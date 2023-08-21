@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import './Navbar.css'
 import { SearchBox, ProfileButton } from '@/components'
 
 
@@ -15,7 +14,7 @@ const Navbar = () => {
                 <ul className='flex flex-row items-center'>
                     <li><Link href="/">Clasificados</Link> </li>
                     <li><Link href="/profesionales">Profesionales</Link> </li>
-                    <li><Link href="/estudios">Estudios gitanxs</Link> </li>
+                    <li><Link href="/estudios">Estudios</Link> </li>
                 </ul>
             </nav>
             <SearchBox />
