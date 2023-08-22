@@ -1,7 +1,5 @@
-import React from "react";
-
-const profesionales = () => {
-  return <div>profesionales</div>;
+const Profesionales = () => {
+  return <div>Profesionales</div>;
 };
 
-export default profesionales;
+export default Profesionales;

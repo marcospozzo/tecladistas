@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ItemProps } from "@/types";
 
-const Item = ({ item }: any) => {
+const Card = ({ item }: { item: ItemProps }) => {
   return (
     <Link
       href={`/item/${item.id}`}
@@ -24,4 +25,4 @@ const Item = ({ item }: any) => {
   );
 };
 
-export default Item;
+export default Card;

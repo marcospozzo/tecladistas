@@ -1,7 +1,7 @@
-import React from "react";
+import { Cards } from "@/components";
 
-const estudios = () => {
-  return <div>estudios</div>;
+const Estudios = () => {
+  return <Cards />;
 };
 
-export default estudios;
+export default Estudios;
