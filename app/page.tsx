@@ -1,27 +1,25 @@
-"use client"
+import { useState, useEffect } from "react";
+import { Item } from "@/components";
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+async function getData() {
+  try {
+    const res = await fetch("http://localhost:3000/api/items");
+    return res.json();
+  } catch (error) {
+    throw new Error("Failed to fetch data");
+  }
+}
 
-export default function Home() {
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(true)
+export default async function Home() {
+  const data = await getData();
 
-  useEffect(() => {
-    fetch('/api/items')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-  }, [])
-
-  if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No data</p>
+  if (!data) return <p>No data</p>;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {data.description}
+    <main className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 min-h-screen p-24">
+      {data.map((item: { id: any }) => (
+        <Item key={item.id} item={item} />
+      ))}
     </main>
-  )
+  );
 }

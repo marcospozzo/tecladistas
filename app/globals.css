@@ -29,3 +29,7 @@ body {
 ul li {
   padding: 20px;
 }
+
+html {
+  width: fit-content;
+}
