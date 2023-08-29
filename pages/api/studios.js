@@ -1,13 +1,13 @@
-const items = [
+const studios = [
   {
     id: 1234,
     userId: 112233,
-    type: "product",
+    type: "studio",
     condition: "new",
     category: "keyboard",
     brand: "Nord",
     model: "Stage 2",
-    title: "Nord Stage 2 como nuevo!!!",
+    title: "E!!!",
     description:
       "El Nord Stage 2, una joya para músicos como yo, combina la versatilidad de sonidos de primera calidad con una interfaz amigable. Sus teclas responden a la perfección, brindando una experiencia musical incomparable. Con sonidos de piano, órgano y sintetizador de alta calidad, este teclado es mi elección para expresar mi pasión por la música en Buenos Aires. Ya sea en el estudio o en el escenario, el Nord Stage 2 nunca me falla.",
     year: 2022,
@@ -22,7 +22,7 @@ const items = [
   {
     id: 1235,
     userId: 112234,
-    type: "product",
+    type: "studio",
     condition: "used",
     category: "keyboard",
     brand: "Roland",
@@ -42,7 +42,7 @@ const items = [
   {
     id: 1236,
     userId: 112235,
-    type: "product",
+    type: "studio",
     condition: "like new",
     category: "keyboard",
     brand: "Korg",
@@ -62,7 +62,7 @@ const items = [
   {
     id: 1237,
     userId: 112236,
-    type: "product",
+    type: "studio",
     condition: "used",
     category: "keyboard",
     brand: "Yamaha",
@@ -82,7 +82,7 @@ const items = [
   {
     id: 1238,
     userId: 112237,
-    type: "product",
+    type: "studio",
     condition: "new",
     category: "keyboard",
     brand: "Casio",
@@ -102,7 +102,7 @@ const items = [
   {
     id: 1239,
     userId: 112238,
-    type: "product",
+    type: "studio",
     condition: "used",
     category: "keyboard",
     brand: "Kawai",
@@ -122,7 +122,7 @@ const items = [
   {
     id: 1240,
     userId: 112239,
-    type: "product",
+    type: "studio",
     condition: "like new",
     category: "keyboard",
     brand: "Nord",
@@ -142,7 +142,7 @@ const items = [
   {
     id: 1241,
     userId: 112240,
-    type: "product",
+    type: "studio",
     condition: "used",
     category: "keyboard",
     brand: "Moog",
@@ -162,7 +162,7 @@ const items = [
   {
     id: 1242,
     userId: 112241,
-    type: "product",
+    type: "studio",
     condition: "like new",
     category: "keyboard",
     brand: "Korg",
@@ -182,7 +182,7 @@ const items = [
   {
     id: 1243,
     userId: 112242,
-    type: "product",
+    type: "studio",
     condition: "used",
     category: "keyboard",
     brand: "Nord",
@@ -202,7 +202,7 @@ const items = [
   {
     id: 1244,
     userId: 112243,
-    type: "product",
+    type: "studio",
     condition: "new",
     category: "keyboard",
     brand: "Arturia",
@@ -222,5 +222,5 @@ const items = [
 ];
 
 export default function (req, res) {
-  res.status(200).json(cards);
+  res.status(200).json(studios);
 }
