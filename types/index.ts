@@ -25,3 +25,17 @@ export interface ItemProps {
   location: string;
   createdAt: string;
 }
+
+export interface ProfessionalProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  nickname?: string;
+  profilePicture?: string;
+  type: "technician" | "teacher";
+  workplace: "onSite" | "offSite" | "both";
+  email?: string;
+  phone?: number;
+  location?: string;
+  createdAt: string;
+}

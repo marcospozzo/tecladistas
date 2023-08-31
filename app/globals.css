@@ -33,3 +33,9 @@ ul li {
 html {
   width: fit-content;
 }
+
+main {
+  padding: 6rem;
+  min-height: 100vh;
+
+}
