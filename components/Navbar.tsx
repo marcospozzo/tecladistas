@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SearchBox, ProfileButton } from "@/components";
 
 const Navbar = () => {
   return (
-    <header className="mx-auto flex justify-between cards-center">
+    <header className="mx-auto flex justify-center cards-center">
       <nav className="flex flex-row">
         <Link href="/">
           <Image
@@ -27,8 +26,6 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      <SearchBox />
-      <ProfileButton />
     </header>
   );
 };

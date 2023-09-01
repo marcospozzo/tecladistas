@@ -1,8 +1,8 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import SearchBox from "./SearchBox";
-import ProfileButton from "./ProfileButton";
-import Card from "./Card";
+import ItemCard from "./ItemCard";
 import Cards from "./Cards";
+import StudioCard from "./StudioCard";
+import ProfessionalCard from "./ProfessionalCard";
 
-export { Navbar, Footer, SearchBox, ProfileButton, Card, Cards };
+export { Navbar, Footer, ItemCard, Cards, StudioCard, ProfessionalCard };

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ItemProps } from "@/types";
 
-const Card = ({ item }: { item: ItemProps }) => {
+const ItemCard = ({ item }: { item: ItemProps }) => {
   return (
     <Link
       href={`/item/${item.id}`}
@@ -31,4 +31,4 @@ const Card = ({ item }: { item: ItemProps }) => {
   );
 };
 
-export default Card;
+export default ItemCard;

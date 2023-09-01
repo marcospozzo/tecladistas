@@ -1,12 +1,7 @@
-import { Card } from "@/components";
-import { ItemProps } from "@/types";
-
-export default async function Cards({ data }: { data: Array<ItemProps> }) {
+export default function Cards({ children }: { children: React.ReactNode }) {
   return (
-    <main className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
-      {data?.map((item: ItemProps) => (
-        <Card key={item.id} item={item} />
-      ))}
-    </main>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {children}
+    </div>
   );
 }

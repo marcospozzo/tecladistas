@@ -33,9 +33,28 @@ export interface ProfessionalProps {
   nickname?: string;
   profilePicture?: string;
   type: "technician" | "teacher";
-  workplace: "onSite" | "offSite" | "both";
+  workplace?: "onSite" | "offSite" | "both";
   email?: string;
   phone?: number;
   location?: string;
+  createdAt: string;
+}
+
+export interface StudioProps {
+  id: number;
+  userId: number;
+  name: string;
+  description: string;
+  services: Array<ServiceProps>;
+  status: "active" | "inactive" | "deleted";
+  visibility: "open" | "closed";
+  pictures: Array<string>;
+  location: string;
+  createdAt: string;
+}
+
+export interface ServiceProps {
+  id: number;
+  name: string;
   createdAt: string;
 }

@@ -30,12 +30,22 @@ ul li {
   padding: 20px;
 }
 
-html {
-  width: fit-content;
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* This prevents horizontal scrolling */
 }
 
 main {
   padding: 6rem;
   min-height: 100vh;
+}
 
+@media screen and (max-width: 768px) {
+  main {
+    padding: 2rem;
+  }
+}
+
+.profile-picture {
+  border-radius: 50%;
 }

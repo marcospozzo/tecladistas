@@ -1,15 +1,16 @@
 import { ProfessionalProps } from "@/types";
 import { getData } from "../getData";
+import ProfessionalCard from "@/components/ProfessionalCard";
 
 const Profesionales = async () => {
   const data = await getData("/professionals");
 
   return (
-    <main>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
       {data.map((professional: ProfessionalProps) => (
-        <div key={professional.id}>{professional.firstName}</div>
+        <ProfessionalCard key={professional.id} professional={professional} />
       ))}
-    </main>
+    </div>
   );
 };
 
