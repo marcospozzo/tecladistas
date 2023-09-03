@@ -23,21 +23,21 @@ export interface ItemProps {
   visibility: "open" | "closed";
   pictures: Array<string>;
   location: string;
-  createdAt: string;
 }
 
 export interface ProfessionalProps {
   id: number;
   firstName: string;
-  lastName: string;
+  lastName?: string;
   nickname?: string;
   profilePicture?: string;
   type: "technician" | "teacher";
+  skills: Array<number>;
   workplace?: "onSite" | "offSite" | "both";
+  website?: string;
   email?: string;
-  phone?: number;
+  phone?: string;
   location?: string;
-  createdAt: string;
 }
 
 export interface StudioProps {
@@ -50,11 +50,14 @@ export interface StudioProps {
   visibility: "open" | "closed";
   pictures: Array<string>;
   location: string;
-  createdAt: string;
 }
 
 export interface ServiceProps {
   id: number;
   name: string;
-  createdAt: string;
+}
+export interface SkillProps {
+  id: number;
+  name: string;
+  professionals: Array<number>;
 }
