@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { StudioProps } from "@/types";
+import { Location } from "@/components";
 
 const StudioCard = ({ studio }: { studio: StudioProps }) => {
   return (
@@ -17,7 +18,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
       />
       <h3>{studio.name}</h3>
       <div className="flex justify-between">
-        <span>{studio.location}</span>
+        <Location name={studio.location} />
         <span>{studio.userId}</span>
       </div>
     </Link>

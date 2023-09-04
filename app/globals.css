@@ -49,3 +49,11 @@ main {
 .profile-picture {
   border-radius: 50%;
 }
+
+h1 {
+  font-size: x-large;
+}
+
+h2 {
+  font-size: large;
+}
