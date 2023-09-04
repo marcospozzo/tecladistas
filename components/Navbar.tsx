@@ -16,13 +16,19 @@ const Navbar = () => {
         </Link>
         <ul className="flex flex-row cards-center">
           <li>
-            <Link href="/">Clasificados</Link>{" "}
+            <Link href="/">
+              <h2>Clasificados</h2>
+            </Link>{" "}
           </li>
           <li>
-            <Link href="/profesionales">Profesionales</Link>{" "}
+            <Link href="/profesionales">
+              <h2>Profesionales</h2>
+            </Link>{" "}
           </li>
           <li>
-            <Link href="/estudios">Estudios</Link>{" "}
+            <Link href="/estudios">
+              <h2>Estudios</h2>
+            </Link>{" "}
           </li>
         </ul>
       </nav>

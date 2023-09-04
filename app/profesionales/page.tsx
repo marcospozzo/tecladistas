@@ -1,24 +1,28 @@
 import { ProfessionalProps, SkillProps } from "@/types";
 import { getData } from "../getData";
-import ProfessionalCard from "@/components/ProfessionalCard";
+import { ProfessionalCard } from "@/components";
+import { skillsTranslations } from "@/utils/utils";
 
-const Profesionales = async () => {
+const Professionals = async () => {
   const skills = await getData("/skills");
   const professionals = await getData("/professionals");
 
   return (
     <div>
-      {skills.map((skill: SkillProps) => (
-        <div>
-          <h1>{skill.name}</h1>
+      {skills.map((skill: string) => (
+        <div className="mb-16">
+          <h1 className="mb-2">{skillsTranslations[skill]}</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
-            {skill.professionals.map((id: number) => {
-              const index = professionals.findIndex(
-                (professional: { id: number }) => professional.id === id
-              );
-              <ProfessionalCard key={id} professional={professionals[index]} />;
-              return null;
-            })}
+            {professionals
+              .filter((professional: ProfessionalProps) =>
+                professional.skills.includes(skill)
+              )
+              .map((professional: ProfessionalProps) => (
+                <ProfessionalCard
+                  key={professional.id}
+                  professional={professional}
+                />
+              ))}
           </div>
         </div>
       ))}
@@ -26,4 +30,4 @@ const Profesionales = async () => {
   );
 };
 
-export default Profesionales;
+export default Professionals;

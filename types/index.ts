@@ -32,7 +32,7 @@ export interface ProfessionalProps {
   nickname?: string;
   profilePicture?: string;
   type: "technician" | "teacher";
-  skills: Array<number>;
+  skills: Array<string>;
   workplace?: "onSite" | "offSite" | "both";
   website?: string;
   email?: string;

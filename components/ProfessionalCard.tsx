@@ -1,6 +1,6 @@
 import { ProfessionalProps } from "@/types";
 import Image from "next/image";
-import { FaLocationArrow } from "react-icons/fa";
+import { Location } from "@/components";
 
 const ProfessionalCard = ({
   professional,
@@ -17,14 +17,13 @@ const ProfessionalCard = ({
           width={40}
           height={40}
         />
-        <p>{professional.firstName}</p>
+        <p>
+          {professional.firstName}{" "}
+          {professional.nickname && `"${professional.nickname}"`}{" "}
+          {professional.lastName}
+        </p>
       </div>
-      {professional.location && (
-        <div className="flex flex-row items-center space-x-1">
-          <FaLocationArrow />
-          <p>{professional.location}</p>
-        </div>
-      )}
+      {professional.location && <Location name={professional.location} />}
     </div>
   );
 };
