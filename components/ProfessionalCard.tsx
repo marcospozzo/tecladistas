@@ -1,5 +1,5 @@
 import { ProfessionalProps } from "@/types";
-import Image from "next/image";
+import Link from "next/link";
 import { Location } from "@/components";
 
 const ProfessionalCard = ({
@@ -8,7 +8,10 @@ const ProfessionalCard = ({
   professional: ProfessionalProps;
 }) => {
   return (
-    <div className="flex items-center justify-between space-x-4 m-2 p-4 bg-slate-300 rounded-xl">
+    <Link
+      href={`/profesionales/${professional.id}`}
+      className="flex items-center justify-between space-x-4 m-2 p-4 bg-slate-300 rounded-xl"
+    >
       <div className="flex flex-row items-center space-x-4">
         <p>
           {professional.firstName}{" "}
@@ -17,7 +20,7 @@ const ProfessionalCard = ({
         </p>
       </div>
       {professional.location && <Location name={professional.location} />}
-    </div>
+    </Link>
   );
 };
 
