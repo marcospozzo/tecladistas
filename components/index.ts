@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+import Header from "./Header";
 import Footer from "./Footer";
 import ItemCard from "./ItemCard";
 import Cards from "./Cards";
@@ -7,7 +7,7 @@ import ProfessionalCard from "./ProfessionalCard";
 import Location from "./Location";
 
 export {
-  Navbar,
+  Header,
   Footer,
   ItemCard,
   Cards,

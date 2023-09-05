@@ -30,10 +30,10 @@ ul li {
   padding: 20px;
 }
 
-/* header nav ul li:hover {
-    opacity: 0.6;
+nav ul li:hover {
+    opacity: 0.5;
     transition: 500ms;
-} */
+}
 
 html, body {
   width: 100%;
@@ -64,11 +64,11 @@ h2 {
   font-size: large;
 }
 
-.currentPage {
+/* .currentPage {
   font-weight: bolder;
 }
 
 .notCurrentPage:hover {
   opacity: 0.5;
   transition: 500ms;
-}
+} */
