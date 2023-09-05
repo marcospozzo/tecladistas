@@ -11,4 +11,6 @@ export const skillsTranslations: { [key: string]: string } = {
   "computers": "Software, Mac y PC",
   "midi-controllers": "Controladores MIDI",
   "luthier": "Luthiers",
+  "in-ears": "In-ears",
+  "cases": "Estuches y fundas",
 };

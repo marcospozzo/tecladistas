@@ -30,6 +30,11 @@ ul li {
   padding: 20px;
 }
 
+/* header nav ul li:hover {
+    opacity: 0.6;
+    transition: 500ms;
+} */
+
 html, body {
   width: 100%;
   overflow-x: hidden; /* This prevents horizontal scrolling */
@@ -55,5 +60,15 @@ h1 {
 }
 
 h2 {
+  font-weight: lighter;
   font-size: large;
+}
+
+.currentPage {
+  font-weight: bolder;
+}
+
+.notCurrentPage:hover {
+  opacity: 0.5;
+  transition: 500ms;
 }

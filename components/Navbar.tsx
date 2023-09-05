@@ -1,9 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { ITEMS, PROFESSIONALS, STUDIOS } from "@/utils/constants";
 
 const Navbar = () => {
+  const [currentPage, setCurrentPage] = useState(ITEMS);
+
+  const handleOnClick = (pageName: string) => {
+    setCurrentPage(pageName);
+  };
+
   return (
-    <header className="mx-auto flex justify-center cards-center">
+    <header className="flex justify-center border-b-4 border-solid border-gray-400">
       <nav className="flex flex-row">
         <Link href="/">
           <Image
@@ -14,20 +24,38 @@ const Navbar = () => {
             height={40}
           />
         </Link>
-        <ul className="flex flex-row cards-center">
+        <ul className="flex flex-row">
           <li>
-            <Link href="/">
-              <h2>Clasificados</h2>
+            <Link
+              href="/"
+              className={
+                currentPage === ITEMS ? "currentPage" : "notCurrentPage"
+              }
+              onClick={() => handleOnClick(ITEMS)}
+            >
+              <h2>{ITEMS}</h2>
             </Link>{" "}
           </li>
           <li>
-            <Link href="/profesionales">
-              <h2>Profesionales</h2>
+            <Link
+              href="/profesionales"
+              className={
+                currentPage === PROFESSIONALS ? "currentPage" : "notCurrentPage"
+              }
+              onClick={() => handleOnClick(PROFESSIONALS)}
+            >
+              <h2>{PROFESSIONALS}</h2>
             </Link>{" "}
           </li>
           <li>
-            <Link href="/estudios">
-              <h2>Estudios</h2>
+            <Link
+              href="/estudios"
+              className={
+                currentPage === STUDIOS ? "currentPage" : "notCurrentPage"
+              }
+              onClick={() => handleOnClick(STUDIOS)}
+            >
+              <h2>{STUDIOS}</h2>
             </Link>{" "}
           </li>
         </ul>
