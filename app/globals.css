@@ -30,7 +30,7 @@ ul li {
   padding: 20px;
 }
 
-nav ul li:hover {
+nav ul li:hover, .link:hover {
     opacity: 0.5;
     transition: 500ms;
 }
@@ -41,14 +41,9 @@ html, body {
 }
 
 main {
-  padding: 6rem;
   min-height: 100vh;
-}
 
-@media screen and (max-width: 768px) {
-  main {
-    padding: 2rem;
-  }
+  @apply p-6 sm:p-8 md:p-24
 }
 
 .profile-picture {
@@ -72,3 +67,37 @@ h2 {
   opacity: 0.5;
   transition: 500ms;
 } */
+
+.cards {
+  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+}
+
+.professionals {
+  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+}
+
+p {
+  margin-bottom: 2rem;
+  font-size: large;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+button {
+  border: 1px solid gray;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+}
+
+.box, input, select, option, textarea, button{
+  @apply space-x-4 m-2 p-4 rounded-xl
+}
+
+.box-item {
+  @apply space-y-4 m-5 p-8
+}

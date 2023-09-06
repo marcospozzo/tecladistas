@@ -1,11 +1,16 @@
 import Link from "next/link";
-import { CONTACT } from "@/utils/constants";
+import { CONTACT, ABOUT_US } from "@/utils/constants";
 
 const Footer = () => {
   return (
-    <footer className="flex justify-end border-t-2 border-solid border-gray-400">
+    <footer className="flex justify-center border-t-2 border-solid border-gray-400">
       <nav className="flex flex-row">
         <ul className="flex flex-row">
+          <li>
+            <Link href="/sobre-nosotrxs">
+              <h2>{ABOUT_US}</h2>
+            </Link>
+          </li>
           <li>
             <Link href="/contacto">
               <h2>{CONTACT}</h2>

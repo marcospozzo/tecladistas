@@ -1,5 +1,5 @@
 import { ProfessionalProps, SkillProps } from "@/types";
-import { getData } from "../getData";
+import { getData } from "@/utils/getData";
 import { ProfessionalCard } from "@/components";
 import { skillsTranslations } from "@/utils/utils";
 
@@ -10,9 +10,9 @@ const Professionals = async () => {
   return (
     <div>
       {skills.map((skill: string) => (
-        <div className="mb-16">
+        <div key={skill} className="mb-16">
           <h1 className="mb-2">{skillsTranslations[skill]}</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
+          <div className="professionals">
             {professionals
               .filter((professional: ProfessionalProps) =>
                 professional.skills.includes(skill)

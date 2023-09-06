@@ -1,7 +1,7 @@
 "use client";
 
-const loading = () => {
-  return <div>Loading...</div>;
+const Loading = () => {
+  return <div className="flex justify-center">Loading...</div>;
 };
 
-export default loading;
+export default Loading;

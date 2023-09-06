@@ -1,7 +1,7 @@
 "use client";
 
-const error = () => {
-  return <div>error</div>;
+const Error = () => {
+  return <div className="flex justify-center">Ups, ha habido un error...</div>;
 };
 
-export default error;
+export default Error;

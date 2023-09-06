@@ -6,7 +6,7 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
   return (
     <Link
       href={`/${item.id}`}
-      className="flex flex-col space-y-4 m-5 p-8 bg-slate-300 rounded-xl"
+      className="flex flex-col box-item bg-slate-300 rounded-xl"
     >
       <Image
         className="mx-auto"
