@@ -1,5 +1,5 @@
 import { StudioCard, Cards } from "@/components";
-import { getData } from "../getData";
+import { getData } from "@/utils/getData";
 import { StudioProps } from "@/types";
 
 const Studios = async () => {

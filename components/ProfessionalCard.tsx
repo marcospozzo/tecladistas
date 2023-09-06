@@ -1,6 +1,7 @@
 import { ProfessionalProps } from "@/types";
 import Link from "next/link";
-import { Location } from "@/components";
+import { FaPhone, FaGlobeAmericas } from "react-icons/fa";
+import { MdPiano, MdEmail, MdLocationPin } from "react-icons/md";
 
 const ProfessionalCard = ({
   professional,
@@ -10,16 +11,22 @@ const ProfessionalCard = ({
   return (
     <Link
       href={`/profesionales/${professional.id}`}
-      className="flex items-center justify-between space-x-4 m-2 p-4 bg-slate-300 rounded-xl"
+      className="flex items-center justify-between box bg-slate-300 rounded-xl"
     >
       <div className="flex flex-row items-center space-x-4">
-        <p>
+        <div>
           {professional.firstName}{" "}
           {professional.nickname && `"${professional.nickname}"`}{" "}
           {professional.lastName}
-        </p>
+        </div>
       </div>
-      {professional.location && <Location name={professional.location} />}
+      <div className="flex space-x-2">
+        {professional.phone && <FaPhone />}
+        {professional.isTecladista && <MdPiano />}
+        {professional.email && <MdEmail />}
+        {professional.website && <FaGlobeAmericas />}
+        {professional.location && <MdLocationPin />}
+      </div>
     </Link>
   );
 };

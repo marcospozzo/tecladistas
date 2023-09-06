@@ -34,6 +34,7 @@ export interface ProfessionalProps {
   type: "technician" | "teacher";
   skills: Array<string>;
   workplace?: "onSite" | "offSite" | "both";
+  isTecladista?: boolean;
   website?: string;
   email?: string;
   phone?: string;

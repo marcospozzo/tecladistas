@@ -1,5 +1,5 @@
 import { ItemCard, Cards } from "@/components";
-import { getData } from "./getData";
+import { getData } from "@/utils/getData";
 import { ItemProps } from "@/types";
 
 const Home = async () => {
