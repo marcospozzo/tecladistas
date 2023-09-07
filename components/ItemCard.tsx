@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ItemProps } from "@/types";
+import { Location } from "@/components";
 
 const ItemCard = ({ item }: { item: ItemProps }) => {
   return (
@@ -15,7 +16,7 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
         width={300}
         height={300}
       />
-      <h3>{item.title}</h3>
+      <h3 className="item-title">{item.title}</h3>
       <div className="flex justify-between">
         <span>
           {Number(item.price).toLocaleString("es-AR", {
@@ -25,7 +26,7 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
             maximumFractionDigits: 0,
           })}
         </span>
-        <span>{item.userId}</span>
+        <Location name={item.location} />
       </div>
     </Link>
   );

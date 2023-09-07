@@ -11,8 +11,8 @@ const Professionals = async () => {
     <div>
       {skills.map((skill: string) => (
         <div key={skill} className="mb-16">
-          <h1 className="mb-2">{skillsTranslations[skill]}</h1>
-          <div className="professionals">
+          <h1 className="mb-4">{skillsTranslations[skill]}</h1>
+          <div className="professionals px-6 sm:px-12">
             {professionals
               .filter((professional: ProfessionalProps) =>
                 professional.skills.includes(skill)

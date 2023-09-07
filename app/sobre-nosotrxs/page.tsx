@@ -10,8 +10,8 @@ const AboutUs = () => {
         itaque dolore, molestias molestiae culpa labore impedit exercitationem!
       </p>
       <p>
-        La misión de esta web es facilitar información útil para Tecladistxs
-        Gitanxs y que sea accesible para toda la comunidad. <br />
+        La misión de esta web es reunir y facilitar información útil para la
+        comunidad de Tecladistxs Gitanxs. <br />
         Toda información personal, datos de contacto y números de teléfono son
         de uso privado y pedimos que se mantenga de esta forma.
       </p>
