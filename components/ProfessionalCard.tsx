@@ -21,8 +21,8 @@ const ProfessionalCard = ({
         </div>
       </div>
       <div className="flex space-x-2">
-        {professional.phone && <FaPhone />}
         {professional.isTecladista && <MdPiano />}
+        {professional.phone && <FaPhone />}
         {professional.email && <MdEmail />}
         {professional.website && <FaGlobeAmericas />}
         {professional.location && <MdLocationPin />}

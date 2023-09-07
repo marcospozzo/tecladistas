@@ -27,7 +27,8 @@ body {
 }
 
 ul li {
-  padding: 20px;
+  align-self: center;
+  @apply m-2 sm:m-4
 }
 
 nav ul li:hover, .link:hover {
@@ -57,6 +58,16 @@ h1 {
 h2 {
   font-weight: lighter;
   font-size: large;
+}
+
+.item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  height: 3em;
+  max-height: 3em;
 }
 
 /* .currentPage {

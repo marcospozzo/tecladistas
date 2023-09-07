@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StudioProps } from "@/types";
 import { MdLocationPin } from "react-icons/md";
+import { Location } from "@/components";
 
 const StudioCard = ({ studio }: { studio: StudioProps }) => {
   return (
@@ -18,11 +19,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
       />
       <h3>{studio.name}</h3>
       <div className="flex justify-between">
-        <div className="flex items-center">
-          <MdLocationPin />
-          {studio.location}
-        </div>
-        <span>{studio.userId}</span>
+        <Location name={studio.location} />
       </div>
     </Link>
   );

@@ -8,7 +8,7 @@ const Header = () => {
       <nav className="flex flex-row">
         <Link href="/">
           <Image
-            className="m-3"
+            className="m-3 min-h-[40px] min-w-[40px]"
             src="/logo.png"
             alt="keyboard knob"
             width={40}
@@ -22,13 +22,13 @@ const Header = () => {
             </Link>{" "}
           </li>
           <li>
-            <Link href="/profesionales">
-              <h2>{PROFESSIONALS}</h2>
+            <Link href="/estudios">
+              <h2>{STUDIOS}</h2>
             </Link>{" "}
           </li>
           <li>
-            <Link href="/estudios">
-              <h2>{STUDIOS}</h2>
+            <Link href="/profesionales">
+              <h2>{PROFESSIONALS}</h2>
             </Link>{" "}
           </li>
         </ul>

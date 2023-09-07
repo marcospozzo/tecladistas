@@ -2,7 +2,7 @@ export interface ItemProps {
   id: number;
   userId: 112243;
   type: "product" | "service";
-  condition: "news" | "used";
+  condition: "new" | "used";
   category:
     | "keyboards"
     | "controller"
@@ -17,7 +17,7 @@ export interface ItemProps {
   title: string;
   description: string;
   year: number;
-  tradeIns: boolean;
+  exchanges: boolean;
   status: "active" | "inactive" | "deleted" | "sold";
   price: number;
   visibility: "open" | "closed";
