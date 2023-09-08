@@ -1,11 +1,7 @@
 const Contact = () => {
   return (
-    <form
-      className="flex flex-col w-full md:w-1/2  mx-auto"
-      action="#"
-      method="post"
-    >
-      <h1 className="self-center mb-12">Contacto</h1>
+    <form action="#" method="post">
+      <h1 className="form-title">Contacto</h1>
       <input type="text" id="name" name="name" placeholder="Nombre" required />
       <br />
 
@@ -37,8 +33,8 @@ const Contact = () => {
       ></textarea>
       <br />
 
-      <button type="submit" value="Enviar">
-        Enviar
+      <button className="submit-button" type="submit" value="Enviar">
+        <h3 className="text-xl">Enviar</h3>
       </button>
     </form>
   );

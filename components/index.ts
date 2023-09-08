@@ -1,10 +1,12 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import ItemCard from "./ItemCard";
-import Cards from "./Cards";
-import StudioCard from "./StudioCard";
-import ProfessionalCard from "./ProfessionalCard";
+import ItemCard from "./Cards/ItemCard";
+import Cards from "./Cards/Cards";
+import StudioCard from "./Cards/StudioCard";
+import ProfessionalCard from "./Cards/ProfessionalCard";
 import Location from "./Location";
+import CardNew from "./Cards/CardNew";
+import EditableInput from "./EditableInput";
 
 export {
   Header,
@@ -14,4 +16,6 @@ export {
   StudioCard,
   ProfessionalCard,
   Location,
+  CardNew,
+  EditableInput,
 };

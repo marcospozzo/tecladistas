@@ -11,9 +11,7 @@ const AboutUs = () => {
       </p>
       <p>
         La misión de esta web es reunir y facilitar información útil para la
-        comunidad de Tecladistxs Gitanxs. <br />
-        Toda información personal, datos de contacto y números de teléfono son
-        de uso privado y pedimos que se mantenga de esta forma.
+        comunidad de Tecladistxs Gitanxs.
       </p>
       <p>
         Además, esta web conecta compradores con vendedores, sin ser
@@ -21,6 +19,10 @@ const AboutUs = () => {
         dinero, garantías, ni acuerdos. La responsabilidad en cada compra, venta
         o servicio queda a cargo de cada usuario involucrado y sucede por fuera
         de esta web.
+      </p>
+      <p>
+        Toda información personal, datos de contacto y números de teléfono son
+        de uso privado y pedimos que se mantengan de esta forma.
       </p>
       <p>
         Los comentarios y sugerencias son bienvenidas (¡y muy alentadas!). Les

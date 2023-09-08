@@ -17,8 +17,8 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
         width={300}
         height={300}
       />
-      <h3>{studio.name}</h3>
-      <div className="flex justify-between">
+      <h3 className="studio-name">{studio.name}</h3>
+      <div className="flex justify-start">
         <Location name={studio.location} />
       </div>
     </Link>

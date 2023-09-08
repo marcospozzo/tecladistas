@@ -1,7 +1,7 @@
 "use client";
 
 const Loading = () => {
-  return <div className="flex justify-center">Loading...</div>;
+  return <div className="flex justify-center">Cargando...</div>;
 };
 
 export default Loading;
