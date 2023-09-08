@@ -1,4 +1,4 @@
-import { ItemCard, Cards } from "@/components";
+import { ItemCard, Cards, CardNew } from "@/components";
 import { getData } from "@/utils/getData";
 import { ItemProps } from "@/types";
 
@@ -7,6 +7,7 @@ const Home = async () => {
 
   return (
     <Cards>
+      <CardNew />
       {data?.map((item: ItemProps) => (
         <ItemCard key={item.id} item={item} />
       ))}

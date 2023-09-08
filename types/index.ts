@@ -1,28 +1,18 @@
+import { ChangeEventHandler } from "react";
+
 export interface ItemProps {
-  id: number;
-  userId: 112243;
-  type: "product" | "service";
-  condition: "new" | "used";
-  category:
-    | "keyboards"
-    | "controller"
-    | "piano"
-    | "electric-piano"
-    | "organ"
-    | "synth"
-    | "case"
-    | "other";
-  brand: string;
-  model: string;
-  title: string;
-  description: string;
-  year: number;
-  exchanges: boolean;
-  status: "active" | "inactive" | "deleted" | "sold";
-  price: number;
-  visibility: "open" | "closed";
-  pictures: Array<string>;
-  location: string;
+  id?: number;
+  userId?: number;
+  brand?: string;
+  model?: string;
+  title?: string;
+  description?: string;
+  year?: number;
+  exchanges?: boolean;
+  status?: "active" | "paused" | "deleted" | "sold";
+  price?: number;
+  pictures?: Array<string>;
+  location?: string;
 }
 
 export interface ProfessionalProps {
@@ -57,8 +47,23 @@ export interface ServiceProps {
   id: number;
   name: string;
 }
+
 export interface SkillProps {
   id: number;
   name: string;
   professionals: Array<number>;
+}
+
+export interface EditableInputProps {
+  text?: string | number;
+  label: string;
+  fieldName: string;
+  handleOnChange: ChangeEventHandler<HTMLInputElement>;
+}
+
+export interface EditableSelectProps {
+  text: string | number;
+  label: string;
+  fieldName: string;
+  handleOnChange: (event: Event) => void;
 }

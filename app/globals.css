@@ -70,6 +70,16 @@ h2 {
   max-height: 3em;
 }
 
+.studio-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* Limit to 2 lines */
+  height: 1.5em;
+  max-height: 1.5em;
+}
+
 /* .currentPage {
   font-weight: bolder;
 }
@@ -96,8 +106,10 @@ p {
   text-decoration: underline;
 }
 
-button {
-  border: 1px solid gray;
+.submit-button {
+  /* @apply bg-gray-300; */
+  /* border: 1px solid gray; */
+  background-color: rgb(114, 176, 102);
   display: flex;
   align-self: center;
   justify-content: center;
@@ -111,4 +123,21 @@ button {
 
 .box-item {
   @apply space-y-4 m-5 p-8
+}
+
+form {
+  @apply flex flex-col w-full md:w-1/2  mx-auto
+}
+
+.form-title {
+  @apply self-center mb-12
+}
+
+.editable-input {
+  font-weight: bold;
+}
+
+.editable-input:hover {
+  transition: 500ms;
+  @apply bg-gray-300
 }

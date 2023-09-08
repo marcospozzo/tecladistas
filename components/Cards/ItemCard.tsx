@@ -18,6 +18,7 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
       />
       <h3 className="item-title">{item.title}</h3>
       <div className="flex justify-between">
+        <Location name={item.location} />
         <span>
           {Number(item.price).toLocaleString("es-AR", {
             style: "currency",
@@ -26,7 +27,6 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
             maximumFractionDigits: 0,
           })}
         </span>
-        <Location name={item.location} />
       </div>
     </Link>
   );
