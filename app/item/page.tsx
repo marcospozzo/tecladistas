@@ -2,10 +2,20 @@
 
 import { EditableInput } from "@/components";
 import { ItemProps } from "@/types";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  SetStateAction,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "JPEG", "PNG"];
 
 const NewItem = () => {
   const [formData, setFormData] = useState<ItemProps>({});
+  const [file, setFile] = useState(null);
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -27,21 +37,9 @@ const NewItem = () => {
     }
   };
 
-  useEffect(() => {
-    const handleBeforeUnload = (e: {
-      preventDefault: () => void;
-      returnValue: string;
-    }) => {
-      e.preventDefault();
-      e.returnValue = ""; // This message will be shown to the user in the confirmation dialog.
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  const handleFileUploaderChange = (file: SetStateAction<null>) => {
+    setFile(file);
+  };
 
   return (
     <form action="#" method="post">
@@ -95,32 +93,47 @@ const NewItem = () => {
         text={formData.location}
       />
 
-      <div className="flex space-x-4 my-4">
-        <label className="text-xl w-1/5 self-center" htmlFor="exchanges">
+      <div className="flex max-sm:flex-col space-x-2 my-4">
+        <label
+          className="text-xl w-1/5 self-center max-sm:self-start "
+          htmlFor="exchanges"
+        >
           Intercambio:
         </label>
-        <input
-          className="h-5 w-5 self-center"
-          type="checkbox"
-          id="exchanges"
-          name="exchanges"
-          onChange={handleCheckboxChange}
-        />
-        <i className="justify-start self-center">
-          Escucho propuestas de intercambio como parte de pago.
-        </i>
+        <div className="flex space-x-2">
+          <input
+            className="h-5 w-5 m-0 self-center"
+            type="checkbox"
+            id="exchanges"
+            name="exchanges"
+            onChange={handleCheckboxChange}
+          />
+          <i className="self-center">
+            Escucho propuestas de intercambio, como parte de pago.
+          </i>
+        </div>
       </div>
 
-      <input
-        type="file"
-        id="pictures"
-        name="pictures"
-        accept="image/*"
-        required
-      />
-      <br />
+      <div className="flex max-sm:flex-col space-x-2 my-4">
+        <label
+          className="text-xl w-1/5 self-center max-sm:self-start "
+          htmlFor="exchanges"
+        >
+          Foto:
+        </label>
+        <FileUploader
+          maxSize={2}
+          required
+          label="Elegir o arrastrar una foto (máx. 2 MB)"
+          hoverTitle=""
+          classes="self-center space-x-4 w-full h-12"
+          handleChange={handleFileUploaderChange}
+          name="file"
+          types={fileTypes}
+        />
+      </div>
 
-      <button className="submit-button" type="submit">
+      <button className="submit-button mt-12" type="submit">
         <h3 className="text-xl">Publicar</h3>
       </button>
     </form>

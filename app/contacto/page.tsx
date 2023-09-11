@@ -25,7 +25,7 @@ const Contact = () => {
       <br />
 
       <textarea
-        className="h-24 min-h-[6rem]"
+        className="h-24 min-h-[6rem] max-h-96"
         id="message"
         name="message"
         placeholder="Mensaje"

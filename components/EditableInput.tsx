@@ -2,6 +2,7 @@
 
 import { EditableInputProps } from "@/types";
 import { ChangeEventHandler, KeyboardEventHandler, useState } from "react";
+import { formatPrice, placeholders } from "@/utils/utils";
 
 export default function EditableInput({
   text = "",
@@ -27,8 +28,8 @@ export default function EditableInput({
   };
 
   return (
-    <div className="flex editable-row">
-      <label className="text-xl self-center w-1/5">{`${label}:`}</label>
+    <div className="flex max-sm:flex-col">
+      <label className="text-xl self-center max-sm:self-start w-1/5">{`${label}:`}</label>
       {isEditing || text === "" ? (
         <input
           name={fieldName}
@@ -36,16 +37,17 @@ export default function EditableInput({
           defaultValue={text}
           onBlur={handleOnClick}
           onKeyDown={handleKeyDown}
-          className="w-4/5"
+          className="w-4/5 max-sm:w-full"
           type="text"
           autoFocus={text !== ""}
+          placeholder={placeholders[fieldName]}
         />
       ) : (
         <button
           onClick={handleOnClick}
-          className="w-4/5 justify-start border-none editable-input text-left"
+          className="w-4/5 max-sm:w-full justify-start border-none editable-input text-left"
         >
-          {text}
+          {fieldName === "price" ? formatPrice(text) : text}
         </button>
       )}
     </div>
