@@ -107,14 +107,23 @@ p {
 }
 
 .submit-button {
-  /* @apply bg-gray-300; */
-  /* border: 1px solid gray; */
   background-color: rgb(114, 176, 102);
+  padding: 10px 20px; /* Add some padding for a better look */
+  border-radius: 5px; /* Rounded corners for a softer appearance */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+button.submit-button {
   display: flex;
   align-self: center;
   justify-content: center;
   align-items: center;
   width: 33%;
+}
+
+.submit-button:hover {
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
 }
 
 .box, input, select, option, textarea, button{
@@ -126,7 +135,7 @@ p {
 }
 
 form {
-  @apply flex flex-col w-full md:w-1/2  mx-auto
+  @apply flex flex-col w-full xl:w-1/2  mx-auto
 }
 
 .form-title {

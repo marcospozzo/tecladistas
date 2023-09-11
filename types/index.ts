@@ -67,3 +67,13 @@ export interface EditableSelectProps {
   fieldName: string;
   handleOnChange: (event: Event) => void;
 }
+
+export interface User {
+  id: number;
+  email?: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  phone: string;
+  role: "user" | "admin";
+}
