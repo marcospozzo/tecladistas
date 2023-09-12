@@ -28,7 +28,7 @@ export default function EditableInput({
   };
 
   return (
-    <div className="flex max-sm:flex-col">
+    <div className="flex max-sm:flex-col max-sm:w-full">
       <label className="text-xl self-center max-sm:self-start w-1/5">{`${label}:`}</label>
       {isEditing || text === "" ? (
         <input
@@ -37,7 +37,7 @@ export default function EditableInput({
           defaultValue={text}
           onBlur={handleOnClick}
           onKeyDown={handleKeyDown}
-          className="w-4/5 max-sm:w-full"
+          className="sm:w-4/5"
           type="text"
           autoFocus={text !== ""}
           placeholder={placeholders[fieldName]}

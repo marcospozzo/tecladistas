@@ -3,7 +3,7 @@ import { CONTACT, ABOUT_US } from "@/utils/constants";
 
 const Footer = () => {
   return (
-    <footer className="flex justify-center border-t-2 border-solid bg-gray-400">
+    <footer className="flex justify-center h-14 bg-gray-400">
       <nav className="flex flex-row">
         <ul className="flex flex-row">
           <li>

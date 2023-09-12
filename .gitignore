@@ -8,6 +8,7 @@
 # testing
 /coverage
 pages/api*
+mock-images
 
 # next.js
 /.next/

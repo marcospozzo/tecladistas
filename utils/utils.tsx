@@ -19,7 +19,11 @@ export const placeholders: { [key: string]: string } = {
   "title": "Ej.: Nord Stage 2 HA88 en muy buen estado",
   "price": "Sólo números",
   "location": "Barrio / Municipio / Provincia",
-  "description": "No incluir datos de contacto",
+  "description": "No es necesario incluir datos de contacto",
+  "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
+  "picture": "Elegir o arrastrar una foto (máx. 2 MB)",
+  "disclamer":
+    "Acepto mostrar mi nombre completo y número de teléfono en la publicación.",
 };
 
 export function formatPrice(price: any) {
@@ -34,3 +38,18 @@ export function formatPrice(price: any) {
 export function formatPhone(phone: string) {
   return phone.replace(/[^0-9]/g, "");
 }
+
+export const servicesTranslation: { [key: string]: string } = {
+  "mixing": "Mezcla",
+  "mastering": "Mastering",
+  "recording": "Grabación",
+  "rehearsing": "Sala de ensayo",
+  "production": "Producción",
+};
+
+export const contactSubjects: { [key: string]: string } = {
+  "comment": "Comentario / sugerencia",
+  "professionalAMD": "Alta / baja / modificación de profesional",
+  "technicalProblem": "Problema técnico",
+  "other": "Otro",
+};

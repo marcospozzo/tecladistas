@@ -1,3 +1,5 @@
+import { contactSubjects } from "@/utils/utils";
+
 const Contact = () => {
   return (
     <form action="#" method="post">
@@ -15,12 +17,16 @@ const Contact = () => {
       <br />
 
       <select className="bg-white" id="subject" name="subject" required>
-        <option value="Comentario/sugerencia">Comentario/sugerencia</option>
-        <option value="Alta/baja de profesional">
-          Alta/baja/modificación de profesional
+        <option value={contactSubjects.comment}>
+          {contactSubjects.comment}
         </option>
-        <option value="Problema técnico">Problema técnico</option>
-        <option value="Otro">Otro</option>
+        <option value={contactSubjects.professionalAMD}>
+          {contactSubjects.professionalAMD}
+        </option>
+        <option value={contactSubjects.technicalProblem}>
+          {contactSubjects.technicalProblem}
+        </option>
+        <option value={contactSubjects.other}>{contactSubjects.other}</option>
       </select>
       <br />
 
