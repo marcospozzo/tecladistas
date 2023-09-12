@@ -108,7 +108,7 @@ const NewItem = () => {
             name="exchanges"
             onChange={handleCheckboxChange}
           />
-          <i className="self-center">{placeholders.exchanges}</i>
+          <h3 className="self-center">{placeholders.exchanges}</h3>
         </div>
       </div>
 
@@ -131,7 +131,7 @@ const NewItem = () => {
         />
       </div>
 
-      <div className="flex max-sm:flex-col space-x-2 my-4">
+      <div className="flex max-sm:flex-col space-x-2 my-4 justify-center">
         <div className="flex space-x-2">
           <input
             className="h-5 w-5 m-0 self-center"
@@ -141,7 +141,7 @@ const NewItem = () => {
             onChange={handleCheckboxChange}
             required={true}
           />
-          <i className="self-center">{placeholders.disclamer}</i>
+          <h3 className="self-center">{placeholders.disclamer}</h3>
         </div>
       </div>
 

@@ -131,7 +131,7 @@ button.submit-button {
 }
 
 .box-item {
-  @apply space-y-4 m-5 p-8 max-sm:mx-0 max-sm:p-6;
+  @apply space-y-4 m-4 p-6 max-sm:mx-0 max-sm:p-6;
 }
 
 .box-item:hover {
