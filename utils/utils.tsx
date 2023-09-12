@@ -23,7 +23,7 @@ export const placeholders: { [key: string]: string } = {
   "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
   "picture": "Elegir o arrastrar una foto (máx. 2 MB)",
   "disclamer":
-    "Acepto mostrar mi nombre completo y número de teléfono en la publicación.",
+    "Acepto mostrar mi nombre y número de teléfono en la publicación.",
 };
 
 export function formatPrice(price: any) {

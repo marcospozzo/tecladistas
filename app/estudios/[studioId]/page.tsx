@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaUserAlt } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
+import { MdPiano } from "react-icons/md";
 
 const Studio = async ({ params }: Params) => {
   const studio = await getData(`/studios/${params.studioId}`);
@@ -16,7 +17,7 @@ const Studio = async ({ params }: Params) => {
     <div className="item-and-studio">
       <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
-          className="object-contain w-full h-full sm:pr-8 max-h-screen"
+          className="object-contain w-full h-full lg:pr-8 max-h-screen"
           src={studio.pictures[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={500}
@@ -40,20 +41,18 @@ const Studio = async ({ params }: Params) => {
         <Location name={studio.location} />
 
         <div>
-          <div className="flex space-x-1 space-y-2">
-            <FaUserAlt className="self-center" />
-            <h3>
-              {user.firstName} {user.lastName}:
-            </h3>
+          <div className="flex space-x-1">
+            <MdPiano className="self-center" />
+            <h3>{user.firstName}:</h3>
             <h3>{user.phone}</h3>
           </div>
         </div>
-        <div className="flex flex-col text-lg space-x-1 justify-start">
+        <div className="flex flex-col text-lg space-x-1">
           <Link
-            className="flex w-fit justify-center submit-button space-x-2"
+            className="flex justify-center submit-button space-x-2"
             href={`${WHATSAPP_LINK}${formatPhone(user.phone)}`}
-            target="_blank" // This opens the link in a new tab
-            rel="noopener noreferrer" // Adds security to prevent security risks
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <h3 className="text-base">Abrir</h3>
             <FaWhatsapp size={25} />

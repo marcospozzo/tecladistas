@@ -9,7 +9,7 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
   return (
     <Link
       href={`/${item.id}`}
-      className="flex flex-col box-item bg-slate-300 rounded-xl relative"
+      className="flex flex-col box-item bg-slate-300 rounded-xl"
       scroll={true}
     >
       <div className=" w-full h-48 bg-white overflow-hidden">
@@ -21,15 +21,13 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
           height={300}
         />
       </div>
-      {item.exchanges && (
-        <div className="absolute z-10 top-1 right-5">
-          <FaArrowsRotate size={25} />
-        </div>
-      )}
       <h3 className="item-title">{item.title}</h3>
       <div className="flex justify-between">
         {item.location && <Location name={item.location} />}
-        {item.price && <span>{formatPrice(item.price)}</span>}
+        <div className="flex space-x-2">
+          {item.exchanges && <FaArrowsRotate className="self-center" />}
+          {item.price && <span>{formatPrice(item.price)}</span>}
+        </div>
       </div>
     </Link>
   );
