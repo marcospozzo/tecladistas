@@ -25,16 +25,16 @@ const AboutUs = () => {
         de uso privado y pedimos que se mantengan de esta forma.
       </p>
       <p>
-        Los comentarios y sugerencias son bienvenidas (¡y muy alentadas!). Les
-        invitamos a hacerlas,{" "}
+        Los comentarios y sugerencias son bienvenidas (¡y muy alentadas!).
+        Pueden hacerlas,{" "}
         <Link href={"/contacto"} className={"link"}>
           aquí
         </Link>
         .
       </p>
       <p>
-        Quienes quieran y puedan contribuir económicamente a este proyecto,
-        pueden hacerlo a través de cafecitos:{" "}
+        Quienes quieran y puedan contribuir económicamente a este proyecto, son
+        invitadxs a hacerlo a través de cafecitos:{" "}
         <Link href={"/"} className={"link"}>
           aquí
         </Link>

@@ -13,20 +13,20 @@ const Item = async ({ params }: Params) => {
   const user = await getData(`/users/${item.userId}`);
 
   return (
-    <div className="flex max-lg:flex-col max-lg:space-y-4 lg:space-x-4">
-      <div className="w-1/2 max-lg:w-full">
+    <div className="item-and-studio">
+      <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
-          className="mx-auto"
+          className="object-contain w-full h-full sm:pr-8 max-h-screen"
           src={item.pictures[0]}
           alt={`${item.brand} ${item.model} item`}
           width={500}
           height={500}
         />
       </div>
-      <div className="w-1/2 max-lg:w-full space-y-4">
+      <div className="w-1/3 max-lg:w-full space-y-4">
         <h1>{item.title}</h1>
 
-        <h1 className="text-4xl">{formatPrice(item.price)}</h1>
+        {item.price && <h1 className="text-4xl">{formatPrice(item.price)}</h1>}
 
         {item.exchanges && (
           <div className="flex space-x-1">
@@ -40,20 +40,20 @@ const Item = async ({ params }: Params) => {
         <p>{item.description}</p>
 
         {item.year && <div>Año: {item.year}</div>}
-
         <Location name={item.location} />
 
-        <div className="flex space-x-1">
-          <FaUserAlt className="self-center" />
-          <h3>
-            {user.firstName} {user.lastName}:
-          </h3>
-          <h3>{user.phone}</h3>
+        <div>
+          <div className="flex space-x-1 space-y-2">
+            <FaUserAlt className="self-center" />
+            <h3>
+              {user.firstName} {user.lastName}:
+            </h3>
+            <h3>{user.phone}</h3>
+          </div>
         </div>
-
-        <div className="flex flex-col text-lg space-x-1">
+        <div className="flex flex-col text-lg space-x-1 max-sm:justify-center justify-start">
           <Link
-            className="flex w-fit justify-center submit-button space-x-2"
+            className="flex justify-center submit-button space-x-2"
             href={`${WHATSAPP_LINK}${formatPhone(user.phone)}`}
             target="_blank" // This opens the link in a new tab
             rel="noopener noreferrer" // Adds security to prevent security risks

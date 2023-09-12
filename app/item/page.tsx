@@ -2,11 +2,11 @@
 
 import { EditableInput } from "@/components";
 import { ItemProps } from "@/types";
+import { placeholders } from "@/utils/utils";
 import {
   ChangeEvent,
   ChangeEventHandler,
   SetStateAction,
-  Suspense,
   useEffect,
   useState,
 } from "react";
@@ -108,9 +108,7 @@ const NewItem = () => {
             name="exchanges"
             onChange={handleCheckboxChange}
           />
-          <i className="self-center">
-            Escucho propuestas de intercambio, como parte de pago.
-          </i>
+          <i className="self-center">{placeholders.exchanges}</i>
         </div>
       </div>
 
@@ -124,7 +122,7 @@ const NewItem = () => {
         <FileUploader
           maxSize={2}
           required
-          label="Elegir o arrastrar una foto (máx. 2 MB)"
+          label={placeholders.picture}
           hoverTitle=""
           classes="self-center space-x-4 w-full h-12"
           handleChange={handleFileUploaderChange}
@@ -133,7 +131,21 @@ const NewItem = () => {
         />
       </div>
 
-      <button className="submit-button mt-12" type="submit">
+      <div className="flex max-sm:flex-col space-x-2 my-4">
+        <div className="flex space-x-2">
+          <input
+            className="h-5 w-5 m-0 self-center"
+            type="checkbox"
+            id="disclamer"
+            name="disclamer"
+            onChange={handleCheckboxChange}
+            required={true}
+          />
+          <i className="self-center">{placeholders.disclamer}</i>
+        </div>
+      </div>
+
+      <button className="submit-button my-6" type="submit">
         <h3 className="text-xl">Publicar</h3>
       </button>
     </form>

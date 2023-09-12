@@ -8,15 +8,17 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
   return (
     <Link
       href={`/estudios/${studio.id}`}
-      className="flex flex-col space-y-4 m-5 p-8 bg-slate-300 rounded-xl"
+      className="flex flex-col box-item bg-slate-300 rounded-xl"
     >
-      <Image
-        className="mx-auto"
-        src={"/placeholder-600x400.png"}
-        alt={`descriptive image of ${studio.name}`}
-        width={300}
-        height={300}
-      />
+      <div className="relative inline-block w-full h-48 bg-white overflow-hidden">
+        <Image
+          className="object-contain w-full h-full box-item-image"
+          src={studio.pictures ? studio.pictures[0] : ""}
+          alt={`Imagen que representa al estudio ${studio.name}`}
+          width={300}
+          height={300}
+        />
+      </div>
       <h3 className="studio-name">{studio.name}</h3>
       <div className="flex justify-start">
         <Location name={studio.location} />

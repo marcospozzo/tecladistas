@@ -9,26 +9,27 @@ const ItemCard = ({ item }: { item: ItemProps }) => {
   return (
     <Link
       href={`/${item.id}`}
-      className="flex flex-col box-item bg-slate-300 rounded-xl"
+      className="flex flex-col box-item bg-slate-300 rounded-xl relative"
+      scroll={true}
     >
-      <div className="relative inline-block">
+      <div className=" w-full h-48 bg-white overflow-hidden">
         <Image
-          className="mx-auto"
-          src={"/placeholder-600x400.png"}
+          className="object-contain w-full h-full box-item-image"
+          src={item.pictures ? item.pictures[0] : ""}
           alt={`${item.brand} item`}
           width={300}
           height={300}
         />
-        {item.exchanges && (
-          <div className="absolute z-10 -top-2 -right-2">
-            <FaArrowsRotate size={25} />
-          </div>
-        )}
       </div>
+      {item.exchanges && (
+        <div className="absolute z-10 top-1 right-5">
+          <FaArrowsRotate size={25} />
+        </div>
+      )}
       <h3 className="item-title">{item.title}</h3>
       <div className="flex justify-between">
         {item.location && <Location name={item.location} />}
-        <span>{formatPrice(item.price)}</span>
+        {item.price && <span>{formatPrice(item.price)}</span>}
       </div>
     </Link>
   );

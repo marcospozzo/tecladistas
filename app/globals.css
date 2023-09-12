@@ -26,9 +26,8 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-ul li {
-  align-self: center;
-  @apply m-2 sm:m-4
+nav ul li {
+  @apply m-2 sm:m-4 self-center text-center
 }
 
 nav ul li:hover, .link:hover {
@@ -43,7 +42,6 @@ html, body {
 
 main {
   min-height: 100vh;
-
   @apply p-6 sm:p-8 md:p-24
 }
 
@@ -112,6 +110,7 @@ p {
   border-radius: 5px; /* Rounded corners for a softer appearance */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+  @apply max-sm:w-full;
 }
 
 button.submit-button {
@@ -120,6 +119,7 @@ button.submit-button {
   justify-content: center;
   align-items: center;
   width: 33%;
+  @apply max-sm:w-3/5;
 }
 
 .submit-button:hover {
@@ -131,11 +131,17 @@ button.submit-button {
 }
 
 .box-item {
-  @apply space-y-4 m-5 p-8
+  @apply space-y-4 m-5 p-8 max-sm:mx-0 max-sm:p-6;
+}
+
+.box-item:hover {
+  .box-item-image {
+    transform: scale(1.015);
+    transition: transform 0.1s ease-in-out;  }
 }
 
 form {
-  @apply flex flex-col w-full xl:w-1/2  mx-auto
+  @apply flex flex-col w-full xl:w-1/2 mx-auto
 }
 
 .form-title {
@@ -149,4 +155,8 @@ form {
 .editable-input:hover {
   transition: 500ms;
   @apply bg-gray-300
+}
+
+.item-and-studio {
+  @apply flex max-lg:flex-col max-lg:py-6 max-lg:space-y-4 lg:space-x-4 bg-white rounded-xl p-6 sm:p-12;
 }
