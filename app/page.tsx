@@ -9,7 +9,7 @@ const Home = async () => {
     <Cards>
       <CardNew />
       {data?.map((product: ProductProps) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product._id} product={product} />
       ))}
     </Cards>
   );

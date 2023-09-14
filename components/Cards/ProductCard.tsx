@@ -8,7 +8,7 @@ import { FaArrowsRotate } from "react-icons/fa6";
 const ProductCard = ({ product }: { product: ProductProps }) => {
   return (
     <Link
-      href={`/${product.id}`}
+      href={`/${product._id}`}
       className="flex flex-col box-item bg-slate-300 rounded-xl"
       scroll={true}
     >
