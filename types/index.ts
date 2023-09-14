@@ -1,11 +1,11 @@
 import { ChangeEventHandler } from "react";
 
 export interface ProductProps {
-  id?: number;
+  _id?: string;
   userId?: number;
+  title?: string;
   brand?: string;
   model?: string;
-  title?: string;
   description?: string;
   year?: number;
   exchanges?: boolean;
@@ -16,7 +16,7 @@ export interface ProductProps {
 }
 
 export interface ProfessionalProps {
-  id: number;
+  _id: string;
   firstName: string;
   lastName?: string;
   nickname?: string;
@@ -32,26 +32,14 @@ export interface ProfessionalProps {
 }
 
 export interface StudioProps {
-  id: number;
+  _id: string;
   userId: number;
   name: string;
   description: string;
-  services: Array<ServiceProps>;
+  services: Array<string>;
   status: "active" | "inactive" | "deleted";
-  visibility: "open" | "closed";
   pictures: Array<string>;
   location: string;
-}
-
-export interface ServiceProps {
-  id: number;
-  name: string;
-}
-
-export interface SkillProps {
-  id: number;
-  name: string;
-  professionals: Array<number>;
 }
 
 export interface EditableInputProps {
@@ -61,19 +49,12 @@ export interface EditableInputProps {
   handleOnChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-export interface EditableSelectProps {
-  text: string | number;
-  label: string;
-  fieldName: string;
-  handleOnChange: (event: Event) => void;
-}
-
-export interface User {
-  id: number;
-  email?: string;
+export interface UserProps {
+  _id: string;
+  email: string;
   firstName: string;
   lastName: string;
   password: string;
   phone: string;
-  role: "user" | "admin";
+  role?: "user" | "admin";
 }

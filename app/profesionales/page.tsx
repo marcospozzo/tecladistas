@@ -1,10 +1,10 @@
-import { ProfessionalProps, SkillProps } from "@/types";
+import { ProfessionalProps } from "@/types";
 import { getData } from "@/utils/getData";
 import { ProfessionalCard } from "@/components";
 import { skillsTranslations } from "@/utils/utils";
+import { skills } from "@/utils/utils";
 
 const Professionals = async () => {
-  const skills = await getData("/skills");
   const professionals = await getData("/professionals");
 
   return (
@@ -19,7 +19,7 @@ const Professionals = async () => {
               )
               .map((professional: ProfessionalProps) => (
                 <ProfessionalCard
-                  key={professional.id}
+                  key={professional._id}
                   professional={professional}
                 />
               ))}

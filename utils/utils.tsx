@@ -53,3 +53,20 @@ export const contactSubjects: { [key: string]: string } = {
   "technicalProblem": "Problema técnico",
   "other": "Otro",
 };
+
+export const skills = [
+  "synths",
+  "organs",
+  "midi-controllers",
+  "electric-pianos",
+  "acoustic-pianos",
+  "piano-tuner",
+  "piano-mover",
+  "general-audio-gear",
+  "cables-headphones-pedals",
+  "computers",
+  "mics",
+  "luthier",
+  "in-ears",
+  "cases",
+];

@@ -5,7 +5,6 @@ import { formatPhone, formatPrice } from "@/utils/utils";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";
-import { FaUserAlt } from "react-icons/fa";
 import { FaArrowsRotate, FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
