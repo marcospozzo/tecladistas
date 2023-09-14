@@ -9,27 +9,29 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaArrowsRotate, FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
-const Item = async ({ params }: Params) => {
-  const item = await getData(`/products/${params.itemId}`);
-  const user = await getData(`/users/${item.userId}`);
+const Product = async ({ params }: Params) => {
+  const product = await getData(`/products/${params.productId}`);
+  const user = await getData(`/users/${product.userId}`);
 
   return (
-    <div className="item-and-studio">
+    <div className="item">
       <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={item.pictures[0]}
-          alt={`${item.brand} ${item.model} item`}
+          src={product.pictures[0]}
+          alt={`${product.brand} ${product.model} product`}
           width={500}
           height={500}
         />
       </div>
       <div className="w-1/3 max-lg:w-full space-y-4">
-        <h1>{item.title}</h1>
+        <h1>{product.title}</h1>
 
-        {item.price && <h1 className="text-4xl">{formatPrice(item.price)}</h1>}
+        {product.price && (
+          <h1 className="text-4xl">{formatPrice(product.price)}</h1>
+        )}
 
-        {item.exchanges && (
+        {product.exchanges && (
           <div className="flex space-x-1">
             <FaArrowsRotate className="self-center" />
             <i className="self-center">
@@ -38,11 +40,11 @@ const Item = async ({ params }: Params) => {
           </div>
         )}
 
-        {item.year && <div>Año: {item.year}</div>}
+        {product.year && <div>Año: {product.year}</div>}
 
-        <p>{item.description}</p>
+        <p>{product.description}</p>
 
-        <Location name={item.location} />
+        <Location name={product.location} />
 
         <div>
           <div className="flex space-x-1">
@@ -67,4 +69,4 @@ const Item = async ({ params }: Params) => {
   );
 };
 
-export default Item;
+export default Product;

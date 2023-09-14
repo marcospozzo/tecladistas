@@ -14,7 +14,7 @@ const Studio = async ({ params }: Params) => {
   const user = await getData(`/users/${studio.userId}`);
 
   return (
-    <div className="item-and-studio">
+    <div className="item">
       <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
           className="object-contain w-full h-full lg:pr-8 max-h-screen"

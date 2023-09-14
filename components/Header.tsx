@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ITEMS, PROFESSIONALS, STUDIOS } from "@/utils/constants";
+import { PRODUCTS, PROFESSIONALS, STUDIOS } from "@/utils/constants";
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
         <Link href="/">
           <Image
             className="m-3 min-h-[40px] min-w-[40px]"
-            src="/logo.png"
+            src="/logo.svg"
             alt="Perilla de teclado"
             width={40}
             height={40}
@@ -18,7 +18,7 @@ const Header = () => {
         <ul className="flex flex-row">
           <li>
             <Link href="/">
-              <h2>{ITEMS}</h2>
+              <h2>{PRODUCTS}</h2>
             </Link>{" "}
           </li>
           <li>

@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import ItemCard from "./Cards/ItemCard";
+import ProductCard from "./Cards/ProductCard";
 import Cards from "./Cards/Cards";
 import StudioCard from "./Cards/StudioCard";
 import ProfessionalCard from "./Cards/ProfessionalCard";
@@ -11,7 +11,7 @@ import EditableInput from "./EditableInput";
 export {
   Header,
   Footer,
-  ItemCard,
+  ProductCard,
   Cards,
   StudioCard,
   ProfessionalCard,

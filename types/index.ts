@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 
-export interface ItemProps {
+export interface ProductProps {
   id?: number;
   userId?: number;
   brand?: string;
