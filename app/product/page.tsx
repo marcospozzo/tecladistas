@@ -1,7 +1,7 @@
 "use client";
 
 import { EditableInput } from "@/components";
-import { ItemProps } from "@/types";
+import { ProductProps } from "@/types";
 import { placeholders } from "@/utils/utils";
 import {
   ChangeEvent,
@@ -13,8 +13,8 @@ import {
 import { FileUploader } from "react-drag-drop-files";
 const fileTypes = ["JPG", "JPEG", "PNG"];
 
-const NewItem = () => {
-  const [formData, setFormData] = useState<ItemProps>({});
+const NewProduct = () => {
+  const [formData, setFormData] = useState<ProductProps>({});
   const [file, setFile] = useState(null);
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
@@ -152,4 +152,4 @@ const NewItem = () => {
   );
 };
 
-export default NewItem;
+export default NewProduct;

@@ -4,7 +4,7 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 const CardNew = () => {
   return (
     <div className="flex box-item bg-slate-300 rounded-xl">
-      <Link className="m-auto" href="/item">
+      <Link className="m-auto" href="/product">
         <BsPlusCircleDotted className="m-auto" size={40} />
       </Link>
     </div>

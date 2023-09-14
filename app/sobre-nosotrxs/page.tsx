@@ -25,8 +25,7 @@ const AboutUs = () => {
         de uso privado y pedimos que se mantengan de esta forma.
       </p>
       <p>
-        Los comentarios y sugerencias son bienvenidas (¡y muy alentadas!).
-        Pueden hacerlas,{" "}
+        Los comentarios y sugerencias son bienvenidas. Pueden hacerlas,{" "}
         <Link href={"/contacto"} className={"link"}>
           aquí
         </Link>

@@ -1,4 +1,4 @@
-export const ITEMS = "Clasificados";
+export const PRODUCTS = "Clasificados";
 export const PROFESSIONALS = "Profesionales";
 export const STUDIOS = "Nuestros estudios";
 export const CONTACT = "Contacto";

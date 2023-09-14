@@ -58,7 +58,7 @@ h2 {
   font-size: large;
 }
 
-.item-title {
+.product-title {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -157,6 +157,6 @@ form {
   @apply bg-gray-300
 }
 
-.item-and-studio {
+.item {
   @apply flex max-lg:flex-col max-lg:py-6 max-lg:space-y-4 lg:space-x-4 bg-white rounded-xl p-6 sm:p-12;
 }
