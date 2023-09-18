@@ -27,12 +27,12 @@ body {
 }
 
 nav ul li {
-  @apply m-2 sm:m-4 self-center text-center
+  @apply m-2 sm:m-2 sm:p-2 self-center text-center
 }
 
 nav ul li:hover, .link:hover {
-    opacity: 0.5;
-    transition: 500ms;
+    opacity: 0.8;
+    transition: 100ms;
 }
 
 html, body {
@@ -140,7 +140,7 @@ button.submit-button {
     transition: transform 0.1s ease-in-out;  }
 }
 
-form {
+.wide-form {
   @apply flex flex-col w-full xl:w-1/2 mx-auto
 }
 
@@ -159,4 +159,12 @@ form {
 
 .item {
   @apply flex max-lg:flex-col max-lg:py-6 max-lg:space-y-4 lg:space-x-4 bg-white rounded-xl p-6 sm:p-12;
+}
+
+.is-active {
+  @apply bg-gray-400 rounded-md
+}
+
+.login-signup {
+  @apply xl:w-2/5 mx-auto flex flex-col
 }

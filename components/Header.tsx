@@ -1,14 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { PRODUCTS, PROFESSIONALS, STUDIOS } from "@/utils/constants";
+import {
+  LOGIN,
+  LOGOUT,
+  PRODUCTS,
+  PROFESSIONALS,
+  STUDIOS,
+} from "@/utils/constants";
+import { FaUserAlt } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
+
+  const isLoggedIn = false;
+
+  const navigationItems = [
+    { label: PRODUCTS, link: "/clasificados" },
+    { label: STUDIOS, link: "/estudios" },
+    { label: PROFESSIONALS, link: "/profesionales" },
+  ];
+
   return (
-    <header className="flex justify-center border-b-4 border-solid border-gray-400">
+    <header className="flex justify-between border-b-4 border-solid border-gray-400">
       <nav className="flex flex-row mx-4">
         <Link href="/">
           <Image
-            className="m-3 min-h-[40px] min-w-[40px]"
+            className="m-2 min-h-[40px] min-w-[40px]"
             src="/logo.svg"
             alt="Perilla de teclado"
             width={40}
@@ -16,23 +36,29 @@ const Header = () => {
           />
         </Link>
         <ul className="flex flex-row">
-          <li>
-            <Link href="/">
-              <h2>{PRODUCTS}</h2>
-            </Link>{" "}
-          </li>
-          <li>
-            <Link href="/estudios">
-              <h2>{STUDIOS}</h2>
-            </Link>{" "}
-          </li>
-          <li>
-            <Link href="/profesionales">
-              <h2>{PROFESSIONALS}</h2>
-            </Link>{" "}
-          </li>
+          {navigationItems.map((item, index) => {
+            const isActive = pathname === item.link;
+
+            return (
+              <Link key={index} href={item.link}>
+                <li className={isActive ? "is-active" : ""}>
+                  <h2>{item.label}</h2>
+                </li>
+              </Link>
+            );
+          })}
         </ul>
       </nav>
+      <Link className="self-center" href="/entrar">
+        <nav id="login navbar" className="flex flex-row mx-4">
+          <FaUserAlt className="self-center" />
+          <ul className="flex flex-row">
+            <li>
+              <h2>{isLoggedIn ? LOGOUT : LOGIN}</h2>
+            </li>
+          </ul>
+        </nav>
+      </Link>
     </header>
   );
 };

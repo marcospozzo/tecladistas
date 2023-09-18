@@ -42,7 +42,7 @@ const NewProduct = () => {
   };
 
   return (
-    <form action="#" method="post">
+    <form className="wide-form" action="#" method="post">
       <h1 className="form-title">Crear publicación</h1>
 
       <EditableInput
