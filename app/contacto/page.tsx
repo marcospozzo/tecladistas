@@ -2,7 +2,7 @@ import { contactSubjects } from "@/utils/utils";
 
 const Contact = () => {
   return (
-    <form action="#" method="post">
+    <form className="wide-form" action="#" method="post">
       <h1 className="form-title">Contacto</h1>
       <input type="text" id="name" name="name" placeholder="Nombre" required />
       <br />

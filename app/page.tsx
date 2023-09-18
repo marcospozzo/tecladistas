@@ -1,18 +1,5 @@
-import { ProductCard, Cards, CardNew } from "@/components";
-import { getData } from "@/utils/getData";
-import { ProductProps } from "@/types";
-
-const Home = async () => {
-  const data = await getData("/products");
-
-  return (
-    <Cards>
-      <CardNew />
-      {data?.map((product: ProductProps) => (
-        <ProductCard key={product._id} product={product} />
-      ))}
-    </Cards>
-  );
+const Home = () => {
+  return <div>Home</div>;
 };
 
 export default Home;
