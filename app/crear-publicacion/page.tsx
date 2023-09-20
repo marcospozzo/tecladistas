@@ -7,7 +7,6 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   SetStateAction,
-  useEffect,
   useState,
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
