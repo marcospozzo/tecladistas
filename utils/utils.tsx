@@ -55,18 +55,18 @@ export const contactSubjects: { [key: string]: string } = {
 };
 
 export const skills = [
+  "piano-tuner",
+  "piano-mover",
+  "acoustic-pianos",
+  "electric-pianos",
   "synths",
   "organs",
   "midi-controllers",
-  "electric-pianos",
-  "acoustic-pianos",
-  "piano-tuner",
-  "piano-mover",
+  "computers",
   "general-audio-gear",
   "cables-headphones-pedals",
-  "computers",
+  "cases",
   "mics",
   "luthier",
   "in-ears",
-  "cases",
 ];

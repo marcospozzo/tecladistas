@@ -168,3 +168,7 @@ button.submit-button {
 .login-signup {
   @apply xl:w-2/5 mx-auto flex flex-col
 }
+
+.about-us > p {
+  font-size: x-large;
+}
