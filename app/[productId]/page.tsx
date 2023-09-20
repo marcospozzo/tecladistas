@@ -2,7 +2,6 @@ import { Location } from "@/components";
 import { WHATSAPP_LINK } from "@/utils/constants";
 import { getData } from "@/utils/getData";
 import { formatPhone, formatPrice } from "@/utils/utils";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowsRotate, FaWhatsapp } from "react-icons/fa6";

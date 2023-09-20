@@ -2,13 +2,12 @@ import { Location } from "@/components";
 import { WHATSAPP_LINK } from "@/utils/constants";
 import { getData } from "@/utils/getData";
 import { formatPhone, servicesTranslation } from "@/utils/utils";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
-const Studio = async ({ params }: Params) => {
+const Studio = async ({ params }: { params: { studioId: string } }) => {
   const studio = await getData(`/studios/${params.studioId}`);
   const user = await getData(`/users/${studio.userId}`);
 
