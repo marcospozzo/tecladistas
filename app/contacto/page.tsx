@@ -5,7 +5,6 @@ const Contact = () => {
     <form className="wide-form" action="#" method="post">
       <h1 className="form-title">Contacto</h1>
       <input type="text" id="name" name="name" placeholder="Nombre" required />
-      <br />
 
       <input
         type="email"
@@ -14,7 +13,6 @@ const Contact = () => {
         placeholder="Email"
         required
       />
-      <br />
 
       <select className="bg-white" id="subject" name="subject" required>
         <option value={contactSubjects.comment}>
@@ -28,7 +26,6 @@ const Contact = () => {
         </option>
         <option value={contactSubjects.other}>{contactSubjects.other}</option>
       </select>
-      <br />
 
       <textarea
         className="h-24 min-h-[6rem] max-h-96"
@@ -37,6 +34,7 @@ const Contact = () => {
         placeholder="Mensaje"
         required
       ></textarea>
+
       <br />
 
       <button className="submit-button" type="submit" value="Enviar">

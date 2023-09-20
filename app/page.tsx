@@ -26,13 +26,6 @@ const AboutUs = () => {
         de uso privado y pedimos que se mantengan de esta forma.
       </p>
       <p>
-        Los comentarios y sugerencias son bienvenidas. Pueden hacerlas,{" "}
-        <Link href={"/contacto"} className={"link"}>
-          aquí
-        </Link>
-        .
-      </p>
-      <p>
         Quienes quieran y puedan contribuir económicamente a este proyecto, son
         invitadxs a hacerlo a través de cafecitos:{" "}
         <Link
@@ -41,6 +34,13 @@ const AboutUs = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
+          aquí
+        </Link>
+        .
+      </p>
+      <p>
+        Los comentarios y sugerencias son bienvenidas. Pueden hacerlas,{" "}
+        <Link href={"/contacto"} className={"link"}>
           aquí
         </Link>
         .
