@@ -1,14 +1,39 @@
+"use client";
+
+import { login } from "@/utils/axios";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const [credentials, setCredentials] = useState({});
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    try {
+      const response = await login(credentials);
+    } catch (error) {
+      console.error(error);
+      toast.error("Login falló. Reintentar...");
+    }
+  };
+
+  function handleChange(event: { target: { name: any; value: any } }) {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
+  }
+
   return (
-    <form className="login-signup" action="#" method="post">
+    <form onSubmit={handleSubmit} className="login-signup">
       <h1 className="form-title">Entrar</h1>
       <input
         type="email"
         id="email"
         name="email"
         placeholder="Email"
+        onChange={handleChange}
         required
       />
       <input
@@ -16,6 +41,7 @@ const Login = () => {
         id="password"
         name="password"
         placeholder="Contraseña"
+        onChange={handleChange}
         required
       />
 
@@ -28,7 +54,7 @@ const Login = () => {
           <h3 className="text-xl underline">Registrarse</h3>
         </Link>
         <Link className="self-center" href="/reset">
-          <h2 className="text-xl">Olvidé contraseña</h2>
+          <h2 className="text-base">Olvidé contraseña</h2>
         </Link>
       </div>
     </form>
