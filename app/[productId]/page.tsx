@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FaArrowsRotate, FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
-const Product = async ({ params }: Params) => {
+const Product = async ({ params }: { params: { productId: string } }) => {
   const product = await getData(`/products/${params.productId}`);
   const user = await getData(`/users/${product.userId}`);
 
