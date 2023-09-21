@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="flex justify-between border-b-4 border-solid border-gray-400">
       <nav className="flex flex-row mx-4">
-        <Link href="/">
+        <Link className="self-center" href="/">
           <Image
             className="m-2 min-h-[40px] min-w-[40px]"
             src="/logo.svg"
@@ -40,7 +40,7 @@ const Header = () => {
             const isActive = pathname === item.link;
 
             return (
-              <Link key={index} href={item.link}>
+              <Link className="self-center" key={index} href={item.link}>
                 <li className={isActive ? "is-active" : ""}>
                   <h2>{item.label}</h2>
                 </li>
@@ -49,7 +49,7 @@ const Header = () => {
           })}
         </ul>
       </nav>
-      <Link className="self-center" href="/entrar">
+      <Link className="self-center max-sm:hidden" href="/entrar">
         <nav id="login navbar" className="flex flex-row mx-4">
           <FaUserAlt className="self-center" />
           <ul className="flex flex-row">

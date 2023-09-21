@@ -23,10 +23,9 @@ const SignUp = () => {
         placeholder="Celular (Ej.: 5491122334455)"
         required
       />
-      <i className="self-center text-center">
+      <i className="self-center text-center mb-2">
         Solo números, con prefijo de país, sin espacios ni guiones
       </i>
-      <br />
       <input
         type="email"
         id="email"
@@ -41,6 +40,9 @@ const SignUp = () => {
         placeholder="Contraseña"
         required
       />
+      <i className="self-center text-center mb-2">
+        Esta contraseña será requerida para ingresar
+      </i>
 
       <br />
       <button className="submit-button" type="submit" value="create">
