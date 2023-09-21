@@ -170,5 +170,5 @@ button.submit-button {
 }
 
 .about-us > p {
-  font-size: x-large;
+  @apply text-xl
 }
