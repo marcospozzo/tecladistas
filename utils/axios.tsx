@@ -1,12 +1,8 @@
-"use client";
-
 import axios from "axios";
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  // headers: {
-  //   "Authorization": JSON.parse(localStorage.getItem("Authorization") || "{}"),
-  // },
+  withCredentials: true,
 });
 
 //   axiosInstance.interceptors.request.use((config) => {
@@ -20,13 +16,7 @@ export const axiosInstance = axios.create({
 
 export const login = async (credentials: any) => {
   try {
-    const response = await axiosInstance.post("/users/login", credentials);
-    if (response.data.accessToken) {
-      localStorage.setItem(
-        "Authorization",
-        JSON.stringify(response.data.accessToken)
-      );
-    }
+    await axiosInstance.post("/users/login", credentials);
   } catch (error) {
     throw error;
   }

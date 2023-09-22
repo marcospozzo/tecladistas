@@ -126,7 +126,7 @@ button.submit-button {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
 }
 
-.box, input, select, option, textarea, button{
+.box, input, select, option, textarea, .form-button{
   @apply space-x-4 m-2 p-4 rounded-xl
 }
 

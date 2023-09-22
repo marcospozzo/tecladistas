@@ -37,7 +37,11 @@ const Contact = () => {
 
       <br />
 
-      <button className="submit-button" type="submit" value="Enviar">
+      <button
+        className="submit-button form-button"
+        type="submit"
+        value="Enviar"
+      >
         <h3 className="text-xl">Enviar</h3>
       </button>
     </form>

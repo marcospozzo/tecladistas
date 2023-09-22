@@ -12,10 +12,8 @@ import {
 import { FaUserAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
-const Header = () => {
+const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const pathname = usePathname();
-
-  const isLoggedIn = false;
 
   const navigationItems = [
     { label: PRODUCTS, link: "/clasificados" },
@@ -24,7 +22,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex justify-between border-b-4 border-solid border-gray-400">
+    <header className="flex justify-between max-sm:justify-center border-b-4 border-solid border-gray-400">
       <nav className="flex flex-row mx-4">
         <Link className="self-center" href="/">
           <Image
@@ -49,16 +47,29 @@ const Header = () => {
           })}
         </ul>
       </nav>
-      <Link className="self-center max-sm:hidden" href="/entrar">
-        <nav id="login navbar" className="flex flex-row mx-4">
-          <FaUserAlt className="self-center" />
-          <ul className="flex flex-row">
-            <li>
-              <h2>{isLoggedIn ? LOGOUT : LOGIN}</h2>
-            </li>
-          </ul>
-        </nav>
-      </Link>
+      {isLoggedIn ? (
+        <Link className="self-center max-sm:hidden" href="/salir">
+          <nav id="login navbar" className="flex flex-row mx-4">
+            <FaUserAlt className="self-center" />
+            <ul className="flex flex-row">
+              <li>
+                <h2>{LOGOUT}</h2>
+              </li>
+            </ul>
+          </nav>
+        </Link>
+      ) : (
+        <Link className="self-center max-sm:hidden" href="/entrar">
+          <nav id="login navbar" className="flex flex-row mx-4">
+            <FaUserAlt className="self-center" />
+            <ul className="flex flex-row">
+              <li>
+                <h2>{LOGIN}</h2>
+              </li>
+            </ul>
+          </nav>
+        </Link>
+      )}
     </header>
   );
 };
