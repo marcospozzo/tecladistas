@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1234,
+    _id: 1234,
     userId: 112233,
     category: "keyboard",
     brand: "Nord",
@@ -17,7 +17,7 @@ export const products = [
     createdAt: "2023-08-21T13:45:00.000Z",
   },
   {
-    id: 1235,
+    _id: 1235,
     userId: 112234,
     condition: "used",
     category: "keyboard",
@@ -36,7 +36,7 @@ export const products = [
     createdAt: "2023-08-21T14:30:00.000Z",
   },
   {
-    id: 1236,
+    _id: 1236,
     userId: 112235,
     condition: "like new",
     category: "keyboard",
@@ -55,7 +55,7 @@ export const products = [
     createdAt: "2023-08-21T15:15:00.000Z",
   },
   {
-    id: 1237,
+    _id: 1237,
     userId: 112236,
     condition: "used",
     category: "keyboard",
@@ -74,7 +74,7 @@ export const products = [
     createdAt: "2023-08-21T16:00:00.000Z",
   },
   {
-    id: 1238,
+    _id: 1238,
     userId: 112237,
     condition: "new",
     category: "keyboard",
@@ -93,7 +93,7 @@ export const products = [
     createdAt: "2023-08-21T17:00:00.000Z",
   },
   {
-    id: 1239,
+    _id: 1239,
     userId: 112238,
     condition: "used",
     category: "keyboard",
@@ -112,7 +112,7 @@ export const products = [
     createdAt: "2023-08-21T18:00:00.000Z",
   },
   {
-    id: 1240,
+    _id: 1240,
     userId: 112239,
     condition: "like new",
     category: "keyboard",
@@ -131,7 +131,7 @@ export const products = [
     createdAt: "2023-08-21T19:00:00.000Z",
   },
   {
-    id: 1241,
+    _id: 1241,
     userId: 112240,
     condition: "used",
     category: "keyboard",
@@ -150,7 +150,7 @@ export const products = [
     createdAt: "2023-08-21T20:00:00.000Z",
   },
   {
-    id: 1242,
+    _id: 1242,
     userId: 112241,
     condition: "like new",
     category: "keyboard",
@@ -169,7 +169,7 @@ export const products = [
     createdAt: "2023-08-21T21:00:00.000Z",
   },
   {
-    id: 1243,
+    _id: 1243,
     userId: 112242,
     condition: "used",
     category: "keyboard",
@@ -188,7 +188,7 @@ export const products = [
     createdAt: "2023-08-21T22:00:00.000Z",
   },
   {
-    id: 1244,
+    _id: 1244,
     userId: 112243,
     condition: "new",
     category: "keyboard",

@@ -1,6 +1,6 @@
 export const studios = [
   {
-    id: 1235,
+    _id: 1235,
     userId: 112234,
     name: "Estudio del Sol",
     description: "Tu lugar para grabar música en Buenos Aires.",
@@ -12,7 +12,7 @@ export const studios = [
     createdAt: "2023-08-22T09:30:00.000Z",
   },
   {
-    id: 1236,
+    _id: 1236,
     userId: 112235,
     name: "Estudio Musical Harmonía",
     description: "Excelente estudio para tus proyectos musicales.",
@@ -24,7 +24,7 @@ export const studios = [
     createdAt: "2023-08-23T14:15:00.000Z",
   },
   {
-    id: 1237,
+    _id: 1237,
     userId: 112236,
     name: "Estudio Rhythm Nation",
     description: "Crea música de calidad en nuestro estudio.",
@@ -36,7 +36,7 @@ export const studios = [
     createdAt: "2023-08-24T11:20:00.000Z",
   },
   {
-    id: 1238,
+    _id: 1238,
     userId: 112237,
     name: "Estudio de la Luna",
     description: "Inspiración musical bajo la luna.",
@@ -48,7 +48,7 @@ export const studios = [
     createdAt: "2023-08-25T17:40:00.000Z",
   },
   {
-    id: 1239,
+    _id: 1239,
     userId: 112238,
     name: "Estudio de Buenos Aires",
     description: "El estudio ideal para tus proyectos musicales.",

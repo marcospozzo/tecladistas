@@ -144,7 +144,7 @@ const NewProduct = () => {
         </div>
       </div>
 
-      <button className="submit-button my-6" type="submit">
+      <button className="submit-button my-6 form-button" type="submit">
         <h3 className="text-xl">Publicar</h3>
       </button>
     </form>

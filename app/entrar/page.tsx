@@ -1,17 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { login } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ searchParams }: { searchParams: { from: string } }) => {
+  const router = useRouter();
+  console.log(searchParams.from);
+
   const [credentials, setCredentials] = useState({});
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
-      const response = await login(credentials);
+      await login(credentials);
+      router.push("/clasificados");
     } catch (error) {
       console.error(error);
       toast.error("Login falló. Reintentar...");
@@ -47,7 +52,11 @@ const Login = () => {
 
       <br />
       <div className="flex flex-col justify-center space-y-2">
-        <button className="submit-button" type="submit" value="login">
+        <button
+          className="submit-button form-button"
+          type="submit"
+          value="login"
+        >
           <h3 className="text-xl">Entrar</h3>
         </button>
         <Link className="self-center" href="/crear-cuenta">
