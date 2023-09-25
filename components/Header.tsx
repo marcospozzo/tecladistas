@@ -48,7 +48,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         </ul>
       </nav>
       {isLoggedIn ? (
-        <Link className="self-center max-sm:hidden" href="/salir">
+        <Link className="self-center max-sm:hidden" href="/api/auth/signout">
           <nav id="login navbar" className="flex flex-row mx-4">
             <FaUserAlt className="self-center" />
             <ul className="flex flex-row">
@@ -59,7 +59,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           </nav>
         </Link>
       ) : (
-        <Link className="self-center max-sm:hidden" href="/entrar">
+        <Link className="self-center max-sm:hidden" href="/api/auth/signin">
           <nav id="login navbar" className="flex flex-row mx-4">
             <FaUserAlt className="self-center" />
             <ul className="flex flex-row">

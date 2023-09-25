@@ -1,9 +1,9 @@
 import { ProductCard, Cards, CardNew } from "@/components";
-import { getData } from "@/utils/getData";
 import { ProductProps } from "@/types";
+import { getProducts } from "@/utils/axios";
 
 const Classified = async () => {
-  const data = await getData("/products");
+  const data = await getProducts();
 
   return (
     <Cards>

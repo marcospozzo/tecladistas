@@ -3,9 +3,11 @@ import { getData } from "@/utils/getData";
 import { ProfessionalCard } from "@/components";
 import { skillsTranslations } from "@/utils/utils";
 import { skills } from "@/utils/utils";
+import { getProfessionals } from "@/utils/axios";
 
 const Professionals = async () => {
-  const professionals = await getData("/professionals");
+  // const professionals = await getData("/professionals");
+  const professionals = await getProfessionals();
 
   return (
     <div>

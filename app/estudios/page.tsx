@@ -1,9 +1,9 @@
 import { StudioCard, Cards } from "@/components";
-import { getData } from "@/utils/getData";
 import { StudioProps } from "@/types";
+import { getStudios } from "@/utils/axios";
 
 const Studios = async () => {
-  const data = await getData("/studios");
+  const data = await getStudios();
 
   return (
     <Cards>
