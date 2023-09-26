@@ -82,3 +82,16 @@ export const userIsAllowedToSignIn = async (body: object): Promise<boolean> => {
     return false;
   }
 };
+
+export const getProfessional = async (
+  professionalId: string
+): Promise<ProfessionalProps> => {
+  try {
+    const response: AxiosResponse<ProfessionalProps> = await axiosInstance.get(
+      `/professionals/${professionalId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -48,13 +48,9 @@ export interface EditableInputProps {
   fieldName: string;
   handleOnChange: ChangeEventHandler<HTMLInputElement>;
 }
-
 export interface UserProps {
-  _id: string;
-  email: string;
   firstName: string;
   lastName: string;
-  password: string;
+  email: string;
   phone: string;
-  role?: "user" | "admin";
 }

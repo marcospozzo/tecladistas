@@ -1,22 +1,49 @@
 "use client";
 
-import { createAccount } from "@/utils/axios";
+import axios, { AxiosError } from "axios";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { UserProps } from "@/types";
 
-const SignUp = () => {
+const SignUp = ({
+  searchParams,
+}: {
+  searchParams: { callbackUrl: string };
+}) => {
   const router = useRouter();
-  const [data, setData] = useState({});
+  const [data, setData] = useState<UserProps>({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+  });
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
-      await createAccount(data);
-      router.push("/clasificados");
+      const promise = axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`,
+        data
+      );
+      toast.promise(promise, {
+        pending: "Cargando...",
+        error: {
+          render({
+            data,
+          }: {
+            data?: { response?: { data?: { error?: string } } };
+          }) {
+            console.log({ data });
+            return data?.response?.data?.error ?? "Error";
+          },
+        },
+      });
+      await promise;
+      router.push("/entrar");
     } catch (error) {
       console.error(error);
-      toast.error("Error. Reintentar...");
     }
   };
 
@@ -29,7 +56,7 @@ const SignUp = () => {
 
   return (
     <form className="login-signup" onSubmit={handleSubmit}>
-      <h1 className="form-title">Crear cuenta</h1>
+      <h1 className="form-title">Registrarse</h1>
       <input
         type="text"
         id="firstName"
@@ -50,7 +77,7 @@ const SignUp = () => {
         type="text"
         id="phone"
         name="phone"
-        placeholder="Celular (Ej.: 5491122334455)"
+        placeholder="Celular (formato: 5491122334455)"
         onChange={handleChange}
         required
       />
@@ -65,17 +92,7 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Contraseña"
-        onChange={handleChange}
-        required
-      />
-      <i className="self-center text-center mb-2">
-        Será requerida para ingresar
-      </i>
+      <i className="self-center text-center mb-2">Será requerido para entrar</i>
 
       <br />
       <button
@@ -83,7 +100,7 @@ const SignUp = () => {
         type="submit"
         value="create"
       >
-        <h3 className="text-xl">Crear cuenta</h3>
+        <h3 className="text-xl">Registrarse</h3>
       </button>
     </form>
   );
