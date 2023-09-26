@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const VerifyRequest = () => {
   return (
     <div className="flex flex-col mx-auto text-center">

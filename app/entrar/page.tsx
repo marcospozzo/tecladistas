@@ -21,10 +21,16 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
         body,
         { withCredentials: true }
       );
-      await signIn("email", {
+      const signInPromise = signIn("email", {
         email: email,
         callbackUrl: searchParams.callbackUrl,
       });
+      toast.promise(signInPromise, {
+        pending: "Enviando...",
+        success: "Redirigiendo...",
+        error: "Ups, ha habido un error",
+      });
+      await signInPromise;
       router.push("/api/auth/verify-request");
     } catch (error) {
       console.error(error);
@@ -57,6 +63,9 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
         >
           <h3 className="text-xl">Entrar con Email</h3>
         </button>
+        <Link className="self-center" href="/registrarse">
+          <h3 className="text-xl underline">Registrarse</h3>
+        </Link>
       </div>
     </form>
   );

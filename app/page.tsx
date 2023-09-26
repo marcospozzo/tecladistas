@@ -4,8 +4,8 @@ const AboutUs = () => {
   return (
     <div className="about-us">
       <p>
-        La misión de esta web es reunir y facilitar información útil para la
-        comunidad de Tecladistxs Gitanxs.
+        La misión de esta web es reunir y facilitar información útil para el
+        grupo Tecladistxs Gitanxs.
       </p>
       <p>
         Además, esta web conecta compradores con vendedores, sin ser
@@ -20,14 +20,7 @@ const AboutUs = () => {
       </p>
       <p>
         Tecladistxs Gitanxs es...{" "}
-        <i>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-          commodi temporibus laboriosam maiores saepe non, odio illo totam nisi
-          accusamus maxime est eum hic dolorem inventore fuga quae expedita
-          similique quas deserunt eos? Voluptatem eveniet quis nisi beatae quia
-          inventore voluptatum excepturi eum perferendis temporibus iste,
-          reprehenderit sit nobis? Explicabo.
-        </i>
+        <i>-Completar párrafo de cómo nació el grupo-</i>
       </p>
       <p>
         Quienes quieran y puedan contribuir económicamente a este proyecto, son
@@ -49,7 +42,7 @@ const AboutUs = () => {
         </Link>
         .
       </p>
-      <Link className="flex justify-center" href="/crear-cuenta">
+      <Link className="flex justify-center mt-20" href="/registrarse">
         <button className="submit-button" type="submit" value="register">
           <h3 className="text-xl">Registrarse</h3>
         </button>
