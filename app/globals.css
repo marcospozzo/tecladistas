@@ -118,7 +118,7 @@ button.submit-button {
   align-self: center;
   justify-content: center;
   align-items: center;
-  width: 33%;
+  width: 40%;
   @apply max-sm:w-3/5;
 }
 

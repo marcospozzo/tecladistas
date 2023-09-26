@@ -9,13 +9,23 @@ export const config = {
     "/estudios",
     "/estudios/:path*",
     "/clasificados",
+    "/entrar",
   ],
 };
 
 export function middleware(request: NextRequest) {
-  if (!request.cookies.has("next-auth.session-token")) {
-    const signinUrl = new URL("/api/auth/signin", request.url);
+  if (
+    request.nextUrl.pathname !== "/entrar" &&
+    !request.cookies.has("next-auth.session-token")
+  ) {
+    const signinUrl = new URL("/entrar", request.url);
     signinUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
     return NextResponse.redirect(signinUrl);
+  }
+  if (
+    request.nextUrl.pathname === "/entrar" &&
+    request.cookies.has("next-auth.session-token")
+  ) {
+    return NextResponse.redirect(new URL("/clasificados", request.url));
   }
 }

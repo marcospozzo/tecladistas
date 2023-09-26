@@ -59,7 +59,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           </nav>
         </Link>
       ) : (
-        <Link className="self-center max-sm:hidden" href="/api/auth/signin">
+        <Link className="self-center max-sm:hidden" href="/entrar">
           <nav id="login navbar" className="flex flex-row mx-4">
             <FaUserAlt className="self-center" />
             <ul className="flex flex-row">

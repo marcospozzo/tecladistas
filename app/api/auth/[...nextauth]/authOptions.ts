@@ -3,6 +3,7 @@ import EmailProvider from "next-auth/providers/email";
 import clientPromise from "../../../lib/mongodb";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { userIsAllowedToSignIn } from "@/utils/axios";
+import { CustomSendVerificationRequest } from "./signInEmail";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -17,6 +18,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest: CustomSendVerificationRequest,
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
@@ -30,5 +32,12 @@ export const authOptions: NextAuthOptions = {
         return false;
       }
     },
+  },
+  pages: {
+    signIn: "/entrar",
+    // signOut: "/auth/signout",
+    // error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/verificar", // (used for check email message)
+    // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
 };
