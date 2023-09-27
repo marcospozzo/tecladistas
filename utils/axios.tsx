@@ -1,6 +1,7 @@
 import { ProductProps, ProfessionalProps, StudioProps } from "@/types";
 import axios, { AxiosResponse } from "axios";
 import { cookies } from "next/headers";
+import { cookieName } from "./utils";
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -17,7 +18,7 @@ export const axiosInstance = axios.create({
 //   });
 
 axiosInstance.interceptors.request.use((config) => {
-  const cookie = cookies().get("next-auth.session-token");
+  const cookie = cookies().get(cookieName);
   config.headers.Authorization = cookie?.value;
   return config;
 });
