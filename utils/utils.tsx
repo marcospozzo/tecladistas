@@ -70,3 +70,8 @@ export const skills = [
   "luthier",
   "in-ears",
 ];
+
+const isProduction = process.env.NODE_ENV === "production";
+export const cookieName = isProduction
+  ? "__Secure-next-auth.session-token"
+  : "next-auth.session-token";
