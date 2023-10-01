@@ -7,6 +7,7 @@ import ProfessionalCard from "./Cards/ProfessionalCard";
 import Location from "./Location";
 import CardNew from "./Cards/CardNew";
 import EditableInput from "./EditableInput";
+import WhatsAppButton from "./WhatsAppButton";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Location,
   CardNew,
   EditableInput,
+  WhatsAppButton,
 };

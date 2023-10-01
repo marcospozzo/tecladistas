@@ -1,9 +1,17 @@
-import type { NextAuthOptions } from "next-auth";
+import type { DefaultSession, NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import clientPromise from "../../../lib/mongodb";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { userIsAllowedToSignIn } from "@/utils/axios";
 import { CustomSendVerificationRequest } from "./signInEmail";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+    } & DefaultSession["user"];
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,6 +39,10 @@ export const authOptions: NextAuthOptions = {
       } else {
         return false;
       }
+    },
+    async session({ session, user }) {
+      session.user.id = user.id;
+      return session;
     },
   },
   pages: {

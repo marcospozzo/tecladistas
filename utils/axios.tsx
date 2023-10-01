@@ -1,4 +1,9 @@
-import { ProductProps, ProfessionalProps, StudioProps } from "@/types";
+import {
+  ProductProps,
+  ProfessionalProps,
+  StudioProps,
+  UserProps,
+} from "@/types";
 import axios, { AxiosResponse } from "axios";
 import { cookies } from "next/headers";
 import { cookieName } from "./utils";
@@ -8,18 +13,14 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-//   axiosInstance.interceptors.request.use((config) => {
-//     if (config.data instanceof FormData) {
-//       config.headers["Content-Type"] = "multipart/form-data";
-//     } else {
-//       config.headers["Content-Type"] = "application/json";
-//     }
-//     return config;
-//   });
-
 axiosInstance.interceptors.request.use((config) => {
   const cookie = cookies().get(cookieName);
-  config.headers.Authorization = cookie?.value;
+  config.headers.cookie = `${cookie?.name}=${cookie?.value}`;
+  if (config.data instanceof FormData) {
+    config.headers["Content-Type"] = "multipart/form-data";
+  } else {
+    config.headers["Content-Type"] = "application/json";
+  }
   return config;
 });
 
@@ -90,6 +91,39 @@ export const getProfessional = async (
   try {
     const response: AxiosResponse<ProfessionalProps> = await axiosInstance.get(
       `/professionals/${professionalId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const handleProductCreation = async (formData: FormData) => {
+  try {
+    const promise = axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
+      formData
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getProduct = async (productId: string): Promise<ProductProps> => {
+  try {
+    const response: AxiosResponse<ProductProps> = await axiosInstance.get(
+      `/products/${productId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUser = async (userId: string): Promise<UserProps> => {
+  try {
+    const response: AxiosResponse<UserProps> = await axiosInstance.get(
+      `/users/${userId}`
     );
     return response.data;
   } catch (error) {

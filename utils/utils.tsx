@@ -1,9 +1,9 @@
 export const skillsTranslations: { [key: string]: string } = {
   "synths": "Sintetizadores",
-  "piano-mover": "Transportistas de pianos",
+  "piano-mover": "Transportista de pianos",
   "electric-pianos": "Pianos eléctricos",
   "acoustic-pianos": "Pianos acústicos",
-  "piano-tuner": "Afinadores de pianos",
+  "piano-tuner": "Afinador de pianos",
   "organs": "Órganos",
   "mics": "Micrófonos",
   "general-audio-gear": "Equipos de audio",
@@ -21,7 +21,7 @@ export const placeholders: { [key: string]: string } = {
   "location": "Barrio / Municipio / Provincia",
   "description": "No es necesario incluir datos de contacto",
   "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
-  "picture": "Elegir o arrastrar una foto (máx. 2 MB)",
+  "image": "Elegir o arrastrar una foto (máx. 2 MB)",
   "disclamer":
     "Acepto mostrar mi nombre y número de teléfono en la publicación.",
 };
@@ -55,8 +55,8 @@ export const contactSubjects: { [key: string]: string } = {
 };
 
 export const skills = [
-  "piano-tuner",
   "piano-mover",
+  "piano-tuner",
   "acoustic-pianos",
   "electric-pianos",
   "synths",

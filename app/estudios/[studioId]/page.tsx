@@ -16,7 +16,7 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
       <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={studio.pictures[0]}
+          src={studio.images[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={500}
           height={500}

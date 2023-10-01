@@ -16,8 +16,7 @@ const ProfessionalCard = ({
       <div className="flex flex-row items-center space-x-4">
         <div>
           {professional.firstName}{" "}
-          {professional.nickname && `"${professional.nickname}"`}{" "}
-          {professional.lastName}
+          {professional.nickname && `"${professional.nickname}"`}
         </div>
       </div>
       <div className="flex space-x-2">

@@ -49,7 +49,7 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
         type="email"
         id="email"
         name="email"
-        placeholder="Email"
+        placeholder="Email registrado"
         onChange={handleChange}
         required
       />

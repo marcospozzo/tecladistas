@@ -5,17 +5,25 @@ import { Location } from "@/components";
 import { formatPrice } from "@/utils/utils";
 import { FaArrowsRotate } from "react-icons/fa6";
 
-const ProductCard = ({ product }: { product: ProductProps }) => {
+const ProductCard = ({
+  product,
+  isOwner,
+}: {
+  product: ProductProps;
+  isOwner: boolean;
+}) => {
   return (
     <Link
       href={`/${product._id}`}
-      className="flex flex-col box-item bg-slate-300 rounded-xl"
+      className={`flex flex-col box-item bg-slate-300 rounded-xl ${
+        isOwner && "border-4 border-green-500"
+      } `}
       scroll={true}
     >
       <div className=" w-full h-48 bg-white overflow-hidden">
         <Image
           className="object-contain w-full h-full box-item-image"
-          src={product.pictures ? product.pictures[0] : ""}
+          src={product.images ? product.images[0] : ""}
           alt={`${product.brand} product`}
           width={300}
           height={300}
