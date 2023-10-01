@@ -3,25 +3,30 @@
 import { EditableInput } from "@/components";
 import { ProductProps } from "@/types";
 import { placeholders } from "@/utils/utils";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import {
   ChangeEvent,
   ChangeEventHandler,
+  FormEvent,
   SetStateAction,
   useState,
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
-const fileTypes = ["JPG", "JPEG", "PNG"];
+import { toast } from "react-toastify";
+const imageTypes = ["JPG", "JPEG", "PNG"];
 
 const NewProduct = () => {
-  const [formData, setFormData] = useState<ProductProps>({});
-  const [file, setFile] = useState(null);
+  const router = useRouter();
+  const [data, setData] = useState<ProductProps>({});
+  const [image, setImage] = useState(null);
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     if (event.target) {
-      setFormData({
-        ...formData,
+      setData({
+        ...data,
         [event.target.name]: event.target.value,
       });
     }
@@ -29,67 +34,107 @@ const NewProduct = () => {
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target) {
-      setFormData({
-        ...formData,
+      setData({
+        ...data,
         [event.target.name]: event.target.checked,
       });
     }
   };
 
-  const handleFileUploaderChange = (file: SetStateAction<null>) => {
-    setFile(file);
+  const handleImageUploaderChange = (image: SetStateAction<null>) => {
+    setImage(image);
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    formData.append("image", image!);
+
+    try {
+      const promise = axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
+        formData,
+        {
+          withCredentials: true,
+          headers: { "content-type": "multipart/form-data" },
+        }
+      );
+      toast.promise(promise, {
+        pending: "Creando...",
+        error: {
+          render({
+            data,
+          }: {
+            data?: { response?: { data?: { error?: string } } };
+          }) {
+            console.log({ data });
+            return data?.response?.data?.error ?? "Error";
+          },
+        },
+      });
+      await promise;
+      router.push("/clasificados");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form className="wide-form" action="#" method="post">
+    <form className="wide-form" onSubmit={handleSubmit}>
       <h1 className="form-title">Crear publicación</h1>
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Título"
         fieldName="title"
-        text={formData.title}
+        text={data.title}
       />
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Marca"
         fieldName="brand"
-        text={formData.brand}
+        text={data.brand}
       />
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Modelo"
         fieldName="model"
-        text={formData.model}
+        text={data.model}
       />
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Año"
         fieldName="year"
-        text={formData.year}
+        text={data.year}
       />
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Descripción"
         fieldName="description"
-        text={formData.description}
+        text={data.description}
       />
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Precio"
         fieldName="price"
-        text={formData.price}
+        text={data.price}
       />
 
       <EditableInput
         handleOnChange={handleEditableInputChange}
         label="Ubicación"
         fieldName="location"
-        text={formData.location}
+        text={data.location}
       />
 
       <div className="flex max-sm:flex-col space-x-2 my-4">
@@ -121,12 +166,12 @@ const NewProduct = () => {
         <FileUploader
           maxSize={2}
           required
-          label={placeholders.picture}
+          label={placeholders.image}
           hoverTitle=""
           classes="self-center space-x-4 w-full h-12"
-          handleChange={handleFileUploaderChange}
-          name="file"
-          types={fileTypes}
+          handleChange={handleImageUploaderChange}
+          name="image"
+          types={imageTypes}
         />
       </div>
 
@@ -135,8 +180,8 @@ const NewProduct = () => {
           <input
             className="h-5 w-5 m-0 self-center"
             type="checkbox"
-            id="disclamer"
-            name="disclamer"
+            id="disclaimer"
+            name="disclaimer"
             onChange={handleCheckboxChange}
             required={true}
           />

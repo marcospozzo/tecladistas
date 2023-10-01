@@ -17,8 +17,8 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 
   const navigationItems = [
     { label: PRODUCTS, link: "/clasificados" },
-    { label: STUDIOS, link: "/estudios" },
     { label: PROFESSIONALS, link: "/profesionales" },
+    { label: STUDIOS, link: "/estudios" },
   ];
 
   return (

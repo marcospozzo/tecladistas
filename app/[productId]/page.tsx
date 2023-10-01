@@ -1,22 +1,20 @@
-import { Location } from "@/components";
-import { WHATSAPP_LINK } from "@/utils/constants";
-import { getData } from "@/utils/getData";
-import { formatPhone, formatPrice } from "@/utils/utils";
+import { Location, WhatsAppButton } from "@/components";
+import { getProduct, getUser } from "@/utils/axios";
+import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
-import Link from "next/link";
-import { FaArrowsRotate, FaWhatsapp } from "react-icons/fa6";
+import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
 const Product = async ({ params }: { params: { productId: string } }) => {
-  const product = await getData(`/products/${params.productId}`);
-  const user = await getData(`/users/${product.userId}`);
+  const product = await getProduct(params.productId);
+  const user = await getUser(product.userId!);
 
   return (
     <div className="item">
       <div className="max-lg:w-full relative w-2/3 h-full">
         <Image
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={product.pictures[0]}
+          src={product.images[0]}
           alt={`${product.brand} ${product.model} product`}
           width={500}
           height={500}
@@ -48,20 +46,11 @@ const Product = async ({ params }: { params: { productId: string } }) => {
           <div className="flex space-x-1">
             <MdPiano className="self-center" />
             <h3>{user.firstName}:</h3>
-            <h3>{user.phone}</h3>
+            <h3>{`+${user.phone}`}</h3>
           </div>
         </div>
-        <div className="flex flex-col text-lg space-x-1">
-          <Link
-            className="flex justify-center submit-button space-x-2"
-            href={`${WHATSAPP_LINK}${formatPhone(user.phone)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h3 className="text-base">Abrir</h3>
-            <FaWhatsapp size={25} />
-          </Link>
-        </div>
+
+        <WhatsAppButton phone={user.phone} />
       </div>
     </div>
   );

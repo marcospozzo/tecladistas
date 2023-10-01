@@ -42,6 +42,7 @@ html, body {
 
 main {
   min-height: 100vh;
+  width: 100%;
   @apply p-6 sm:p-8 md:p-24
 }
 
@@ -78,21 +79,12 @@ h2 {
   max-height: 1.5em;
 }
 
-/* .currentPage {
-  font-weight: bolder;
-}
-
-.notCurrentPage:hover {
-  opacity: 0.5;
-  transition: 500ms;
-} */
-
 .cards {
   @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
 }
 
 .professionals {
-  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
 }
 
 p {
@@ -162,7 +154,7 @@ button.submit-button {
 }
 
 .is-active {
-  @apply bg-gray-400 rounded-md
+  @apply bg-gray-400 rounded-md p-2
 }
 
 .login-signup {

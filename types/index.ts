@@ -1,8 +1,9 @@
 import { ChangeEventHandler } from "react";
 
 export interface ProductProps {
+  [key: string]: any;
   _id?: string;
-  userId?: number;
+  userId?: string;
   title?: string;
   brand?: string;
   model?: string;
@@ -38,7 +39,7 @@ export interface StudioProps {
   description: string;
   services: Array<string>;
   status: "active" | "inactive" | "deleted";
-  pictures: Array<string>;
+  images: Array<string>;
   location: string;
 }
 

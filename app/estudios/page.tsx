@@ -6,11 +6,14 @@ const Studios = async () => {
   const data = await getStudios();
 
   return (
-    <Cards>
-      {data?.map((studio: StudioProps) => (
-        <StudioCard key={studio._id} studio={studio} />
-      ))}
-    </Cards>
+    // <Cards>
+    //   {data?.map((studio: StudioProps) => (
+    //     <StudioCard key={studio._id} studio={studio} />
+    //   ))}
+    // </Cards>
+    <div className="flex justify-center">
+      <i>Próximamente</i>
+    </div>
   );
 };
 

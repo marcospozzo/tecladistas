@@ -1,5 +1,5 @@
 export const PRODUCTS = "Clasificados";
-export const PROFESSIONALS = "Profesionales";
+export const PROFESSIONALS = "Listado de Profesionales";
 export const STUDIOS = "Estudios de Grabación";
 export const CONTACT = "Contacto";
 export const ABOUT_US = "Sobre nosotrxs";

@@ -12,7 +12,7 @@ const Professionals = async () => {
   return (
     <div>
       {skills.map((skill: string) => (
-        <div key={skill} className="mb-16">
+        <div key={skill} className="mb-14">
           <h1 className="mb-4">{skillsTranslations[skill]}</h1>
           <div className="professionals px-6 sm:px-12">
             {professionals

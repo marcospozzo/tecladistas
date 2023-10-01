@@ -45,7 +45,7 @@ export default function EditableInput({
       ) : (
         <button
           onClick={handleOnClick}
-          className="w-4/5 max-sm:w-full justify-start border-none editable-input text-left"
+          className="w-4/5 max-sm:w-full justify-start form-button border-none editable-input text-left"
         >
           {fieldName === "price" ? formatPrice(text) : text}
         </button>

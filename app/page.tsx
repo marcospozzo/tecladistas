@@ -42,7 +42,7 @@ const AboutUs = () => {
         </Link>
         .
       </p>
-      <Link className="flex justify-center mt-20" href="/registrarse">
+      <Link className="flex justify-center sm:mt-20 mb-2" href="/registrarse">
         <button className="submit-button" type="submit" value="register">
           <h3 className="text-xl">Registrarse</h3>
         </button>
