@@ -12,7 +12,13 @@ const Footer = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 <h2>{CONTACT}</h2>
               </Link>
             ) : (
-              <Link href={`mailto:${EMAIL}`}>{EMAIL}</Link>
+              <Link
+                href={`mailto:${EMAIL}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {EMAIL}
+              </Link>
             )}
           </li>
         </ul>
