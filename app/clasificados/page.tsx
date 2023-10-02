@@ -11,12 +11,13 @@ const Classified = async () => {
 
   return (
     <Cards>
-      <CardNew />
+      {/* hide the create button if user already has an active one */}
+      {data[0].userId !== userId && <CardNew />}
       {data?.map((product: ProductProps) => (
         <ProductCard
           key={product._id}
           product={product}
-          isOwner={product.userId === userId}
+          isTheirOwn={product.userId === userId}
         />
       ))}
     </Cards>

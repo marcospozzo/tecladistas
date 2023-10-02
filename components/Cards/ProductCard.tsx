@@ -7,16 +7,16 @@ import { FaArrowsRotate } from "react-icons/fa6";
 
 const ProductCard = ({
   product,
-  isOwner,
+  isTheirOwn,
 }: {
   product: ProductProps;
-  isOwner: boolean;
+  isTheirOwn: boolean;
 }) => {
   return (
     <Link
       href={`/${product._id}`}
       className={`flex flex-col box-item bg-slate-300 rounded-xl ${
-        isOwner && "border-4 border-green-500"
+        isTheirOwn && "border-4 border-green-500"
       } `}
       scroll={true}
     >

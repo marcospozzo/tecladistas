@@ -8,6 +8,7 @@ import Location from "./Location";
 import CardNew from "./Cards/CardNew";
 import EditableInput from "./EditableInput";
 import WhatsAppButton from "./WhatsAppButton";
+import DeleteProductButton from "./DeleteProductButton";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   CardNew,
   EditableInput,
   WhatsAppButton,
+  DeleteProductButton,
 };

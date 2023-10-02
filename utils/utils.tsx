@@ -24,6 +24,9 @@ export const placeholders: { [key: string]: string } = {
   "image": "Elegir o arrastrar una foto (máx. 2 MB)",
   "disclamer":
     "Acepto mostrar mi nombre y número de teléfono en la publicación.",
+  "brand": "Opcional",
+  "model": "Opcional",
+  "year": "Opcional",
 };
 
 export function formatPrice(price: any) {
