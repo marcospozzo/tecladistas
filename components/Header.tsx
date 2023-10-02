@@ -48,7 +48,11 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         </ul>
       </nav>
       {isLoggedIn ? (
-        <Link className="self-center max-sm:hidden" href="/api/auth/signout">
+        <Link
+          className="self-center max-sm:hidden"
+          href="/api/auth/signout"
+          prefetch={false}
+        >
           <nav id="login navbar" className="flex flex-row mx-4">
             <FaUserAlt className="self-center" />
             <ul className="flex flex-row">

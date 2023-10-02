@@ -60,28 +60,29 @@ const NewProduct = () => {
     formData.append("image", image!);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
-        {
-          method: "POST",
-          body: formData,
-          credentials: "include",
-          headers: {
-            // Remove the "multipart/form-data" header, as fetch handles it automatically for FormData.
+      const promise = axios.post(`/api/products/create`, formData, {
+        withCredentials: true,
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      toast.promise(promise, {
+        pending: "Publicando...",
+        error: {
+          render({
+            data,
+          }: {
+            data?: { response?: { data?: { error?: string } } };
+          }) {
+            console.log({ data });
+            return data?.response?.data?.error ?? "Error";
           },
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.response?.data?.error || "Error");
-      }
-
-      toast("Publicando...");
+        },
+      });
+      await promise;
       router.push("/clasificados");
     } catch (error) {
       console.error(error);
-      toast.error("Error");
     }
   };
 
