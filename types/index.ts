@@ -50,6 +50,7 @@ export interface EditableInputProps {
   handleOnChange: ChangeEventHandler<HTMLInputElement>;
 }
 export interface UserProps {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;

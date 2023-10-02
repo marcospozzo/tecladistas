@@ -1,13 +1,17 @@
-import { Location, WhatsAppButton } from "@/components";
+import { DeleteProductButton, Location, WhatsAppButton } from "@/components";
 import { getProduct, getUser } from "@/utils/axios";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 const Product = async ({ params }: { params: { productId: string } }) => {
   const product = await getProduct(params.productId);
   const user = await getUser(product.userId!);
+  const session = await getServerSession(authOptions);
+  const isTheirOwn = session?.user.id === user._id;
 
   return (
     <div className="item">
@@ -50,7 +54,11 @@ const Product = async ({ params }: { params: { productId: string } }) => {
           </div>
         </div>
 
-        <WhatsAppButton phone={user.phone} />
+        {isTheirOwn ? (
+          <DeleteProductButton id={product._id} />
+        ) : (
+          <WhatsAppButton phone={user.phone} />
+        )}
       </div>
     </div>
   );
