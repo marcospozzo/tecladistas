@@ -14,6 +14,7 @@ const SignUp = ({
 }) => {
   const router = useRouter();
   const [data, setData] = useState<UserProps>({
+    _id: "",
     firstName: "",
     lastName: "",
     phone: "",
