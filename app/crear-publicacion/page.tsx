@@ -62,7 +62,10 @@ const NewProduct = () => {
         formData,
         {
           withCredentials: true,
-          headers: { "content-type": "multipart/form-data" },
+          headers: {
+            "content-type": "multipart/form-data",
+            "Access-Control-Allow-Credentials": true,
+          },
         }
       );
       toast.promise(promise, {
