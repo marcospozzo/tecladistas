@@ -2,7 +2,7 @@
 
 import { EditableInput } from "@/components";
 import { ProductProps } from "@/types";
-import { placeholders } from "@/utils/utils";
+import { cookieName, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {
@@ -14,12 +14,15 @@ import {
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
-const imageTypes = ["JPG", "JPEG", "PNG"];
+// import nookies, { parseCookies } from "nookies";
 
 const NewProduct = () => {
   const router = useRouter();
   const [data, setData] = useState<ProductProps>({});
   const [image, setImage] = useState(null);
+  const imageTypes = ["JPG", "JPEG", "PNG"];
+  // const cookies = parseCookies();
+  // console.log({ cookies });
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -57,30 +60,28 @@ const NewProduct = () => {
     formData.append("image", image!);
 
     try {
-      const promise = axios.post(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
-        formData,
         {
-          withCredentials: true,
+          method: "POST",
+          body: formData,
+          credentials: "include",
+          headers: {
+            // Remove the "multipart/form-data" header, as fetch handles it automatically for FormData.
+          },
         }
       );
-      toast.promise(promise, {
-        pending: "Publicando...",
-        error: {
-          render({
-            data,
-          }: {
-            data?: { response?: { data?: { error?: string } } };
-          }) {
-            console.log({ data });
-            return data?.response?.data?.error ?? "Error";
-          },
-        },
-      });
-      await promise;
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData?.response?.data?.error || "Error");
+      }
+
+      toast("Publicando...");
       router.push("/clasificados");
     } catch (error) {
       console.error(error);
+      toast.error("Error");
     }
   };
 
