@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { cookieName } from "./utils/utils";
-// export { default } from "next-auth/middleware";
+// export { default } from "next-auth/middleware"; // its buggy on nextjs 13.4
 
 export const config = {
   matcher: [
@@ -12,6 +12,7 @@ export const config = {
     "/clasificados",
     "/entrar",
     "/registrarse",
+    "/contacto",
   ],
 };
 

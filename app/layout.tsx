@@ -23,7 +23,7 @@ export default async function RootLayout({
       <body>
         <Header isLoggedIn={session != undefined} />
         <main>{children}</main>
-        <Footer />
+        <Footer isLoggedIn={session != undefined} />
         <ToastContainer position="bottom-right" />
         <Analytics />
       </body>
