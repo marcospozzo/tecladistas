@@ -8,6 +8,9 @@ const nextConfig = {
       },
     ],
   },
+};
+
+module.exports = {
   async headers() {
     return [
       {
