@@ -14,15 +14,12 @@ import {
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
-// import nookies, { parseCookies } from "nookies";
 
 const NewProduct = () => {
   const router = useRouter();
   const [data, setData] = useState<ProductProps>({});
   const [image, setImage] = useState(null);
   const imageTypes = ["JPG", "JPEG", "PNG"];
-  // const cookies = parseCookies();
-  // console.log({ cookies });
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -61,7 +58,6 @@ const NewProduct = () => {
 
     try {
       const promise = axios.post(`/api/products/create`, formData, {
-        withCredentials: true,
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -165,7 +161,7 @@ const NewProduct = () => {
           Foto:
         </label>
         <FileUploader
-          maxSize={2}
+          maxSize={5}
           required
           label={placeholders.image}
           hoverTitle=""

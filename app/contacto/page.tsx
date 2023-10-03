@@ -24,15 +24,12 @@ const Contact = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("subject", data.subject);
+    formData.append("message", data.message);
 
     try {
-      const promise = axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact-form`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+      const promise = axios.post("/api/contact-form", formData);
       toast.promise(promise, {
         pending: "Enviando...",
         success: "Enviado",

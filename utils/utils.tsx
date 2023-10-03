@@ -21,7 +21,7 @@ export const placeholders: { [key: string]: string } = {
   "location": "Barrio / Municipio / Provincia",
   "description": "No es necesario incluir datos de contacto",
   "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
-  "image": "Elegir o arrastrar una foto (máx. 2 MB)",
+  "image": "Elegir o arrastrar una foto (máx. 5 MB)",
   "disclamer":
     "Acepto mostrar mi nombre y número de teléfono en la publicación.",
   "brand": "Opcional",
