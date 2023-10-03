@@ -27,6 +27,7 @@ const ProductCard = ({
           alt={`${product.brand} product`}
           width={300}
           height={300}
+          priority={true}
         />
       </div>
       <h3 className="product-title">{product.title}</h3>

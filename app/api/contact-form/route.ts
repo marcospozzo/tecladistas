@@ -4,12 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
+
   const cookieStore = cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact-form`,
       {
         method: "post",
         headers: {

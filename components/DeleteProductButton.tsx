@@ -15,12 +15,7 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
 
   const handleConfirm = async () => {
     try {
-      const promise = axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const promise = axios.delete(`/api/products/${id}`);
       toast.promise(promise, {
         pending: "Eliminando...",
         error: {

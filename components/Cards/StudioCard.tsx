@@ -17,6 +17,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={300}
           height={300}
+          priority={true}
         />
       </div>
       <h3 className="studio-name">{studio.name}</h3>
