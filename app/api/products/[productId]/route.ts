@@ -2,17 +2,16 @@ import { cookieName } from "@/utils/utils";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function DELETE(request: Request) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { productId: string } }
+) {
   const cookieStore = cookies();
   const cookie = cookieStore.get(cookieName);
 
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-  console.log({ searchParams, id });
-
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${params.productId}`,
       {
         method: "delete",
         headers: {
