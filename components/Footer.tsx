@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { CONTACT, EMAIL } from "@/utils/constants";
 import { useSession } from "next-auth/react";
