@@ -11,21 +11,20 @@ export const metadata: Metadata = {
   title: "Tecladistas",
 };
 
-export const fetchCache = "force-no-store";
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+  console.log({ session }, session !== null);
 
   return (
     <html lang="es">
       <body>
-        <Header isLoggedIn={session != undefined} />
+        <Header isLoggedIn={session !== null} />
         <main>{children}</main>
-        <Footer isLoggedIn={session != undefined} />
+        <Footer isLoggedIn={session !== null} />
         <ToastContainer position="bottom-right" />
         <Analytics />
       </body>
