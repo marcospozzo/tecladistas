@@ -1,26 +1,52 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const AboutUs = () => {
+  const whitelistedUsersCounter = 274;
   return (
     <div className="about-us">
       <p>
-        Esta web reúne y facilita información útil para el grupo Tecladistxs
-        Gitanxs.
+        Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
+        los más diversos. <br />
+        Se creó en el 2013 a partir de la iniciativa de cuatro amigos
+        tecladistas que se juntaban para compartir la pasión por los pianos y
+        los teclados. A través del boca en boca se fueron sumando más colegas y
+        se iniciaron los encuentros tecladísticos anuales. Actualmente cuenta
+        con {whitelistedUsersCounter} integrantes y sigue creciendo. <br />{" "}
+        <br />
+        Algunos de los pilares del grupo son la generosidad, la humildad, la
+        camaradería, el intercambio y la amistad.
+      </p>
+      <Image
+        className="w-full my-12 rounded-lg"
+        src={"/keyboard.jpg"}
+        alt="teclas de un piano o teclado"
+        width={0}
+        height={0}
+        sizes="100vw"
+        priority={true}
+      />
+      <p>
+        Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
       </p>
       <p>
-        Además, conecta compradores con vendedores, sin intermediación. Es
-        decir: no participamos de operaciones, intercambio de dinero, garantías,
-        ni acuerdos. La responsabilidad en cada compra, venta o servicio queda a
-        cargo de cada usuario involucrado y sucede por fuera de esta web.
+        Aquí podrás encontrar el contacto directo de técnicos de distintas áreas
+        como: transportistas, afinadores e incluso nuestros teclados en venta.
+        El objetivo es facilitar ese contacto, motivado por la frecuente
+        consulta de dichos servicios.
+      </p>
+      <p>
+        Tené en cuenta que los desarrolladores de esta página no participamos de
+        operaciones, intercambio de dinero, garantías, ni acuerdos en relación a
+        esas ventas o servicios dados. La responsabilidad de dichas
+        transacciones quedan a cargo de cada usuario involucrado, y las mismas
+        suceden por fuera de esta web.
       </p>
       <p>
         Toda información personal, datos de contacto y números de teléfono son
         de uso privado y pedimos que se mantengan de esta forma.
       </p>
-      <p>
-        Tecladistxs Gitanxs es...{" "}
-        <i>-Completar párrafo de cómo nació el grupo-</i>
-      </p>
+
       <p>
         Quienes quieran y puedan contribuir económicamente a este proyecto, son
         invitadxs a hacerlo a través de cafecitos:{" "}
