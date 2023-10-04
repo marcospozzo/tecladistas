@@ -25,7 +25,9 @@ export default async function RootLayout({
       <body>
         <Provider session={session}>
           <Header />
-          <main>{children}</main>
+        </Provider>
+        <main>{children}</main>
+        <Provider session={session}>
           <Footer />
         </Provider>
         <ToastContainer position="bottom-right" />
