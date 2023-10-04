@@ -11,9 +11,12 @@ import {
 } from "@/utils/constants";
 import { FaUserAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const Header = () => {
   const pathname = usePathname();
+  const { status } = useSession();
+  const isLoggedIn = status === "authenticated";
 
   const navigationItems = [
     { label: PRODUCTS, link: "/clasificados" },

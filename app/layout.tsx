@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { SessionProvider } from "next-auth/react";
+import Provider from "@/components/Provider";
 
 export const metadata: Metadata = {
   title: "Tecladistas",
@@ -21,7 +23,9 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Header isLoggedIn={session !== null} />
+        <Provider session={session}>
+          <Header />
+        </Provider>
         <main>{children}</main>
         <Footer isLoggedIn={session !== null} />
         <ToastContainer position="bottom-right" />
