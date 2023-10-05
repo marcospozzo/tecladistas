@@ -30,7 +30,7 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
         },
       });
       await promise;
-      router.push("/clasificados");
+      router.push("/teclados");
     } catch (error) {
       console.error(error);
     }

@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   LOGIN,
   LOGOUT,
-  PRODUCTS,
+  KEYBOARDS,
   PROFESSIONALS,
   STUDIOS,
 } from "@/utils/constants";
@@ -19,7 +19,7 @@ const Header = () => {
   const isLoggedIn = status === "authenticated";
 
   const navigationItems = [
-    { label: PRODUCTS, link: "/clasificados" },
+    { label: KEYBOARDS, link: "/teclados" },
     { label: PROFESSIONALS, link: "/profesionales" },
     { label: STUDIOS, link: "/estudios" },
   ];
