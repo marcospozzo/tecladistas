@@ -9,7 +9,7 @@ const Footer = () => {
   const isLoggedIn = status === "authenticated";
 
   return (
-    <footer className="flex justify-center h-14 bg-gray-400">
+    <footer className="flex justify-center h-14 border-t-4 header-footer">
       <nav className="flex flex-row">
         <ul className="flex flex-row">
           <li>

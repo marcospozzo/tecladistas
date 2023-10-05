@@ -42,7 +42,7 @@ const Product = async ({ params }: { params: { productId: string } }) => {
 
         {product.year && <div>Año: {product.year}</div>}
 
-        <p>{product.description}</p>
+        <pre>{product.description}</pre>
 
         <Location name={product.location} />
 
