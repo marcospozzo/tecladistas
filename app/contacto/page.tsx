@@ -52,47 +52,47 @@ const Contact = () => {
   };
 
   return (
-    <form className="wide-form" onSubmit={handleSubmit}>
+    <>
       <h1 className="form-title">Contacto</h1>
+      <form className="wide-form" onSubmit={handleSubmit}>
+        <select
+          id="subject"
+          name="subject"
+          onChange={handleOnChange} // Add this line
+          required
+        >
+          <option value={contactSubjects.comment}>
+            {contactSubjects.comment}
+          </option>
+          <option value={contactSubjects.professionalAMD}>
+            {contactSubjects.professionalAMD}
+          </option>
+          <option value={contactSubjects.technicalProblem}>
+            {contactSubjects.technicalProblem}
+          </option>
+          <option value={contactSubjects.other}>{contactSubjects.other}</option>
+        </select>
 
-      <select
-        className="bg-white"
-        id="subject"
-        name="subject"
-        onChange={handleOnChange} // Add this line
-        required
-      >
-        <option value={contactSubjects.comment}>
-          {contactSubjects.comment}
-        </option>
-        <option value={contactSubjects.professionalAMD}>
-          {contactSubjects.professionalAMD}
-        </option>
-        <option value={contactSubjects.technicalProblem}>
-          {contactSubjects.technicalProblem}
-        </option>
-        <option value={contactSubjects.other}>{contactSubjects.other}</option>
-      </select>
+        <textarea
+          className="h-24 min-h-[6rem] max-h-96"
+          id="message"
+          name="message"
+          placeholder="Mensaje"
+          onChange={handleOnChange}
+          required
+        ></textarea>
 
-      <textarea
-        className="h-24 min-h-[6rem] max-h-96"
-        id="message"
-        name="message"
-        placeholder="Mensaje"
-        onChange={handleOnChange}
-        required
-      ></textarea>
+        <br />
 
-      <br />
-
-      <button
-        className="submit-button form-button"
-        type="submit"
-        value="Enviar"
-      >
-        <h3 className="text-xl">Enviar mensaje</h3>
-      </button>
-    </form>
+        <button
+          className="submit-button form-button"
+          type="submit"
+          value="Enviar"
+        >
+          <h3 className="text-xl">Enviar mensaje</h3>
+        </button>
+      </form>
+    </>
   );
 };
 

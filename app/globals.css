@@ -121,12 +121,16 @@ button.submit-button {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
 }
 
-.box, input, select, option, textarea, .form-button{
-  @apply space-x-4 m-2 p-4 rounded-xl
+.box, input, select, option, textarea {
+  @apply space-x-4 m-2 p-4 rounded-xl text-black dark:text-white dark:bg-slate-600 dark:border-2;
+}
+
+.form-button {
+  @apply space-x-4 m-2 p-4 rounded-xl dark:border-2 border-white border-solid
 }
 
 .box-item {
-  @apply space-y-4 m-4 p-6 max-sm:mx-0 max-sm:p-6;
+  @apply space-y-4 m-4 p-6 max-sm:mx-0 max-sm:p-6 dark:bg-slate-600;
 }
 
 .box-item:hover {
@@ -140,7 +144,7 @@ button.submit-button {
 }
 
 .form-title {
-  @apply self-center mb-12
+  @apply self-center mb-12 text-center
 }
 
 .editable-input {
@@ -149,15 +153,15 @@ button.submit-button {
 
 .editable-input:hover {
   transition: 500ms;
-  @apply bg-gray-300
+  @apply bg-gray-400 dark:bg-gray-500 
 }
 
 .item {
-  @apply flex max-lg:flex-col max-lg:py-6 max-lg:space-y-4 lg:space-x-4 bg-white rounded-xl p-6 sm:p-12;
+  @apply flex max-lg:flex-col max-lg:py-6 max-lg:space-y-4 lg:space-x-4 bg-white dark:bg-slate-600 rounded-xl p-6 sm:p-12;
 }
 
 .is-active {
-  @apply bg-gray-400 rounded-md p-2
+  @apply bg-gray-500 rounded-md p-2 font-bold
 }
 
 .login-signup {
@@ -166,4 +170,16 @@ button.submit-button {
 
 .about-us > p {
   @apply text-2xl text-center mb-8
+}
+
+.icons-container {
+  @apply dark:text-white
+}
+
+form > * {
+  @apply dark:text-white
+}
+
+.header-footer {
+  @apply border-solid bg-gray-400 border-gray-500 dark:bg-gray-600
 }

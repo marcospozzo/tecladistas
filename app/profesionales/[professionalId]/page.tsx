@@ -13,7 +13,7 @@ const Professional = async ({
 
   return (
     <div className="flex flex-col w-full items-center m-auto">
-      <div className="flex flex-col bg-slate-300 rounded-xl p-6 space-y-1">
+      <div className="flex flex-col bg-slate-300 rounded-xl p-6 space-y-1 box-item">
         <h1 className="self-center mb-4">
           {professional.firstName}{" "}
           {professional.nickname && `"${professional.nickname}"`}{" "}

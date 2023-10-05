@@ -16,7 +16,7 @@ export const skillsTranslations: { [key: string]: string } = {
 };
 
 export const placeholders: { [key: string]: string } = {
-  "title": "Ej.: Nord Stage 2 HA88 en muy buen estado",
+  "title": "Ej.: Nord Stage 2 en muy buen estado",
   "price": "Sólo números",
   "location": "Barrio / Municipio / Provincia",
   "description": "No es necesario incluir datos de contacto",
@@ -24,8 +24,8 @@ export const placeholders: { [key: string]: string } = {
   "image": "Elegir o arrastrar una foto (máx. 5 MB)",
   "disclamer":
     "Acepto mostrar mi nombre y número de teléfono en la publicación.",
-  "brand": "Opcional",
-  "model": "Opcional",
+  "brand": "",
+  "model": "",
   "year": "Opcional",
 };
 

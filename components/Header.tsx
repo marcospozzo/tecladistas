@@ -25,7 +25,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex justify-between max-sm:justify-center border-b-4 border-solid border-gray-400">
+    <header className="flex justify-between max-sm:justify-center border-b-4 header-footer">
       <nav className="flex flex-row mx-4">
         <Link className="self-center" href="/">
           <Image
