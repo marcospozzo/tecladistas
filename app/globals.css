@@ -183,3 +183,10 @@ form > * {
 .header-footer {
   @apply border-solid bg-gray-400 border-gray-500 dark:bg-gray-600
 }
+
+pre {
+  width: 100%; /* Set the width of your container */
+  white-space: pre-wrap; /* Prevent text from wrapping */
+  overflow: auto; /* Hide the overflow */
+  text-overflow: ellipsis; /* Add an ellipsis (...) to indicate overflow */
+}
