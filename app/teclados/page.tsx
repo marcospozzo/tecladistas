@@ -4,7 +4,7 @@ import { getProducts } from "@/utils/axios";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-const Classified = async () => {
+const Keyboards = async () => {
   const products = await getProducts();
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
@@ -33,4 +33,4 @@ const Classified = async () => {
   );
 };
 
-export default Classified;
+export default Keyboards;

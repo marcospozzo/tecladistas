@@ -9,7 +9,7 @@ export const config = {
     "/profesionales/:path*",
     "/estudios",
     "/estudios/:path*",
-    "/clasificados",
+    "/teclados",
     "/entrar",
     "/registrarse",
     "/contacto",
@@ -31,6 +31,6 @@ export function middleware(request: NextRequest) {
       request.nextUrl.pathname === "/registrarse") &&
     request.cookies.has(cookieName)
   ) {
-    return NextResponse.redirect(new URL("/clasificados", request.url));
+    return NextResponse.redirect(new URL("/teclados", request.url));
   }
 }
