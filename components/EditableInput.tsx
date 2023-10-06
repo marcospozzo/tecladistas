@@ -29,9 +29,13 @@ export default function EditableInput({
 
   return (
     <div className="flex max-sm:flex-col max-sm:w-full">
-      <label className="text-xl self-center max-sm:self-start w-1/5">{`${label}:`}</label>
+      <label
+        htmlFor={fieldName}
+        className="text-xl self-center max-sm:self-start w-1/5"
+      >{`${label}:`}</label>
       {isEditing || text === "" ? (
         <input
+          id={fieldName}
           name={fieldName}
           onChange={handleOnChangeEdit}
           defaultValue={text}

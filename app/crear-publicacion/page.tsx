@@ -2,7 +2,7 @@
 
 import { EditableInput } from "@/components";
 import { ProductProps } from "@/types";
-import { cookieName, placeholders } from "@/utils/utils";
+import { placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {
@@ -86,6 +86,7 @@ const NewProduct = () => {
       });
       await promise;
       router.push("/teclados");
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
@@ -124,7 +125,10 @@ const NewProduct = () => {
         />
 
         <div className="flex max-sm:flex-col max-sm:w-full">
-          <label className="text-xl self-center max-sm:self-start w-1/5">
+          <label
+            htmlFor={"description"}
+            className="text-xl self-center max-sm:self-start w-1/5"
+          >
             {"Descripción:"}
           </label>
 
@@ -134,7 +138,6 @@ const NewProduct = () => {
             name="description"
             placeholder={placeholders.description}
             onChange={handleTextAreaChange}
-            required
           ></textarea>
         </div>
 
@@ -174,7 +177,7 @@ const NewProduct = () => {
         <div className="flex max-sm:flex-col space-x-2 my-4">
           <label
             className="text-xl w-1/5 self-center max-sm:self-start "
-            htmlFor="exchanges"
+            htmlFor="image"
           >
             Foto:
           </label>
@@ -186,6 +189,7 @@ const NewProduct = () => {
             classes="self-center space-x-4 w-full h-12"
             handleChange={handleImageUploaderChange}
             name="image"
+            id="image"
             types={imageTypes}
           />
         </div>

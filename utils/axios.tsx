@@ -24,22 +24,6 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-export const login = async (credentials: any) => {
-  try {
-    await axiosInstance.post("/users/login", credentials);
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const createAccount = async (data: any) => {
-  try {
-    await axiosInstance.post("/users/create", data);
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const getProfessionals = async (): Promise<Array<ProfessionalProps>> => {
   try {
     const response: AxiosResponse<ProfessionalProps[]> =
@@ -129,4 +113,14 @@ export const getUser = async (userId: string): Promise<UserProps> => {
   } catch (error) {
     throw error;
   }
+};
+
+export const getWhitelistedUsersCount = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
 };
