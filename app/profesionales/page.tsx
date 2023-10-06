@@ -6,7 +6,6 @@ import { skills } from "@/utils/utils";
 import { getProfessionals } from "@/utils/axios";
 
 const Professionals = async () => {
-  // const professionals = await getData("/professionals");
   const professionals = await getProfessionals();
 
   return (

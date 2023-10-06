@@ -1,17 +1,25 @@
+import { getWhitelistedUsersCount } from "@/utils/axios";
 import Image from "next/image";
 import Link from "next/link";
 
-const AboutUs = () => {
-  const whitelistedUsersCounter = 274;
+const AboutUs = async () => {
+  let whitelistedUsersCounter;
+  try {
+    const data = await getWhitelistedUsersCount();
+    whitelistedUsersCounter = data.count;
+  } catch (error) {
+    whitelistedUsersCounter = "más de 270";
+  }
+
   return (
     <div className="about-us">
       <p>
         Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
         los más diversos. <br />
-        Se creó en el 2013 a partir de la iniciativa de cuatro amigos
+        Fue creado en el 2013 a partir de la iniciativa de cuatro amigos
         tecladistas que se juntaban para compartir la pasión por los pianos y
-        los teclados. A través del boca en boca se fueron sumando más colegas y
-        se iniciaron los encuentros tecladísticos anuales. Actualmente cuenta
+        los teclados. A través del boca en boca fueron sumando más y más colegas
+        y se iniciaron los encuentros tecladísticos anuales. Actualmente cuenta
         con {whitelistedUsersCounter} integrantes y sigue creciendo. <br />{" "}
         <br />
         Algunos de los pilares del grupo son la generosidad, la humildad, la
