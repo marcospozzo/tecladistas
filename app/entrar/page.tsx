@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { login } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
