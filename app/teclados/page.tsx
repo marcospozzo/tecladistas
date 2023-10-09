@@ -3,6 +3,12 @@ import { ProductProps } from "@/types";
 import { getProducts } from "@/utils/axios";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { Metadata } from "next";
+import { pageTitles } from "@/utils/utils";
+
+export const metadata: Metadata = {
+  title: pageTitles.keyboards,
+};
 
 const Keyboards = async () => {
   const products = await getProducts();

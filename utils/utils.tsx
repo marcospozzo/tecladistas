@@ -78,3 +78,16 @@ const isProduction = process.env.NODE_ENV === "production";
 export const cookieName = isProduction
   ? "__Secure-next-auth.session-token"
   : "next-auth.session-token";
+
+export const imageTypes = ["JPG", "JPEG", "PNG"];
+
+export const pageTitles: { [key: string]: string } = {
+  professionals: "Profesionales",
+  studios: "Estudios",
+  keyboards: "Teclados",
+  verify: "Verificar",
+  contact: "Contacto",
+  createProduct: "Crear publicación",
+  login: "Entrar",
+  signUp: "Registrarse",
+};

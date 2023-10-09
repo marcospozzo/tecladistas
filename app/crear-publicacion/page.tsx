@@ -2,7 +2,7 @@
 
 import { EditableInput } from "@/components";
 import { ProductProps } from "@/types";
-import { placeholders } from "@/utils/utils";
+import { imageTypes, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {
@@ -19,7 +19,6 @@ const NewProduct = () => {
   const router = useRouter();
   const [data, setData] = useState<ProductProps>({});
   const [image, setImage] = useState(null);
-  const imageTypes = ["JPG", "JPEG", "PNG"];
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event

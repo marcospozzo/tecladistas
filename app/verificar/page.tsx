@@ -1,3 +1,10 @@
+import { pageTitles } from "@/utils/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: pageTitles.verify,
+};
+
 const VerifyRequest = () => {
   return (
     <div className="flex flex-col mx-auto text-center">
