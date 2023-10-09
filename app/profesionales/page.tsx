@@ -1,9 +1,14 @@
 import { ProfessionalProps } from "@/types";
 import { getData } from "@/utils/getData";
 import { ProfessionalCard } from "@/components";
-import { skillsTranslations } from "@/utils/utils";
+import { pageTitles, skillsTranslations } from "@/utils/utils";
 import { skills } from "@/utils/utils";
 import { getProfessionals } from "@/utils/axios";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: pageTitles.professionals,
+};
 
 const Professionals = async () => {
   const professionals = await getProfessionals();

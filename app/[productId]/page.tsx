@@ -1,11 +1,13 @@
 import { DeleteProductButton, Location, WhatsAppButton } from "@/components";
 import { getProduct, getUser } from "@/utils/axios";
-import { formatPrice } from "@/utils/utils";
+import { formatPrice, imageTypes } from "@/utils/utils";
 import Image from "next/image";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { generateMetadata } from "./utils";
+export { generateMetadata };
 
 const Product = async ({ params }: { params: { productId: string } }) => {
   const product = await getProduct(params.productId);

@@ -3,6 +3,12 @@ import { getProfessional } from "@/utils/axios";
 import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStarHalfAlt } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
+import { Metadata } from "next";
+import { pageTitles } from "@/utils/utils";
+
+export const metadata: Metadata = {
+  title: pageTitles.professionals,
+};
 
 const Professional = async ({
   params,
