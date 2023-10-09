@@ -11,6 +11,8 @@ import Provider from "@/components/Provider";
 
 export const metadata: Metadata = {
   title: "Tecladistas",
+  description:
+    "Esta web reúne y facilita información útil para Tecladistxs Gitanxs. Desde nuestros teclados en venta hasta el contacto directo con técnicos.",
 };
 
 export default async function RootLayout({
