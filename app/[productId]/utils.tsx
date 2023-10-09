@@ -1,5 +1,4 @@
 import { Metadata, ResolvingMetadata } from "next";
-import { getProduct } from "@/utils/axios";
 import { imageTypes, pageTitles } from "@/utils/utils";
 
 type Props = {
@@ -17,8 +16,6 @@ export async function generateMetadata(
 
   // Define the protocol based on the environment
   const protocol = isProduction ? "https://" : "http://";
-
-  const product = await getProduct(id);
 
   let foundImage = null;
 
