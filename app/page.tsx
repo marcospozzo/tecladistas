@@ -14,16 +14,13 @@ const AboutUs = async () => {
   return (
     <div className="about-us">
       <p>
-        Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
-        los más diversos. <br />
-        Comenzó en el 2013 con cuatro amigos tecladistas, que se juntaban para
-        compartir la pasión por los pianos y los teclados. A través del boca en
-        boca fueron sumando a más colegas y se iniciaron los encuentros
-        tecladísticos anuales. Actualmente cuenta con {
-          whitelistedUsersCounter
-        }{" "}
-        integrantes y sigue creciendo. Algunos de los pilares del grupo son la
-        generosidad, la humildad, la camaradería, el intercambio y la amistad.
+        Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
+      </p>
+      <p>
+        Aquí podrás encontrar el contacto directo de técnicos de distintas áreas
+        como: transportistas, afinadores e incluso nuestros teclados en venta.
+        El objetivo es facilitar ese contacto, motivado por la frecuente
+        consulta de dichos servicios.
       </p>
       <Image
         className="w-full my-12 rounded-lg"
@@ -35,13 +32,16 @@ const AboutUs = async () => {
         priority={true}
       />
       <p>
-        Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
-      </p>
-      <p>
-        Aquí podrás encontrar el contacto directo de técnicos de distintas áreas
-        como: transportistas, afinadores e incluso nuestros teclados en venta.
-        El objetivo es facilitar ese contacto, motivado por la frecuente
-        consulta de dichos servicios.
+        Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
+        los más diversos. <br />
+        Comenzó en el 2013 con cuatro amigos tecladistas, que se juntaban para
+        compartir la pasión por los pianos y los teclados. A través del boca en
+        boca fueron sumando a más colegas y se iniciaron los encuentros
+        tecladísticos anuales. Actualmente cuenta con {
+          whitelistedUsersCounter
+        }{" "}
+        integrantes y sigue creciendo. Algunos de los pilares del grupo son la
+        generosidad, la humildad, la camaradería, el intercambio y la amistad.
       </p>
       <p>
         Tené en cuenta que los desarrolladores de esta página no participamos de
@@ -54,7 +54,6 @@ const AboutUs = async () => {
         Toda información personal, datos de contacto y números de teléfono son
         de uso privado y pedimos que se mantengan de esta forma.
       </p>
-
       <p>
         Quienes quieran y puedan contribuir económicamente a este proyecto, son
         invitadxs a hacerlo a través de cafecitos:{" "}
