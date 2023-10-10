@@ -30,13 +30,14 @@ export async function generateMetadata(
     }
   }
 
-  const previousImages = (await parent).openGraph?.images || [];
+  // const previousImages = (await parent).openGraph?.images || [];
 
   return {
     metadataBase: new URL(`${protocol}${process.env.IMAGES_HOST_NAME}`),
     title: pageTitles.keyboards,
     openGraph: {
-      images: [foundImage!, ...previousImages],
+      images: [foundImage!],
+      // images: [foundImage!, ...previousImages],
     },
   };
 }

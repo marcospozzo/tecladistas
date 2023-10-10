@@ -7,14 +7,31 @@ import { Analytics } from "@vercel/analytics/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import Provider from "@/components/Provider";
+import { pageTitles } from "@/utils/utils";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Tecladistas.ar",
-    default: "Tecladistas.ar", // a default is required when creating a template
+    template: `%s | ${pageTitles.home}`,
+    default: pageTitles.home,
   },
   description:
-    "Esta web reúne y facilita información útil para Tecladistxs Gitanxs. Desde nuestros teclados en venta hasta el contacto directo con técnicos.",
+    "Esta web reúne y facilita información útil para Tecladistxs Gitanxs.",
+  openGraph: {
+    title: pageTitles.home,
+    url: process.env.WEBSITE_URL,
+    siteName: pageTitles.home,
+    images: [
+      {
+        url: "/keyboard.jpg",
+        alt: "Teclado de piano desde plano cenital",
+        width: 2978.5,
+        height: 578.5,
+      },
+    ],
+    locale: "es",
+    type: "website",
+  },
+  metadataBase: new URL(process.env.WEBSITE_URL!),
 };
 
 export default async function RootLayout({
