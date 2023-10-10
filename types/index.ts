@@ -34,7 +34,7 @@ export interface ProfessionalProps {
 
 export interface StudioProps {
   _id: string;
-  userId: number;
+  userId: string;
   name: string;
   description: string;
   services: Array<string>;
