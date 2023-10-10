@@ -92,4 +92,5 @@ export const pageTitles: { [key: string]: string } = {
   createProduct: "Crear publicación",
   login: "Entrar",
   signUp: "Registrarse",
+  home: "Tecladistas.ar",
 };
