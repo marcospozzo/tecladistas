@@ -16,14 +16,14 @@ const AboutUs = async () => {
       <p>
         Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
         los más diversos. <br />
-        Fue creado en el 2013 a partir de la iniciativa de cuatro amigos
-        tecladistas que se juntaban para compartir la pasión por los pianos y
-        los teclados. A través del boca en boca fueron sumando más y más colegas
-        y se iniciaron los encuentros tecladísticos anuales. Actualmente cuenta
-        con {whitelistedUsersCounter} integrantes y sigue creciendo. <br />{" "}
-        <br />
-        Algunos de los pilares del grupo son la generosidad, la humildad, la
-        camaradería, el intercambio y la amistad.
+        Comenzó en el 2013 con cuatro amigos tecladistas, que se juntaban para
+        compartir la pasión por los pianos y los teclados. A través del boca en
+        boca fueron sumando a más colegas y se iniciaron los encuentros
+        tecladísticos anuales. Actualmente cuenta con {
+          whitelistedUsersCounter
+        }{" "}
+        integrantes y sigue creciendo. Algunos de los pilares del grupo son la
+        generosidad, la humildad, la camaradería, el intercambio y la amistad.
       </p>
       <Image
         className="w-full my-12 rounded-lg"
