@@ -1,5 +1,4 @@
 import { ProfessionalProps } from "@/types";
-import { getData } from "@/utils/getData";
 import { ProfessionalCard } from "@/components";
 import { pageTitles, skillsTranslations } from "@/utils/utils";
 import { skills } from "@/utils/utils";
