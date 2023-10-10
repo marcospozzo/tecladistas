@@ -20,7 +20,7 @@ const ProductCard = ({
       } `}
       scroll={true}
     >
-      <div className=" w-full h-48 bg-white overflow-hidden">
+      <div className=" w-full h-48 bg-white dark:bg-black overflow-hidden">
         <Image
           className="object-contain w-full h-full box-item-image"
           src={product.images ? product.images[0] : ""}

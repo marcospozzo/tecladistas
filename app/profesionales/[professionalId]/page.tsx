@@ -41,7 +41,12 @@ const Professional = async ({
         {professional.email && (
           <div className="flex space-x-2">
             <MdEmail className="self-center" />
-            <Link href={`mailto:${professional.email}`} className={"link"}>
+            <Link
+              href={`mailto:${professional.email}`}
+              className={"link"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {professional.email}
             </Link>
           </div>
@@ -49,7 +54,12 @@ const Professional = async ({
         {professional.website && (
           <div className="flex space-x-2">
             <FaGlobeAmericas className="self-center" />
-            <Link href={professional.website} className={"link"}>
+            <Link
+              href={professional.website}
+              className={"link"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {professional.website}
             </Link>
           </div>
