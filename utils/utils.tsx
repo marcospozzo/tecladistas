@@ -1,5 +1,6 @@
 export const skillsTranslations: { [key: string]: string } = {
-  "synths": "Sintetizadores",
+  "synths-digital": "Sintetizadores digitales",
+  "synths-analog": "Sintetizadores analógicos",
   "piano-mover": "Transportista de pianos",
   "electric-pianos": "Pianos eléctricos",
   "acoustic-pianos": "Pianos acústicos",
@@ -62,16 +63,17 @@ export const skills = [
   "piano-tuner",
   "acoustic-pianos",
   "electric-pianos",
-  "synths",
+  "synths-analog",
+  "synths-digital",
   "organs",
   "midi-controllers",
   "computers",
   "general-audio-gear",
   "cables-headphones-pedals",
+  "in-ears",
   "cases",
   "mics",
   "luthier",
-  "in-ears",
 ];
 
 const isProduction = process.env.NODE_ENV === "production";
