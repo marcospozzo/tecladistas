@@ -104,6 +104,17 @@ export const getProduct = async (productId: string): Promise<ProductProps> => {
   }
 };
 
+export const getStudio = async (studioId: string): Promise<StudioProps> => {
+  try {
+    const response: AxiosResponse<StudioProps> = await axiosInstance.get(
+      `/studios/${studioId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getUser = async (userId: string): Promise<UserProps> => {
   try {
     const response: AxiosResponse<UserProps> = await axiosInstance.get(

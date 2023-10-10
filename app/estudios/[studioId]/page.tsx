@@ -1,15 +1,19 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { Location } from "@/components";
+import { getStudio, getUser } from "@/utils/axios";
 import { WHATSAPP_LINK } from "@/utils/constants";
-import { getData } from "@/utils/getData";
 import { formatPhone, servicesTranslation } from "@/utils/utils";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
 const Studio = async ({ params }: { params: { studioId: string } }) => {
-  const studio = await getData(`/studios/${params.studioId}`);
-  const user = await getData(`/users/${studio.userId}`);
+  const studio = await getStudio(params.studioId);
+  const user = await getUser(studio.userId!);
+  const session = await getServerSession(authOptions);
+  const isTheirOwn = session?.user.id === user._id;
 
   return (
     <div className="item">
