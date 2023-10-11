@@ -18,32 +18,40 @@ const options = {
   maxPoolSize: 4,
 };
 
-let client;
-let clientPromise: Promise<MongoClient>;
-
 const maxRetries = 3; // You can adjust the number of retries as needed
 let currentRetries = 0;
+let clientPromise: Promise<MongoClient> | undefined;
 
 function connectWithRetry(): Promise<MongoClient> {
-  return clientPromise.catch((error) => {
-    if (currentRetries < maxRetries) {
-      currentRetries++;
-      console.log(`Connection failed. Retrying (Attempt ${currentRetries})...`);
-      return connectWithRetry(); // Recursive call to retry
+  if (!clientPromise) {
+    if (process.env.NODE_ENV === "development") {
+      // In development mode, use a global variable
+      if (!global._mongoClientPromise) {
+        const client = new MongoClient(uri, options);
+        global._mongoClientPromise = client.connect();
+      }
+      clientPromise = global._mongoClientPromise;
+    } else {
+      // In production mode, create a new client
+      const client = new MongoClient(uri, options);
+      clientPromise = client.connect();
     }
-    throw error; // If max retries are reached, throw the error
-  });
-}
-
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    let client = new MongoClient(uri, options);
-    global._mongoClientPromise = connectWithRetry(); // Retry logic added here
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  let client = new MongoClient(uri, options);
-  clientPromise = connectWithRetry(); // Retry logic added here
+
+  return clientPromise
+    .then((client) => {
+      return client; // Resolve with the client if successful
+    })
+    .catch((error) => {
+      if (currentRetries < maxRetries) {
+        currentRetries++;
+        console.log(
+          `Connection failed. Retrying (Attempt ${currentRetries})...`
+        );
+        return connectWithRetry(); // Recursive call to retry
+      }
+      throw error; // If max retries are reached, throw the error
+    });
 }
 
 // Usage:
