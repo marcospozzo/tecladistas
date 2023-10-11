@@ -27,7 +27,7 @@ export const placeholders: { [key: string]: string } = {
     "Acepto mostrar mi nombre y número de teléfono en la publicación.",
   "brand": "",
   "model": "",
-  "year": "Opcional",
+  "year": "",
 };
 
 export function formatPrice(price: any) {
