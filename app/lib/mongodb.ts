@@ -22,7 +22,7 @@ const maxRetries = 3; // You can adjust the number of retries as needed
 let currentRetries = 0;
 let clientPromise: Promise<MongoClient> | undefined;
 
-function connectWithRetry(): Promise<MongoClient> {
+async function connectWithRetry(): Promise<MongoClient> {
   if (!clientPromise) {
     if (process.env.NODE_ENV === "development") {
       // In development mode, use a global variable
@@ -38,16 +38,17 @@ function connectWithRetry(): Promise<MongoClient> {
     }
   }
 
-  return clientPromise
+  return await clientPromise
     .then((client) => {
       return client; // Resolve with the client if successful
     })
-    .catch((error) => {
+    .catch(async (error) => {
       if (currentRetries < maxRetries) {
         currentRetries++;
         console.log(
           `Connection failed. Retrying (Attempt ${currentRetries})...`
         );
+        await new Promise((resolve) => setTimeout(resolve, 500)); // Add a 500ms delay
         return connectWithRetry(); // Recursive call to retry
       }
       throw error; // If max retries are reached, throw the error
