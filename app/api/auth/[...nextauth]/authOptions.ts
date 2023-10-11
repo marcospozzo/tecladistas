@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       sendVerificationRequest: CustomSendVerificationRequest,
     }),
   ],
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise!),
   callbacks: {
     async signIn({ user }) {
       const body = { email: user.email };
