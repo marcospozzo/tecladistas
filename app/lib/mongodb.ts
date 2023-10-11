@@ -13,6 +13,7 @@ declare global {
 
 const uri = process.env.MONGODB_URI;
 const options = {
+  connectTimeoutMS: 0,
   maxIdleTimeMS: 270000,
   minPoolSize: 2,
   maxPoolSize: 4,
@@ -48,7 +49,6 @@ async function connectWithRetry(): Promise<MongoClient> {
         console.log(
           `Connection failed. Retrying (Attempt ${currentRetries})...`
         );
-        await new Promise((resolve) => setTimeout(resolve, 500)); // Add a 500ms delay
         return connectWithRetry(); // Recursive call to retry
       }
       throw error; // If max retries are reached, throw the error
