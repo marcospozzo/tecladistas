@@ -12,7 +12,11 @@ declare global {
 }
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+const options = {
+  maxIdleTimeMS: 270000,
+  minPoolSize: 2,
+  maxPoolSize: 4,
+};
 
 let client;
 let clientPromise: Promise<MongoClient>;
