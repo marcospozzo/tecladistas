@@ -15,7 +15,6 @@ const uri = process.env.MONGODB_URI;
 const options = {
   connectTimeoutMS: 0,
   serverSelectionTimeoutMS: 0,
-  frutanga: 0,
   maxIdleTimeMS: 270000,
   minPoolSize: 2,
   maxPoolSize: 4,
