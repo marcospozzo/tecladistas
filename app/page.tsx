@@ -32,7 +32,7 @@ const AboutUs = async () => {
         priority={true}
       />
       <p>
-        Tecladistxs Gitaxns es un grupo de intérpretes de estilos y géneros de
+        Tecladistxs Gitanxs es un grupo de intérpretes de estilos y géneros de
         los más diversos. <br />
         Comenzó en el 2013 con cuatro amigos tecladistas, que se juntaban para
         compartir la pasión por los pianos y los teclados. A través del boca en
