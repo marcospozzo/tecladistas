@@ -10,7 +10,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
       href={`/estudios/${studio._id}`}
       className="flex flex-col box-item bg-slate-300 rounded-xl"
     >
-      <div className="relative inline-block w-full h-48 bg-white overflow-hidden">
+      <div className="relative inline-block w-full h-48 bg-white dark:bg-black overflow-hidden">
         <Image
           className="object-contain w-full h-full box-item-image"
           src={studio.images ? studio.images[0] : ""}

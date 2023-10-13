@@ -40,7 +40,8 @@ export interface StudioProps {
   services: Array<string>;
   status: "active" | "inactive" | "deleted";
   images: Array<string>;
-  location: string;
+  website?: string;
+  location?: string;
 }
 
 export interface EditableInputProps {
