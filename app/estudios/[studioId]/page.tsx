@@ -1,19 +1,16 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { Location } from "@/components";
 import { getStudio, getUser } from "@/utils/axios";
 import { WHATSAPP_LINK } from "@/utils/constants";
 import { formatPhone, servicesTranslation } from "@/utils/utils";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
+import { FaGlobeAmericas } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 
 const Studio = async ({ params }: { params: { studioId: string } }) => {
   const studio = await getStudio(params.studioId);
   const user = await getUser(studio.userId!);
-  const session = await getServerSession(authOptions);
-  const isTheirOwn = session?.user.id === user._id;
 
   return (
     <div className="item">
@@ -41,6 +38,20 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
         )}
 
         <Location name={studio.location} />
+
+        {studio.website && (
+          <div className="flex space-x-2">
+            <FaGlobeAmericas className="self-center" />
+            <Link
+              href={studio.website}
+              className={"link"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {studio.website}
+            </Link>
+          </div>
+        )}
 
         <div>
           <div className="flex space-x-1">
