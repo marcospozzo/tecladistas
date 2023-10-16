@@ -26,13 +26,13 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
       <div className="w-1/3 max-lg:w-full space-y-4">
         <h1>{studio.name}</h1>
 
-        <p>{studio.description}</p>
+        {studio.description && <pre>{studio.description}</pre>}
 
         {studio.services && (
           <div>
             <h3 className="text-lg mb-2">Servicios:</h3>
-            {studio.services.map((service: string) => (
-              <li key={service}>{servicesTranslation[service]}</li>
+            {studio.services.map((service: string, index) => (
+              <li key={index}>{service}</li>
             ))}
           </div>
         )}
