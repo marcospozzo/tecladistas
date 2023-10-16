@@ -53,7 +53,7 @@ export const servicesTranslation: { [key: string]: string } = {
 
 export const contactSubjects: { [key: string]: string } = {
   "comment": "Comentario / sugerencia",
-  "professionalAMD": "Alta / baja / modificación de profesional",
+  "professionalsAndStudios": "Profesionales / Estudios",
   "technicalProblem": "Problema técnico",
   "other": "Otro",
 };

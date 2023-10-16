@@ -1,12 +1,12 @@
-import { Location } from "@/components";
+import { Location, WhatsAppButton } from "@/components";
 import { getStudio, getUser } from "@/utils/axios";
-import { WHATSAPP_LINK } from "@/utils/constants";
-import { formatPhone, servicesTranslation } from "@/utils/utils";
+import { servicesTranslation } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGlobeAmericas } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
+import { generateMetadata } from "./utils";
+export { generateMetadata };
 
 const Studio = async ({ params }: { params: { studioId: string } }) => {
   const studio = await getStudio(params.studioId);
@@ -19,8 +19,8 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
           src={studio.images[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
-          width={500}
-          height={500}
+          width={1000}
+          height={1000}
         />
       </div>
       <div className="w-1/3 max-lg:w-full space-y-4">
@@ -57,20 +57,11 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
           <div className="flex space-x-1">
             <MdPiano className="self-center" />
             <h3>{user.firstName}:</h3>
-            <h3>{user.phone}</h3>
+            <h3>{`+${user.phone}`}</h3>
           </div>
         </div>
-        <div className="flex flex-col text-lg space-x-1">
-          <Link
-            className="flex justify-center submit-button space-x-2"
-            href={`${WHATSAPP_LINK}${formatPhone(user.phone)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h3 className="text-base">Abrir</h3>
-            <FaWhatsapp size={25} />
-          </Link>
-        </div>
+
+        <WhatsAppButton phone={user.phone} />
       </div>
     </div>
   );

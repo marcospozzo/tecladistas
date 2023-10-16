@@ -1,6 +1,6 @@
 import { DeleteProductButton, Location, WhatsAppButton } from "@/components";
 import { getProduct, getUser } from "@/utils/axios";
-import { formatPrice, imageTypes } from "@/utils/utils";
+import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
@@ -22,8 +22,8 @@ const Product = async ({ params }: { params: { productId: string } }) => {
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
           src={product.images[0]}
           alt={`${product.brand} ${product.model} product`}
-          width={500}
-          height={500}
+          width={1000}
+          height={1000}
         />
       </div>
       <div className="w-1/3 max-lg:w-full space-y-4">
