@@ -64,8 +64,8 @@ const Contact = () => {
           <option value={contactSubjects.comment}>
             {contactSubjects.comment}
           </option>
-          <option value={contactSubjects.professionalAMD}>
-            {contactSubjects.professionalAMD}
+          <option value={contactSubjects.professionalsAndStudios}>
+            {contactSubjects.professionalsAndStudios}
           </option>
           <option value={contactSubjects.technicalProblem}>
             {contactSubjects.technicalProblem}
