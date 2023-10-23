@@ -13,6 +13,7 @@ export const config = {
     "/entrar",
     "/registrarse",
     "/contacto",
+    "/crear-usuario",
   ],
 };
 
