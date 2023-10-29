@@ -40,7 +40,7 @@ const SignUp = ({
             let errorMessage = errorData?.error ?? "Error";
 
             if (errorData && errorData.err?.code === 11000) {
-              errorMessage = `${errorMessage}. Redirigiendo...`;
+              errorMessage = "Usuario ya existe. Redirigiendo...";
               setTimeout(() => {
                 router.push("/entrar");
               }, 1000);
