@@ -34,10 +34,18 @@ const SignUp = ({
           render({
             data,
           }: {
-            data?: { response?: { data?: { error?: string } } };
+            data?: { response?: { data?: { error?: string; err: any } } };
           }) {
-            console.log({ data });
-            return data?.response?.data?.error ?? "Error";
+            const errorData = data?.response?.data;
+            let errorMessage = errorData?.error ?? "Error";
+
+            if (errorData && errorData.err?.code === 11000) {
+              errorMessage = `${errorMessage}. Redirigiendo...`;
+              setTimeout(() => {
+                router.push("/entrar");
+              }, 1000);
+            }
+            return errorMessage;
           },
         },
       });
