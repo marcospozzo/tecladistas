@@ -25,15 +25,24 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
         callbackUrl: searchParams.callbackUrl,
       });
       toast.promise(signInPromise, {
-        pending: "Enviando...",
+        pending: "Cargando...",
         success: "Redirigiendo...",
         error: "Ups, ha habido un error",
       });
       await signInPromise;
       router.push("/api/auth/verify-request");
     } catch (error) {
-      console.error(error);
-      toast.error("Login falló. Reintentar...");
+      if (axios.isAxiosError(error)) {
+        console.error(error);
+        if (error.response?.status === 404) {
+          toast.error("Email no registrado, redirigiendo...");
+          setTimeout(() => {
+            router.push("/registrarse");
+          }, 2000);
+        } else {
+          toast.error("Login falló. Reintentar...");
+        }
+      }
     }
   };
 
