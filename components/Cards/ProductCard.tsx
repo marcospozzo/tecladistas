@@ -20,7 +20,7 @@ const ProductCard = ({
       } `}
       scroll={true}
     >
-      <div className=" w-full h-48 bg-white dark:bg-black overflow-hidden">
+      <div className="w-full h-48 bg-white dark:bg-black overflow-hidden">
         <Image
           className="object-contain w-full h-full box-item-image"
           src={product.images ? product.images[0] : ""}
@@ -30,7 +30,7 @@ const ProductCard = ({
           priority={true}
         />
       </div>
-      <h3 className="product-title">{product.title}</h3>
+      <h3 className="card-title">{product.title}</h3>
       <div className="flex justify-between">
         {product.location && <Location name={product.location} />}
         <div className="flex space-x-2">

@@ -59,22 +59,12 @@ h2 {
   font-size: large;
 }
 
-.product-title {
+.card-title {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* Limit to 2 lines */
-  height: 3em;
-  max-height: 3em;
-}
-
-.studio-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; /* Limit to 2 lines */
   height: 1.5em;
   max-height: 1.5em;
 }
