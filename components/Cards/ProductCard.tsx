@@ -14,7 +14,7 @@ const ProductCard = ({
 }) => {
   return (
     <Link
-      href={`/${product._id}`}
+      href={`/instrumentos/${product._id}`}
       className={`flex flex-col box-item bg-slate-300 rounded-xl ${
         isTheirOwn && "border-4 border-green-500"
       } `}

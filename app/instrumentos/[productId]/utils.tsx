@@ -34,7 +34,7 @@ export async function generateMetadata(
 
   return {
     metadataBase: new URL(`${protocol}${process.env.IMAGES_HOST_NAME}`),
-    title: pageTitles.keyboards,
+    title: pageTitles.instruments,
     openGraph: {
       images: [foundImage!],
       // images: [foundImage!, ...previousImages],

@@ -1,17 +1,12 @@
 "use client";
 
-import axios, { AxiosError } from "axios";
-import { signIn } from "next-auth/react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { UserProps } from "@/types";
 
-const SignUp = ({
-  searchParams,
-}: {
-  searchParams: { callbackUrl: string };
-}) => {
+const SignUp = () => {
   const router = useRouter();
   const [data, setData] = useState<UserProps>({
     _id: "",

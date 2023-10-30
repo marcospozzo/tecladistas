@@ -86,7 +86,7 @@ export const imageTypes = ["JPG", "JPEG", "PNG"];
 export const pageTitles: { [key: string]: string } = {
   professionals: "Profesionales",
   studios: "Estudios",
-  keyboards: "Teclados",
+  instruments: "Instrumentos",
   verify: "Verificar",
   contact: "Contacto",
   createProduct: "Crear publicación",
