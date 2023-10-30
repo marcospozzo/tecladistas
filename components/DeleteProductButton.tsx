@@ -30,7 +30,7 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
         },
       });
       await promise;
-      router.push("/teclados");
+      router.push("/instrumentos");
       router.refresh();
     } catch (error) {
       console.error(error);

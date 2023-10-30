@@ -5,11 +5,7 @@ import { cookieName } from "./utils/utils";
 
 export const config = {
   matcher: [
-    "/profesionales",
-    "/profesionales/:path*",
-    "/estudios",
-    "/estudios/:path*",
-    "/teclados",
+    "/profesionales/:path+",
     "/entrar",
     "/registrarse",
     "/contacto",
@@ -32,6 +28,6 @@ export function middleware(request: NextRequest) {
       request.nextUrl.pathname === "/registrarse") &&
     request.cookies.has(cookieName)
   ) {
-    return NextResponse.redirect(new URL("/teclados", request.url));
+    return NextResponse.redirect(new URL("/instrumentos", request.url));
   }
 }

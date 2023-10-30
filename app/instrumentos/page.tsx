@@ -7,10 +7,10 @@ import { Metadata } from "next";
 import { pageTitles } from "@/utils/utils";
 
 export const metadata: Metadata = {
-  title: pageTitles.keyboards,
+  title: pageTitles.instruments,
 };
 
-const Keyboards = async () => {
+const Intruments = async () => {
   const products = await getProducts();
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
@@ -39,4 +39,4 @@ const Keyboards = async () => {
   );
 };
 
-export default Keyboards;
+export default Intruments;

@@ -12,7 +12,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
     >
       <div className="relative inline-block w-full h-48 bg-white dark:bg-black overflow-hidden">
         <Image
-          className="object-contain w-full h-full box-item-image"
+          className="object-cover w-full h-full box-item-image"
           src={studio.images ? studio.images[0] : ""}
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={300}
