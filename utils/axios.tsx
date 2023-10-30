@@ -16,6 +16,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   const cookie = cookies().get(cookieName);
   config.headers.cookie = `${cookie?.name}=${cookie?.value}`;
+  config.headers.Authorization = process.env.NEXT_SECRET;
   if (config.data instanceof FormData) {
     config.headers["Content-Type"] = "multipart/form-data";
   } else {
