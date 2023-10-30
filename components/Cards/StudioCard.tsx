@@ -20,7 +20,7 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
           priority={true}
         />
       </div>
-      <h3 className="studio-name">{studio.name}</h3>
+      <h3 className="card-title">{studio.name}</h3>
       <div className="flex justify-start">
         <Location name={studio.location} />
       </div>
