@@ -25,9 +25,7 @@ const Intruments = async () => {
   return (
     <Cards>
       {/* show create button if user does not have on created yet */}
-      {(products.length === 0 || currentUserProducts.length === 0) && (
-        <CardNew />
-      )}
+      {currentUserProducts.length === 0 && <CardNew />}
       {sortedProducts?.map((product: ProductProps) => (
         <ProductCard
           key={product._id}

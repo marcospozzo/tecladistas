@@ -51,15 +51,14 @@ const Product = async ({ params }: { params: { productId: string } }) => {
         <div>
           <div className="flex space-x-1">
             <MdPiano className="self-center" />
-            <h3>{user.firstName}:</h3>
-            <h3>{`+${user.phone}`}</h3>
+            <h3>{user.firstName}</h3>
           </div>
         </div>
 
         {isTheirOwn ? (
           <DeleteProductButton id={product._id} />
         ) : (
-          <WhatsAppButton phone={user.phone} />
+          <WhatsAppButton userId={product.userId!} />
         )}
       </div>
     </div>
