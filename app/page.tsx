@@ -18,8 +18,8 @@ const AboutUs = async () => {
       </p>
       <p>
         Aquí podrás encontrar el contacto directo de técnicos de distintas áreas
-        como: transportistas, afinadores e incluso nuestros teclados en venta.
-        El objetivo es facilitar ese contacto, motivado por la frecuente
+        como: transportistas, afinadores e incluso nuestros instrumentos en
+        venta. El objetivo es facilitar ese contacto, motivado por la frecuente
         consulta de dichos servicios.
       </p>
       <Image
