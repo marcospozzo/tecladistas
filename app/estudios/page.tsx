@@ -13,10 +13,10 @@ const Studios = async () => {
 
   return (
     <Cards>
-      <CardNew />
       {data?.map((studio: StudioProps) => (
         <StudioCard key={studio._id} studio={studio} />
       ))}
+      <CardNew />
     </Cards>
   );
 };
