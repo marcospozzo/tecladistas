@@ -13,7 +13,7 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
 
   return (
     <div className="item">
-      <div className="max-lg:w-full relative w-2/3 h-full">
+      <div className="max-lg:w-full relative w-3/5 h-full">
         <Image
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
           src={studio.images[0]}
@@ -22,7 +22,7 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
           height={1000}
         />
       </div>
-      <div className="w-1/3 max-lg:w-full space-y-4">
+      <div className="w-2/5 max-lg:w-full space-y-4">
         <h1>{studio.name}</h1>
 
         {studio.description && <pre>{studio.description}</pre>}
