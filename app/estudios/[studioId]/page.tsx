@@ -1,6 +1,5 @@
 import { Location, WhatsAppButton } from "@/components";
 import { getStudio, getUser } from "@/utils/axios";
-import { servicesTranslation } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGlobeAmericas } from "react-icons/fa";
@@ -56,12 +55,11 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
         <div>
           <div className="flex space-x-1">
             <MdPiano className="self-center" />
-            <h3>{user.firstName}:</h3>
-            <h3>{`+${user.phone}`}</h3>
+            <h3>{user.firstName}</h3>
           </div>
         </div>
 
-        <WhatsAppButton phone={user.phone} />
+        <WhatsAppButton userId={studio.userId!} />
       </div>
     </div>
   );

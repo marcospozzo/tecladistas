@@ -10,6 +10,8 @@ export const config = {
     "/registrarse",
     "/contacto",
     "/crear-usuario",
+    "/api/users/open-whatsapp/:userId+",
+    "/crear-publicacion",
   ],
 };
 

@@ -3,12 +3,21 @@ import { formatPhone } from "@/utils/utils";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
 
-const WhatsAppButton = ({ phone }: { phone: string }) => {
+const WhatsAppButton = ({
+  userId,
+  phone,
+}: {
+  userId?: string;
+  phone?: string;
+}) => {
+  const url = phone
+    ? `${WHATSAPP_LINK}${formatPhone(phone)}`
+    : `/api/users/open-whatsapp/${userId}`;
   return (
     <div className="flex flex-col text-lg space-x-1">
       <Link
         className="flex justify-center submit-button space-x-2 my-2"
-        href={`${WHATSAPP_LINK}${formatPhone(phone)}`}
+        href={url}
         target="_blank"
         rel="noopener noreferrer"
       >
