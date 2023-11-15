@@ -16,6 +16,24 @@ export const skillsTranslations: { [key: string]: string } = {
   "cases": "Estuches y fundas",
 };
 
+export const skillsPageIds: { [key: string]: string } = {
+  "synths-digital": "sintetizadores",
+  "synths-analog": "sintetizadores",
+  "piano-mover": "transportistas",
+  "electric-pianos": "pianos",
+  "acoustic-pianos": "pianos",
+  "piano-tuner": "afinadores",
+  "organs": "organos",
+  "mics": "microfonos",
+  "general-audio-gear": "audio",
+  "cables-headphones-pedals": "varios",
+  "computers": "software",
+  "midi-controllers": "controladores",
+  "luthier": "luthiers",
+  "in-ears": "in-ears",
+  "cases": "fundas",
+};
+
 export const placeholders: { [key: string]: string } = {
   "title": "Ej.: Nord Stage 2 en muy buen estado",
   "price": "Sólo números (opcional)",
