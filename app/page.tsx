@@ -6,7 +6,7 @@ const AboutUs = async () => {
   let whitelistedUsersCounter;
   try {
     const data = await getWhitelistedUsersCount();
-    whitelistedUsersCounter = data.count;
+    whitelistedUsersCounter = String(data.count);
   } catch (error) {
     whitelistedUsersCounter = "más de 280";
   }

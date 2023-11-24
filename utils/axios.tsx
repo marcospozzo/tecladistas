@@ -127,12 +127,15 @@ export const getUser = async (userId: string): Promise<UserProps> => {
   }
 };
 
+type Count = { count: Number };
+
 export const getWhitelistedUsersCount = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const response: AxiosResponse<Count> = await axiosInstance.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
   }
-  return res.json();
 };
