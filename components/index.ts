@@ -9,6 +9,8 @@ import CardNew from "./Cards/CardNew";
 import EditableInput from "./EditableInput";
 import WhatsAppButton from "./WhatsAppButton";
 import DeleteProductButton from "./DeleteProductButton";
+import SaleRentSwitchButton from "./SaleRentSwitchButton";
+import Products from "./Products";
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   EditableInput,
   WhatsAppButton,
   DeleteProductButton,
+  SaleRentSwitchButton,
+  Products,
 };

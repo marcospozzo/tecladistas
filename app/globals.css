@@ -151,7 +151,7 @@ button.submit-button {
 }
 
 .is-active {
-  @apply bg-gray-500 rounded-md p-2 font-bold
+  @apply bg-gray-500 rounded-md p-2 font-bold transition-all duration-300 ease-in-out
 }
 
 .login-signup {

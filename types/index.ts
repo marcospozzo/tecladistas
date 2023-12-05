@@ -10,7 +10,8 @@ export interface ProductProps {
   description?: string;
   year?: number;
   exchanges?: boolean;
-  status?: "active" | "paused" | "deleted" | "sold";
+  status?: "active" | "deleted" | "sold";
+  listingType?: "sale" | "rent";
   price?: number;
   pictures?: Array<string>;
   location?: string;
