@@ -1,7 +1,8 @@
 "use client";
 
-import { EditableInput } from "@/components";
+import { EditableInput, SaleRentSwitchButton } from "@/components";
 import { ProductProps } from "@/types";
+import { RENT, SALE } from "@/utils/constants";
 import { imageTypes, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -19,6 +20,7 @@ const NewProduct = () => {
   const router = useRouter();
   const [data, setData] = useState<ProductProps>({});
   const [image, setImage] = useState(null);
+  const [listingType, setListingType] = useState(SALE);
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -53,6 +55,14 @@ const NewProduct = () => {
     setImage(image);
   };
 
+  const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setListingType((prevListingType) =>
+      prevListingType === SALE ? RENT : SALE
+    );
+    listingType === RENT && (data.exchanges = false);
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
@@ -63,6 +73,7 @@ const NewProduct = () => {
     }
 
     formData.append("image", image!);
+    formData.append("listingType", listingType);
 
     try {
       const promise = axios.post(`/api/products/create`, formData, {
@@ -96,31 +107,15 @@ const NewProduct = () => {
       <h1 className="form-title">Crear publicación</h1>
 
       <form className="wide-form" onSubmit={handleSubmit}>
+        <SaleRentSwitchButton
+          handleSwitchListingType={handleSwitchListingType}
+          listingType={listingType}
+        />
         <EditableInput
           handleOnChange={handleEditableInputChange}
           label="Título"
           fieldName="title"
           text={data.title}
-        />
-        <EditableInput
-          handleOnChange={handleEditableInputChange}
-          label="Marca"
-          fieldName="brand"
-          text={data.brand}
-        />
-
-        <EditableInput
-          handleOnChange={handleEditableInputChange}
-          label="Modelo"
-          fieldName="model"
-          text={data.model}
-        />
-
-        <EditableInput
-          handleOnChange={handleEditableInputChange}
-          label="Año"
-          fieldName="year"
-          text={data.year}
         />
 
         <div className="flex max-sm:flex-col max-sm:w-full">
@@ -132,7 +127,7 @@ const NewProduct = () => {
           </label>
 
           <textarea
-            className="h-24 min-h-[6rem] max-h-96 sm:w-4/5"
+            className="h-24 min-h-[6rem] max-h-48 sm:w-4/5"
             id="description"
             name="description"
             placeholder={placeholders.description}
@@ -142,7 +137,13 @@ const NewProduct = () => {
 
         <EditableInput
           handleOnChange={handleEditableInputChange}
-          label="Precio"
+          label="Año"
+          fieldName="year"
+          text={data.year}
+        />
+        <EditableInput
+          handleOnChange={handleEditableInputChange}
+          label={listingType === SALE ? "Precio" : "Precio / día"}
           fieldName="price"
           text={data.price}
         />
@@ -154,24 +155,26 @@ const NewProduct = () => {
           text={data.location}
         />
 
-        <div className="flex max-sm:flex-col space-x-2 my-4">
-          <label
-            className="text-xl w-1/5 self-center max-sm:self-start "
-            htmlFor="exchanges"
-          >
-            Intercambio:
-          </label>
-          <div className="flex space-x-2">
-            <input
-              className="h-5 w-5 m-0 self-center"
-              type="checkbox"
-              id="exchanges"
-              name="exchanges"
-              onChange={handleCheckboxChange}
-            />
-            <h3 className="self-center">{placeholders.exchanges}</h3>
+        {listingType === SALE && (
+          <div className="flex max-sm:flex-col space-x-2 my-4">
+            <label
+              className="text-xl w-1/5 self-center max-sm:self-start "
+              htmlFor="exchanges"
+            >
+              Intercambio:
+            </label>
+            <div className="flex space-x-2">
+              <input
+                className="h-5 w-5 m-0 self-center"
+                type="checkbox"
+                id="exchanges"
+                name="exchanges"
+                onChange={handleCheckboxChange}
+              />
+              <h3 className="self-center">{placeholders.exchanges}</h3>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex max-sm:flex-col space-x-2 my-4">
           <label

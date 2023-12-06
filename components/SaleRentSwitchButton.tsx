@@ -1,26 +1,24 @@
-"use client";
+import { RENT, SALE } from "@/utils/constants";
+import { MouseEventHandler } from "react";
 
-import { MouseEventHandler, useEffect, useState } from "react";
-
-const SaleRentSwitchButton = ({ handleSwitchProducts }) => {
-  const [switchStatus, setSwitchStatus] = useState(false);
-
-  const handleOnClick = () => {
-    setSwitchStatus(!switchStatus);
-    handleSwitchProducts();
-  };
-
+const SaleRentSwitchButton = ({
+  handleSwitchListingType,
+  listingType,
+}: {
+  handleSwitchListingType: MouseEventHandler<HTMLButtonElement>;
+  listingType: string;
+}) => {
   return (
     <nav className="flex w-fit mx-auto h-12 space-x-4 mb-4">
       <button
-        onClick={handleOnClick}
-        className={switchStatus ? "" : "is-active"}
+        onClick={handleSwitchListingType}
+        className={listingType === SALE ? "is-active" : ""}
       >
         Venta
       </button>
       <button
-        onClick={handleOnClick}
-        className={switchStatus ? "is-active" : ""}
+        onClick={handleSwitchListingType}
+        className={listingType === RENT ? "is-active" : ""}
       >
         Alquiler
       </button>
