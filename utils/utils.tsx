@@ -44,7 +44,7 @@ export const placeholders: { [key: string]: string } = {
   "disclamer": "Acepto mostrar mi nombre en la publicación.",
   "brand": "",
   "model": "",
-  "year": "",
+  "year": "(Opcional)",
 };
 
 export function formatPrice(price: any) {

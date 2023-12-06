@@ -1,5 +1,4 @@
 import { ChangeEventHandler } from "react";
-
 export interface ProductProps {
   [key: string]: any;
   _id?: string;
@@ -16,7 +15,6 @@ export interface ProductProps {
   pictures?: Array<string>;
   location?: string;
 }
-
 export interface ProfessionalProps {
   _id: string;
   firstName: string;
@@ -32,7 +30,6 @@ export interface ProfessionalProps {
   phone?: string;
   location?: string;
 }
-
 export interface StudioProps {
   _id: string;
   userId: string;
@@ -44,7 +41,6 @@ export interface StudioProps {
   website?: string;
   location?: string;
 }
-
 export interface EditableInputProps {
   text?: string | number;
   label: string;

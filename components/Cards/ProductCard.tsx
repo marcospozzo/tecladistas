@@ -4,13 +4,16 @@ import { ProductProps } from "@/types";
 import { Location } from "@/components";
 import { formatPrice } from "@/utils/utils";
 import { FaArrowsRotate } from "react-icons/fa6";
+import { SALE } from "@/utils/constants";
 
 const ProductCard = ({
   product,
   isTheirOwn,
+  listingType,
 }: {
   product: ProductProps;
   isTheirOwn: boolean;
+  listingType: string;
 }) => {
   return (
     <Link
@@ -35,7 +38,13 @@ const ProductCard = ({
         {product.location && <Location name={product.location} />}
         <div className="flex space-x-2">
           {product.exchanges && <FaArrowsRotate className="self-center" />}
-          {product.price && <span>{formatPrice(product.price)}</span>}
+          {product.price && (
+            <span>
+              {listingType === SALE
+                ? formatPrice(product.price)
+                : `${formatPrice(product.price)} / día`}
+            </span>
+          )}
         </div>
       </div>
     </Link>

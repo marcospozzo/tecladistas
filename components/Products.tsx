@@ -8,6 +8,7 @@ import {
   SaleRentSwitchButton,
 } from "@/components";
 import { useState } from "react";
+import { RENT, SALE } from "@/utils/constants";
 
 const Products = ({
   products,
@@ -16,14 +17,14 @@ const Products = ({
   products: ProductProps[];
   userId: string | undefined;
 }) => {
-  const [listingType, setListingType] = useState("sale");
+  const [listingType, setListingType] = useState(SALE);
 
   const sortedProducts = products.sort((a, b) =>
     a.userId === b.userId ? -1 : 1
   );
   const { productsForSale, productsForRent } = sortedProducts.reduce(
     (result, product) => {
-      if (product.listingType === "rent") {
+      if (product.listingType === RENT) {
         result.productsForRent.push(product);
       } else {
         result.productsForSale.push(product);
@@ -33,29 +34,32 @@ const Products = ({
     { productsForSale: [], productsForRent: [] }
   );
 
-  const userHasAtLeastOnePublishedProduct = sortedProducts[0].userId === userId;
-
-  const handleSwitchProducts = () => {
+  const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     setListingType((prevListingType) =>
-      prevListingType === "sale" ? "rent" : "sale"
+      prevListingType === SALE ? RENT : SALE
     );
   };
 
   const displayedProducts =
-    listingType === "sale" ? productsForSale : productsForRent;
+    listingType === SALE ? productsForSale : productsForRent;
 
   return (
     <>
-      <SaleRentSwitchButton handleSwitchProducts={handleSwitchProducts} />
+      <SaleRentSwitchButton
+        handleSwitchListingType={handleSwitchListingType}
+        listingType={listingType}
+      />
       <Cards>
         {/* show create button if user does not have one created yet */}
-        {!userHasAtLeastOnePublishedProduct && <CardNew />}
+        {displayedProducts[0]?.userId !== userId && <CardNew />}
 
         {displayedProducts.map((product: ProductProps) => (
           <ProductCard
             key={product._id}
             product={product}
             isTheirOwn={product.userId === userId}
+            listingType={listingType}
           />
         ))}
       </Cards>
