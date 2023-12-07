@@ -13,6 +13,7 @@ import {
   SetStateAction,
   useState,
   useReducer,
+  useEffect,
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
@@ -113,12 +114,18 @@ const NewProduct = () => {
         },
       });
       await promise;
-      router.push("/instrumentos");
+      const route =
+        listingType === RENT ? "/instrumentos#alquiler" : "/instrumentos";
+      router.push(route);
       router.refresh();
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (window.location.hash === "#alquiler") setListingType(RENT);
+  }, []);
 
   return (
     <>
