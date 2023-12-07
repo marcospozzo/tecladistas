@@ -13,7 +13,10 @@ export async function CustomSendVerificationRequest(params: {
   const transport = createTransport(provider.server);
   const result = await transport.sendMail({
     to: identifier,
-    from: provider.from,
+    from: {
+      name: "Tecladistas.ar",
+      address: provider.from,
+    },
     subject: `Entrar a ${host}`,
     text: text({ url, host }),
     html: html({ url, host, theme }),
