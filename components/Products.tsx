@@ -7,7 +7,7 @@ import {
   CardNew,
   SaleRentSwitchButton,
 } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RENT, SALE } from "@/utils/constants";
 
 const Products = ({
@@ -44,6 +44,10 @@ const Products = ({
   const displayedProducts =
     listingType === SALE ? productsForSale : productsForRent;
 
+  useEffect(() => {
+    if (window.location.hash === "#alquiler") setListingType(RENT);
+  }, []);
+
   return (
     <>
       <SaleRentSwitchButton
@@ -52,7 +56,9 @@ const Products = ({
       />
       <Cards>
         {/* show create button if user does not have one created yet */}
-        {displayedProducts[0]?.userId !== userId && <CardNew />}
+        {displayedProducts[0]?.userId !== userId && (
+          <CardNew listingType={listingType} />
+        )}
 
         {displayedProducts.map((product: ProductProps) => (
           <ProductCard
