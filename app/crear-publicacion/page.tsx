@@ -12,41 +12,56 @@ import {
   FormEvent,
   SetStateAction,
   useState,
+  useReducer,
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
 
+const dataReducer = (state: ProductProps, action: any): ProductProps => {
+  switch (action.type) {
+    case "UPDATE":
+      return { ...state, [action.field]: action.value };
+    case "SET_EXCHANGES_FALSE":
+      return { ...state, exchanges: false };
+    default:
+      return state;
+  }
+};
+
 const NewProduct = () => {
   const router = useRouter();
-  const [data, setData] = useState<ProductProps>({});
   const [image, setImage] = useState(null);
   const [listingType, setListingType] = useState(SALE);
+  const [data, dispatch] = useReducer(dataReducer, {});
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     if (event.target) {
-      setData({
-        ...data,
-        [event.target.name]: event.target.value,
+      dispatch({
+        type: "UPDATE",
+        field: event.target.name,
+        value: event.target.value,
       });
     }
   };
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target) {
-      setData({
-        ...data,
-        [event.target.name]: event.target.checked,
+      dispatch({
+        type: "UPDATE",
+        field: event.target.name,
+        value: event.target.checked,
       });
     }
   };
 
   const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (event.target) {
-      setData({
-        ...data,
-        [event.target.name]: event.target.value,
+      dispatch({
+        type: "UPDATE",
+        field: event.target.name,
+        value: event.target.value,
       });
     }
   };
@@ -57,15 +72,18 @@ const NewProduct = () => {
 
   const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+    if (listingType === SALE) {
+      dispatch({ type: "SET_EXCHANGES_FALSE" });
+    }
     setListingType((prevListingType) =>
       prevListingType === SALE ? RENT : SALE
     );
-    listingType === RENT && (data.exchanges = false);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
+
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
         formData.append(key, data[key]);
