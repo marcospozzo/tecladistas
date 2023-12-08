@@ -71,9 +71,13 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
         >
           <h3 className="text-xl">Entrar con Email</h3>
         </button>
-        <Link className="self-center" href="/registrarse">
-          <h3 className="text-xl underline">Registrarse</h3>
-        </Link>
+
+        <div className="flex justify-center space-x-1 mb-2">
+          <h3>¿No estás registradx? </h3>
+          <Link className="link" href="/registrarse">
+            Registrarse
+          </Link>
+        </div>
       </div>
     </form>
   );

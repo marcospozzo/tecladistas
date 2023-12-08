@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { UserProps } from "@/types";
+import Link from "next/link";
 
 const SignUp = () => {
   const router = useRouter();
@@ -61,6 +62,12 @@ const SignUp = () => {
   return (
     <form className="login-signup" onSubmit={handleSubmit}>
       <h1 className="form-title">Registrarse</h1>
+      <div className="flex justify-center space-x-1 mb-2">
+        <h3>¿Ya estás registradx? </h3>
+        <Link className="link" href="/entrar">
+          Entrar
+        </Link>
+      </div>
       <input
         type="text"
         id="firstName"

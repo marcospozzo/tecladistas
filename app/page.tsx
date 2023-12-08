@@ -13,15 +13,6 @@ const AboutUs = async () => {
 
   return (
     <div className="about-us">
-      <Image
-        className="w-full mb-12 rounded-lg"
-        src={"/keyboard.jpg"}
-        alt="teclas de un piano o teclado"
-        width={0}
-        height={0}
-        sizes="100vw"
-        priority={true}
-      />
       <p className="text-big">
         Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
       </p>
@@ -31,11 +22,29 @@ const AboutUs = async () => {
         Además, podés publicar tu estudio de grabación y tus instrumentos en
         venta y alquiler.
       </p>
-      <Link className="flex justify-center mb-10" href="/registrarse">
-        <button className="submit-button" type="submit" value="register">
-          <h3 className="text-xl">Registrarse</h3>
-        </button>
-      </Link>
+      <div className="mb-10 space-y-4">
+        <Link className="flex justify-center" href="/registrarse">
+          <button className="submit-button" type="submit" value="register">
+            <h3 className="text-xl">Registrarse</h3>
+          </button>
+        </Link>
+        <div className="flex justify-center space-x-1 mb-2">
+          <h3>¿Ya estás registradx? </h3>
+          <Link className="link" href="/entrar">
+            Entrar
+          </Link>
+        </div>
+      </div>
+
+      <Image
+        className="w-full mb-12 rounded-lg"
+        src={"/keyboard.jpg"}
+        alt="teclas de un piano o teclado"
+        width={0}
+        height={0}
+        sizes="100vw"
+        priority={true}
+      />
 
       <p className="italic text-big">
         "Tecladistxs Gitanxs es un grupo de intérpretes de estilos y géneros de
