@@ -158,8 +158,12 @@ button.submit-button {
   @apply xl:w-2/5 mx-auto flex flex-col
 }
 
-.about-us > p {
+.about-us > p.text-big {
   @apply text-xl text-center mb-8
+}
+
+.small-text {
+  @apply text-sm text-center;
 }
 
 .icons-container {

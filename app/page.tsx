@@ -13,30 +13,8 @@ const AboutUs = async () => {
 
   return (
     <div className="about-us">
-      <p>
-        Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
-      </p>
-      <p>
-        Aquí podés consultar el listado actualizado de contactos de técnicos de
-        distintas áreas como transportistas y afinadores. <br />
-        Además, podés publicar tu estudio de grabación y tus instrumentos en
-        venta y alquiler.
-      </p>
-      <p>
-        Quienes quieran y puedan contribuir económicamente a este proyecto, son
-        invitadxs a hacerlo a través de cafecitos:{" "}
-        <Link
-          href={"https://cafecito.app/marcospozzo"}
-          className={"link"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          aquí
-        </Link>
-        .
-      </p>
       <Image
-        className="w-full my-12 rounded-lg"
+        className="w-full mb-12 rounded-lg"
         src={"/keyboard.jpg"}
         alt="teclas de un piano o teclado"
         width={0}
@@ -44,7 +22,22 @@ const AboutUs = async () => {
         sizes="100vw"
         priority={true}
       />
-      <p className="italic">
+      <p className="text-big">
+        Esta web reúne y facilita información útil para Tecladistxs Gitanxs.
+      </p>
+      <p className="text-big">
+        Aquí podés consultar el listado actualizado de contactos de técnicos de
+        distintas áreas como transportistas y afinadores. <br />
+        Además, podés publicar tu estudio de grabación y tus instrumentos en
+        venta y alquiler.
+      </p>
+      <Link className="flex justify-center mb-10" href="/registrarse">
+        <button className="submit-button" type="submit" value="register">
+          <h3 className="text-xl">Registrarse</h3>
+        </button>
+      </Link>
+
+      <p className="italic text-big">
         "Tecladistxs Gitanxs es un grupo de intérpretes de estilos y géneros de
         los más diversos. <br />
         Comenzó en el 2013 con cuatro amigos tecladistas, que se juntaban para
@@ -55,23 +48,31 @@ const AboutUs = async () => {
         de los pilares del grupo son la generosidad, la humildad, la
         camaradería, el intercambio y la amistad."
       </p>
-      <br />
-      <p>
+      <p className="text-big">
+        Quienes puedan contribuir económicamente a este proyecto web, son
+        invitadxs a hacerlo a través de cafecitos:{" "}
+      </p>
+      <div className="flex justify-center mb-12">
+        <Link
+          href={"https://cafecito.app/marcospozzo"}
+          className={"link"}
+          target="_blank"
+        >
+          <img
+            srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
+            src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+            alt="Invitame un café en cafecito.app"
+          />
+        </Link>
+      </div>
+      <p className="small-text">
         Los desarrolladores de esta página no participamos de operaciones,
-        intercambio de dinero, garantías, ni acuerdos en relación a esas ventas
-        o servicios dados. La responsabilidad de dichas transacciones quedan a
-        cargo de cada usuario involucrado, y las mismas suceden por fuera de
-        esta web.
+        intercambio de dinero, garantías, ni acuerdos en relación a ventas o
+        servicios dados. Las mismas suceden por fuera de esta web y esa
+        responsabilidad queda a cargo de cada usuario involucrado. Toda
+        información personal, datos de contacto y números de teléfono son de uso
+        privado y pedimos que se mantengan de esta forma.
       </p>
-      <p>
-        Toda información personal, datos de contacto y números de teléfono son
-        de uso privado y pedimos que se mantengan de esta forma.
-      </p>
-      <Link className="flex justify-center sm:mt-20 mb-2" href="/registrarse">
-        <button className="submit-button" type="submit" value="register">
-          <h3 className="text-xl">Registrarse</h3>
-        </button>
-      </Link>
     </div>
   );
 };
