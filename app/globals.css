@@ -81,42 +81,42 @@ h2 {
   text-decoration: underline;
 }
 
-.delete-button {
-  padding: 10px 20px; /* Add some padding for a better look */
-  border-radius: 5px; /* Rounded corners for a softer appearance */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
-  @apply max-sm:w-full bg-red-700;
+button, .button {
+  padding: 0.5em 2em; 
+  border-radius: 5px;
 }
 
-.submit-button {
+.submit-button, .delete-button {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(114, 176, 102);
-  padding: 10px 20px; /* Add some padding for a better look */
-  border-radius: 5px; /* Rounded corners for a softer appearance */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
   @apply max-sm:w-full;
 }
 
-button.submit-button {
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  width: 40%;
-  @apply max-sm:w-3/5;
+.delete-button {
+  @apply bg-red-700;
 }
 
-.submit-button:hover {
+.submit-button:hover, .delete-button:hover {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
 }
 
 .box, input, select, option, textarea {
-  @apply space-x-4 m-2 p-4 rounded-xl text-black dark:text-white dark:bg-slate-600 dark:border-2;
+  @apply space-x-4 my-1 p-4 rounded-xl text-black dark:text-white dark:bg-slate-600 dark:border-2;
 }
 
-.form-button {
-  @apply space-x-4 m-2 p-4 rounded-xl dark:border-2 border-white border-solid
+.editable-input {
+  font-weight: bold;
+  @apply space-x-4 my-1 p-4 rounded-xl dark:border-2 border-white border-solid
+}
+
+.editable-input:hover {
+  transition: 500ms;
+  @apply bg-gray-400 dark:bg-gray-500 
 }
 
 .box-item {
@@ -135,15 +135,6 @@ button.submit-button {
 
 .form-title {
   @apply self-center mb-12 text-center
-}
-
-.editable-input {
-  font-weight: bold;
-}
-
-.editable-input:hover {
-  transition: 500ms;
-  @apply bg-gray-400 dark:bg-gray-500 
 }
 
 .item {

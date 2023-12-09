@@ -106,12 +106,8 @@ const SignUp = () => {
       <i className="self-center text-center mb-2">Será requerido para entrar</i>
 
       <br />
-      <button
-        className="submit-button form-button"
-        type="submit"
-        value="create"
-      >
-        <h3 className="text-xl">Registrarse</h3>
+      <button className="submit-button" type="submit" value="create">
+        <h3>Registrarse</h3>
       </button>
     </form>
   );

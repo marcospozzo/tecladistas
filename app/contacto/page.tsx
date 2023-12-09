@@ -84,12 +84,8 @@ const Contact = () => {
 
         <br />
 
-        <button
-          className="submit-button form-button"
-          type="submit"
-          value="Enviar"
-        >
-          <h3 className="text-xl">Enviar mensaje</h3>
+        <button className="submit-button w-fit" type="submit" value="Enviar">
+          <h3>Enviar mensaje</h3>
         </button>
       </form>
     </>

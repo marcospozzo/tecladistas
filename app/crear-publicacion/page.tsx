@@ -146,7 +146,7 @@ const NewProduct = () => {
         <div className="flex max-sm:flex-col max-sm:w-full">
           <label
             htmlFor={"description"}
-            className="text-xl self-center max-sm:self-start w-1/5"
+            className="self-center max-sm:self-start w-1/5"
           >
             {"Descripción:"}
           </label>
@@ -183,7 +183,7 @@ const NewProduct = () => {
         {listingType === SALE && (
           <div className="flex max-sm:flex-col space-x-2 my-4">
             <label
-              className="text-xl w-1/5 self-center max-sm:self-start "
+              className="w-1/5 self-center max-sm:self-start "
               htmlFor="exchanges"
             >
               Intercambio:
@@ -201,9 +201,9 @@ const NewProduct = () => {
           </div>
         )}
 
-        <div className="flex max-sm:flex-col space-x-2 my-4">
+        <div className="flex max-sm:flex-col my-4">
           <label
-            className="text-xl w-1/5 self-center max-sm:self-start "
+            className="w-1/5 self-center max-sm:self-start "
             htmlFor="image"
           >
             Foto:
@@ -235,8 +235,8 @@ const NewProduct = () => {
           </div>
         </div>
 
-        <button className="submit-button my-6 form-button" type="submit">
-          <h3 className="text-xl">Publicar</h3>
+        <button className="submit-button my-6" type="submit">
+          <h3>Publicar</h3>
         </button>
       </form>
     </>
