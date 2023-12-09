@@ -14,9 +14,9 @@ const WhatsAppButton = ({
     ? `${WHATSAPP_LINK}${formatPhone(phone)}`
     : `/api/users/open-whatsapp/${userId}`;
   return (
-    <div className="flex flex-col text-lg space-x-1">
+    <div className="flex flex-col space-x-1">
       <Link
-        className="flex justify-center submit-button space-x-2 my-2"
+        className="flex justify-center button submit-button space-x-2 my-2 w-full"
         href={url}
         target="_blank"
         rel="noopener noreferrer"

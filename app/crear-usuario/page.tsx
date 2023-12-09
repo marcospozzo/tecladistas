@@ -77,12 +77,8 @@ const CreateWhitelisted = () => {
         />
         <br />
         <div className="flex flex-col justify-center space-y-2">
-          <button
-            className="submit-button form-button"
-            type="submit"
-            value="login"
-          >
-            <h3 className="text-xl">Crear usuario</h3>
+          <button className="submit-button" type="submit" value="login">
+            <h3>Crear usuario</h3>
           </button>
         </div>
       </form>

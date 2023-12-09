@@ -63,13 +63,9 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
       />
 
       <br />
-      <div className="flex flex-col justify-center space-y-2">
-        <button
-          className="submit-button form-button"
-          type="submit"
-          value="login"
-        >
-          <h3 className="text-xl">Entrar con Email</h3>
+      <div className="flex flex-col justify-center space-y-4">
+        <button className="submit-button" type="submit" value="login">
+          <h3>Entrar con Email</h3>
         </button>
 
         <div className="flex justify-center space-x-1 mb-2">

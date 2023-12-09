@@ -25,7 +25,7 @@ const AboutUs = async () => {
       <div className="mb-10 space-y-4">
         <Link className="flex justify-center" href="/registrarse">
           <button className="submit-button" type="submit" value="register">
-            <h3 className="text-xl">Registrarse</h3>
+            <h3>Registrarse</h3>
           </button>
         </Link>
         <div className="flex justify-center space-x-1 mb-2">
