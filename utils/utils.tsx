@@ -40,7 +40,7 @@ export const placeholders: { [key: string]: string } = {
   "location": "Barrio / Provincia (máx 20 caracteres)",
   "description": "No incluir datos de contacto (opcional)",
   "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
-  "image": "Elegir o arrastrar una foto (máx. 5 MB)",
+  "image": "Elegir o arrastrar una foto (máx. 20 MB)",
   "disclamer": "Acepto mostrar mi nombre en la publicación.",
   "brand": "",
   "model": "",
