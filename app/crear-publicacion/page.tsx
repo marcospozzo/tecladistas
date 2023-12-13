@@ -258,7 +258,7 @@ const NewProduct = () => {
               Foto:
             </label>
             <FileUploader
-              maxSize={5}
+              maxSize={20}
               required={productId ? false : true}
               label={placeholders.image}
               hoverTitle=""
