@@ -21,7 +21,7 @@ const WhatsAppButton = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <h3 className="text-base">Abrir</h3>
+        <h3>Abrir</h3>
         <FaWhatsapp size={25} />
       </Link>
     </div>

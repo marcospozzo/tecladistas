@@ -11,6 +11,7 @@ import WhatsAppButton from "./WhatsAppButton";
 import DeleteProductButton from "./DeleteProductButton";
 import SaleRentSwitchButton from "./SaleRentSwitchButton";
 import Products from "./Products";
+import EditProductButton from "./EditProductButton";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   DeleteProductButton,
   SaleRentSwitchButton,
   Products,
+  EditProductButton,
 };
