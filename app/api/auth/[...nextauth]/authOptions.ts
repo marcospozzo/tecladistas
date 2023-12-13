@@ -4,6 +4,7 @@ import clientPromise from "../../../lib/mongodb";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { userIsAllowedToSignIn } from "@/utils/axios";
 import { CustomSendVerificationRequest } from "./signInEmail";
+import { SIX_MONTHS_IN_SECONDS } from "@/utils/constants";
 
 declare module "next-auth" {
   interface Session {
@@ -51,5 +52,8 @@ export const authOptions: NextAuthOptions = {
     // error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/verificar", // (used for check email message)
     // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
+  session: {
+    maxAge: SIX_MONTHS_IN_SECONDS,
   },
 };

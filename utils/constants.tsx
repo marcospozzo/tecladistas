@@ -9,3 +9,4 @@ export const LOGOUT = "Salir";
 export const EMAIL = "hola@tecladistas.ar";
 export const RENT = "rent";
 export const SALE = "sale";
+export const SIX_MONTHS_IN_SECONDS = 15552000;
