@@ -41,18 +41,18 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
     <div className="flex flex-col space-x-1">
       {!isConfirmed && (
         <button
-          className="flex justify-center delete-button space-x-2 my-2 w-full"
+          className="flex justify-center delete-button space-x-2 w-full"
           onClick={handleDelete}
         >
-          <h3>Borrar publicación</h3>
+          <h3>Eliminar</h3>
         </button>
       )}
       {isConfirmed && (
         <button
-          className="flex justify-center submit-button space-x-2 my-2 w-fit"
+          className="flex justify-center submit-button space-x-2 w-fit"
           onClick={handleConfirm}
         >
-          <h3>Confirmar</h3>
+          <h3>Confirmar eliminación</h3>
         </button>
       )}
     </div>

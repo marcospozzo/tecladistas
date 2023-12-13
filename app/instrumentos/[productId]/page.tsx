@@ -1,4 +1,9 @@
-import { DeleteProductButton, Location, WhatsAppButton } from "@/components";
+import {
+  DeleteProductButton,
+  EditProductButton,
+  Location,
+  WhatsAppButton,
+} from "@/components";
 import { getProduct, getUser } from "@/utils/axios";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
@@ -63,7 +68,10 @@ const Product = async ({ params }: { params: { productId: string } }) => {
         </div>
 
         {isTheirOwn ? (
-          <DeleteProductButton id={product._id} />
+          <>
+            <EditProductButton productId={product._id} />
+            <DeleteProductButton id={product._id} />
+          </>
         ) : (
           <WhatsAppButton userId={product.userId!} />
         )}
