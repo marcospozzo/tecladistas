@@ -1,4 +1,4 @@
-import { WhatsAppButton } from "@/components";
+import { CustomThumb, WhatsAppButton } from "@/components";
 import { getProfessional } from "@/utils/axios";
 import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStarHalfAlt } from "react-icons/fa";
@@ -72,12 +72,25 @@ const Professional = async ({
         )}
         <div className="flex space-x-2">
           <FaStarHalfAlt className="self-center" />
-          <i>(próximamente)</i>
+          <b>4.5</b>
         </div>
-        {/* <h2>Categorías</h2>
-      {professional.skills.map((skill) => (
-        <li key={skill}>{skillsTranslations[skill]}</li>
-      ))} */}
+        <div className="flex flex-col space-y-3">
+          <h2 className="self-center mt-4">
+            Recomendar a {professional.firstName}:
+          </h2>
+          <div className="flex justify-center space-x-4">
+            <CustomThumb
+              type="up"
+              isPressed={true}
+              // handleOnClick={handleOnThumbClick}
+            />
+            <CustomThumb
+              type="down"
+              isPressed={false}
+              // handleOnClick={handleOnThumbClick}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

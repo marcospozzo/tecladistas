@@ -12,6 +12,7 @@ import DeleteProductButton from "./DeleteProductButton";
 import SaleRentSwitchButton from "./SaleRentSwitchButton";
 import Products from "./Products";
 import EditProductButton from "./EditProductButton";
+import CustomThumb from "./CustomThumb";
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   SaleRentSwitchButton,
   Products,
   EditProductButton,
+  CustomThumb,
 };
