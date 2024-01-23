@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: pageTitles.instruments,
 };
 
-const Intruments = async () => {
+const Instruments = async () => {
   const products = await getProducts();
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
@@ -17,4 +17,4 @@ const Intruments = async () => {
   return <Products products={products} userId={userId} />;
 };
 
-export default Intruments;
+export default Instruments;
