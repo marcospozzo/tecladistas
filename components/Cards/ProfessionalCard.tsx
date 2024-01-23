@@ -11,7 +11,7 @@ const ProfessionalCard = ({
   return (
     <Link
       href={`/profesionales/${professional._id}`}
-      className="flex items-center justify-between box bg-slate-300 dark:bg-slate-600 rounded-xl mx-1"
+      className="flex items-center justify-between box bg-slate-300 dark:bg-slate-600 rounded-xl mx-1 shadow-md"
     >
       <div className="flex flex-row items-center space-x-4">
         <h3 className="dark:text-white">
