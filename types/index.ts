@@ -29,6 +29,8 @@ export interface ProfessionalProps {
   email?: string;
   phone?: string;
   location?: string;
+  ratesUp?: Array<string>;
+  ratesDown?: Array<string>;
 }
 export interface StudioProps {
   _id: string;

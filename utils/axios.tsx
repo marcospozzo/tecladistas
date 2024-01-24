@@ -65,7 +65,7 @@ export const userIsAllowedToSignIn = async (body: object): Promise<boolean> => {
     );
     return response.status === 200;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 };

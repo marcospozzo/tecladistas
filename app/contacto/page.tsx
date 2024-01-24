@@ -39,7 +39,6 @@ const Contact = () => {
           }: {
             data?: { response?: { data?: { error?: string } } };
           }) {
-            console.log({ data });
             return data?.response?.data?.error ?? "Error";
           },
         },
