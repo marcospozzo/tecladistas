@@ -1,3 +1,5 @@
+import { ProfessionalProps } from "@/types";
+
 export const skillsTranslations: { [key: string]: string } = {
   "synths-digital": "Sintetizadores digitales",
   "synths-analog": "Sintetizadores analógicos",
@@ -110,4 +112,30 @@ export const pageTitles: { [key: string]: string } = {
   login: "Entrar",
   signUp: "Registrarse",
   home: "Tecladistas.ar",
+};
+
+export const calculateRating = (professional: ProfessionalProps): number => {
+  if (!professional || !professional.ratesUp || !professional.ratesDown) {
+    // Return a default rating if professional or ratings are undefined
+    return 3;
+  }
+
+  const totalRatings = countTotalRatings(professional);
+
+  if (totalRatings === 0) {
+    // Return a default rating if there are no ratings yet
+    return 3;
+  }
+
+  const ratio = professional.ratesUp.length / totalRatings;
+  const rating = Math.round(ratio * 4) + 1; // Adjust the scale to 1-5
+
+  return rating;
+};
+
+export const countTotalRatings = (professional: ProfessionalProps): number => {
+  const ratesUp = professional.ratesUp || [];
+  const ratesDown = professional.ratesDown || [];
+
+  return ratesUp.length + ratesDown.length;
 };

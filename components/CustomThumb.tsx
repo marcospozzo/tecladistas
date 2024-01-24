@@ -1,29 +1,56 @@
 "use client";
 
-import { MouseEventHandler } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
-const CustomThumb = ({
+const CustomThumb = async ({
   type,
-  isPressed,
-}: //   handleOnClick,
-{
+  isRated,
+  professionalId,
+}: {
   type: "up" | "down";
-  isPressed: boolean;
-  //   handleOnClick: MouseEventHandler<HTMLButtonElement>;
+  isRated: boolean | undefined;
+  professionalId: string | undefined;
 }) => {
-  const handleOnClick = () => {
-    console.log("clicked");
+  const [isPressed, setIsPressed] = useState(isRated);
+
+  const handleOnClick = async () => {
+    try {
+      const promise = axios.post(
+        `/api/professionals/${
+          type === "up" ? "rate-up" : "rate-down"
+        }/${professionalId}`
+      );
+      toast.promise(promise, {
+        pending: "Calificando...",
+        success: "Calificado",
+        error: {
+          render({
+            data,
+          }: {
+            data?: { response?: { data?: { error?: string } } };
+          }) {
+            return data?.response?.data?.error ?? "Error";
+          },
+        },
+      });
+      await promise;
+      setIsPressed(!isPressed);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const size = 30;
-  const children =
+  const thumb =
     type === "up" ? <FaThumbsUp size={size} /> : <FaThumbsDown size={size} />;
   return (
     <button
       className={`custom-thumb ${isPressed && "is-pressed"} `}
       onClick={handleOnClick}
     >
-      {children}
+      {thumb}
     </button>
   );
 };

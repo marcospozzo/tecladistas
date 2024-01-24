@@ -4,7 +4,9 @@ import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStarHalfAlt } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
 import { Metadata } from "next";
-import { pageTitles } from "@/utils/utils";
+import { calculateRating, countTotalRatings, pageTitles } from "@/utils/utils";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export const metadata: Metadata = {
   title: pageTitles.professionals,
@@ -16,6 +18,8 @@ const Professional = async ({
   params: { professionalId: string };
 }) => {
   const professional = await getProfessional(params.professionalId);
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id ?? "";
 
   return (
     <div className="flex flex-col w-full items-center m-auto">
@@ -72,22 +76,24 @@ const Professional = async ({
         )}
         <div className="flex space-x-2">
           <FaStarHalfAlt className="self-center" />
-          <b>4.5</b>
+          <b>{`${calculateRating(professional)}/5 (${countTotalRatings(
+            professional
+          )})`}</b>
         </div>
         <div className="flex flex-col space-y-3">
           <h2 className="self-center mt-4">
-            Recomendar a {professional.firstName}:
+            Calificar a {professional.firstName}:
           </h2>
           <div className="flex justify-center space-x-4">
             <CustomThumb
               type="up"
-              isPressed={true}
-              // handleOnClick={handleOnThumbClick}
+              isRated={professional.ratesUp?.includes(userId)}
+              professionalId={professional._id}
             />
             <CustomThumb
               type="down"
-              isPressed={false}
-              // handleOnClick={handleOnThumbClick}
+              isRated={professional.ratesDown?.includes(userId)}
+              professionalId={professional._id}
             />
           </div>
         </div>
