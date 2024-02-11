@@ -1,7 +1,7 @@
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import clientPromise from "../../../lib/mongodb";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { userIsAllowedToSignIn } from "@/utils/axios";
 import { CustomSendVerificationRequest } from "./signInEmail";
 import { SIX_MONTHS_IN_SECONDS } from "@/utils/constants";
