@@ -175,11 +175,3 @@ pre {
   overflow: auto; /* Hide the overflow */
   text-overflow: ellipsis; /* Add an ellipsis (...) to indicate overflow */
 }
-
-.custom-thumb {
-  @apply self-center hover:bg-slate-500 p-3 rounded-full ease-out duration-300
-}
-
-.is-pressed {
-  @apply bg-gray-400
-}

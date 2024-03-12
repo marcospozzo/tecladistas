@@ -1,4 +1,4 @@
-import { ProfessionalProps } from "@/types";
+import { Rating } from "@/types";
 
 export const skillsTranslations: { [key: string]: string } = {
   "synths-digital": "Sintetizadores digitales",
@@ -7,15 +7,15 @@ export const skillsTranslations: { [key: string]: string } = {
   "electric-pianos": "Pianos eléctricos",
   "acoustic-pianos": "Pianos acústicos",
   "piano-tuner": "Afinador de pianos",
-  "organs": "Órganos",
-  "mics": "Micrófonos",
+  organs: "Órganos",
+  mics: "Micrófonos",
   "general-audio-gear": "Equipos de audio",
   "cables-headphones-pedals": "Cables, auriculares y pedales",
-  "computers": "Software, Mac y PC",
+  computers: "Software, Mac y PC",
   "midi-controllers": "Controladores MIDI",
-  "luthier": "Luthiers",
+  luthier: "Luthiers",
   "in-ears": "In-ears",
-  "cases": "Estuches y fundas",
+  cases: "Estuches y fundas",
 };
 
 export const skillsPageIds: { [key: string]: string } = {
@@ -25,28 +25,28 @@ export const skillsPageIds: { [key: string]: string } = {
   "electric-pianos": "pianos",
   "acoustic-pianos": "pianos",
   "piano-tuner": "afinadores",
-  "organs": "organos",
-  "mics": "microfonos",
+  organs: "organos",
+  mics: "microfonos",
   "general-audio-gear": "audio",
   "cables-headphones-pedals": "varios",
-  "computers": "software",
+  computers: "software",
   "midi-controllers": "controladores",
-  "luthier": "luthiers",
+  luthier: "luthiers",
   "in-ears": "in-ears",
-  "cases": "fundas",
+  cases: "fundas",
 };
 
 export const placeholders: { [key: string]: string } = {
-  "title": "Ej.: Nord Stage 2 en muy buen estado",
-  "price": "Sólo números (opcional)",
-  "location": "Barrio / Provincia (máx 20 caracteres)",
-  "description": "No incluir datos de contacto (opcional)",
-  "exchanges": "Escucho propuestas de intercambio, como parte de pago.",
-  "image": "Elegir o arrastrar una foto (máx. 20 MB)",
-  "disclamer": "Acepto mostrar mi nombre en la publicación.",
-  "brand": "",
-  "model": "",
-  "year": "(Opcional)",
+  title: "Ej.: Nord Stage 2 en muy buen estado",
+  price: "Sólo números (opcional)",
+  location: "Barrio / Provincia (máx 20 caracteres)",
+  description: "No incluir datos de contacto (opcional)",
+  exchanges: "Escucho propuestas de intercambio, como parte de pago.",
+  image: "Elegir o arrastrar una foto (máx. 20 MB)",
+  disclamer: "Acepto mostrar mi nombre en la publicación.",
+  brand: "",
+  model: "",
+  year: "(Opcional)",
 };
 
 export function formatPrice(price: any) {
@@ -63,18 +63,18 @@ export function formatPhone(phone: string) {
 }
 
 export const servicesTranslation: { [key: string]: string } = {
-  "mixing": "Mezcla",
-  "mastering": "Mastering",
-  "recording": "Grabación",
-  "rehearsing": "Sala de ensayo",
-  "production": "Producción",
+  mixing: "Mezcla",
+  mastering: "Mastering",
+  recording: "Grabación",
+  rehearsing: "Sala de ensayo",
+  production: "Producción",
 };
 
 export const contactSubjects: { [key: string]: string } = {
-  "comment": "Comentario / sugerencia",
-  "professionalsAndStudios": "Profesionales / Estudios",
-  "technicalProblem": "Problema técnico",
-  "other": "Otro",
+  comment: "Comentario / sugerencia",
+  professionalsAndStudios: "Profesionales / Estudios",
+  technicalProblem: "Problema técnico",
+  other: "Otro",
 };
 
 export const skills = [
@@ -114,28 +114,14 @@ export const pageTitles: { [key: string]: string } = {
   home: "Tecladistas.ar",
 };
 
-export const calculateRating = (professional: ProfessionalProps): number => {
-  if (!professional || !professional.ratesUp || !professional.ratesDown) {
-    // Return a default rating if professional or ratings are undefined
-    return 3;
+export const calculateRating = (ratings: Array<Rating> | undefined): number => {
+  if (ratings?.length === 0) {
+    return 0;
   }
 
-  const totalRatings = countTotalRatings(professional);
+  const totalRating =
+    ratings?.reduce((sum, rating) => sum + rating.rating, 0) ?? 0;
+  const averageRating = totalRating / (ratings?.length ?? 1);
 
-  if (totalRatings === 0) {
-    // Return a default rating if there are no ratings yet
-    return 3;
-  }
-
-  const ratio = professional.ratesUp.length / totalRatings;
-  const rating = Math.round(ratio * 4) + 1; // Adjust the scale to 1-5
-
-  return rating;
-};
-
-export const countTotalRatings = (professional: ProfessionalProps): number => {
-  const ratesUp = professional.ratesUp || [];
-  const ratesDown = professional.ratesDown || [];
-
-  return ratesUp.length + ratesDown.length;
+  return parseFloat(averageRating.toFixed(1));
 };

@@ -1,12 +1,12 @@
-import { CustomThumb, WhatsAppButton } from "@/components";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { ProfessionalRating, WhatsAppButton } from "@/components";
 import { getProfessional } from "@/utils/axios";
+import { calculateRating, pageTitles } from "@/utils/utils";
+import { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStarHalfAlt } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
-import { Metadata } from "next";
-import { calculateRating, countTotalRatings, pageTitles } from "@/utils/utils";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export const metadata: Metadata = {
   title: pageTitles.professionals,
@@ -75,28 +75,23 @@ const Professional = async ({
           </div>
         )}
         <div className="flex space-x-2">
+          <b>{`${calculateRating(professional.ratings)}/5 `}</b>
           <FaStarHalfAlt className="self-center" />
-          <b>{`${calculateRating(professional)}/5 (${countTotalRatings(
-            professional
-          )})`}</b>
+          <i>
+            {`de ${professional.ratings?.length} ${
+              professional.ratings?.length === 1
+                ? "calificación"
+                : "calificaciones"
+            }`}
+          </i>
         </div>
-        <div className="flex flex-col space-y-3">
-          <h2 className="self-center mt-4">
-            Calificar a {professional.firstName}:
-          </h2>
-          <div className="flex justify-center space-x-4">
-            <CustomThumb
-              type="up"
-              isRated={professional.ratesUp?.includes(userId)}
-              professionalId={professional._id}
-            />
-            <CustomThumb
-              type="down"
-              isRated={professional.ratesDown?.includes(userId)}
-              professionalId={professional._id}
-            />
-          </div>
-        </div>
+        <ProfessionalRating
+          id={professional._id}
+          value={
+            professional.ratings?.find((rating) => rating.userId === userId)
+              ?.rating
+          }
+        />
       </div>
     </div>
   );

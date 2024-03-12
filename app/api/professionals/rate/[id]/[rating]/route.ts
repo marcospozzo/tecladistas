@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request,
-  { params }: { params: { professionalId: string } }
+  { params }: { params: { id: string, rating: string } }
 ) {
   const cookieStore = cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/professionals/rate-down/${params.professionalId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/professionals/rate/${params.id}/${params.rating}`,
       {
         method: "post",
         headers: {
