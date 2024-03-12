@@ -15,6 +15,11 @@ export interface ProductProps {
   pictures?: Array<string>;
   location?: string;
 }
+
+export interface Rating {
+  userId: string;
+  rating: number;
+}
 export interface ProfessionalProps {
   _id: string;
   firstName: string;
@@ -29,8 +34,7 @@ export interface ProfessionalProps {
   email?: string;
   phone?: string;
   location?: string;
-  ratesUp?: Array<string>;
-  ratesDown?: Array<string>;
+  ratings?: Array<Rating>;
 }
 export interface StudioProps {
   _id: string;
