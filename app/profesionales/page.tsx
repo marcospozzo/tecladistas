@@ -1,6 +1,11 @@
 import { ProfessionalProps } from "@/types";
 import { ProfessionalCard } from "@/components";
-import { pageTitles, skillsPageIds, skillsTranslations } from "@/utils/utils";
+import {
+  calculateRating,
+  pageTitles,
+  skillsPageIds,
+  skillsTranslations,
+} from "@/utils/utils";
 import { skills } from "@/utils/utils";
 import { getProfessionals } from "@/utils/axios";
 import { Metadata } from "next";
@@ -21,6 +26,10 @@ const Professionals = async () => {
             {professionals
               .filter((professional: ProfessionalProps) =>
                 professional.skills.includes(skill)
+              )
+              .sort(
+                (a, b) =>
+                  calculateRating(b.ratings) - calculateRating(a.ratings)
               )
               .map((professional: ProfessionalProps) => (
                 <ProfessionalCard
