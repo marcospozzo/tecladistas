@@ -2,6 +2,7 @@
 
 import { Rating } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -12,6 +13,7 @@ const ProfessionalRating = ({
   id: string;
   value: number | undefined | null;
 }) => {
+  const router = useRouter();
   const [ratingValue, setRatingValue] = useState<number | undefined | null>(
     value
   );
@@ -39,8 +41,9 @@ const ProfessionalRating = ({
                   },
                 },
               });
-              setRatingValue(rate);
               await promise;
+              setRatingValue(rate);
+              router.refresh();
             } catch (error) {
               console.error(error);
             }
