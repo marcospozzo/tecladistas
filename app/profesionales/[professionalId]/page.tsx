@@ -74,7 +74,14 @@ const Professional = async ({
             <h3>{professional.location}</h3>
           </div>
         )}
-        <div className="flex space-x-2">
+        <ProfessionalRating
+          id={professional._id}
+          value={
+            professional.ratings?.find((rating) => rating.userId === userId)
+              ?.rating
+          }
+        />
+        <div className="flex space-x-2 self-center">
           <b>{`${calculateRating(professional.ratings)}/5 `}</b>
           <FaStarHalfAlt className="self-center" />
           <i>
@@ -85,13 +92,6 @@ const Professional = async ({
             }`}
           </i>
         </div>
-        <ProfessionalRating
-          id={professional._id}
-          value={
-            professional.ratings?.find((rating) => rating.userId === userId)
-              ?.rating
-          }
-        />
       </div>
     </div>
   );
