@@ -17,7 +17,8 @@ const ProfessionalCard = ({
       <div className="flex flex-row items-center space-x-3">
         <h3 className="dark:text-white">
           {professional.firstName}{" "}
-          {professional.nickname && `"${professional.nickname}"`}
+          {professional.nickname && `"${professional.nickname}"`}{" "}
+          {professional.lastName && `${professional.lastName.slice(0, 1)}.`}
         </h3>
         {professional.ratings?.length !== 0 && (
           <div className="flex flex-row space-x-1">
