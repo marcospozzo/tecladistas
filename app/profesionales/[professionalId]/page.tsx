@@ -5,7 +5,7 @@ import { calculateRating, pageTitles } from "@/utils/utils";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { FaGlobeAmericas, FaPhone, FaStarHalfAlt } from "react-icons/fa";
+import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
 
 export const metadata: Metadata = {
@@ -81,16 +81,16 @@ const Professional = async ({
               ?.rating
           }
         />
-        <div className="flex space-x-2 self-center">
-          <b>{`${calculateRating(professional.ratings)}/5 `}</b>
-          <FaStarHalfAlt className="self-center" />
-          <i>
-            {`de ${professional.ratings?.length} ${
+        <div className="flex space-x-1 self-center">
+          <h3>{calculateRating(professional.ratings)}</h3>
+          <FaStar className="self-center" />
+          <h3>
+            {`(${professional.ratings?.length} ${
               professional.ratings?.length === 1
                 ? "calificación"
                 : "calificaciones"
-            }`}
-          </i>
+            })`}
+          </h3>
         </div>
       </div>
     </div>
