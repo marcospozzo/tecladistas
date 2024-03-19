@@ -1,7 +1,12 @@
 import { ProfessionalProps } from "@/types";
 import { calculateRating } from "@/utils/utils";
 import Link from "next/link";
-import { FaPhone, FaGlobeAmericas, FaStarHalfAlt } from "react-icons/fa";
+import {
+  FaPhone,
+  FaGlobeAmericas,
+  FaStarHalfAlt,
+  FaStar,
+} from "react-icons/fa";
 import { MdPiano, MdEmail, MdLocationPin } from "react-icons/md";
 
 const ProfessionalCard = ({
@@ -22,8 +27,8 @@ const ProfessionalCard = ({
         </h3>
         {professional.ratings?.length !== 0 && (
           <div className="flex flex-row space-x-1">
-            <FaStarHalfAlt className="self-center" />
-            <h3>{`${calculateRating(professional.ratings)}`}</h3>
+            <h3>{calculateRating(professional.ratings)}</h3>
+            <FaStar className="self-center" />
           </div>
         )}
       </div>
