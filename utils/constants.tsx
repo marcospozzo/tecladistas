@@ -1,6 +1,7 @@
 export const INSTRUMENTS = "Instrumentos";
 export const PROFESSIONALS = "Listado de Profesionales";
 export const STUDIOS = "Estudios de Grabación";
+export const PICTURES = "Fotos";
 export const CONTACT = "Contacto";
 export const ABOUT_US = "Sobre nosotrxs";
 export const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=";
@@ -9,4 +10,5 @@ export const LOGOUT = "Salir";
 export const EMAIL = "hola@tecladistas.ar";
 export const RENT = "rent";
 export const SALE = "sale";
+export const URL_SHORT = "tecladistas.ar";
 export const SIX_MONTHS_IN_SECONDS = 15552000;
