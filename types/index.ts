@@ -60,3 +60,9 @@ export interface UserProps {
   email: string;
   phone: string;
 }
+
+export type Page = {
+  title: string;
+  path: string;
+  subpages?: Page[];
+};
