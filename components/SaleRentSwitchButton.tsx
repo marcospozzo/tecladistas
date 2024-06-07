@@ -12,13 +12,13 @@ const SaleRentSwitchButton = ({
     <nav className="flex w-fit mx-auto h-12 space-x-4 mb-4">
       <button
         onClick={handleSwitchListingType}
-        className={listingType === SALE ? "is-active" : "p-2"}
+        className={`p-2 ${listingType === SALE && "is-active"}`}
       >
         Venta
       </button>
       <button
         onClick={handleSwitchListingType}
-        className={listingType === RENT ? "is-active" : "p-2"}
+        className={`p-2 ${listingType === RENT && "is-active"}`}
       >
         Alquiler
       </button>
