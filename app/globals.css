@@ -82,7 +82,7 @@ h2 {
 }
 
 button, .button {
-  padding: 0.5em 2em; 
+  padding: 0.5em 2em;
   border-radius: 5px;
 }
 
@@ -142,7 +142,7 @@ button, .button {
 }
 
 .is-active {
-  @apply bg-gray-500 rounded-md max-md:p-2 transition-all duration-300 ease-in-out shadow-xl
+  @apply bg-gray-500 rounded-md transition-all duration-300 ease-in-out shadow-xl
 }
 
 .login-signup {

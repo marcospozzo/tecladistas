@@ -27,25 +27,12 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Page } from "@/types";
+import { useState } from "react";
 
 const pages: Page[] = [
   { title: INSTRUMENTS, path: "/instrumentos" },
   { title: PROFESSIONALS, path: "/profesionales" },
   { title: STUDIOS, path: "/estudios" },
-  // {
-  //   title: PICTURES,
-  //   path: "/fotos",
-  //   subpages: [
-  //     {
-  //       title: "2023",
-  //       path: "/fotos/2023",
-  //     },
-  //     {
-  //       title: "2022",
-  //       path: "/fotos/2022",
-  //     },
-  //   ],
-  // },
 ];
 
 const settings: Page[] = [
@@ -60,14 +47,11 @@ const Header = () => {
   const { status } = useSession();
   const isLoggedIn = status === "authenticated";
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElSubMenu, setAnchorElSubMenu] = useState<null | HTMLElement>(
     null
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElSubMenu, setAnchorElSubMenu] =
-    React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -141,46 +125,48 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => [
-                <MenuItem
-                  key={page.title}
-                  onClick={
-                    page.subpages ? handleOpenSubMenu : handleCloseNavMenu
-                  }
-                >
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>,
-                page.subpages && (
-                  <Menu
-                    key={`${page.title}-sub`}
-                    sx={{ mt: "45px" }}
-                    anchorEl={anchorElSubMenu}
-                    anchorOrigin={{ vertical: "top", horizontal: "left" }}
-                    keepMounted
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
-                    open={Boolean(anchorElSubMenu)}
-                    onClose={handleCloseNavMenu}
-                  >
-                    {page.subpages.map((subpage) => (
-                      <MenuItem
-                        key={subpage.title}
-                        onClick={handleCloseNavMenu}
-                      >
-                        <Link href={subpage.path}>
-                          <Typography textAlign="center">
-                            {subpage.title}
-                          </Typography>
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                ),
-              ])}
+              {pages.map((page) => (
+                <div key={page.title}>
+                  <Link href={page.path} passHref>
+                    <MenuItem
+                      onClick={
+                        page.subpages ? handleOpenSubMenu : handleCloseNavMenu
+                      }
+                    >
+                      <Typography textAlign="center">{page.title}</Typography>
+                    </MenuItem>
+                  </Link>
+                  {page.subpages && (
+                    <Menu
+                      sx={{ mt: "45px" }}
+                      anchorEl={anchorElSubMenu}
+                      anchorOrigin={{ vertical: "top", horizontal: "left" }}
+                      keepMounted
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                      open={Boolean(anchorElSubMenu)}
+                      onClose={handleCloseNavMenu}
+                    >
+                      {page.subpages.map((subpage) => (
+                        <MenuItem
+                          key={subpage.title}
+                          onClick={handleCloseNavMenu}
+                        >
+                          <Link href={subpage.path}>
+                            <Typography textAlign="center">
+                              {subpage.title}
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  )}
+                </div>
+              ))}
             </Menu>
           </Box>
 
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
             component="a"
             href="/"
@@ -219,16 +205,13 @@ const Header = () => {
                       onClose={handleCloseNavMenu}
                     >
                       {page.subpages.map((subpage) => (
-                        <MenuItem
-                          key={subpage.title}
-                          onClick={handleCloseNavMenu}
-                        >
-                          <Link href={subpage.path}>
+                        <Link key={subpage.title} href={subpage.path} passHref>
+                          <MenuItem onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">
                               {subpage.title}
                             </Typography>
-                          </Link>
-                        </MenuItem>
+                          </MenuItem>
+                        </Link>
                       ))}
                     </Menu>
                   </>
