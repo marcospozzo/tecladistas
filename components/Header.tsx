@@ -32,20 +32,20 @@ const pages: Page[] = [
   { title: INSTRUMENTS, path: "/instrumentos" },
   { title: PROFESSIONALS, path: "/profesionales" },
   { title: STUDIOS, path: "/estudios" },
-  {
-    title: PICTURES,
-    path: "/fotos",
-    subpages: [
-      {
-        title: "2023",
-        path: "/fotos/2023",
-      },
-      {
-        title: "2022",
-        path: "/fotos/2022",
-      },
-    ],
-  },
+  // {
+  //   title: PICTURES,
+  //   path: "/fotos",
+  //   subpages: [
+  //     {
+  //       title: "2023",
+  //       path: "/fotos/2023",
+  //     },
+  //     {
+  //       title: "2022",
+  //       path: "/fotos/2022",
+  //     },
+  //   ],
+  // },
 ];
 
 const settings: Page[] = [
