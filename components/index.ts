@@ -1,5 +1,4 @@
 import Header from "./Header";
-import Footer from "./Footer";
 import ProductCard from "./Cards/ProductCard";
 import Cards from "./Cards/Cards";
 import StudioCard from "./Cards/StudioCard";
@@ -16,7 +15,6 @@ import ProfessionalRating from "./ProfessionalRating";
 
 export {
   Header,
-  Footer,
   ProductCard,
   Cards,
   StudioCard,

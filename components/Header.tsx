@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  CONTACT,
+  EMAIL,
   INSTRUMENTS,
   LOGIN,
   LOGOUT,
@@ -33,13 +35,6 @@ const pages: Page[] = [
   { title: INSTRUMENTS, path: "/instrumentos" },
   { title: PROFESSIONALS, path: "/profesionales" },
   { title: STUDIOS, path: "/estudios" },
-];
-
-const settings: Page[] = [
-  {
-    title: LOGOUT,
-    path: "/api/auth/signout",
-  },
 ];
 
 const Header = () => {
@@ -254,15 +249,22 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
-                  <Link href={isLoggedIn ? setting.path : "/entrar"}>
-                    <Typography textAlign="center">
-                      {isLoggedIn ? setting.title : LOGIN}
-                    </Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              <MenuItem key="1" onClick={handleCloseUserMenu}>
+                <Link
+                  href={isLoggedIn ? "/contacto" : `mailto:${EMAIL}`}
+                  target={isLoggedIn ? "" : "_blank"}
+                  rel={isLoggedIn ? "" : "noopener noreferrer"}
+                >
+                  <Typography textAlign="center">{CONTACT}</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem key="0" onClick={handleCloseUserMenu}>
+                <Link href={isLoggedIn ? "/api/auth/signout" : "/entrar"}>
+                  <Typography textAlign="center">
+                    {isLoggedIn ? LOGOUT : LOGIN}
+                  </Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
