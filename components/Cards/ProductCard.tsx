@@ -1,10 +1,10 @@
+import { Location } from "@/components";
+import { ProductProps } from "@/types";
+import { INSTRUMENTS_PATH, SALE } from "@/utils/constants";
+import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { ProductProps } from "@/types";
-import { Location } from "@/components";
-import { formatPrice } from "@/utils/utils";
 import { FaArrowsRotate } from "react-icons/fa6";
-import { SALE } from "@/utils/constants";
 
 const ProductCard = ({
   product,
@@ -17,7 +17,7 @@ const ProductCard = ({
 }) => {
   return (
     <Link
-      href={`/instrumentos/${product._id}`}
+      href={`${INSTRUMENTS_PATH}/${product._id}`}
       className={`flex flex-col box-item bg-slate-300 rounded-xl ${
         isTheirOwn && "border-4 border-green-500"
       } `}

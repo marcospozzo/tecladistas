@@ -2,7 +2,7 @@
 
 import { EditableInput, SaleRentSwitchButton } from "@/components";
 import { ProductProps } from "@/types";
-import { RENT, SALE } from "@/utils/constants";
+import { INSTRUMENTS_PATH, RENT, SALE } from "@/utils/constants";
 import { imageTypes, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,9 +11,9 @@ import {
   ChangeEventHandler,
   FormEvent,
   SetStateAction,
-  useState,
-  useReducer,
   useEffect,
+  useReducer,
+  useState,
 } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
@@ -122,10 +122,10 @@ const NewProduct = () => {
       });
       await promise;
       const route = productId
-        ? `/instrumentos/${productId}`
+        ? `${INSTRUMENTS_PATH}/${productId}`
         : listingType === RENT
-        ? "/instrumentos#alquiler"
-        : "/instrumentos";
+        ? `${INSTRUMENTS_PATH}#alquiler`
+        : INSTRUMENTS_PATH;
       router.push(route);
       router.refresh();
     } catch (error) {

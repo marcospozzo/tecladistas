@@ -1,11 +1,11 @@
+import { userIsAllowedToSignIn } from "@/utils/axios";
+import { LOGIN_PATH, SIX_MONTHS_IN_SECONDS } from "@/utils/constants";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import type { DefaultSession, NextAuthOptions } from "next-auth";
+import type { Adapter } from "next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
 import clientPromise from "../../../lib/mongodb";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { userIsAllowedToSignIn } from "@/utils/axios";
 import { CustomSendVerificationRequest } from "./signInEmail";
-import { SIX_MONTHS_IN_SECONDS } from "@/utils/constants";
-import type { Adapter } from "next-auth/adapters";
 
 declare module "next-auth" {
   interface Session {
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/entrar",
+    signIn: LOGIN_PATH,
     // signOut: "/auth/signout",
     // error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/verificar", // (used for check email message)
