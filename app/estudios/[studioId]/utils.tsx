@@ -5,23 +5,15 @@ type Props = {
   params: { studioId: string };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
-  const id = params.studioId;
-
-  const isProduction = process.env.NODE_ENV === "production";
-
-  // Define the protocol based on the environment
-  const protocol = isProduction ? "https://" : "http://";
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const protocol =
+    process.env.NODE_ENV === "production" ? "https://" : "http://";
 
   let foundImage = null;
 
   for (const extension of imageTypes) {
     const lowercaseExtension = extension.toLowerCase();
-    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}/estudios/${id}.${lowercaseExtension}`;
+    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}/estudios/${params.studioId}.${lowercaseExtension}`;
     const imageExists = await checkImageExists(imageUrl);
 
     if (imageExists) {
@@ -42,7 +34,6 @@ export async function generateMetadata(
   };
 }
 
-// Función para verificar si una imagen existe
 async function checkImageExists(url: string) {
   try {
     const response = await fetch(url, { method: "HEAD" });
