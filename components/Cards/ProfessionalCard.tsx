@@ -1,13 +1,9 @@
 import { ProfessionalProps } from "@/types";
+import { PROFESSIONALS_PATH } from "@/utils/constants";
 import { calculateRating } from "@/utils/utils";
 import Link from "next/link";
-import {
-  FaPhone,
-  FaGlobeAmericas,
-  FaStarHalfAlt,
-  FaStar,
-} from "react-icons/fa";
-import { MdPiano, MdEmail, MdLocationPin } from "react-icons/md";
+import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
+import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
 
 const ProfessionalCard = ({
   professional,
@@ -16,7 +12,7 @@ const ProfessionalCard = ({
 }) => {
   return (
     <Link
-      href={`/profesionales/${professional._id}`}
+      href={`${PROFESSIONALS_PATH}/${professional._id}`}
       className="flex items-center justify-between box bg-slate-300 dark:bg-slate-600 rounded-xl mx-1 shadow-md"
     >
       <div className="flex flex-row items-center space-x-3">

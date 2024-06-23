@@ -95,7 +95,7 @@ export const skills = [
   "luthier",
 ];
 
-const isProduction = process.env.NODE_ENV === "production";
+export const isProduction = process.env.NODE_ENV === "production";
 export const cookieName = isProduction
   ? "__Secure-next-auth.session-token"
   : "next-auth.session-token";

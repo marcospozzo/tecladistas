@@ -1,19 +1,19 @@
-import { Metadata, ResolvingMetadata } from "next";
-import { imageTypes, pageTitles } from "@/utils/utils";
+import { INSTRUMENTS_PATH } from "@/utils/constants";
+import { imageTypes, isProduction, pageTitles } from "@/utils/utils";
+import { Metadata } from "next";
 
 type Props = {
   params: { productId: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const protocol =
-    process.env.NODE_ENV === "production" ? "https://" : "http://";
+  const protocol = isProduction ? "https://" : "http://";
 
   let foundImage = null;
 
   for (const extension of imageTypes) {
     const lowercaseExtension = extension.toLowerCase();
-    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}/instrumentos/${params.productId}/1.${lowercaseExtension}`;
+    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}${INSTRUMENTS_PATH}/${params.productId}/1.${lowercaseExtension}`;
     const imageExists = await checkImageExists(imageUrl);
 
     if (imageExists) {

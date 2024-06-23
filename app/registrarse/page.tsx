@@ -1,11 +1,12 @@
 "use client";
 
+import { UserProps } from "@/types";
+import { LOGIN_PATH } from "@/utils/constants";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { UserProps } from "@/types";
-import Link from "next/link";
 
 const SignUp = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const SignUp = () => {
             if (errorData && errorData.err?.code === 11000) {
               errorMessage = "Usuario ya existe. Redirigiendo...";
               setTimeout(() => {
-                router.push("/entrar");
+                router.push(LOGIN_PATH);
               }, 1000);
             }
             return errorMessage;
@@ -46,7 +47,7 @@ const SignUp = () => {
         },
       });
       await promise;
-      router.push("/entrar");
+      router.push(LOGIN_PATH);
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +65,7 @@ const SignUp = () => {
       <h1 className="form-title">Registrarse</h1>
       <div className="flex justify-center space-x-1 mb-2">
         <h3>¿Ya estás registradx? </h3>
-        <Link className="link" href="/entrar">
+        <Link className="link" href={LOGIN_PATH}>
           Entrar
         </Link>
       </div>

@@ -1,18 +1,18 @@
 "use client";
 
+import { CONTACT_PATH, INSTRUMENTS_PATH, RENT } from "@/utils/constants";
 import Link from "next/link";
-import { BsPlusCircleDotted } from "react-icons/bs";
 import { usePathname } from "next/navigation";
-import { RENT } from "@/utils/constants";
+import { BsPlusCircleDotted } from "react-icons/bs";
 
 const CardNew = ({ listingType = "" }) => {
   const pathname = usePathname();
   const url =
     listingType === RENT
       ? "/crear-publicacion#alquiler"
-      : pathname === "/instrumentos"
+      : pathname === INSTRUMENTS_PATH
       ? "/crear-publicacion"
-      : "/contacto";
+      : CONTACT_PATH;
   return (
     <div className="flex box-item bg-slate-300 rounded-xl">
       <Link className="m-auto" href={url}>
