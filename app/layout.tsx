@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Footer, Header } from "@/components";
+import { Header } from "@/components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -47,7 +47,6 @@ export default async function RootLayout({
         <Provider session={session}>
           <Header />
           <main>{children}</main>
-          <Footer />
         </Provider>
         <ToastContainer position="bottom-right" />
         <Analytics />
