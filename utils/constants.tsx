@@ -19,3 +19,6 @@ export const PICTURES_PATH = "/fotos";
 export const CONTACT_PATH = "/contacto";
 export const LOGIN_PATH = "/entrar";
 export const LOGOUT_PATH = "/api/auth/signout";
+export const PHOTOGRAPHERS_INSTAGRAM = "@aledesafinada";
+export const PHOTOGRAPHERS_INSTAGRAM_URL =
+  "https://instagram.com/aledesafinada";

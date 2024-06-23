@@ -2,19 +2,27 @@
 
 import {
   CONTACT,
+  CONTACT_PATH,
   EMAIL,
   INSTRUMENTS,
+  INSTRUMENTS_PATH,
   LOGIN,
+  LOGIN_PATH,
   LOGOUT,
+  LOGOUT_PATH,
   PICTURES,
+  PICTURES_PATH,
   PROFESSIONALS,
+  PROFESSIONALS_PATH,
   STUDIOS,
+  STUDIOS_PATH,
   URL_SHORT,
 } from "@/utils/constants";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Page } from "@/types";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
@@ -28,13 +36,22 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { Page } from "@/types";
 import { useState } from "react";
 
 const pages: Page[] = [
-  { title: INSTRUMENTS, path: "/instrumentos" },
-  { title: PROFESSIONALS, path: "/profesionales" },
-  { title: STUDIOS, path: "/estudios" },
+  { title: INSTRUMENTS, path: INSTRUMENTS_PATH },
+  { title: PROFESSIONALS, path: PROFESSIONALS_PATH },
+  { title: STUDIOS, path: STUDIOS_PATH },
+  {
+    title: PICTURES,
+    path: PICTURES_PATH,
+    subpages: [
+      {
+        title: "2023",
+        path: `${PICTURES_PATH}/2023`,
+      },
+    ],
+  },
 ];
 
 const Header = () => {
@@ -57,6 +74,7 @@ const Header = () => {
   };
 
   const handleOpenSubMenu = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     setAnchorElSubMenu(event.currentTarget);
   };
 
@@ -251,7 +269,7 @@ const Header = () => {
             >
               <MenuItem key="1" onClick={handleCloseUserMenu}>
                 <Link
-                  href={isLoggedIn ? "/contacto" : `mailto:${EMAIL}`}
+                  href={isLoggedIn ? CONTACT_PATH : `mailto:${EMAIL}`}
                   target={isLoggedIn ? "" : "_blank"}
                   rel={isLoggedIn ? "" : "noopener noreferrer"}
                 >
@@ -259,7 +277,7 @@ const Header = () => {
                 </Link>
               </MenuItem>
               <MenuItem key="0" onClick={handleCloseUserMenu}>
-                <Link href={isLoggedIn ? "/api/auth/signout" : "/entrar"}>
+                <Link href={isLoggedIn ? LOGOUT_PATH : LOGIN_PATH}>
                   <Typography textAlign="center">
                     {isLoggedIn ? LOGOUT : LOGIN}
                   </Typography>
