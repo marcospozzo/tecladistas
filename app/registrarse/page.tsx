@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+
 const SignUp = () => {
   const router = useRouter();
   const [data, setData] = useState<UserProps>({
@@ -26,6 +29,7 @@ const SignUp = () => {
         data
       );
       toast.promise(promise, {
+        success: "Usuario creado. Redirigiendo...",
         pending: "Cargando...",
         error: {
           render({
@@ -60,6 +64,13 @@ const SignUp = () => {
     });
   }
 
+  function handlePhoneChange(value: string | undefined) {
+    setData({
+      ...data,
+      phone: value ?? "",
+    });
+  }
+
   return (
     <form className="login-signup" onSubmit={handleSubmit}>
       <h1 className="form-title">Registrarse</h1>
@@ -85,17 +96,15 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
-      <input
-        type="text"
+      <PhoneInput
+        className="pl-4 gap-x-2 w-full"
         id="phone"
         name="phone"
-        placeholder="Celular (formato: 5491122334455)"
-        onChange={handleChange}
-        required
+        international
+        countryCallingCodeEditable={false}
+        defaultCountry="AR"
+        onChange={handlePhoneChange}
       />
-      <i className="self-center text-center mb-2">
-        Solo números, con prefijo de país, sin espacios ni guiones
-      </i>
       <input
         type="email"
         id="email"
