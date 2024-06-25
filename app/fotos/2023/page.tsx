@@ -18,7 +18,6 @@ export default async function Page() {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/api/photos/2023`);
-        console.log(res.data);
         setPhotos(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
