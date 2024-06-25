@@ -44,12 +44,14 @@ export default async function Page() {
         showPlayButton={false}
         thumbnailPosition="top"
         showIndex={true}
+        lazyLoad={true}
         items={photos}
         // items={photos.map(
         //   (photo): ReactImageGalleryItem => ({
         //     original: photo.original,
         //     thumbnail: photo.thumbnail,
-        //     moreProps...
+        //     loading: "lazy",
+        //     thumbnailLoading: "lazy",
         //   })
         // )}
       />
