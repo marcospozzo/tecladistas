@@ -3,7 +3,6 @@
 import {
   PHOTOGRAPHERS_INSTAGRAM,
   PHOTOGRAPHERS_INSTAGRAM_URL,
-  PICTURES_2023_PATH,
 } from "@/utils/constants";
 import axios from "axios";
 import Link from "next/link";
@@ -18,7 +17,7 @@ export default async function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api${PICTURES_2023_PATH}`);
+        const res = await axios.get(`/api/photos/2023`);
         console.log(res.data);
         setPhotos(res.data);
       } catch (error) {
