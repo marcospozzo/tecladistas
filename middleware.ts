@@ -13,6 +13,8 @@ export const config = {
     "/crear-usuario",
     "/api/users/open-whatsapp/:userId+",
     "/crear-publicacion",
+    "/fotos/:path+",
+    "/fotos",
   ],
 };
 
