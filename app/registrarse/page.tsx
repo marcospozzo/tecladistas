@@ -103,6 +103,7 @@ const SignUp = () => {
         international
         countryCallingCodeEditable={false}
         defaultCountry="AR"
+        value={"+549"}
         onChange={handlePhoneChange}
       />
       <input
