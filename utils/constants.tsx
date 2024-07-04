@@ -17,6 +17,7 @@ export const PROFESSIONALS_PATH = "/profesionales";
 export const STUDIOS_PATH = "/estudios";
 export const PICTURES_PATH = "/fotos";
 export const PICTURES_2023_PATH = "/fotos/2023";
+export const PICTURES_2022_PATH = "/fotos/2022";
 export const CONTACT_PATH = "/contacto";
 export const LOGIN_PATH = "/entrar";
 export const LOGOUT_PATH = "/api/auth/signout";
