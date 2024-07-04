@@ -11,6 +11,7 @@ import {
   LOGOUT,
   LOGOUT_PATH,
   PICTURES,
+  PICTURES_2022_PATH,
   PICTURES_2023_PATH,
   PICTURES_PATH,
   PROFESSIONALS,
@@ -50,6 +51,10 @@ const pages: Page[] = [
       {
         title: "2023",
         path: PICTURES_2023_PATH,
+      },
+      {
+        title: "2022",
+        path: PICTURES_2022_PATH,
       },
     ],
   },
