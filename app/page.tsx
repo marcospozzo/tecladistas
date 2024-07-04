@@ -29,7 +29,7 @@ const AboutUs = async () => {
         venta y alquiler.
       </p>
 
-      {!isLoggedIn ? (
+      {!isLoggedIn && (
         <div className="mb-10 space-y-4">
           <Link className="flex justify-center" href="/registrarse">
             <button className="submit-button" type="submit" value="register">
@@ -43,30 +43,10 @@ const AboutUs = async () => {
             </Link>
           </div>
         </div>
-      ) : (
-        <>
-          <p className="text-big">
-            Quienes puedan contribuir económicamente a este proyecto web, son
-            invitadxs a hacerlo a través de cafecitos:{" "}
-          </p>
-          <div className="flex justify-center mb-12">
-            <Link
-              href={"https://cafecito.app/marcospozzo"}
-              className={"link"}
-              target="_blank"
-            >
-              <img
-                srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
-                src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
-                alt="Invitame un café en cafecito.app"
-              />
-            </Link>
-          </div>
-        </>
       )}
 
       <Image
-        className="w-full mb-12 rounded-lg"
+        className="w-full my-10 rounded-lg"
         src={"/keyboard.jpg"}
         alt="teclas de un piano o teclado"
         width={0}
@@ -86,27 +66,6 @@ const AboutUs = async () => {
         de los pilares del grupo son la generosidad, la humildad, la
         camaradería, el intercambio y la amistad."
       </p>
-      {!isLoggedIn && (
-        <>
-          <p className="text-big">
-            Quienes puedan contribuir económicamente a este proyecto web, son
-            invitadxs a hacerlo a través de cafecitos:{" "}
-          </p>
-          <div className="flex justify-center mb-12">
-            <Link
-              href={"https://cafecito.app/marcospozzo"}
-              className={"link"}
-              target="_blank"
-            >
-              <img
-                srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
-                src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
-                alt="Invitame un café en cafecito.app"
-              />
-            </Link>
-          </div>
-        </>
-      )}
       <p className="small-text">
         Los desarrolladores de esta página no participamos de operaciones,
         intercambio de dinero, garantías, ni acuerdos en relación a ventas o
@@ -115,6 +74,19 @@ const AboutUs = async () => {
         información personal, datos de contacto y números de teléfono son de uso
         privado y pedimos que se mantengan de esta forma.
       </p>
+      <div className="flex justify-center mt-12">
+        <Link
+          href={"https://cafecito.app/marcospozzo"}
+          className={"link"}
+          target="_blank"
+        >
+          <img
+            srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
+            src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+            alt="Invitame un café en cafecito.app"
+          />
+        </Link>
+      </div>
     </div>
   );
 };
