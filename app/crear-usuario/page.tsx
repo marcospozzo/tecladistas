@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const CreateWhitelisted = () => {
   const router = useRouter();
@@ -20,6 +22,13 @@ const CreateWhitelisted = () => {
       });
     }
   };
+
+  function handlePhoneChange(value: string | undefined) {
+    setData({
+      ...data,
+      phone: value ?? "",
+    });
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -67,13 +76,15 @@ const CreateWhitelisted = () => {
           placeholder="Nombre"
           onChange={handleChange}
         />
-        <input
-          type="text"
+        <PhoneInput
+          className="pl-4 gap-x-2 w-full"
           id="phone"
           name="phone"
-          placeholder="Celular (formato: 5491122334455)"
-          onChange={handleChange}
-          required
+          international
+          countryCallingCodeEditable={false}
+          defaultCountry="AR"
+          value={"+549"}
+          onChange={handlePhoneChange}
         />
         <br />
         <div className="flex flex-col justify-center space-y-2">
