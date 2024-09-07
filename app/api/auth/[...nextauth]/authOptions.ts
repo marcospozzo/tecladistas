@@ -20,7 +20,9 @@ export const authOptions: NextAuthOptions = {
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
+        port: process.env.EMAIL_SERVER_PORT
+          ? parseInt(process.env.EMAIL_SERVER_PORT, 10)
+          : undefined,
         secure: true,
         auth: {
           user: process.env.EMAIL_SERVER_USER,

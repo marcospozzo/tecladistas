@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create-whitelisted`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/delete-whitelisted`,
       {
         method: "post",
         headers: {
@@ -21,24 +21,21 @@ export async function POST(request: Request) {
     );
     const data = await res.json();
     let errorMessage = "";
-    if (data.code === 11000) {
-      errorMessage = "Celular ya existe";
+    if (data.deletedCount === 0) {
+      errorMessage = `Error: usuario no fue eliminado`;
     }
-    if (data.name) {
-      errorMessage = `Error: ${data.name}`;
-    }
-    if (data.error) {
-      errorMessage = `Error: ${data.error}`;
-    }
-    if (res.ok) {
-      return NextResponse.json({ success: "Usuario creado" }, { status: 201 });
+    if (res.ok && data.deletedCount === 1) {
+      return NextResponse.json(
+        { success: "Usuario eliminado" },
+        { status: 201 }
+      );
     } else {
       return NextResponse.json({ error: errorMessage }, { status: 400 });
     }
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Error al intentar crear usuario" },
+      { error: "Error al intentar eliminar usuario" },
       { status: 500 }
     );
   }
