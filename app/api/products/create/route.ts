@@ -2,14 +2,6 @@ import { cookieName } from "@/utils/utils";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "20mb",
-    },
-  },
-};
-
 export async function POST(request: Request) {
   const formData = await request.formData();
   const cookieStore = cookies();
