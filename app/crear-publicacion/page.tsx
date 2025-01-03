@@ -103,11 +103,7 @@ const NewProduct = () => {
       : "/api/products/create";
 
     try {
-      const promise = axios.post(endpoint, formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
+      const promise = axios.post(endpoint, formData);
       toast.promise(promise, {
         pending: "Publicando...",
         error: {
@@ -116,6 +112,7 @@ const NewProduct = () => {
           }: {
             data?: { response?: { data?: { error?: string } } };
           }) {
+            console.error("Error response:", data);
             return data?.response?.data?.error ?? "Error";
           },
         },
