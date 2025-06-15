@@ -5,7 +5,7 @@ import {
   WhatsAppButton,
 } from "@/components";
 import { getProduct, getUser } from "@/utils/axios";
-import { formatPrice } from "@/utils/utils";
+import { formatPrice, productMessage } from "@/utils/utils";
 import Image from "next/image";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
@@ -73,7 +73,10 @@ const Product = async ({ params }: { params: { productId: string } }) => {
             <DeleteProductButton id={product._id} />
           </>
         ) : (
-          <WhatsAppButton userId={product.userId!} />
+          <WhatsAppButton
+            userId={product.userId!}
+            message={productMessage(user.firstName, product.title)}
+          />
         )}
       </div>
     </div>
