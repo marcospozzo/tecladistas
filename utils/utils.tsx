@@ -40,7 +40,8 @@ export const placeholders: { [key: string]: string } = {
   title: "Ej.: Nord Stage 2 en muy buen estado",
   price: "Sólo números",
   location: "Barrio / Provincia (máx 20 caracteres)",
-  description: "(Opcional)No incluir datos de contacto, como teléfono o email.",
+  description:
+    "(Opcional) No incluir datos de contacto, como teléfono o email.",
   exchanges: "Escucho propuestas de intercambio, como parte de pago.",
   image: "Elegir o arrastrar una foto (máx. 20 MB)",
   disclamer: "Acepto mostrar mi nombre en la publicación.",
