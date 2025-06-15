@@ -125,3 +125,11 @@ export const calculateRating = (ratings: Array<Rating> | undefined): number => {
 
   return parseFloat(averageRating.toFixed(1));
 };
+
+export function productMessage(name: string, title: string): string {
+  return `Hola ${name}! Soy tecladista gitanx, te contacto por tu instrumento ${title} publicado en la web de Tecladistas.`;
+}
+
+export function studioMessage(name: string, title: string): string {
+  return `Hola ${name}! Soy tecladista gitanx, te contacto por tu estudio ${title} publicado en la web de Tecladistas.`;
+}

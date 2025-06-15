@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { MdPiano } from "react-icons/md";
 import { generateMetadata } from "./utils";
+import { studioMessage } from "@/utils/utils";
 export { generateMetadata };
 
 const Studio = async ({ params }: { params: { studioId: string } }) => {
@@ -59,7 +60,10 @@ const Studio = async ({ params }: { params: { studioId: string } }) => {
           </div>
         </div>
 
-        <WhatsAppButton userId={studio.userId!} />
+        <WhatsAppButton
+          userId={studio.userId}
+          message={studioMessage(user.firstName, studio.name)}
+        />
       </div>
     </div>
   );

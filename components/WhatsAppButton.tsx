@@ -6,13 +6,20 @@ import { FaWhatsapp } from "react-icons/fa6";
 const WhatsAppButton = ({
   userId,
   phone,
+  message: text,
 }: {
   userId?: string;
   phone?: string;
+  message?: string;
 }) => {
-  const url = phone
-    ? `${WHATSAPP_LINK}${formatPhone(phone)}`
-    : `/api/users/open-whatsapp/${userId}`;
+  let url = "";
+
+  if (phone) {
+    url = `${WHATSAPP_LINK}${formatPhone(phone)}`;
+  } else if (userId) {
+    url = `/api/users/open-whatsapp/${userId}/${text}`;
+  }
+
   return (
     <div className="flex flex-col space-x-1">
       <Link
