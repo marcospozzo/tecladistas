@@ -35,9 +35,7 @@ const NewProduct = () => {
   const router = useRouter();
   const [image, setImage] = useState(null);
   const [listingType, setListingType] = useState(SALE);
-  const [data, dispatch] = useReducer(dataReducer, {
-    title: "",
-  });
+  const [data, dispatch] = useReducer(dataReducer, {});
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
 

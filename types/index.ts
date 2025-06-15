@@ -3,7 +3,7 @@ export interface ProductProps {
   [key: string]: any;
   _id?: string;
   userId?: string;
-  title: string;
+  title?: string;
   brand?: string;
   model?: string;
   description?: string;

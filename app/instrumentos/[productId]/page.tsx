@@ -75,7 +75,7 @@ const Product = async ({ params }: { params: { productId: string } }) => {
         ) : (
           <WhatsAppButton
             userId={product.userId!}
-            message={productMessage(user.firstName, product.title)}
+            message={productMessage(user.firstName, product.title ?? "")}
           />
         )}
       </div>
