@@ -1,5 +1,5 @@
 "use client";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

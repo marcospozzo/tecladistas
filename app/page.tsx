@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getWhitelistedUsersCount } from "@/utils/axios";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 "use client";
 
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

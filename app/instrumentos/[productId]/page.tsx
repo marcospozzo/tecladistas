@@ -12,7 +12,7 @@ import { MdPiano } from "react-icons/md";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { generateMetadata } from "./utils";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 export { generateMetadata };
 
 const Product = async ({ params }: { params: { productId: string } }) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";

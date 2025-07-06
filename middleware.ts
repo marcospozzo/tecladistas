@@ -1,4 +1,4 @@
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { cookieName } from "./utils/utils";

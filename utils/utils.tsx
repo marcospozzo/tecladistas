@@ -1,5 +1,35 @@
 import { Rating } from "@/types";
 
+export const constants = {
+  INSTRUMENTS: "Instrumentos",
+  PROFESSIONALS: "Listado de Profesionales",
+  STUDIOS: "Estudios de Grabación",
+  PICTURES: "Fotos",
+  CONTACT: "Contacto",
+  ABOUT_US: "Sobre nosotrxs",
+  WHATSAPP_LINK: "https://wa.me/",
+  LOGIN: "Entrar",
+  LOGOUT: "Salir",
+  EMAIL: "hola@tecladistas.ar",
+  RENT: "rent",
+  SALE: "sale",
+  URL_SHORT: "tecladistas.ar",
+  SIX_MONTHS_IN_SECONDS: 15552000,
+  INSTRUMENTS_PATH: "/instrumentos",
+  PROFESSIONALS_PATH: "/profesionales",
+  STUDIOS_PATH: "/estudios",
+  PICTURES_PATH: "/fotos",
+  PICTURES_2023_PATH: "/fotos/2023",
+  PICTURES_2022_PATH: "/fotos/2022",
+  CONTACT_PATH: "/contacto",
+  LOGIN_PATH: "/entrar",
+  LOGOUT_PATH: "/api/auth/signout",
+  PHOTOGRAPHERS_INSTAGRAM: "@aledesafinada",
+  PHOTOGRAPHERS_INSTAGRAM_URL: "https://instagram.com/aledesafinada",
+  SHEETMUSIC: "Partituras",
+  SHEETMUSIC_PATH: "/partituras",
+};
+
 export const skillsTranslations: { [key: string]: string } = {
   "synths-digital": "Sintetizadores digitales",
   "synths-analog": "Sintetizadores analógicos",
@@ -113,6 +143,7 @@ export const pageTitles: { [key: string]: string } = {
   login: "Entrar",
   signUp: "Registrarse",
   home: "Tecladistas.ar",
+  sheetMusic: "Partituras",
 };
 
 export const calculateRating = (ratings: Array<Rating> | undefined): number => {
