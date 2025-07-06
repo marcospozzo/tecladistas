@@ -1,4 +1,4 @@
-import { WHATSAPP_LINK } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { formatPhone } from "@/utils/utils";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -15,7 +15,7 @@ const WhatsAppButton = ({
   let url = "";
 
   if (phone) {
-    url = `${WHATSAPP_LINK}${formatPhone(phone)}`;
+    url = `${constants.WHATSAPP_LINK}${formatPhone(phone)}`;
   } else if (userId) {
     url = `/api/users/open-whatsapp/${userId}/${text}`;
   }

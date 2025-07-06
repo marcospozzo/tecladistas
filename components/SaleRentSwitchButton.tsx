@@ -1,4 +1,4 @@
-import { RENT, SALE } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { MouseEventHandler } from "react";
 
 const SaleRentSwitchButton = ({
@@ -12,13 +12,13 @@ const SaleRentSwitchButton = ({
     <nav className="flex w-fit mx-auto h-12 space-x-4 mb-4">
       <button
         onClick={handleSwitchListingType}
-        className={`p-2 ${listingType === SALE && "is-active"}`}
+        className={`p-2 ${listingType === constants.SALE && "is-active"}`}
       >
         Venta
       </button>
       <button
         onClick={handleSwitchListingType}
-        className={`p-2 ${listingType === RENT && "is-active"}`}
+        className={`p-2 ${listingType === constants.RENT && "is-active"}`}
       >
         Alquiler
       </button>

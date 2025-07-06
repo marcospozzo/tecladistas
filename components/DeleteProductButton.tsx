@@ -1,5 +1,5 @@
 "use client";
-import { INSTRUMENTS_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -29,7 +29,7 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
         },
       });
       await promise;
-      router.push(INSTRUMENTS_PATH);
+      router.push(constants.INSTRUMENTS_PATH);
       router.refresh();
     } catch (error) {
       console.error(error);

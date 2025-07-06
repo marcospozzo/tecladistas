@@ -1,4 +1,4 @@
-import { INSTRUMENTS_PATH, LOGIN_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { cookieName } from "./utils/utils";
@@ -20,19 +20,21 @@ export const config = {
 
 export function middleware(request: NextRequest) {
   if (
-    request.nextUrl.pathname !== LOGIN_PATH &&
+    request.nextUrl.pathname !== constants.LOGIN_PATH &&
     request.nextUrl.pathname !== "/registrarse" &&
     !request.cookies.has(cookieName)
   ) {
-    const signinUrl = new URL(LOGIN_PATH, request.url);
+    const signinUrl = new URL(constants.LOGIN_PATH, request.url);
     signinUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
     return NextResponse.redirect(signinUrl);
   }
   if (
-    (request.nextUrl.pathname === LOGIN_PATH ||
+    (request.nextUrl.pathname === constants.LOGIN_PATH ||
       request.nextUrl.pathname === "/registrarse") &&
     request.cookies.has(cookieName)
   ) {
-    return NextResponse.redirect(new URL(INSTRUMENTS_PATH, request.url));
+    return NextResponse.redirect(
+      new URL(constants.INSTRUMENTS_PATH, request.url)
+    );
   }
 }

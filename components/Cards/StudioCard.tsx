@@ -1,13 +1,13 @@
 import { Location } from "@/components";
 import { StudioProps } from "@/types";
-import { STUDIOS_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 
 const StudioCard = ({ studio }: { studio: StudioProps }) => {
   return (
     <Link
-      href={`${STUDIOS_PATH}/${studio._id}`}
+      href={`${constants.STUDIOS_PATH}/${studio._id}`}
       className="flex flex-col box-item bg-slate-300 rounded-xl"
     >
       <div className="relative inline-block w-full h-48 bg-white dark:bg-black overflow-hidden">

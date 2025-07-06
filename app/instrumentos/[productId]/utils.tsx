@@ -1,4 +1,4 @@
-import { INSTRUMENTS_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { imageTypes, isProduction, pageTitles } from "@/utils/utils";
 import { Metadata } from "next";
 
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   for (const extension of imageTypes) {
     const lowercaseExtension = extension.toLowerCase();
-    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}${INSTRUMENTS_PATH}/${params.productId}/1.${lowercaseExtension}`;
+    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}${constants.INSTRUMENTS_PATH}/${params.productId}/1.${lowercaseExtension}`;
     const imageExists = await checkImageExists(imageUrl);
 
     if (imageExists) {

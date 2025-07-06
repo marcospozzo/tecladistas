@@ -1,6 +1,6 @@
 import { Location } from "@/components";
 import { ProductProps } from "@/types";
-import { INSTRUMENTS_PATH, SALE } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,7 @@ const ProductCard = ({
 }) => {
   return (
     <Link
-      href={`${INSTRUMENTS_PATH}/${product._id}`}
+      href={`${constants.INSTRUMENTS_PATH}/${product._id}`}
       className={`flex flex-col box-item bg-slate-300 rounded-xl ${
         isTheirOwn && "border-4 border-green-500"
       } `}
@@ -40,7 +40,7 @@ const ProductCard = ({
           {product.exchanges && <FaArrowsRotate className="self-center" />}
           {product.price && (
             <span>
-              {listingType === SALE
+              {listingType === constants.SALE
                 ? formatPrice(product.price)
                 : `${formatPrice(product.price)} / día`}
             </span>

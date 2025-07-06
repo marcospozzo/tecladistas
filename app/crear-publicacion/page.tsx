@@ -2,7 +2,7 @@
 
 import { EditableInput, SaleRentSwitchButton } from "@/components";
 import { ProductProps } from "@/types";
-import { INSTRUMENTS_PATH, RENT, SALE } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { imageTypes, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -34,7 +34,7 @@ const dataReducer = (state: ProductProps, action: any): ProductProps => {
 const NewProduct = () => {
   const router = useRouter();
   const [image, setImage] = useState(null);
-  const [listingType, setListingType] = useState(SALE);
+  const [listingType, setListingType] = useState(constants.SALE);
   const [data, dispatch] = useReducer(dataReducer, {});
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
@@ -77,11 +77,11 @@ const NewProduct = () => {
 
   const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    if (listingType === SALE) {
+    if (listingType === constants.SALE) {
       dispatch({ type: "SET_EXCHANGES_FALSE" });
     }
     setListingType((prevListingType) =>
-      prevListingType === SALE ? RENT : SALE
+      prevListingType === constants.SALE ? constants.RENT : constants.SALE
     );
   };
 
@@ -119,10 +119,10 @@ const NewProduct = () => {
       });
       await promise;
       const route = productId
-        ? `${INSTRUMENTS_PATH}/${productId}`
-        : listingType === RENT
-        ? `${INSTRUMENTS_PATH}#alquiler`
-        : INSTRUMENTS_PATH;
+        ? `${constants.INSTRUMENTS_PATH}/${productId}`
+        : listingType === constants.RENT
+        ? `${constants.INSTRUMENTS_PATH}#alquiler`
+        : constants.INSTRUMENTS_PATH;
       router.push(route);
       router.refresh();
     } catch (error) {
@@ -131,7 +131,7 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
-    if (window.location.hash === "#alquiler") setListingType(RENT);
+    if (window.location.hash === "#alquiler") setListingType(constants.RENT);
   }, []);
 
   useEffect(() => {
@@ -213,7 +213,7 @@ const NewProduct = () => {
         />
         <EditableInput
           handleOnChange={handleEditableInputChange}
-          label={listingType === SALE ? "Precio" : "Precio / día"}
+          label={listingType === constants.SALE ? "Precio" : "Precio / día"}
           fieldName="price"
           text={data.price}
         />
@@ -225,7 +225,7 @@ const NewProduct = () => {
           text={data.location}
         />
 
-        {listingType === SALE && (
+        {listingType === constants.SALE && (
           <div className="flex max-sm:flex-col space-x-2 my-4">
             <label
               className="w-1/5 self-center max-sm:self-start "

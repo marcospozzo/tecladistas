@@ -1,5 +1,5 @@
 import { userIsAllowedToSignIn } from "@/utils/axios";
-import { LOGIN_PATH, SIX_MONTHS_IN_SECONDS } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
@@ -50,13 +50,13 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: LOGIN_PATH,
+    signIn: constants.LOGIN_PATH,
     // signOut: "/auth/signout",
     // error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/verificar", // (used for check email message)
     // newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   session: {
-    maxAge: SIX_MONTHS_IN_SECONDS,
+    maxAge: constants.SIX_MONTHS_IN_SECONDS,
   },
 };

@@ -12,7 +12,7 @@ import { MdPiano } from "react-icons/md";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { generateMetadata } from "./utils";
-import { SALE } from "@/utils/constants";
+import constants from "@/utils/constants";
 export { generateMetadata };
 
 const Product = async ({ params }: { params: { productId: string } }) => {
@@ -35,7 +35,7 @@ const Product = async ({ params }: { params: { productId: string } }) => {
       <div className="w-1/3 max-lg:w-full space-y-4">
         <h1>{product.title}</h1>
 
-        {product.listingType === SALE
+        {product.listingType === constants.SALE
           ? product.price && (
               <h1 className="text-4xl">{formatPrice(product.price)}</h1>
             )
