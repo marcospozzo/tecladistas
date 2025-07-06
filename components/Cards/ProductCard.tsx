@@ -1,6 +1,6 @@
 import { Location } from "@/components";
 import { ProductProps } from "@/types";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";

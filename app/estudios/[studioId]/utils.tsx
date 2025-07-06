@@ -1,4 +1,4 @@
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { imageTypes, isProduction, pageTitles } from "@/utils/utils";
 import { Metadata } from "next";
 

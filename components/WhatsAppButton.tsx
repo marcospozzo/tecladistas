@@ -1,4 +1,4 @@
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { formatPhone } from "@/utils/utils";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";

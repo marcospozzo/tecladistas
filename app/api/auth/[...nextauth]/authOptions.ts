@@ -1,5 +1,5 @@
 import { userIsAllowedToSignIn } from "@/utils/axios";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";

@@ -8,7 +8,7 @@ import {
   SaleRentSwitchButton,
 } from "@/components";
 import { useEffect, useState } from "react";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 
 const Products = ({
   products,

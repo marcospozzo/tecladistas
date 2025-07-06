@@ -2,7 +2,7 @@
 
 import { EditableInput, SaleRentSwitchButton } from "@/components";
 import { ProductProps } from "@/types";
-import constants from "@/utils/constants";
+import { constants } from "@/utils/utils";
 import { imageTypes, placeholders } from "@/utils/utils";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
