@@ -1,25 +1,6 @@
 "use client";
 
-import {
-  CONTACT,
-  CONTACT_PATH,
-  EMAIL,
-  INSTRUMENTS,
-  INSTRUMENTS_PATH,
-  LOGIN,
-  LOGIN_PATH,
-  LOGOUT,
-  LOGOUT_PATH,
-  PICTURES,
-  PICTURES_2022_PATH,
-  PICTURES_2023_PATH,
-  PICTURES_PATH,
-  PROFESSIONALS,
-  PROFESSIONALS_PATH,
-  STUDIOS,
-  STUDIOS_PATH,
-  URL_SHORT,
-} from "@/utils/constants";
+import constants from "@/utils/constants";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -41,23 +22,24 @@ import * as React from "react";
 import { useState } from "react";
 
 const pages: Page[] = [
-  { title: INSTRUMENTS, path: INSTRUMENTS_PATH },
-  { title: PROFESSIONALS, path: PROFESSIONALS_PATH },
-  { title: STUDIOS, path: STUDIOS_PATH },
+  { title: constants.INSTRUMENTS, path: constants.INSTRUMENTS_PATH },
+  { title: constants.PROFESSIONALS, path: constants.PROFESSIONALS_PATH },
+  { title: constants.STUDIOS, path: constants.STUDIOS_PATH },
   {
-    title: PICTURES,
-    path: PICTURES_PATH,
+    title: constants.PICTURES,
+    path: constants.PICTURES_PATH,
     subpages: [
       {
         title: "2023",
-        path: PICTURES_2023_PATH,
+        path: constants.PICTURES_2023_PATH,
       },
       {
         title: "2022",
-        path: PICTURES_2022_PATH,
+        path: constants.PICTURES_2022_PATH,
       },
     ],
   },
+  { title: constants.SHEETMUSIC, path: constants.SHEETMUSIC_PATH },
 ];
 
 const Header = () => {
@@ -112,7 +94,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            {URL_SHORT}
+            {constants.URL_SHORT}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -200,7 +182,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            {URL_SHORT}
+            {constants.URL_SHORT}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -275,17 +257,27 @@ const Header = () => {
             >
               <MenuItem key="1" onClick={handleCloseUserMenu}>
                 <Link
-                  href={isLoggedIn ? CONTACT_PATH : `mailto:${EMAIL}`}
+                  href={
+                    isLoggedIn
+                      ? constants.CONTACT_PATH
+                      : `mailto:${constants.EMAIL}`
+                  }
                   target={isLoggedIn ? "" : "_blank"}
                   rel={isLoggedIn ? "" : "noopener noreferrer"}
                 >
-                  <Typography textAlign="center">{CONTACT}</Typography>
+                  <Typography textAlign="center">
+                    {constants.CONTACT}
+                  </Typography>
                 </Link>
               </MenuItem>
               <MenuItem key="0" onClick={handleCloseUserMenu}>
-                <Link href={isLoggedIn ? LOGOUT_PATH : LOGIN_PATH}>
+                <Link
+                  href={
+                    isLoggedIn ? constants.LOGOUT_PATH : constants.LOGIN_PATH
+                  }
+                >
                   <Typography textAlign="center">
-                    {isLoggedIn ? LOGOUT : LOGIN}
+                    {isLoggedIn ? constants.LOGOUT : constants.LOGIN}
                   </Typography>
                 </Link>
               </MenuItem>

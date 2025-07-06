@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getWhitelistedUsersCount } from "@/utils/axios";
-import { LOGIN, LOGIN_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,8 +38,8 @@ const AboutUs = async () => {
           </Link>
           <div className="flex justify-center space-x-1 mb-2">
             <h3>¿Ya estás registradx? </h3>
-            <Link className="link" href={LOGIN_PATH}>
-              {LOGIN}
+            <Link className="link" href={constants.LOGIN_PATH}>
+              {constants.LOGIN}
             </Link>
           </div>
         </div>

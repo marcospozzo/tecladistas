@@ -8,7 +8,7 @@ import {
   SaleRentSwitchButton,
 } from "@/components";
 import { useEffect, useState } from "react";
-import { RENT, SALE } from "@/utils/constants";
+import constants from "@/utils/constants";
 
 const Products = ({
   products,
@@ -17,14 +17,14 @@ const Products = ({
   products: ProductProps[];
   userId: string | undefined;
 }) => {
-  const [listingType, setListingType] = useState(SALE);
+  const [listingType, setListingType] = useState(constants.SALE);
 
   const sortedProducts = products.sort((a, b) =>
     a.userId === b.userId ? -1 : 1
   );
   const { productsForSale, productsForRent } = sortedProducts.reduce(
     (result, product) => {
-      if (product.listingType === RENT) {
+      if (product.listingType === constants.RENT) {
         result.productsForRent.push(product);
       } else {
         result.productsForSale.push(product);
@@ -37,15 +37,15 @@ const Products = ({
   const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setListingType((prevListingType) =>
-      prevListingType === SALE ? RENT : SALE
+      prevListingType === constants.SALE ? constants.RENT : constants.SALE
     );
   };
 
   const displayedProducts =
-    listingType === SALE ? productsForSale : productsForRent;
+    listingType === constants.SALE ? productsForSale : productsForRent;
 
   useEffect(() => {
-    if (window.location.hash === "#alquiler") setListingType(RENT);
+    if (window.location.hash === "#alquiler") setListingType(constants.RENT);
   }, []);
 
   return (

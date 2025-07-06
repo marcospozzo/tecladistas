@@ -1,4 +1,4 @@
-import { WHATSAPP_LINK } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { formatPhone } from "@/utils/utils";
 import { NextResponse } from "next/server";
 
@@ -19,7 +19,7 @@ export async function GET(
     );
 
     const data = await res.json();
-    const url = `${WHATSAPP_LINK}${formatPhone(
+    const url = `${constants.WHATSAPP_LINK}${formatPhone(
       data.phone
     )}?text=${encodeURIComponent(text)}`;
 

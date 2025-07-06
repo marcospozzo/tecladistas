@@ -1,5 +1,5 @@
 import { ProfessionalProps } from "@/types";
-import { PROFESSIONALS_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import { calculateRating } from "@/utils/utils";
 import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
@@ -12,7 +12,7 @@ const ProfessionalCard = ({
 }) => {
   return (
     <Link
-      href={`${PROFESSIONALS_PATH}/${professional._id}`}
+      href={`${constants.PROFESSIONALS_PATH}/${professional._id}`}
       className="flex items-center justify-between box bg-slate-300 dark:bg-slate-600 rounded-xl mx-1 shadow-md"
     >
       <div className="flex flex-row items-center space-x-3">

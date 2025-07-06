@@ -1,7 +1,7 @@
 "use client";
 
 import { UserProps } from "@/types";
-import { LOGIN_PATH } from "@/utils/constants";
+import constants from "@/utils/constants";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ const SignUp = () => {
             if (errorData && errorData.err?.code === 11000) {
               errorMessage = "Usuario ya existe. Redirigiendo...";
               setTimeout(() => {
-                router.push(LOGIN_PATH);
+                router.push(constants.LOGIN_PATH);
               }, 1000);
             }
             return errorMessage;
@@ -51,7 +51,7 @@ const SignUp = () => {
         },
       });
       await promise;
-      router.push(LOGIN_PATH);
+      router.push(constants.LOGIN_PATH);
     } catch (error) {
       console.error(error);
     }
@@ -76,7 +76,7 @@ const SignUp = () => {
       <h1 className="form-title">Registrarse</h1>
       <div className="flex justify-center space-x-1 mb-2">
         <h3>¿Ya estás registradx? </h3>
-        <Link className="link" href={LOGIN_PATH}>
+        <Link className="link" href={constants.LOGIN_PATH}>
           Entrar
         </Link>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { CONTACT_PATH, INSTRUMENTS_PATH, RENT } from "@/utils/constants";
+import constants from "@/utils/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsPlusCircleDotted } from "react-icons/bs";
@@ -8,11 +8,11 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 const CardNew = ({ listingType = "" }) => {
   const pathname = usePathname();
   const url =
-    listingType === RENT
+    listingType === constants.RENT
       ? "/crear-publicacion#alquiler"
-      : pathname === INSTRUMENTS_PATH
+      : pathname === constants.INSTRUMENTS_PATH
       ? "/crear-publicacion"
-      : CONTACT_PATH;
+      : constants.CONTACT_PATH;
   return (
     <div className="flex box-item bg-slate-300 rounded-xl">
       <Link className="m-auto" href={url}>

@@ -1,26 +1,31 @@
-export const INSTRUMENTS = "Instrumentos";
-export const PROFESSIONALS = "Listado de Profesionales";
-export const STUDIOS = "Estudios de Grabación";
-export const PICTURES = "Fotos";
-export const CONTACT = "Contacto";
-export const ABOUT_US = "Sobre nosotrxs";
-export const WHATSAPP_LINK = "https://wa.me/";
-export const LOGIN = "Entrar";
-export const LOGOUT = "Salir";
-export const EMAIL = "hola@tecladistas.ar";
-export const RENT = "rent";
-export const SALE = "sale";
-export const URL_SHORT = "tecladistas.ar";
-export const SIX_MONTHS_IN_SECONDS = 15552000;
-export const INSTRUMENTS_PATH = "/instrumentos";
-export const PROFESSIONALS_PATH = "/profesionales";
-export const STUDIOS_PATH = "/estudios";
-export const PICTURES_PATH = "/fotos";
-export const PICTURES_2023_PATH = "/fotos/2023";
-export const PICTURES_2022_PATH = "/fotos/2022";
-export const CONTACT_PATH = "/contacto";
-export const LOGIN_PATH = "/entrar";
-export const LOGOUT_PATH = "/api/auth/signout";
-export const PHOTOGRAPHERS_INSTAGRAM = "@aledesafinada";
-export const PHOTOGRAPHERS_INSTAGRAM_URL =
-  "https://instagram.com/aledesafinada";
+const constants = {
+  INSTRUMENTS: "Instrumentos",
+  PROFESSIONALS: "Listado de Profesionales",
+  STUDIOS: "Estudios de Grabación",
+  PICTURES: "Fotos",
+  CONTACT: "Contacto",
+  ABOUT_US: "Sobre nosotrxs",
+  WHATSAPP_LINK: "https://wa.me/",
+  LOGIN: "Entrar",
+  LOGOUT: "Salir",
+  EMAIL: "hola@tecladistas.ar",
+  RENT: "rent",
+  SALE: "sale",
+  URL_SHORT: "tecladistas.ar",
+  SIX_MONTHS_IN_SECONDS: 15552000,
+  INSTRUMENTS_PATH: "/instrumentos",
+  PROFESSIONALS_PATH: "/profesionales",
+  STUDIOS_PATH: "/estudios",
+  PICTURES_PATH: "/fotos",
+  PICTURES_2023_PATH: "/fotos/2023",
+  PICTURES_2022_PATH: "/fotos/2022",
+  CONTACT_PATH: "/contacto",
+  LOGIN_PATH: "/entrar",
+  LOGOUT_PATH: "/api/auth/signout",
+  PHOTOGRAPHERS_INSTAGRAM: "@aledesafinada",
+  PHOTOGRAPHERS_INSTAGRAM_URL: "https://instagram.com/aledesafinada",
+  SHEETMUSIC: "Partituras",
+  SHEETMUSIC_PATH: "/partituras",
+};
+
+export default constants;

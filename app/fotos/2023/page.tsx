@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  PHOTOGRAPHERS_INSTAGRAM,
-  PHOTOGRAPHERS_INSTAGRAM_URL,
-} from "@/utils/constants";
+import constants from "@/utils/constants";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -35,9 +32,9 @@ export default async function Page() {
           className="underline"
           target="_blank"
           rel="noopener noreferrer"
-          href={PHOTOGRAPHERS_INSTAGRAM_URL}
+          href={constants.PHOTOGRAPHERS_INSTAGRAM_URL}
         >
-          {PHOTOGRAPHERS_INSTAGRAM}
+          {constants.PHOTOGRAPHERS_INSTAGRAM}
         </Link>
       </div>
       <ImageGallery
