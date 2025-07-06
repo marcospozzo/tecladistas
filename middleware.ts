@@ -15,6 +15,7 @@ export const config = {
     "/crear-publicacion",
     "/fotos/:path+",
     "/fotos",
+    "/partituras",
   ],
 };
 
