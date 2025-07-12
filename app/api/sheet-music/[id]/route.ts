@@ -1,16 +1,21 @@
+import { cookieName } from "@/utils/utils";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: { id: string } }
 ) {
+  const cookieStore = cookies();
+  const cookie = cookieStore.get(cookieName);
+
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/sheet-music/${params.id}`,
       {
         headers: {
-          authorization: `${process.env.NEXT_SECRET}`,
-          "Cache-Control": "no-cache",
+          cookie: `${cookie?.name}=${cookie?.value}`,
+          // "Cache-Control": "no-cache",
         },
       }
     );
