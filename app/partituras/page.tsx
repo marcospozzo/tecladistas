@@ -55,7 +55,9 @@ export default async function SheetMusic() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {sheet.title ?? sheet.fileName}
+                {sheet.composer && sheet.title
+                  ? `${sheet.composer} – ${sheet.title}`
+                  : sheet.composer ?? sheet.title}
               </TableCell>
               <TableCell align="right">{genreMap[sheet.genre ?? ""]}</TableCell>
               <TableCell align="right">
