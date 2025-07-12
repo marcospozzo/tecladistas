@@ -139,3 +139,25 @@ export const getWhitelistedUsersCount = async () => {
     throw error;
   }
 };
+
+type SheetMusic = {
+  id: string;
+  fileName: string;
+  downloadCount: number;
+  title?: string;
+  composer?: string;
+  genre?: string;
+  difficulty?: string;
+  year?: number;
+};
+
+export const getAllSheetMusic = async () => {
+  try {
+    const response: AxiosResponse<SheetMusic[]> = await axiosInstance.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/sheet-music`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
