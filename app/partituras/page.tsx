@@ -27,9 +27,9 @@ const genreMap: Record<string, string> = {
   Classical: "Clásico",
   Jazz: "Jazz",
   Pop: "Popular",
-  Rock: "Rock",
+  Educational: "Educacional",
+  Tango: "Tango",
   Soundtrack: "Soundtrack",
-  Other: "Otros",
 };
 
 export default async function SheetMusic() {
