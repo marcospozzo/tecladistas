@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   title: pageTitles.sheetmusic,
 };
 
+const difficultyMap: Record<string, string> = {
+  Beginner: "Principiante",
+  Intermediate: "Intermedio",
+  Advanced: "Avanzado",
+};
+
+const genreMap: Record<string, string> = {
+  Classical: "Clásico",
+  Jazz: "Jazz",
+  Pop: "Popular",
+  Rock: "Rock",
+  Other: "Otros",
+};
+
 export default async function SheetMusic() {
   const sheetMusic = await getAllSheetMusic();
 
@@ -26,7 +40,6 @@ export default async function SheetMusic() {
         <TableHead>
           <TableRow>
             <TableCell>Nombre</TableCell>
-            <TableCell align="right">Compositor/a</TableCell>
             <TableCell align="right">Género/estilo</TableCell>
             <TableCell align="right">Dificultad</TableCell>
             <TableCell align="right">Año</TableCell>
@@ -37,15 +50,16 @@ export default async function SheetMusic() {
         <TableBody>
           {sheetMusic?.map((sheet) => (
             <TableRow
-              key={sheet.title}
+              key={sheet.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {sheet.fileName}
+                {sheet.title ?? sheet.fileName}
               </TableCell>
-              <TableCell align="right">{sheet.composer}</TableCell>
-              <TableCell align="right">{sheet.genre}</TableCell>
-              <TableCell align="right">{sheet.difficulty}</TableCell>
+              <TableCell align="right">{genreMap[sheet.genre ?? ""]}</TableCell>
+              <TableCell align="right">
+                {difficultyMap[sheet.difficulty ?? ""]}
+              </TableCell>
               <TableCell align="right">{sheet.year}</TableCell>
               <TableCell align="right">{sheet.downloadCount}</TableCell>
               <TableCell align="right">
