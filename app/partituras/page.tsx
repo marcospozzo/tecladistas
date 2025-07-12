@@ -28,6 +28,7 @@ const genreMap: Record<string, string> = {
   Jazz: "Jazz",
   Pop: "Popular",
   Rock: "Rock",
+  Soundtrack: "Soundtrack",
   Other: "Otros",
 };
 
