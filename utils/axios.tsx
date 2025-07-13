@@ -140,7 +140,7 @@ export const getWhitelistedUsersCount = async () => {
   }
 };
 
-type SheetMusic = {
+export type SheetMusic = {
   id: string;
   fileName: string;
   downloadCount: number;
