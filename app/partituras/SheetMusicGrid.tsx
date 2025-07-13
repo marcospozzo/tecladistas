@@ -93,6 +93,11 @@ export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
           window.open(params.row.downloadUrl);
         }}
         showToolbar
+        sx={{
+          "& .MuiDataGrid-cell": {
+            cursor: "pointer",
+          },
+        }}
       />
     </Box>
   );
