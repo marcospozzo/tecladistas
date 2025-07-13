@@ -54,22 +54,12 @@ const Contact = () => {
     <>
       <h1 className="form-title">Contacto</h1>
       <form className="wide-form" onSubmit={handleSubmit}>
-        <select
-          id="subject"
-          name="subject"
-          onChange={handleOnChange} // Add this line
-          required
-        >
-          <option value={contactSubjects.comment}>
-            {contactSubjects.comment}
-          </option>
-          <option value={contactSubjects.professionalsAndStudios}>
-            {contactSubjects.professionalsAndStudios}
-          </option>
-          <option value={contactSubjects.technicalProblem}>
-            {contactSubjects.technicalProblem}
-          </option>
-          <option value={contactSubjects.other}>{contactSubjects.other}</option>
+        <select id="subject" name="subject" onChange={handleOnChange} required>
+          {Object.entries(contactSubjects).map(([key, value]) => (
+            <option key={key} value={value}>
+              {value}
+            </option>
+          ))}
         </select>
 
         <textarea
