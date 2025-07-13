@@ -1,7 +1,17 @@
 "use client";
 
 import { Box, Button } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbarContainer,
+  GridToolbarQuickFilter,
+  QuickFilter,
+  QuickFilterClear,
+  QuickFilterControl,
+  QuickFilterTrigger,
+  Toolbar,
+} from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
 import { FaDownload } from "react-icons/fa6";
 import { SheetMusic } from "@/utils/axios";
@@ -43,12 +53,12 @@ export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
     { field: "name", headerName: "Nombre", flex: 1, minWidth: 200 },
     { field: "genre", headerName: "Género", width: 130 },
     { field: "difficulty", headerName: "Dificultad", width: 130 },
-    { field: "year", headerName: "Año", width: 100 },
-    { field: "downloadCount", headerName: "Descargas", width: 130 },
+    { field: "year", headerName: "Año", width: 80 },
+    { field: "downloadCount", headerName: "Descargas", width: 120 },
     {
       field: "downloadUrl",
       headerName: "",
-      width: 140,
+      width: 150,
       sortable: false,
       filterable: false,
       renderCell: (params) => (
@@ -79,7 +89,10 @@ export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
           },
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        disableRowSelectionOnClick
+        onCellClick={(params) => {
+          window.open(params.row.downloadUrl);
+        }}
+        showToolbar
       />
     </Box>
   );
