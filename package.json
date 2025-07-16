@@ -41,5 +41,8 @@
   "devDependencies": {
     "@types/nodemailer": "^6.4.11",
     "@types/react-image-gallery": "^1.2.4"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
