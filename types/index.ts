@@ -14,7 +14,7 @@ export interface ProductProps {
   price?: number;
   pictures?: Array<string>;
   location?: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Rating {
