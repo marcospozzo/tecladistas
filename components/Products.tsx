@@ -20,18 +20,19 @@ const Products = ({
   const [listingType, setListingType] = useState(constants.SALE);
 
   const sortedProducts = products.sort((a, b) =>
-    a.userId === b.userId ? -1 : 1
+    a.userId === b.userId && a.createdBy === b.createdBy
+      ? 0
+      : a.userId === b.userId
+      ? -1
+      : 1
   );
-  const { productsForSale, productsForRent } = sortedProducts.reduce(
-    (result, product) => {
-      if (product.listingType === constants.RENT) {
-        result.productsForRent.push(product);
-      } else {
-        result.productsForSale.push(product);
-      }
-      return result;
-    },
-    { productsForSale: [], productsForRent: [] }
+
+  const productsForSale = sortedProducts.filter(
+    (product) => product.listingType === constants.SALE
+  );
+
+  const productsForRent = sortedProducts.filter(
+    (product) => product.listingType === constants.RENT
   );
 
   const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
