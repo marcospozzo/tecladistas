@@ -20,7 +20,7 @@ const Product = async ({ params }: { params: { productId: string } }) => {
   const user = await getUser(product.userId!);
   const session = await getServerSession(authOptions);
   const isTheirOwn = session?.user.id === user._id;
-  const date = new Date(product.createdAt);
+  const date = new Date(product.createdAt ?? "");
   const createdAtSpanishDate = new Intl.DateTimeFormat("es-ES", {
     year: "numeric",
     month: "long",
