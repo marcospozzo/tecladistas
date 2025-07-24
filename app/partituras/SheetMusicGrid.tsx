@@ -87,6 +87,9 @@ export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
               page: 0,
             },
           },
+          sorting: {
+            sortModel: [{ field: "downloadCount", sort: "desc" }],
+          },
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         onCellClick={(params) => {
