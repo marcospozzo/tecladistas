@@ -1,23 +1,14 @@
 "use client";
 
+import { SheetMusic } from "@/utils/axios";
 import { Box, Button } from "@mui/material";
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbarContainer,
-  GridToolbarQuickFilter,
-  QuickFilter,
-  QuickFilterClear,
-  QuickFilterControl,
-  QuickFilterTrigger,
-  Toolbar,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
 import { FaDownload } from "react-icons/fa6";
-import { SheetMusic } from "@/utils/axios";
 
 interface SheetMusicGridProps {
   rows: SheetMusic[];
+  startingFilter?: string;
 }
 
 const difficultyMap: Record<string, string> = {
@@ -35,7 +26,10 @@ const genreMap: Record<string, string> = {
   Soundtrack: "Soundtrack",
 };
 
-export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
+export default function SheetMusicGrid({
+  rows,
+  startingFilter,
+}: SheetMusicGridProps) {
   const mappedRows = rows.map((sheet) => ({
     id: sheet.id,
     name:
@@ -90,6 +84,19 @@ export default function SheetMusicGrid({ rows }: SheetMusicGridProps) {
           sorting: {
             sortModel: [{ field: "downloadCount", sort: "desc" }],
           },
+          filter: startingFilter
+            ? {
+                filterModel: {
+                  items: [
+                    {
+                      field: "name",
+                      value: startingFilter,
+                      operator: "contains",
+                    },
+                  ],
+                },
+              }
+            : undefined,
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         onCellClick={(params) => {

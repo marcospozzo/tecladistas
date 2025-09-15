@@ -15,7 +15,6 @@ export async function GET(
       {
         headers: {
           cookie: `${cookie?.name}=${cookie?.value}`,
-          // "Cache-Control": "no-cache",
         },
       }
     );
