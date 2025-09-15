@@ -16,6 +16,7 @@ export const config = {
     "/fotos/:path+",
     "/fotos",
     "/partituras",
+    "/partituras/:containsFilter+",
   ],
 };
 
