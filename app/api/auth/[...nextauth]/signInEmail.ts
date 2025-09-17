@@ -1,3 +1,4 @@
+import { constants } from "@/utils/utils";
 import { Theme } from "next-auth";
 import { createTransport } from "nodemailer";
 
@@ -14,7 +15,7 @@ export async function CustomSendVerificationRequest(params: {
   const result = await transport.sendMail({
     to: identifier,
     from: {
-      name: "Tecladistas.ar",
+      name: constants.HOME,
       address: provider.from,
     },
     subject: `Entrar a ${host}`,
