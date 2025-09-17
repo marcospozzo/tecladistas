@@ -10,10 +10,10 @@ export const constants = {
   WHATSAPP_LINK: "https://wa.me/",
   LOGIN: "Entrar",
   LOGOUT: "Salir",
-  EMAIL: "hola@tecladistas.ar",
+  EMAIL: "hola@tecladistas.com.ar",
   RENT: "rent",
   SALE: "sale",
-  URL_SHORT: "tecladistas.ar",
+  URL_SHORT: "tecladistas.com.ar",
   SIX_MONTHS_IN_SECONDS: 15552000,
   INSTRUMENTS_PATH: "/instrumentos",
   PROFESSIONALS_PATH: "/profesionales",
@@ -28,6 +28,7 @@ export const constants = {
   PHOTOGRAPHERS_INSTAGRAM_URL: "https://instagram.com/aledesafinada",
   SHEETMUSIC: "Partituras",
   SHEETMUSIC_PATH: "/partituras",
+  HOME: "tecladistas",
 };
 
 export const skillsTranslations: { [key: string]: string } = {
@@ -142,7 +143,7 @@ export const pageTitles: { [key: string]: string } = {
   createProduct: "Crear publicación",
   login: "Entrar",
   signUp: "Registrarse",
-  home: "Tecladistas.ar",
+  home: "Tecladistas.com.ar",
   sheetMusic: "Partituras",
 };
 
