@@ -10,7 +10,6 @@ export async function GET(
       {
         headers: {
           authorization: `${process.env.NEXT_SECRET}`,
-          cache: "no-store",
         },
       }
     );
