@@ -8,7 +8,7 @@ import { FaCamera } from "react-icons/fa6";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-export default async function Page() {
+export default function Page() {
   const [photos, setPhotos] = useState<ReactImageGalleryItem[]>([]);
 
   useEffect(() => {
@@ -43,14 +43,6 @@ export default async function Page() {
         showIndex={true}
         lazyLoad={true}
         items={photos}
-        // items={photos.map(
-        //   (photo): ReactImageGalleryItem => ({
-        //     original: photo.original,
-        //     thumbnail: photo.thumbnail,
-        //     loading: "lazy",
-        //     thumbnailLoading: "lazy",
-        //   })
-        // )}
       />
     </>
   );
