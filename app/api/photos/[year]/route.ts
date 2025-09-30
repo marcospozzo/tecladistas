@@ -16,7 +16,7 @@ export async function GET(
         headers: {
           cookie: `${cookie?.name}=${cookie?.value}`,
           authorization: `${process.env.NEXT_SECRET}`,
-          cache: "no-store",
+          "accept-encoding": "gzip, deflate",
         },
       }
     );
