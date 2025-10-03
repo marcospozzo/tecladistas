@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { year: string } }) {
+export async function GET(
+  _request: Request,
+  { params }: { params: { year: string } }
+) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/photos/${params.year}`,
