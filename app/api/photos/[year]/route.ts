@@ -10,6 +10,7 @@ export async function GET(
       {
         headers: {
           authorization: `${process.env.NEXT_SECRET}`,
+          "accept-encoding": "identity",
           cache: "no-store",
         },
       }
