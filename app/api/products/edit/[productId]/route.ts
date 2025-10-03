@@ -7,7 +7,7 @@ export async function POST(
   { params }: { params: { productId: string } }
 ) {
   const formData = await request.formData();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
@@ -16,7 +16,7 @@ export async function POST(
       {
         method: "put",
         headers: {
-          "cookie": `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie?.name}=${cookie?.value}`,
         },
         body: formData,
       }

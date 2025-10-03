@@ -6,7 +6,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: { productId: string } }
 ) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
@@ -15,7 +15,7 @@ export async function DELETE(
       {
         method: "delete",
         headers: {
-          "cookie": `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie?.name}=${cookie?.value}`,
         },
       }
     );
@@ -30,7 +30,7 @@ export async function GET(
   request: Request,
   { params }: { params: { productId: string } }
 ) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
@@ -38,8 +38,8 @@ export async function GET(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${params.productId}`,
       {
         headers: {
-          "cookie": `${cookie?.name}=${cookie?.value}`,
-          "Authorization": `${process.env.NEXT_SECRET}`,
+          cookie: `${cookie?.name}=${cookie?.value}`,
+          Authorization: `${process.env.NEXT_SECRET}`,
         },
       }
     );
