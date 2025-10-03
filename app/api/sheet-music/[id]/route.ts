@@ -6,7 +6,7 @@ export async function GET(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
