@@ -13,8 +13,9 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-  const cookie = cookies().get(cookieName);
+axiosInstance.interceptors.request.use(async (config) => {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(cookieName);
   config.headers.cookie = `${cookie?.name}=${cookie?.value}`;
   config.headers.Authorization = process.env.NEXT_SECRET;
   if (config.data instanceof FormData) {
