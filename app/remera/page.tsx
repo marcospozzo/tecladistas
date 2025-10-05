@@ -1,12 +1,6 @@
-"use client";
+import { constants } from "@/utils/utils";
+import { redirect } from "next/navigation";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-export default function RemerasPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.push("/partituras/remera");
-  }, []);
+export default async function Remera() {
+  redirect(constants.REMERA_PATH);
 }

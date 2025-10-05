@@ -26,7 +26,14 @@ export default function Page() {
 
   return (
     <>
-      <div className="flex justify-center gap-x-2 mb-4">
+      <ImageGallery
+        showPlayButton={false}
+        thumbnailPosition="top"
+        showIndex={true}
+        lazyLoad={true}
+        items={photos}
+      />
+      <div className="flex justify-center gap-x-2 mt-4">
         <FaCamera className="self-center" />
         <Link
           className="underline"
@@ -37,13 +44,6 @@ export default function Page() {
           {constants.PHOTOGRAPHERS_INSTAGRAM}
         </Link>
       </div>
-      <ImageGallery
-        showPlayButton={false}
-        thumbnailPosition="top"
-        showIndex={true}
-        lazyLoad={true}
-        items={photos}
-      />
     </>
   );
 }

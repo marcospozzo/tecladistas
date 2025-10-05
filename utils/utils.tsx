@@ -30,6 +30,7 @@ export const constants = {
   SHEETMUSIC: "Partituras",
   SHEETMUSIC_PATH: "/partituras",
   HOME: "tecladistas",
+  REMERA_PATH: "/partituras/remera",
 };
 
 export const skillsTranslations: { [key: string]: string } = {
