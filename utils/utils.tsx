@@ -19,6 +19,7 @@ export const constants = {
   PROFESSIONALS_PATH: "/profesionales",
   STUDIOS_PATH: "/estudios",
   PICTURES_PATH: "/fotos",
+  PICTURES_2025_PATH: "/fotos/2025",
   PICTURES_2023_PATH: "/fotos/2023",
   PICTURES_2022_PATH: "/fotos/2022",
   CONTACT_PATH: "/contacto",
