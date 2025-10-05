@@ -30,6 +30,10 @@ const pages: Page[] = [
     path: constants.PICTURES_PATH,
     subpages: [
       {
+        title: "2025",
+        path: constants.PICTURES_2023_PATH,
+      },
+      {
         title: "2023",
         path: constants.PICTURES_2023_PATH,
       },
