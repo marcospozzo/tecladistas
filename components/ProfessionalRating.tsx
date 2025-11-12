@@ -25,9 +25,10 @@ const ProfessionalRating = ({
           value={ratingValue}
           onChange={async (_event, rate) => {
             try {
-              const promise = axios.post(
-                `/api/professionals/rate/${id}/${rate}`
-              );
+              const promise = axios.post(`/api/professionals/rate`, {
+                id,
+                rate,
+              });
               toast.promise(promise, {
                 pending: "Calificando...",
                 success: "Calificado",
