@@ -1,27 +1,19 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#445566",
-    },
-  },
-});
+import type { Session } from "next-auth";
+import ThemeRegistry from "./ThemeRegistry";
 
 export default function Provider({
   children,
   session,
 }: {
   children: React.ReactNode;
-  session: any;
+  session: Session | null;
 }): React.ReactNode {
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeRegistry>{children}</ThemeRegistry>
     </SessionProvider>
   );
 }

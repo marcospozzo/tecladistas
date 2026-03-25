@@ -4,14 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
+  const { productId } = await params;
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${params.productId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${productId}`,
       {
         method: "delete",
         headers: {
@@ -28,14 +29,15 @@ export async function DELETE(
 
 export async function GET(
   request: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
+  const { productId } = await params;
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${params.productId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${productId}`,
       {
         headers: {
           cookie: `${cookie?.name}=${cookie?.value}`,

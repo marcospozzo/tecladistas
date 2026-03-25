@@ -7,15 +7,15 @@ export const metadata: Metadata = {
   title: pageTitles.sheetmusic,
 };
 
-export default async function SheetMusicPage(params: {
-  params: { containsFilter: string };
+export default async function SheetMusicPage({
+  params,
+}: {
+  params: Promise<{ containsFilter: string }>;
 }) {
+  const { containsFilter } = await params;
   const sheetMusic: SheetMusic[] = await getAllSheetMusic();
 
   return (
-    <SheetMusicGrid
-      rows={sheetMusic}
-      startingFilter={params.params.containsFilter}
-    />
+    <SheetMusicGrid rows={sheetMusic} startingFilter={containsFilter} />
   );
 }
