@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   _request: Request,
-  { params }: { params: { year: string } }
+  { params }: { params: Promise<{ year: string }> }
 ) {
   try {
+    const { year } = await params;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/photos/${params.year}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/photos/${year}`,
       {
         headers: {
           authorization: `${process.env.NEXT_SECRET}`,

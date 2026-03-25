@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   _req: Request,
-  context: { params: { userId: string; text: string } }
+  context: { params: Promise<{ userId: string; text: string }> }
 ) {
-  const { userId, text } = context.params;
+  const { userId, text } = await context.params;
 
   try {
     const res = await fetch(

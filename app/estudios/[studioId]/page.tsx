@@ -8,8 +8,13 @@ import { generateMetadata } from "./utils";
 import { studioMessage } from "@/utils/utils";
 export { generateMetadata };
 
-const Studio = async ({ params }: { params: { studioId: string } }) => {
-  const studio = await getStudio(params.studioId);
+const Studio = async ({
+  params,
+}: {
+  params: Promise<{ studioId: string }>;
+}) => {
+  const { studioId } = await params;
+  const studio = await getStudio(studioId);
   const user = await getUser(studio.userId!);
 
   return (

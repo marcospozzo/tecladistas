@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/core": "0.34.2",
-    "@auth/mongodb-adapter": "^2.0.0",
+    "@auth/core": "0.34.3",
+    "@auth/mongodb-adapter": "3.11.1",
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.18",
@@ -21,13 +22,13 @@
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.2",
     "autoprefixer": "10.4.15",
-    "axios": "^1.12.0",
-    "cookie": ">=0.7.0",
-    "eslint-config-next": "^14.1.0",
+    "axios": "1.13.6",
+    "cookie": "0.7.2",
+    "eslint-config-next": "15.5.14",
     "mongodb": "^6.1.0",
-    "next": "^14.2.32",
-    "next-auth": "4.24.11",
-    "nodemailer": "6.10.1",
+    "next": "15.5.14",
+    "next-auth": "4.24.13",
+    "nodemailer": "7.0.11",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -40,12 +41,20 @@
     "typescript": "5.1.6"
   },
   "overrides": {
-    "nodemailer": "6.10.1"
+    "ajv": "6.14.0",
+    "cookie": "0.7.2",
+    "fast-xml-parser": "5.5.9",
+    "flatted": "3.4.2",
+    "glob@10": "10.5.0",
+    "js-yaml": "4.1.1",
+    "minimatch@3": "3.1.4",
+    "minimatch@9": "9.0.7",
+    "nodemailer": "7.0.11"
   },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.11",
+    "@types/nodemailer": "7.0.1",
     "@types/react-image-gallery": "^1.2.4",
-    "cookie": ">=0.7.0",
+    "cookie": "0.7.2",
     "eslint": "^8.57.1"
   },
   "engines": {

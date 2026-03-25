@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {

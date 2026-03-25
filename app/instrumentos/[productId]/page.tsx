@@ -15,8 +15,13 @@ import { generateMetadata } from "./utils";
 import { constants } from "@/utils/utils";
 export { generateMetadata };
 
-const Product = async ({ params }: { params: { productId: string } }) => {
-  const product = await getProduct(params.productId);
+const Product = async ({
+  params,
+}: {
+  params: Promise<{ productId: string }>;
+}) => {
+  const { productId } = await params;
+  const product = await getProduct(productId);
   const user = await getUser(product.userId!);
   const session = await getServerSession(authOptions);
   const isTheirOwn = session?.user.id === user._id;

@@ -15,9 +15,10 @@ export const metadata: Metadata = {
 const Professional = async ({
   params,
 }: {
-  params: { professionalId: string };
+  params: Promise<{ professionalId: string }>;
 }) => {
-  const professional = await getProfessional(params.professionalId);
+  const { professionalId } = await params;
+  const professional = await getProfessional(professionalId);
   const session = await getServerSession(authOptions);
   const userId = session?.user.id ?? "";
 

@@ -1,14 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 
-const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
+const Login = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -22,7 +23,7 @@ const Login = ({ searchParams }: { searchParams: { callbackUrl: string } }) => {
       );
       const signInPromise = signIn("email", {
         email: email,
-        callbackUrl: searchParams.callbackUrl,
+        callbackUrl: searchParams.get("callbackUrl") ?? "/",
       });
       toast.promise(signInPromise, {
         pending: "Cargando...",

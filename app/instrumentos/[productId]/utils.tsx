@@ -3,17 +3,18 @@ import { imageTypes, isProduction, pageTitles } from "@/utils/utils";
 import { Metadata } from "next";
 
 type Props = {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { productId } = await params;
   const protocol = isProduction ? "https://" : "http://";
 
   let foundImage = null;
 
   for (const extension of imageTypes) {
     const lowercaseExtension = extension.toLowerCase();
-    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}${constants.INSTRUMENTS_PATH}/${params.productId}/1.${lowercaseExtension}`;
+    const imageUrl = `${protocol}${process.env.IMAGES_HOST_NAME}${constants.INSTRUMENTS_PATH}/${productId}/1.${lowercaseExtension}`;
     const imageExists = await checkImageExists(imageUrl);
 
     if (imageExists) {

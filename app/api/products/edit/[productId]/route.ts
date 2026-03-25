@@ -4,15 +4,16 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
+  const { productId } = await params;
   const formData = await request.formData();
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/edit/${params.productId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/edit/${productId}`,
       {
         method: "put",
         headers: {
