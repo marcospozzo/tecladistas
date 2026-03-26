@@ -20,7 +20,7 @@ export const config = {
   ],
 };
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   if (
     request.nextUrl.pathname !== constants.LOGIN_PATH &&
     request.nextUrl.pathname !== "/registrarse" &&
