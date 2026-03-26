@@ -1,11 +1,12 @@
 "use client";
 
 import { constants } from "@/utils/utils";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Page } from "@/types";
+import ThemeSelector from "./theme/ThemeSelector";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
@@ -48,6 +49,7 @@ const pages: Page[] = [
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const { status } = useSession();
   const isLoggedIn = status === "authenticated";
 
@@ -77,6 +79,28 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleContactClick = () => {
+    handleCloseUserMenu();
+
+    if (isLoggedIn) {
+      router.push(constants.CONTACT_PATH);
+      return;
+    }
+
+    window.location.href = `mailto:${constants.EMAIL}`;
+  };
+
+  const handleAuthClick = async () => {
+    handleCloseUserMenu();
+
+    if (isLoggedIn) {
+      await signOut({ callbackUrl: constants.LOGIN_PATH });
+      return;
+    }
+
+    router.push(constants.LOGIN_PATH);
   };
 
   return (
@@ -259,32 +283,15 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key="1" onClick={handleCloseUserMenu}>
-                <Link
-                  href={
-                    isLoggedIn
-                      ? constants.CONTACT_PATH
-                      : `mailto:${constants.EMAIL}`
-                  }
-                  target={isLoggedIn ? "" : "_blank"}
-                  rel={isLoggedIn ? "" : "noopener noreferrer"}
-                >
-                  <Typography textAlign="center">
-                    {constants.CONTACT}
-                  </Typography>
-                </Link>
+              <MenuItem key="1" onClick={handleContactClick}>
+                <Typography textAlign="center">{constants.CONTACT}</Typography>
               </MenuItem>
-              <MenuItem key="0" onClick={handleCloseUserMenu}>
-                <Link
-                  href={
-                    isLoggedIn ? constants.LOGOUT_PATH : constants.LOGIN_PATH
-                  }
-                >
+              <MenuItem key="0" onClick={handleAuthClick}>
                   <Typography textAlign="center">
                     {isLoggedIn ? constants.LOGOUT : constants.LOGIN}
                   </Typography>
-                </Link>
               </MenuItem>
+              <ThemeSelector onSelect={handleCloseUserMenu} />
             </Menu>
           </Box>
         </Toolbar>

@@ -1,8 +1,8 @@
 import { Location } from "@/components";
+import DefensiveImage from "@/components/DefensiveImage";
 import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import { formatPrice } from "@/utils/utils";
-import Image from "next/image";
 import Link from "next/link";
 import { FaArrowsRotate } from "react-icons/fa6";
 
@@ -24,9 +24,9 @@ const ProductCard = ({
       scroll={true}
     >
       <div className="w-full h-48 bg-white dark:bg-black overflow-hidden">
-        <Image
+        <DefensiveImage
           className="object-contain w-full h-full box-item-image"
-          src={product.images ? product.images[0] : ""}
+          src={product.images?.[0]}
           alt={`${product.brand} product`}
           width={300}
           height={300}

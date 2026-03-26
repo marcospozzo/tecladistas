@@ -1,12 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Header } from "@/components";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Analytics } from "@vercel/analytics/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import ClientLayoutUI from "@/components/ClientLayoutUI";
 import Provider from "@/components/Provider";
+import {
+  THEME_COOKIE_NAME,
+  THEME_RESOLVED_COOKIE_NAME,
+  getServerResolvedTheme,
+  getThemeInitScript,
+  getThemePreference,
+} from "@/components/theme/theme";
 import { pageTitles } from "@/utils/utils";
 
 export const metadata: Metadata = {
@@ -39,17 +46,45 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
   const session = await getServerSession(authOptions);
+  const initialThemePreference = getThemePreference(
+    cookieStore.get(THEME_COOKIE_NAME)?.value
+  );
+  const initialResolvedTheme = getServerResolvedTheme(
+    initialThemePreference,
+    cookieStore.get(THEME_RESOLVED_COOKIE_NAME)?.value
+  );
 
   return (
-    <html lang="es">
+    <html
+      className={initialResolvedTheme === "dark" ? "dark" : undefined}
+      data-theme={initialResolvedTheme}
+      data-theme-preference={initialThemePreference}
+      lang="es"
+      suppressHydrationWarning
+      style={
+        initialResolvedTheme
+          ? { colorScheme: initialResolvedTheme }
+          : undefined
+      }
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: getThemeInitScript() }}
+          id="theme-init"
+        />
+      </head>
       <body>
-        <Provider session={session}>
+        <Provider
+          initialResolvedTheme={initialResolvedTheme}
+          initialThemePreference={initialThemePreference}
+          session={session}
+        >
           <Header />
           <main>{children}</main>
         </Provider>
-        <ToastContainer position="bottom-right" />
-        <Analytics />
+        <ClientLayoutUI />
       </body>
     </html>
   );

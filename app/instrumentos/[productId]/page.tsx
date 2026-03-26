@@ -4,9 +4,9 @@ import {
   Location,
   WhatsAppButton,
 } from "@/components";
+import DefensiveImage from "@/components/DefensiveImage";
 import { getProduct, getUser } from "@/utils/axios";
 import { formatPrice, productMessage } from "@/utils/utils";
-import Image from "next/image";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdPiano } from "react-icons/md";
 import { getServerSession } from "next-auth/next";
@@ -35,9 +35,9 @@ const Product = async ({
   return (
     <div className="item">
       <div className="max-lg:w-full relative w-2/3 h-full">
-        <Image
+        <DefensiveImage
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={product.images[0]}
+          src={product.images?.[0]}
           alt={`${product.brand} ${product.model} product`}
           width={1000}
           height={1000}

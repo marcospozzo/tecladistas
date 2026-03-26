@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@auth/core": "0.34.3",
@@ -14,6 +14,7 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@eslint/eslintrc": "^3.3.5",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.10",
     "@mui/x-data-grid": "^8.8.0",
@@ -24,9 +25,9 @@
     "autoprefixer": "10.4.15",
     "axios": "1.13.6",
     "cookie": "0.7.2",
-    "eslint-config-next": "15.5.14",
+    "eslint-config-next": "^16.2.1",
     "mongodb": "^6.1.0",
-    "next": "15.5.14",
+    "next": "^16.2.1",
     "next-auth": "4.24.13",
     "nodemailer": "7.0.11",
     "postcss": "^8.4.31",
@@ -55,7 +56,7 @@
     "@types/nodemailer": "7.0.1",
     "@types/react-image-gallery": "^1.2.4",
     "cookie": "0.7.2",
-    "eslint": "^8.57.1"
+    "eslint": "^9.39.4"
   },
   "engines": {
     "node": "22.x"

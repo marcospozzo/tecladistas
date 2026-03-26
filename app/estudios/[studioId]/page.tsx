@@ -1,6 +1,6 @@
 import { Location, WhatsAppButton } from "@/components";
+import DefensiveImage from "@/components/DefensiveImage";
 import { getStudio, getUser } from "@/utils/axios";
-import Image from "next/image";
 import Link from "next/link";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { MdPiano } from "react-icons/md";
@@ -20,9 +20,9 @@ const Studio = async ({
   return (
     <div className="item">
       <div className="max-lg:w-full relative w-3/5 h-full">
-        <Image
+        <DefensiveImage
           className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={studio.images[0]}
+          src={studio.images?.[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={1000}
           height={1000}

@@ -6,14 +6,7 @@ import { useServerInsertedHTML } from "next/navigation";
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#445566",
-    },
-  },
-});
+import { ResolvedTheme } from "./theme/theme";
 
 function createEmotionCache() {
   const cache = createCache({ key: "mui" });
@@ -43,10 +36,24 @@ function createEmotionCache() {
 
 export default function ThemeRegistry({
   children,
+  mode,
 }: {
   children: React.ReactNode;
+  mode: ResolvedTheme;
 }) {
   const [{ cache, flush }] = React.useState(createEmotionCache);
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          primary: {
+            main: "#445566",
+          },
+        },
+      }),
+    [mode]
+  );
 
   useServerInsertedHTML(() => {
     const names = flush();
