@@ -2,8 +2,14 @@
 
 import { SheetMusic } from "@/utils/axios";
 import { Box, Button } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridFilterModel,
+  GridSortModel,
+} from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
+import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa6";
 
 interface SheetMusicGridProps {
@@ -26,10 +32,41 @@ const genreMap: Record<string, string> = {
   Soundtrack: "Soundtrack",
 };
 
+const defaultSortModel: GridSortModel = [
+  { field: "downloadCount", sort: "desc" },
+];
+
+function createFilterModel(startingFilter?: string): GridFilterModel {
+  return startingFilter
+    ? {
+        items: [
+          {
+            field: "name",
+            value: startingFilter,
+            operator: "contains",
+          },
+        ],
+      }
+    : { items: [] };
+}
+
 export default function SheetMusicGrid({
   rows,
   startingFilter,
 }: SheetMusicGridProps) {
+  const [hasMounted, setHasMounted] = useState(false);
+  const [filterModel, setFilterModel] = useState<GridFilterModel>(() =>
+    createFilterModel()
+  );
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setFilterModel(createFilterModel(startingFilter));
+  }, [startingFilter]);
+
   const mappedRows = rows.map((sheet) => ({
     id: sheet.id,
     name:
@@ -68,11 +105,19 @@ export default function SheetMusicGrid({
     },
   ];
 
+  // MUI DataGrid does internal async setup; deferring the first render until
+  // mount avoids React warnings in Next 16 when a filter is applied on load.
+  if (!hasMounted) {
+    return <Box sx={{ height: 600, width: "100%" }} />;
+  }
+
   return (
     <Box sx={{ height: 600, width: "100%" }}>
       <DataGrid
         rows={mappedRows}
         columns={columns}
+        filterModel={filterModel}
+        onFilterModelChange={setFilterModel}
         pageSizeOptions={[10]}
         initialState={{
           pagination: {
@@ -82,21 +127,8 @@ export default function SheetMusicGrid({
             },
           },
           sorting: {
-            sortModel: [{ field: "downloadCount", sort: "desc" }],
+            sortModel: defaultSortModel,
           },
-          filter: startingFilter
-            ? {
-                filterModel: {
-                  items: [
-                    {
-                      field: "name",
-                      value: startingFilter,
-                      operator: "contains",
-                    },
-                  ],
-                },
-              }
-            : undefined,
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         onCellClick={(params) => {

@@ -183,6 +183,26 @@ textarea {
   @apply text-sm text-center;
 }
 
+.dashboard-panel {
+  @apply rounded-[28px] border border-black/10 bg-white/80 shadow-xl shadow-black/5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/75;
+}
+
+.dashboard-card {
+  @apply rounded-[24px] border border-black/5 bg-white/60 shadow-sm shadow-black/5 dark:border-white/10 dark:bg-slate-950/40;
+}
+
+.dashboard-link-card {
+  @apply dashboard-card transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg;
+}
+
+.dashboard-eyebrow {
+  @apply text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400;
+}
+
+.dashboard-chip {
+  @apply inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/10 dark:text-slate-100;
+}
+
 .icons-container {
   @apply dark:text-white;
 }

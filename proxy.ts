@@ -16,7 +16,6 @@ export const config = {
     "/fotos/:path+",
     "/fotos",
     "/partituras",
-    "/partituras/:containsFilter+",
   ],
 };
 
@@ -27,7 +26,10 @@ export function proxy(request: NextRequest) {
     !request.cookies.has(cookieName)
   ) {
     const signinUrl = new URL(constants.LOGIN_PATH, request.url);
-    signinUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+    signinUrl.searchParams.set(
+      "callbackUrl",
+      `${request.nextUrl.pathname}${request.nextUrl.search}`
+    );
     return NextResponse.redirect(signinUrl);
   }
   if (
