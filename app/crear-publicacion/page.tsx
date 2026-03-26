@@ -1,6 +1,7 @@
 "use client";
 
 import { EditableInput, SaleRentSwitchButton } from "@/components";
+import SimpleFileUploader from "@/components/SimpleFileUploader";
 import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import { imageTypes, placeholders } from "@/utils/utils";
@@ -10,12 +11,10 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   FormEvent,
-  SetStateAction,
   useEffect,
   useReducer,
   useState,
 } from "react";
-import { FileUploader } from "react-drag-drop-files";
 import { toast } from "react-toastify";
 
 const dataReducer = (state: ProductProps, action: any): ProductProps => {
@@ -33,7 +32,7 @@ const dataReducer = (state: ProductProps, action: any): ProductProps => {
 
 const NewProduct = () => {
   const router = useRouter();
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | null>(null);
   const [listingType, setListingType] = useState(constants.SALE);
   const [data, dispatch] = useReducer(dataReducer, {});
   const searchParams = useSearchParams();
@@ -71,7 +70,7 @@ const NewProduct = () => {
     }
   };
 
-  const handleImageUploaderChange = (image: SetStateAction<null>) => {
+  const handleImageUploaderChange = (image: File | null) => {
     setImage(image);
   };
 
@@ -254,11 +253,10 @@ const NewProduct = () => {
             >
               Foto:
             </label>
-            <FileUploader
+            <SimpleFileUploader
               maxSize={20}
-              required={productId ? false : true}
+              required={!productId}
               label={placeholders.image}
-              hoverTitle=""
               classes="self-center space-x-4 w-full h-12"
               handleChange={handleImageUploaderChange}
               name="image"

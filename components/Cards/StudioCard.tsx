@@ -1,7 +1,7 @@
 import { Location } from "@/components";
+import DefensiveImage from "@/components/DefensiveImage";
 import { StudioProps } from "@/types";
 import { constants } from "@/utils/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 const StudioCard = ({ studio }: { studio: StudioProps }) => {
@@ -11,9 +11,9 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
       className="flex flex-col box-item bg-slate-300 rounded-xl"
     >
       <div className="relative inline-block w-full h-48 bg-white dark:bg-black overflow-hidden">
-        <Image
+        <DefensiveImage
           className="object-cover w-full h-full box-item-image"
-          src={studio.images ? studio.images[0] : ""}
+          src={studio.images?.[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
           width={300}
           height={300}
