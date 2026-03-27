@@ -26,6 +26,7 @@ const DASHBOARD_PHOTOS_YEAR = "2025";
 
 export type HomeStat = {
   detail: string;
+  key: "instruments" | "members" | "professionals" | "sheetMusic" | "studios";
   label: string;
   value: string;
 };
@@ -233,9 +234,10 @@ function buildStats(params: {
   sheetMusicCount: number;
   sheetMusicGenresCount: number;
   topSkillsCount: number;
-}) {
+}): HomeStat[] {
   return [
     {
+      key: "instruments",
       label: "Instrumentos",
       value: formatCount(params.activeProductsCount),
       detail: `${formatCount(params.saleProductsCount)} en venta · ${formatCount(
@@ -243,21 +245,25 @@ function buildStats(params: {
       )} en alquiler`,
     },
     {
+      key: "professionals",
       label: "Profesionales",
       value: formatCount(params.professionalsCount),
       detail: `${formatCount(params.topSkillsCount)} rubros`,
     },
     {
+      key: "studios",
       label: "Estudios",
       value: formatCount(params.activeStudiosCount),
       detail: "Grabacion, mezcla, mastering y produccion",
     },
     {
+      key: "sheetMusic",
       label: "Partituras",
       value: formatCount(params.sheetMusicCount),
       detail: `${formatCount(params.sheetMusicGenresCount)} géneros`,
     },
     {
+      key: "members",
       label: "Integrantes",
       value: params.memberCountLabel,
       detail: "Y contando...",
@@ -334,18 +340,19 @@ export function buildSheetMusicPreviewHref(sheetMusic: SheetMusic) {
 }
 
 export async function getHomeDashboardData(): Promise<HomeDashboardData> {
+  const session = await getServerSession(authOptions);
+  const isLoggedIn = Boolean(session);
+
   const requests = [
-    getServerSession(authOptions),
     getWhitelistedUsersCount(),
     getProducts(),
     getProfessionals(),
     getStudios(),
-    getAllSheetMusic(),
+    isLoggedIn ? getAllSheetMusic() : Promise.resolve([] as SheetMusic[]),
     getHomePhotos(DASHBOARD_PHOTOS_YEAR),
   ] as const;
 
   const [
-    sessionResult,
     memberCountResult,
     productsResult,
     professionalsResult,
@@ -354,7 +361,6 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     photosResult,
   ] = await Promise.allSettled(requests);
 
-  const session = getSettledValue(sessionResult, null);
   const products = getSettledValue(productsResult, []);
   const professionals = getSettledValue(professionalsResult, []);
   const studios = getSettledValue(studiosResult, []);
@@ -392,7 +398,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     featuredProfessionals: getFeaturedProfessionals(professionals),
     featuredStudios: getFeaturedStudios(activeStudios),
     heroPhoto,
-    isLoggedIn: Boolean(session),
+    isLoggedIn,
     memberCountLabel,
     photos,
     photosYear: DASHBOARD_PHOTOS_YEAR,
