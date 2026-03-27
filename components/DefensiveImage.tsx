@@ -1,6 +1,3 @@
-"use client";
-
-import * as React from "react";
 import Image, { ImageProps } from "next/image";
 
 const DEFAULT_FALLBACK_SRC = "/placeholder-600x400.png";
@@ -9,10 +6,7 @@ function isRemoteImageSource(src: string) {
   return src.startsWith("http://") || src.startsWith("https://");
 }
 
-function getSafeImageSource(
-  src?: string | null,
-  fallbackSrc = DEFAULT_FALLBACK_SRC,
-) {
+function getSafeImageSource(src?: string | null, fallbackSrc = DEFAULT_FALLBACK_SRC) {
   if (!src || !src.trim()) {
     return fallbackSrc;
   }
@@ -32,26 +26,15 @@ export default function DefensiveImage({
   src,
   ...props
 }: DefensiveImageProps) {
-  const safeFallbackSrc = getSafeImageSource(fallbackSrc, DEFAULT_FALLBACK_SRC);
-  const [currentSrc, setCurrentSrc] = React.useState(() =>
-    getSafeImageSource(src, safeFallbackSrc),
-  );
-
-  React.useEffect(() => {
-    setCurrentSrc(getSafeImageSource(src, safeFallbackSrc));
-  }, [safeFallbackSrc, src]);
+  const safeFallbackSrc = getSafeImageSource(fallbackSrc);
+  const safeImageSource = getSafeImageSource(src, safeFallbackSrc);
 
   return (
     <Image
       {...props}
       alt={alt}
-      onError={() => {
-        if (currentSrc !== safeFallbackSrc) {
-          setCurrentSrc(safeFallbackSrc);
-        }
-      }}
-      src={currentSrc}
-      unoptimized={isRemoteImageSource(currentSrc)}
+      src={safeImageSource}
+      unoptimized={isRemoteImageSource(safeImageSource)}
     />
   );
 }

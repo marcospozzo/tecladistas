@@ -16,9 +16,10 @@ import {
 } from "@/utils/utils";
 import { getServerSession } from "next-auth/next";
 
-const DASHBOARD_PRODUCTS_PER_LISTING = 2;
+const DASHBOARD_RENT_PRODUCTS = 1;
+const DASHBOARD_SALE_PRODUCTS = 3;
 const DASHBOARD_FEATURED_PROFESSIONALS = 4;
-const DASHBOARD_FEATURED_STUDIOS = 3;
+const DASHBOARD_FEATURED_STUDIOS = 5;
 const DASHBOARD_FEATURED_SHEET_MUSIC = 5;
 const DASHBOARD_FEATURED_PHOTOS = 6;
 const DASHBOARD_PHOTOS_YEAR = "2025";
@@ -54,6 +55,7 @@ export type HomePhoto = {
 export type HomeDashboardData = {
   featuredProfessionals: ProfessionalProps[];
   featuredStudios: StudioProps[];
+  heroPhoto?: HomePhoto;
   isLoggedIn: boolean;
   memberCountLabel: string;
   photos: HomePhoto[];
@@ -63,6 +65,8 @@ export type HomeDashboardData = {
   quickLinks: HomeQuickLink[];
   sessionUserId?: string;
   stats: HomeStat[];
+  totalRentProductsCount: number;
+  totalSaleProductsCount: number;
   topSheetMusic: SheetMusic[];
   topSkills: HomeHighlightedSkill[];
 };
@@ -171,12 +175,32 @@ function getTopSheetMusic(sheetMusic: SheetMusic[]) {
     .slice(0, DASHBOARD_FEATURED_SHEET_MUSIC);
 }
 
-async function getPhotosPreview(year: string): Promise<HomePhoto[]> {
+function getScatteredPhotosForToday(photos: HomePhoto[]) {
+  const selectedPhotosCount = Math.min(DASHBOARD_FEATURED_PHOTOS, photos.length);
+
+  if (selectedPhotosCount <= 1) {
+    return photos.slice(0, selectedPhotosCount);
+  }
+
+  const daysSinceEpoch = Math.floor(Date.now() / 86_400_000);
+  const rotationOffset = daysSinceEpoch % photos.length;
+  const selectedIndexes = Array.from(
+    { length: selectedPhotosCount },
+    (_, index) => (Math.floor((index * photos.length) / selectedPhotosCount) + rotationOffset) % photos.length,
+  );
+
+  return selectedIndexes.map((index) => photos[index]);
+}
+
+async function getHomePhotos(year: string): Promise<{
+  heroPhoto?: HomePhoto;
+  photos: HomePhoto[];
+}> {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const secret = process.env.NEXT_SECRET;
 
   if (!apiBaseUrl || !secret) {
-    return [];
+    return { photos: [] };
   }
 
   const response = await fetch(`${apiBaseUrl}/photos/${year}`, {
@@ -192,7 +216,11 @@ async function getPhotosPreview(year: string): Promise<HomePhoto[]> {
   }
 
   const photos = (await response.json()) as HomePhoto[];
-  return photos.slice(0, DASHBOARD_FEATURED_PHOTOS);
+
+  return {
+    heroPhoto: photos[0],
+    photos: getScatteredPhotosForToday(photos),
+  };
 }
 
 function buildStats(params: {
@@ -207,11 +235,6 @@ function buildStats(params: {
   topSkillsCount: number;
 }) {
   return [
-    {
-      label: "Integrantes",
-      value: params.memberCountLabel,
-      detail: "Y contando...",
-    },
     {
       label: "Instrumentos",
       value: formatCount(params.activeProductsCount),
@@ -233,6 +256,11 @@ function buildStats(params: {
       label: "Partituras",
       value: formatCount(params.sheetMusicCount),
       detail: `${formatCount(params.sheetMusicGenresCount)} géneros`,
+    },
+    {
+      label: "Integrantes",
+      value: params.memberCountLabel,
+      detail: "Y contando...",
     },
   ];
 }
@@ -268,6 +296,14 @@ function buildQuickLinks(params: {
       description: "Grabación, producción y mezcla directo entre colegas.",
     },
     {
+      title: constants.SHEETMUSIC,
+      href: constants.SHEETMUSIC_PATH,
+      metric: formatCount(params.sheetMusicCount),
+      description:
+        "Partituras ordenadas y categorizadas para encontrar de todo fácilmente.",
+      requiresLogin: true,
+    },
+    {
       title: constants.PICTURES,
       href: constants.PICTURES_2025_PATH,
       metric:
@@ -277,26 +313,22 @@ function buildQuickLinks(params: {
       description: `Encuentros y registros visuales del grupo en ${params.photosYear}.`,
       requiresLogin: true,
     },
-    {
-      title: constants.SHEETMUSIC,
-      href: constants.SHEETMUSIC_PATH,
-      metric: formatCount(params.sheetMusicCount),
-      description:
-        "Partituras ordenadas y categorizadas para encontrar de todo fácilmente.",
-      requiresLogin: true,
-    },
   ];
 }
 
 export function buildSheetMusicPreviewHref(sheetMusic: SheetMusic) {
-  const filterValue = [sheetMusic.title, sheetMusic.composer, sheetMusic.fileName]
+  const filterValue = [
+    sheetMusic.title,
+    sheetMusic.composer,
+    sheetMusic.fileName,
+  ]
     .filter((value): value is string => Boolean(value))
     .map((value) => value.trim())
     .find((value) => Boolean(value));
 
   return filterValue
     ? `${constants.SHEETMUSIC_PATH}?containsFilter=${encodeURIComponent(
-        filterValue
+        filterValue,
       )}`
     : constants.SHEETMUSIC_PATH;
 }
@@ -309,7 +341,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     getProfessionals(),
     getStudios(),
     getAllSheetMusic(),
-    getPhotosPreview(DASHBOARD_PHOTOS_YEAR),
+    getHomePhotos(DASHBOARD_PHOTOS_YEAR),
   ] as const;
 
   const [
@@ -327,7 +359,9 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   const professionals = getSettledValue(professionalsResult, []);
   const studios = getSettledValue(studiosResult, []);
   const sheetMusic = getSettledValue(sheetMusicResult, []);
-  const photos = getSettledValue(photosResult, []);
+  const homePhotos = getSettledValue(photosResult, { photos: [] });
+  const heroPhoto = homePhotos.heroPhoto;
+  const photos = homePhotos.photos;
 
   const activeProducts = products.filter(isActiveProduct);
   const saleProducts = sortProductsByDateDesc(
@@ -357,12 +391,13 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   return {
     featuredProfessionals: getFeaturedProfessionals(professionals),
     featuredStudios: getFeaturedStudios(activeStudios),
+    heroPhoto,
     isLoggedIn: Boolean(session),
     memberCountLabel,
     photos,
     photosYear: DASHBOARD_PHOTOS_YEAR,
-    productsForRent: rentProducts.slice(0, DASHBOARD_PRODUCTS_PER_LISTING),
-    productsForSale: saleProducts.slice(0, DASHBOARD_PRODUCTS_PER_LISTING),
+    productsForRent: rentProducts.slice(0, DASHBOARD_RENT_PRODUCTS),
+    productsForSale: saleProducts.slice(0, DASHBOARD_SALE_PRODUCTS),
     quickLinks: buildQuickLinks({
       activeProductsCount: activeProducts.length,
       activeStudiosCount: activeStudios.length,
@@ -384,6 +419,8 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
       sheetMusicGenresCount,
       topSkillsCount: sortedSkills.length,
     }),
+    totalRentProductsCount: rentProducts.length,
+    totalSaleProductsCount: saleProducts.length,
     topSheetMusic,
     topSkills,
   };
