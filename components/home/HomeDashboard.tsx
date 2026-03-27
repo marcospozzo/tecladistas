@@ -89,6 +89,23 @@ function getSheetMusicName(composer?: string, title?: string) {
   return composer ?? title ?? "Partitura";
 }
 
+function formatProfessionalName(
+  professional: ProfessionalProps,
+  isLoggedIn: boolean,
+) {
+  if (isLoggedIn) {
+    return `${professional.firstName} ${
+      professional.nickname ? `"${professional.nickname}" ` : ""
+    }${professional.lastName ?? ""}`.trim();
+  }
+
+  const lastNameInitial = professional.lastName?.trim().charAt(0);
+
+  return lastNameInitial
+    ? `${professional.firstName} ${lastNameInitial}.`
+    : professional.firstName;
+}
+
 function EmptyPreview({
   ctaHref,
   ctaLabel,
@@ -210,8 +227,10 @@ function ProductPreviewCard({
 }
 
 function ProfessionalPreviewCard({
+  isLoggedIn,
   professional,
 }: {
+  isLoggedIn: boolean;
   professional: ProfessionalProps;
 }) {
   const rating = calculateRating(professional.ratings);
@@ -228,9 +247,7 @@ function ProfessionalPreviewCard({
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="text-lg font-semibold tracking-tight">
-              {professional.firstName}{" "}
-              {professional.nickname ? `"${professional.nickname}"` : ""}{" "}
-              {professional.lastName ?? ""}
+              {formatProfessionalName(professional, isLoggedIn)}
             </h3>
             {professional.location ? (
               <div className="mt-1 flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300">
@@ -499,6 +516,7 @@ export default function HomeDashboard({
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {featuredProfessionals.map((professional) => (
                 <ProfessionalPreviewCard
+                  isLoggedIn={isLoggedIn}
                   key={professional._id}
                   professional={professional}
                 />
