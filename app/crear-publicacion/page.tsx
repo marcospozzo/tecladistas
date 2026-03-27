@@ -39,7 +39,7 @@ const NewProduct = () => {
   const productId = searchParams.get("id");
 
   const handleEditableInputChange: ChangeEventHandler<HTMLInputElement> = (
-    event
+    event,
   ) => {
     if (event.target) {
       dispatch({
@@ -80,7 +80,7 @@ const NewProduct = () => {
       dispatch({ type: "SET_EXCHANGES_FALSE" });
     }
     setListingType((prevListingType) =>
-      prevListingType === constants.SALE ? constants.RENT : constants.SALE
+      prevListingType === constants.SALE ? constants.RENT : constants.SALE,
     );
   };
 
@@ -120,8 +120,8 @@ const NewProduct = () => {
       const route = productId
         ? `${constants.INSTRUMENTS_PATH}/${productId}`
         : listingType === constants.RENT
-        ? `${constants.INSTRUMENTS_PATH}#alquiler`
-        : constants.INSTRUMENTS_PATH;
+          ? `${constants.INSTRUMENTS_PATH}#alquiler`
+          : constants.INSTRUMENTS_PATH;
       router.push(route);
       router.refresh();
     } catch (error) {
@@ -145,8 +145,8 @@ const NewProduct = () => {
           // Filter out null or undefined properties
           const cleanedProduct = Object.fromEntries(
             Object.entries(product).filter(
-              ([_, value]) => value !== null && value !== undefined
-            )
+              ([_, value]) => value !== null && value !== undefined,
+            ),
           );
 
           const { listingType, ...cleanedProductWithoutListingType } =
@@ -230,7 +230,7 @@ const NewProduct = () => {
               className="w-1/5 self-center max-sm:self-start "
               htmlFor="exchanges"
             >
-              Intercambio:
+              Canje:
             </label>
             <div className="flex space-x-2">
               <input
