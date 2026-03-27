@@ -37,7 +37,15 @@ const ProductCard = ({
       <div className="flex justify-between">
         {product.location && <Location name={product.location} />}
         <div className="flex space-x-2">
-          {product.exchanges && <FaArrowsRotate className="self-center" />}
+          {product.exchanges && (
+            <span
+              aria-label="Escucha propuestas de canje"
+              title="Escucha propuestas de canje"
+              className="self-center"
+            >
+              <FaArrowsRotate />
+            </span>
+          )}
           {product.price && (
             <span>
               {listingType === constants.SALE

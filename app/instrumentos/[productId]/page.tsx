@@ -52,16 +52,20 @@ const Product = async ({
             )
           : product.price && (
               <h1 className="text-4xl">{`${formatPrice(
-                product.price
+                product.price,
               )} / día`}</h1>
             )}
 
         {product.exchanges && (
           <div className="flex space-x-1">
-            <FaArrowsRotate className="self-center" />
-            <i className="self-center">
-              Escucha propuestas de intercambio, como parte de pago.
-            </i>
+            <span
+              aria-label="Escucha propuestas de canje"
+              title="Escucha propuestas de canje"
+              className="self-center"
+            >
+              <FaArrowsRotate />
+            </span>
+            <i className="self-center">Escucha propuestas de canje.</i>
           </div>
         )}
 

@@ -13,9 +13,21 @@ const CardNew = ({ listingType = "" }) => {
       : pathname === constants.INSTRUMENTS_PATH
       ? "/crear-publicacion"
       : constants.CONTACT_PATH;
+  const hoverHint =
+    listingType === constants.RENT
+      ? "Crear publicación de alquiler"
+      : pathname === constants.INSTRUMENTS_PATH
+      ? "Crear publicación de venta"
+      : "Contactanos para publicar tu estudio";
+
   return (
     <div className="flex box-item bg-slate-300 rounded-xl">
-      <Link className="m-auto" href={url}>
+      <Link
+        aria-label={hoverHint}
+        className="m-auto"
+        href={url}
+        title={hoverHint}
+      >
         <BsPlusCircleDotted className="m-auto" size={40} />
       </Link>
     </div>
