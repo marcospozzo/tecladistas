@@ -1,6 +1,10 @@
 "use client";
 
 import { SheetMusic } from "@/utils/axios";
+import {
+  translateSheetMusicDifficulty,
+  translateSheetMusicGenre,
+} from "@/utils/sheetMusic";
 import { Box, Button } from "@mui/material";
 import {
   DataGrid,
@@ -16,21 +20,6 @@ interface SheetMusicGridProps {
   rows: SheetMusic[];
   startingFilter?: string;
 }
-
-const difficultyMap: Record<string, string> = {
-  Beginner: "Principiante",
-  Intermediate: "Intermedio",
-  Advanced: "Avanzado",
-};
-
-const genreMap: Record<string, string> = {
-  Classical: "Clásico",
-  Jazz: "Jazz",
-  Pop: "Popular",
-  Educational: "Educacional",
-  Tango: "Tango",
-  Soundtrack: "Soundtrack",
-};
 
 const defaultSortModel: GridSortModel = [
   { field: "downloadCount", sort: "desc" },
@@ -73,8 +62,8 @@ export default function SheetMusicGrid({
       sheet.composer && sheet.title
         ? `${sheet.composer} – ${sheet.title}`
         : sheet.composer ?? sheet.title,
-    genre: genreMap[sheet.genre ?? ""] ?? sheet.genre,
-    difficulty: difficultyMap[sheet.difficulty ?? ""] ?? sheet.difficulty,
+    genre: translateSheetMusicGenre(sheet.genre),
+    difficulty: translateSheetMusicDifficulty(sheet.difficulty),
     year: sheet.year,
     downloadCount: sheet.downloadCount,
     downloadUrl: `/api/sheet-music/${sheet.id}`,

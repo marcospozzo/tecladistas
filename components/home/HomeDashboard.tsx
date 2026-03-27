@@ -1,6 +1,10 @@
 import DefensiveImage from "@/components/DefensiveImage";
 import { ProductProps, ProfessionalProps, StudioProps } from "@/types";
 import {
+  translateSheetMusicDifficulty,
+  translateSheetMusicGenre,
+} from "@/utils/sheetMusic";
+import {
   calculateRating,
   constants,
   formatPrice,
@@ -68,6 +72,12 @@ function formatPublicationDate(createdAt?: string) {
     month: "short",
     year: "numeric",
   }).format(publishedAt)}`;
+}
+
+function getListingBadgeClass(listingType?: ProductProps["listingType"]) {
+  return listingType === constants.RENT
+    ? "inline-flex items-center rounded-full border border-sky-200/80 bg-sky-600 px-3 py-1 text-xs font-semibold text-white shadow-lg shadow-sky-950/30"
+    : "inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow-lg shadow-emerald-950/30";
 }
 
 function getSheetMusicName(composer?: string, title?: string) {
@@ -170,6 +180,9 @@ function ProductPreviewCard({
           src={getProductImage(product)}
         />
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+          <span className={getListingBadgeClass(product.listingType)}>
+            {product.listingType === constants.RENT ? "Alquiler" : "Venta"}
+          </span>
           {isOwn ? (
             <span className="dashboard-chip">Tu publicación</span>
           ) : null}
@@ -266,6 +279,13 @@ function ProfessionalPreviewCard({
 }
 
 function StudioPreviewCard({ studio }: { studio: StudioProps }) {
+  const visibleServices =
+    studio.services?.filter((service) => service.length < 20).slice(0, 4) ?? [];
+  const hiddenServicesCount = Math.max(
+    (studio.services.length ?? 0) - visibleServices.length,
+    0,
+  );
+
   return (
     <Link
       className="dashboard-card group block overflow-hidden p-4"
@@ -294,13 +314,21 @@ function StudioPreviewCard({ studio }: { studio: StudioProps }) {
           ) : null}
         </div>
 
-        {studio.services?.length ? (
+        {visibleServices.length ? (
           <div className="flex flex-wrap gap-2">
-            {studio.services.slice(0, 3).map((service) => (
+            {visibleServices.map((service) => (
               <span className="dashboard-chip" key={service}>
                 {service}
               </span>
             ))}
+            {hiddenServicesCount > 0 ? (
+              <span
+                className="dashboard-chip"
+                title={`${hiddenServicesCount} servicios más`}
+              >
+                +{hiddenServicesCount}
+              </span>
+            ) : null}
           </div>
         ) : null}
       </div>
@@ -325,7 +353,7 @@ function PhotosPreview({
         className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         fill
         sizes="(max-width: 768px) 50vw, 33vw"
-        src={photo.thumbnail ?? photo.original}
+        src={photo.original}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-80" />
     </Link>
@@ -335,6 +363,7 @@ function PhotosPreview({
 export default function HomeDashboard({
   featuredProfessionals,
   featuredStudios,
+  heroPhoto,
   isLoggedIn,
   memberCountLabel,
   photos,
@@ -344,15 +373,16 @@ export default function HomeDashboard({
   quickLinks,
   sessionUserId,
   stats,
+  totalRentProductsCount,
+  totalSaleProductsCount,
   topSheetMusic,
   topSkills,
 }: HomeDashboardData) {
-  const heroImage = photos[0]?.original ?? "/keyboard.jpg";
+  const heroImage = heroPhoto?.original ?? "/keyboard.jpg";
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
       <section className="grid gap-6 lg:grid-cols-2">
-        {" "}
         <div className="dashboard-panel p-6 sm:p-8 lg:p-10">
           <div className="flex h-full flex-col justify-between gap-8">
             <div className="space-y-5">
@@ -365,10 +395,10 @@ export default function HomeDashboard({
                   : instrumentos, técnicos, estudios, fotos y partituras.
                 </h1>
                 <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
-                  Aquí podés consultar el listado actualizado de contactos de
-                  técnicos de distintas áreas como transportistas y afinadores.
-                  Además, podés publicar tu estudio de grabación y tus
-                  instrumentos en venta y alquiler.
+                  Acá encontrás contactos actualizados de técnicos de distintas
+                  áreas, podés publicar tu estudio de grabación y tus
+                  instrumentos en venta o alquiler, y acceder al catálogo de
+                  partituras que se fue compartiendo en el grupo.
                 </p>
               </div>
             </div>
@@ -377,50 +407,13 @@ export default function HomeDashboard({
         <div className="dashboard-panel overflow-hidden p-0">
           <div className="relative min-h-[320px] overflow-hidden lg:min-h-full">
             <DefensiveImage
-              alt="Resumen visual de la comunidad Tecladistas"
+              alt="Resumen visual del grupo de Tecladistas"
               className="object-cover"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 40vw"
               src={heroImage}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
-
-            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 text-white sm:p-8">
-              <div>
-                <p className="dashboard-eyebrow text-white/70">Resumen</p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                  Una comunidad de {memberCountLabel} tecladistas
-                </h2>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/70">
-                    Instrumentos
-                  </p>
-                  <p className="mt-2 text-xl font-semibold">
-                    {quickLinks[0]?.metric ?? "Instrumentos"}
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/70">
-                    Técnicos
-                  </p>
-                  <p className="mt-2 text-xl font-semibold">
-                    {quickLinks[1]?.metric ?? "Profesionales"}
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/70">
-                    Partituras
-                  </p>
-                  <p className="mt-2 text-xl font-semibold">
-                    {quickLinks[4]?.metric ?? "Partituras"}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -456,72 +449,35 @@ export default function HomeDashboard({
         eyebrow="Compra / Venta"
         href={constants.INSTRUMENTS_PATH}
         linkLabel="Ver todo"
-        title="Instrumentos recientes"
+        title="Instrumentos"
       >
-        <div className="grid gap-6 xl:grid-cols-2">
-          <div className="dashboard-card p-5">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <div>
-                <p className="dashboard-eyebrow">Venta</p>
-                <h3 className="mt-2 text-xl font-semibold tracking-tight">
-                  Listados activos
-                </h3>
-              </div>
-              <span className="dashboard-chip">
-                {productsForSale.length} visibles
-              </span>
-            </div>
-
-            {productsForSale.length ? (
-              <div className="grid gap-4 md:grid-cols-2">
-                {productsForSale.map((product) => (
-                  <ProductPreviewCard
-                    isOwn={product.userId === sessionUserId}
-                    key={product._id ?? product.title}
-                    product={product}
-                  />
-                ))}
-              </div>
-            ) : (
-              <EmptyPreview
-                ctaHref={constants.INSTRUMENTS_PATH}
-                ctaLabel="Ver instrumentos"
-                message="Todavía no pude cargar publicaciones de venta para este resumen."
-              />
-            )}
+        <div className="space-y-5">
+          <div className="flex flex-wrap gap-2">
+            <span className="dashboard-chip">
+              {totalSaleProductsCount} en venta
+            </span>
+            <span className="dashboard-chip">
+              {totalRentProductsCount} en alquiler
+            </span>
           </div>
 
-          <div className="dashboard-card p-5">
-            <div className="mb-5 flex items-center justify-between gap-3">
-              <div>
-                <p className="dashboard-eyebrow">Alquiler</p>
-                <h3 className="mt-2 text-xl font-semibold tracking-tight">
-                  Opciones por día
-                </h3>
-              </div>
-              <span className="dashboard-chip">
-                {productsForRent.length} visibles
-              </span>
+          {productsForSale.length || productsForRent.length ? (
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {[...productsForSale, ...productsForRent].map((product) => (
+                <ProductPreviewCard
+                  isOwn={product.userId === sessionUserId}
+                  key={product._id ?? product.title}
+                  product={product}
+                />
+              ))}
             </div>
-
-            {productsForRent.length ? (
-              <div className="grid gap-4 md:grid-cols-2">
-                {productsForRent.map((product) => (
-                  <ProductPreviewCard
-                    isOwn={product.userId === sessionUserId}
-                    key={product._id ?? product.title}
-                    product={product}
-                  />
-                ))}
-              </div>
-            ) : (
-              <EmptyPreview
-                ctaHref={`${constants.INSTRUMENTS_PATH}#alquiler`}
-                ctaLabel="Explorar alquileres"
-                message="No encontré alquileres listos para mostrar en el recorte actual."
-              />
-            )}
-          </div>
+          ) : (
+            <EmptyPreview
+              ctaHref={constants.INSTRUMENTS_PATH}
+              ctaLabel="Ver instrumentos"
+              message="Todavía no pude cargar publicaciones para este resumen."
+            />
+          )}
         </div>
       </HomeSection>
 
@@ -560,26 +516,70 @@ export default function HomeDashboard({
         </div>
       </HomeSection>
 
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+      <HomeSection
+        description=""
+        eyebrow="Producción"
+        href={constants.STUDIOS_PATH}
+        linkLabel="Ver estudios"
+        title="Estudios"
+      >
+        {featuredStudios.length ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {featuredStudios.map((studio) => (
+              <StudioPreviewCard key={studio._id} studio={studio} />
+            ))}
+          </div>
+        ) : (
+          <EmptyPreview
+            ctaHref={constants.STUDIOS_PATH}
+            ctaLabel="Explorar estudios"
+            message="No pude cargar estudios para este preview; la sección completa sigue disponible."
+          />
+        )}
+      </HomeSection>
+
+      <div className="grid gap-8 lg:grid-cols-2">
         <HomeSection
           description=""
-          eyebrow="Producción"
-          href={constants.STUDIOS_PATH}
-          linkLabel="Ver estudios"
-          title="Estudios en foco"
+          eyebrow="Galería"
+          href={constants.PICTURES_2025_PATH}
+          linkLabel="Ver fotos"
+          title={`Fotos ${photosYear}`}
         >
-          {featuredStudios.length ? (
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {featuredStudios.map((studio) => (
-                <StudioPreviewCard key={studio._id} studio={studio} />
+          {photos.length ? (
+            <div className="grid gap-4 sm:grid-cols-2">
+              {photos.map((photo) => (
+                <PhotosPreview
+                  key={photo.original}
+                  photo={photo}
+                  photosYear={photosYear}
+                />
               ))}
             </div>
           ) : (
-            <EmptyPreview
-              ctaHref={constants.STUDIOS_PATH}
-              ctaLabel="Explorar estudios"
-              message="No pude cargar estudios para este preview; la sección completa sigue disponible."
-            />
+            <Link
+              className="dashboard-link-card block overflow-hidden p-0"
+              href={constants.PICTURES_2025_PATH}
+            >
+              <div className="relative h-64">
+                <DefensiveImage
+                  alt="Teclado de piano o sintetizador"
+                  className="object-cover"
+                  fill
+                  sizes="100vw"
+                  src="/keyboard.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <p className="dashboard-eyebrow text-white/70">
+                    Acceso rápido
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold">
+                    Ver el archivo visual del grupo
+                  </h3>
+                </div>
+              </div>
+            </Link>
           )}
         </HomeSection>
 
@@ -603,8 +603,10 @@ export default function HomeDashboard({
                       {getSheetMusicName(sheet.composer, sheet.title)}
                     </p>
                     <p className="text-sm text-slate-600 dark:text-slate-300">
-                      {sheet.genre ?? "Género abierto"}
-                      {sheet.difficulty ? ` · ${sheet.difficulty}` : ""}
+                      {translateSheetMusicGenre(sheet.genre)}
+                      {sheet.difficulty
+                        ? ` · ${translateSheetMusicDifficulty(sheet.difficulty)}`
+                        : ""}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
@@ -628,67 +630,26 @@ export default function HomeDashboard({
 
       <HomeSection
         description=""
-        eyebrow="Galería"
-        href={constants.PICTURES_2025_PATH}
-        linkLabel="Ver fotos"
-        title={`Fotos ${photosYear}`}
-      >
-        {photos.length ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {photos.map((photo) => (
-              <PhotosPreview
-                key={photo.original}
-                photo={photo}
-                photosYear={photosYear}
-              />
-            ))}
-          </div>
-        ) : (
-          <Link
-            className="dashboard-link-card block overflow-hidden p-0"
-            href={constants.PICTURES_2025_PATH}
-          >
-            <div className="relative h-64">
-              <DefensiveImage
-                alt="Teclado de piano o sintetizador"
-                className="object-cover"
-                fill
-                sizes="100vw"
-                src="/keyboard.jpg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <p className="dashboard-eyebrow text-white/70">Acceso rápido</p>
-                <h3 className="mt-2 text-2xl font-semibold">
-                  Ver el archivo visual del grupo
-                </h3>
-              </div>
-            </div>
-          </Link>
-        )}
-      </HomeSection>
-
-      <HomeSection
-        description=""
         eyebrow="Comunidad"
         title="Sobre Tecladistas Gitanxs"
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
           <div className="dashboard-card space-y-4 p-6 text-sm leading-7 text-slate-700 dark:text-slate-200">
             <p>
-              Tecladistas Gitanxs nacio en 2013 entre amigxs que compartian la
-              pasion por pianos y teclados. Desde entonces el grupo se fue
-              ampliando por recomendacion, encuentros y trabajo en comun.
+              &quot;Tecladistxs Gitanxs es un grupo de intérpretes de estilos y
+              géneros de los más diversos. Comenzó en el 2013 con cuatro amigos
+              tecladistas, que se juntaban para compartir la pasión por los
+              pianos y los teclados. A través del boca en boca fueron sumando a
+              más colegas y se iniciaron los encuentros tecladísticos
+              anuales.{" "}
             </p>
             <p>
-              Hoy la comunidad cuenta con {memberCountLabel} integrantes y esta
-              web funciona para publicar instrumentos, ubicar técnicos y
-              estudios, revisar fotos de los encuentros y encontrar partituras.
+              Actualmente cuenta con {memberCountLabel} integrantes, y sigue
+              creciendo.
             </p>
             <p>
-              Las operaciones, acuerdos y garantias suceden por fuera del sitio.
-              La web solo organiza informacion y datos de contacto, que siguen
-              siendo de uso privado entre las personas involucradas.
+              Algunos de los pilares del grupo son la generosidad, la humildad,
+              la camaradería, el intercambio y la amistad.&quot;
             </p>
           </div>
 
@@ -700,19 +661,38 @@ export default function HomeDashboard({
               </h3>
               <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
                 Cada aporte ayuda a pagar los costos de mantenimiento del
-                servidor y motiva a seguir mejorándola.
+                servidor y motiva a seguir construyéndola.
               </p>
             </div>
 
-            <Link
-              className="submit-button w-full justify-center sm:w-fit"
-              href="https://cafecito.app/marcospozzo"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Ir a Cafecito
-            </Link>
+            <div className="flex justify-center">
+              <Link
+                href="https://cafecito.app/marcospozzo"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt="Invitame un café en cafecito.app"
+                  src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+                  srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
+                />
+              </Link>
+            </div>
           </div>
+        </div>
+      </HomeSection>
+
+      <HomeSection description="" eyebrow="Privacidad" title="Importante">
+        <div className="dashboard-card p-6 text-sm leading-7 text-slate-700 dark:text-slate-200">
+          <i>
+            Los desarrolladores de esta página no participamos de operaciones,
+            intercambio de dinero, garantías, ni acuerdos en relación a ventas o
+            servicios dados. Las mismas suceden por fuera de esta web y esa
+            responsabilidad queda a cargo de cada usuario involucrado. Toda
+            información personal, datos de contacto y números de teléfono son de
+            uso privado y deben mantenerse de esta forma.
+          </i>
         </div>
       </HomeSection>
     </div>
