@@ -7,6 +7,7 @@ import {
 import {
   calculateRating,
   constants,
+  skillsPageIds,
   formatPrice,
   skillsTranslations,
 } from "@/utils/utils";
@@ -113,11 +114,7 @@ function EmptyPreview({
   );
 }
 
-function QuickLinkCard({
-  quickLink,
-}: {
-  quickLink: HomeQuickLink;
-}) {
+function QuickLinkCard({ quickLink }: { quickLink: HomeQuickLink }) {
   const Icon = quickLinkIcons[quickLink.href] ?? MdPiano;
 
   return (
@@ -429,7 +426,7 @@ export default function HomeDashboard({
         ))}
       </section>
 
-      <HomeSection description="" eyebrow="Mapa rápido" title="Explorá la web">
+      <HomeSection description="" eyebrow="Resumen" title="Explorá la web">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {quickLinks.map((quickLink) => (
             <QuickLinkCard key={quickLink.href} quickLink={quickLink} />
@@ -484,9 +481,17 @@ export default function HomeDashboard({
         <div className="space-y-6">
           <div className="flex flex-wrap gap-2">
             {topSkills.map((skill) => (
-              <span className="dashboard-chip" key={skill.key}>
+              <Link
+                className="dashboard-chip transition-colors hover:bg-slate-200/90 dark:hover:bg-slate-800/90"
+                href={
+                  skillsPageIds[skill.key]
+                    ? `${constants.PROFESSIONALS_PATH}#${skillsPageIds[skill.key]}`
+                    : constants.PROFESSIONALS_PATH
+                }
+                key={skill.key}
+              >
                 {skill.label} · {skill.count}
-              </span>
+              </Link>
             ))}
           </div>
 
