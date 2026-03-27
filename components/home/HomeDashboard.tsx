@@ -114,10 +114,8 @@ function EmptyPreview({
 }
 
 function QuickLinkCard({
-  isLoggedIn,
   quickLink,
 }: {
-  isLoggedIn: boolean;
   quickLink: HomeQuickLink;
 }) {
   const Icon = quickLinkIcons[quickLink.href] ?? MdPiano;
@@ -144,11 +142,7 @@ function QuickLinkCard({
         </p>
         <div className="flex items-center justify-between gap-3 text-sm font-semibold text-slate-800 dark:text-slate-100">
           <span>Ver sección</span>
-          {quickLink.requiresLogin && !isLoggedIn ? (
-            <span className="dashboard-chip">Requiere sesión</span>
-          ) : (
-            <MdArrowOutward className="text-lg transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          )}
+          <MdArrowOutward className="text-lg transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
     </Link>
@@ -379,6 +373,9 @@ export default function HomeDashboard({
   topSkills,
 }: HomeDashboardData) {
   const heroImage = heroPhoto?.original ?? "/keyboard.jpg";
+  const visibleStats = isLoggedIn
+    ? stats
+    : stats.filter((stat) => stat.key !== "sheetMusic");
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
@@ -419,7 +416,7 @@ export default function HomeDashboard({
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-        {stats.map((stat) => (
+        {visibleStats.map((stat) => (
           <div className="dashboard-panel p-5" key={stat.label}>
             <p className="dashboard-eyebrow">{stat.label}</p>
             <p className="mt-3 text-3xl font-semibold tracking-tight">
@@ -435,11 +432,7 @@ export default function HomeDashboard({
       <HomeSection description="" eyebrow="Mapa rápido" title="Explorá la web">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {quickLinks.map((quickLink) => (
-            <QuickLinkCard
-              isLoggedIn={isLoggedIn}
-              key={quickLink.href}
-              quickLink={quickLink}
-            />
+            <QuickLinkCard key={quickLink.href} quickLink={quickLink} />
           ))}
         </div>
       </HomeSection>
@@ -538,7 +531,99 @@ export default function HomeDashboard({
         )}
       </HomeSection>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      {isLoggedIn ? (
+        <div className="grid gap-8 lg:grid-cols-2">
+          <HomeSection
+            description=""
+            eyebrow="Galería"
+            href={constants.PICTURES_2025_PATH}
+            linkLabel="Ver fotos"
+            title={`Fotos ${photosYear}`}
+          >
+            {photos.length ? (
+              <div className="grid gap-4 sm:grid-cols-2">
+                {photos.map((photo) => (
+                  <PhotosPreview
+                    key={photo.original}
+                    photo={photo}
+                    photosYear={photosYear}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Link
+                className="dashboard-link-card block overflow-hidden p-0"
+                href={constants.PICTURES_2025_PATH}
+              >
+                <div className="relative h-64">
+                  <DefensiveImage
+                    alt="Teclado de piano o sintetizador"
+                    className="object-cover"
+                    fill
+                    sizes="100vw"
+                    src="/keyboard.jpg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <p className="dashboard-eyebrow text-white/70">
+                      Acceso rápido
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold">
+                      Ver el archivo visual del grupo
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            )}
+          </HomeSection>
+
+          <HomeSection
+            description=""
+            eyebrow="Recursos"
+            href={constants.SHEETMUSIC_PATH}
+            linkLabel="Ver catálogo"
+            title="Partituras más descargadas"
+          >
+            {topSheetMusic.length ? (
+              <div className="flex flex-col gap-3">
+                {topSheetMusic.map((sheet) => (
+                  <Link
+                    className="dashboard-link-card flex items-center justify-between gap-4 p-4"
+                    href={buildSheetMusicPreviewHref(sheet)}
+                    key={sheet.id}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-6">
+                        {getSheetMusicName(sheet.composer, sheet.title)}
+                      </p>
+                      <p className="text-sm text-slate-600 dark:text-slate-300">
+                        {translateSheetMusicGenre(sheet.genre)}
+                        {sheet.difficulty
+                          ? ` · ${translateSheetMusicDifficulty(
+                              sheet.difficulty,
+                            )}`
+                          : ""}
+                      </p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <p className="dashboard-eyebrow">Descargas</p>
+                      <p className="mt-1 text-lg font-semibold">
+                        {sheet.downloadCount}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <EmptyPreview
+                ctaHref={constants.SHEETMUSIC_PATH}
+                ctaLabel="Ver partituras"
+                message="No hubo datos suficientes para construir el ranking de descargas."
+              />
+            )}
+          </HomeSection>
+        </div>
+      ) : (
         <HomeSection
           description=""
           eyebrow="Galería"
@@ -582,51 +667,7 @@ export default function HomeDashboard({
             </Link>
           )}
         </HomeSection>
-
-        <HomeSection
-          description=""
-          eyebrow="Recursos"
-          href={constants.SHEETMUSIC_PATH}
-          linkLabel="Ver catálogo"
-          title="Partituras más descargadas"
-        >
-          {topSheetMusic.length ? (
-            <div className="flex flex-col gap-3">
-              {topSheetMusic.map((sheet) => (
-                <Link
-                  className="dashboard-link-card flex items-center justify-between gap-4 p-4"
-                  href={buildSheetMusicPreviewHref(sheet)}
-                  key={sheet.id}
-                >
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold leading-6">
-                      {getSheetMusicName(sheet.composer, sheet.title)}
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-300">
-                      {translateSheetMusicGenre(sheet.genre)}
-                      {sheet.difficulty
-                        ? ` · ${translateSheetMusicDifficulty(sheet.difficulty)}`
-                        : ""}
-                    </p>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="dashboard-eyebrow">Descargas</p>
-                    <p className="mt-1 text-lg font-semibold">
-                      {sheet.downloadCount}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <EmptyPreview
-              ctaHref={constants.SHEETMUSIC_PATH}
-              ctaLabel="Ver partituras"
-              message="No hubo datos suficientes para construir el ranking de descargas."
-            />
-          )}
-        </HomeSection>
-      </div>
+      )}
 
       <HomeSection
         description=""
