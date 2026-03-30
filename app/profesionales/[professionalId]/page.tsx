@@ -23,54 +23,57 @@ const Professional = async ({
   const userId = session?.user.id ?? "";
 
   return (
-    <div className="flex flex-col w-full items-center m-auto">
-      <div className="flex flex-col bg-slate-300 rounded-xl p-6 space-y-1 box-item">
-        <h1 className="self-center mb-4">
-          {professional.firstName}{" "}
-          {professional.nickname && `"${professional.nickname}"`}{" "}
-          {professional.lastName}
-        </h1>
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="ui-panel flex flex-col space-y-5 p-6 sm:p-8">
+        <div className="space-y-2 text-center">
+          <p className="ui-eyebrow">Profesional</p>
+          <h1>
+            {professional.firstName}{" "}
+            {professional.nickname && `"${professional.nickname}"`}{" "}
+            {professional.lastName}
+          </h1>
+        </div>
         {professional.phone && (
-          <div className="flex space-x-1 w-full self-start">
+          <div className="ui-detail-meta w-full self-start">
             <FaPhone className="self-center" />
             <h3>{professional.phone}</h3>
           </div>
         )}
         {professional.phone && <WhatsAppButton phone={professional.phone} />}
         {professional.isTecladista && (
-          <div className="flex space-x-2">
+          <div className="ui-chip w-fit">
             <MdPiano className="self-center" />
             <i>Pst, ¡es del grupo!</i>
           </div>
         )}
         {professional.email && (
-          <div className="flex space-x-2">
+          <div className="ui-detail-meta">
             <MdEmail className="self-center" />
             <Link
-              href={`mailto:${professional.email}`}
               className={"link"}
-              target="_blank"
+              href={`mailto:${professional.email}`}
               rel="noopener noreferrer"
+              target="_blank"
             >
               {professional.email}
             </Link>
           </div>
         )}
         {professional.website && (
-          <div className="flex space-x-2">
+          <div className="ui-detail-meta">
             <FaGlobeAmericas className="self-center" />
             <Link
-              href={professional.website}
               className={"link"}
-              target="_blank"
+              href={professional.website}
               rel="noopener noreferrer"
+              target="_blank"
             >
               {professional.website}
             </Link>
           </div>
         )}
         {professional.location && (
-          <div className="flex space-x-2">
+          <div className="ui-detail-meta">
             <MdLocationPin className="self-center" />
             <h3>{professional.location}</h3>
           </div>
@@ -82,7 +85,7 @@ const Professional = async ({
               ?.rating
           }
         />
-        <div className="flex space-x-1 self-center">
+        <div className="ui-chip flex w-fit self-center space-x-1">
           <h3>{calculateRating(professional.ratings)}</h3>
           <FaStar className="self-center" />
           <h3>

@@ -1,9 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import Field from "@/components/ui/Field";
+import FormShell from "@/components/ui/FormShell";
 import { contactSubjects } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 const Contact = () => {
@@ -13,7 +16,9 @@ const Contact = () => {
     message: "",
   });
 
-  const handleOnChange = (event: { target: { name: any; value: any } }) => {
+  const handleOnChange = (
+    event: ChangeEvent<HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
     if (event.target) {
       setData({
         ...data,
@@ -51,33 +56,45 @@ const Contact = () => {
   };
 
   return (
-    <>
-      <h1 className="form-title">Contacto</h1>
-      <form className="wide-form" onSubmit={handleSubmit}>
-        <select id="subject" name="subject" onChange={handleOnChange} required>
-          {Object.entries(contactSubjects).map(([key, value]) => (
-            <option key={key} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
+    <FormShell
+      description="Usá este formulario para comentarios, sugerencias o temas administrativos."
+      eyebrow="Soporte"
+      size="default"
+      title="Contacto"
+    >
+      <form className="ui-form-grid" onSubmit={handleSubmit}>
+        <Field htmlFor="subject" label="Motivo">
+          <select
+            className="ui-select"
+            id="subject"
+            name="subject"
+            onChange={handleOnChange}
+            required
+          >
+            {Object.entries(contactSubjects).map(([key, value]) => (
+              <option key={key} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </Field>
 
-        <textarea
-          className="h-24 min-h-[6rem] max-h-96"
-          id="message"
-          name="message"
-          placeholder="Mensaje"
-          onChange={handleOnChange}
-          required
-        ></textarea>
+        <Field htmlFor="message" label="Mensaje">
+          <textarea
+            className="ui-textarea max-h-96"
+            id="message"
+            name="message"
+            onChange={handleOnChange}
+            placeholder="Mensaje"
+            required
+          ></textarea>
+        </Field>
 
-        <br />
-
-        <button className="submit-button w-fit" type="submit" value="Enviar">
-          <h3>Enviar mensaje</h3>
-        </button>
+        <div className="ui-form-actions">
+          <Button type="submit">Enviar mensaje</Button>
+        </div>
       </form>
-    </>
+    </FormShell>
   );
 };
 

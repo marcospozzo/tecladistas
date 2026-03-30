@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import Script from "next/script";
 import { Header } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import { getServerSession } from "next-auth/next";
@@ -70,10 +71,12 @@ export default async function RootLayout({
       }
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{ __html: getThemeInitScript() }}
+        <Script
           id="theme-init"
-        />
+          strategy="beforeInteractive"
+        >
+          {getThemeInitScript()}
+        </Script>
       </head>
       <body>
         <Provider

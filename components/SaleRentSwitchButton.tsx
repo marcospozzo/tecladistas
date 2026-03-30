@@ -9,16 +9,26 @@ const SaleRentSwitchButton = ({
   listingType: string;
 }) => {
   return (
-    <nav className="flex w-fit mx-auto h-12 space-x-4 mb-4">
+    <nav className="mx-auto mb-2 flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/70 p-1 shadow-sm dark:border-white/10 dark:bg-slate-900/60">
       <button
+        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+          listingType === constants.SALE
+            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950"
+            : "text-slate-600 hover:bg-black/5 dark:text-slate-300 dark:hover:bg-white/10"
+        }`}
         onClick={handleSwitchListingType}
-        className={`p-2 ${listingType === constants.SALE && "is-active"}`}
+        type="button"
       >
         Venta
       </button>
       <button
+        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+          listingType === constants.RENT
+            ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950"
+            : "text-slate-600 hover:bg-black/5 dark:text-slate-300 dark:hover:bg-white/10"
+        }`}
         onClick={handleSwitchListingType}
-        className={`p-2 ${listingType === constants.RENT && "is-active"}`}
+        type="button"
       >
         Alquiler
       </button>

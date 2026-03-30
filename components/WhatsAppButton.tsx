@@ -1,6 +1,6 @@
+import { ButtonLink } from "./ui/Button";
 import { constants } from "@/utils/utils";
 import { formatPhone } from "@/utils/utils";
-import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa6";
 
 const WhatsAppButton = ({
@@ -21,16 +21,16 @@ const WhatsAppButton = ({
   }
 
   return (
-    <div className="flex flex-col space-x-1">
-      <Link
-        className="flex justify-center button submit-button space-x-2 my-2 w-full"
+    <div className="flex flex-col">
+      <ButtonLink
+        fullWidth
         href={url}
-        target="_blank"
         rel="noopener noreferrer"
+        target="_blank"
       >
-        <h3>Abrir</h3>
+        Abrir
         <FaWhatsapp size={25} />
-      </Link>
+      </ButtonLink>
     </div>
   );
 };

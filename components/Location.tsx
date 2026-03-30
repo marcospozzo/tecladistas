@@ -2,8 +2,8 @@ import { MdLocationPin } from "react-icons/md";
 
 const Location = ({ name }: { name: string | undefined }) => {
   return (
-    <div className="flex flex-row items-center space-x-1">
-      <MdLocationPin />
+    <div className="ui-detail-meta">
+      <MdLocationPin className="text-base" />
       <div>{name}</div>
     </div>
   );

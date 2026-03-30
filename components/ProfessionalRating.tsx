@@ -14,9 +14,8 @@ const ProfessionalRating = ({
   value: number | undefined | null;
 }) => {
   const router = useRouter();
-  const [ratingValue, setRatingValue] = useState<number | undefined | null>(
-    value
-  );
+  const [ratingValue, setRatingValue] = useState<number | null>(value ?? null);
+
   return (
     <div className="flex flex-col space-y-3">
       <h2 className="self-center mt-4">Calificar:</h2>

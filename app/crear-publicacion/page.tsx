@@ -1,5 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import Field from "@/components/ui/Field";
+import FormShell from "@/components/ui/FormShell";
 import { EditableInput, SaleRentSwitchButton } from "@/components";
 import SimpleFileUploader from "@/components/SimpleFileUploader";
 import { ProductProps } from "@/types";
@@ -11,13 +14,19 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   FormEvent,
+  MouseEvent,
   useEffect,
   useReducer,
   useState,
 } from "react";
 import { toast } from "react-toastify";
 
-const dataReducer = (state: ProductProps, action: any): ProductProps => {
+type DataAction =
+  | { field: string; type: "UPDATE"; value: boolean | string }
+  | { type: "SET_EXCHANGES_FALSE" }
+  | { type: "OVERWRITE"; value: ProductProps };
+
+const dataReducer = (state: ProductProps, action: DataAction): ProductProps => {
   switch (action.type) {
     case "UPDATE":
       return { ...state, [action.field]: action.value };
@@ -34,7 +43,7 @@ const NewProduct = () => {
   const router = useRouter();
   const [image, setImage] = useState<File | null>(null);
   const [listingType, setListingType] = useState(constants.SALE);
-  const [data, dispatch] = useReducer(dataReducer, {});
+  const [data, dispatch] = useReducer(dataReducer, {} as ProductProps);
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
 
@@ -74,7 +83,7 @@ const NewProduct = () => {
     setImage(image);
   };
 
-  const handleSwitchListingType = (event: React.MouseEvent<HTMLElement>) => {
+  const handleSwitchListingType = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (listingType === constants.SALE) {
       dispatch({ type: "SET_EXCHANGES_FALSE" });
@@ -94,7 +103,9 @@ const NewProduct = () => {
       }
     }
 
-    !productId && formData.append("image", image!);
+    if (!productId && image) {
+      formData.append("image", image);
+    }
     formData.append("listingType", listingType);
 
     const endpoint = productId
@@ -130,7 +141,20 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
-    if (window.location.hash === "#alquiler") setListingType(constants.RENT);
+    const syncListingTypeWithHash = () => {
+      setListingType(
+        window.location.hash === "#alquiler"
+          ? constants.RENT
+          : constants.SALE,
+      );
+    };
+
+    syncListingTypeWithHash();
+    window.addEventListener("hashchange", syncListingTypeWithHash);
+
+    return () => {
+      window.removeEventListener("hashchange", syncListingTypeWithHash);
+    };
   }, []);
 
   useEffect(() => {
@@ -145,16 +169,16 @@ const NewProduct = () => {
           // Filter out null or undefined properties
           const cleanedProduct = Object.fromEntries(
             Object.entries(product).filter(
-              ([_, value]) => value !== null && value !== undefined,
+              ([key, value]) =>
+                key !== "listingType" &&
+                value !== null &&
+                value !== undefined,
             ),
-          );
-
-          const { listingType, ...cleanedProductWithoutListingType } =
-            cleanedProduct;
+          ) as ProductProps;
 
           dispatch({
             type: "OVERWRITE",
-            value: cleanedProductWithoutListingType,
+            value: cleanedProduct,
           });
           setListingType(product.listingType!);
         } catch (error) {
@@ -164,15 +188,16 @@ const NewProduct = () => {
     };
 
     fetchData();
-  }, []);
+  }, [productId]);
 
   return (
-    <>
-      <h1 className="form-title">
-        {productId ? "Editar publicación" : "Crear publicación"}
-      </h1>
-
-      <form className="wide-form" onSubmit={handleSubmit}>
+    <FormShell
+      description="Publicá un instrumento para venta o alquiler dentro de la comunidad."
+      eyebrow={productId ? "Edición" : "Publicación"}
+      size="wide"
+      title={productId ? "Editar publicación" : "Crear publicación"}
+    >
+      <form className="ui-form-grid" onSubmit={handleSubmit}>
         {!productId && (
           <SaleRentSwitchButton
             handleSwitchListingType={handleSwitchListingType}
@@ -186,23 +211,16 @@ const NewProduct = () => {
           text={data.title}
         />
 
-        <div className="flex max-sm:flex-col max-sm:w-full">
-          <label
-            htmlFor={"description"}
-            className="self-center max-sm:self-start w-1/5"
-          >
-            {"Descripción:"}
-          </label>
-
+        <Field htmlFor="description" label="Descripción:">
           <textarea
-            className="h-24 min-h-[6rem] max-h-48 sm:w-4/5"
+            className="ui-textarea max-h-48"
             id="description"
             name="description"
-            placeholder={placeholders.description}
             onChange={handleTextAreaChange}
-            value={data.description || ""} // Ensure that value is set
+            placeholder={placeholders.description}
+            value={data.description || ""}
           ></textarea>
-        </div>
+        </Field>
 
         <EditableInput
           handleOnChange={handleEditableInputChange}
@@ -225,66 +243,60 @@ const NewProduct = () => {
         />
 
         {listingType === constants.SALE && (
-          <div className="flex max-sm:flex-col space-x-2 my-4">
-            <label
-              className="w-1/5 self-center max-sm:self-start "
-              htmlFor="exchanges"
-            >
-              Canje:
-            </label>
-            <div className="flex space-x-2">
+          <Field htmlFor="exchanges" label="Canje:">
+            <div className="ui-checkbox-row">
               <input
-                className="h-5 w-5 m-0 self-center"
-                type="checkbox"
+                checked={data.exchanges || false}
+                className="ui-checkbox"
                 id="exchanges"
                 name="exchanges"
                 onChange={handleCheckboxChange}
-                checked={data.exchanges || false} // Ensure that checked property is set
+                type="checkbox"
               />
-              <h3 className="self-center">{placeholders.exchanges}</h3>
+              <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
+                {placeholders.exchanges}
+              </p>
             </div>
-          </div>
+          </Field>
         )}
         {!productId && (
-          <div className="flex max-sm:flex-col my-4">
-            <label
-              className="w-1/5 self-center max-sm:self-start "
-              htmlFor="image"
-            >
-              Foto:
-            </label>
+          <Field htmlFor="image" label="Foto:">
             <SimpleFileUploader
-              maxSize={20}
-              required={!productId}
-              label={placeholders.image}
               classes="self-center space-x-4 w-full h-12"
               handleChange={handleImageUploaderChange}
-              name="image"
               id="image"
+              label={placeholders.image}
+              maxSize={20}
+              name="image"
+              required={!productId}
               types={imageTypes}
             />
-          </div>
+          </Field>
         )}
 
-        <div className="flex max-sm:flex-col space-x-2 my-4 justify-center">
-          <div className="flex space-x-2">
+        <Field htmlFor="disclaimer" label="Confirmación:">
+          <div className="ui-checkbox-row">
             <input
-              className="h-5 w-5 m-0 self-center"
-              type="checkbox"
+              className="ui-checkbox"
               id="disclaimer"
               name="disclaimer"
               onChange={handleCheckboxChange}
               required={true}
+              type="checkbox"
             />
-            <h3 className="self-center">{placeholders.disclamer}</h3>
+            <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
+              {placeholders.disclamer}
+            </p>
           </div>
-        </div>
+        </Field>
 
-        <button className="submit-button my-6" type="submit">
-          <h3>{productId ? "Guardar cambios" : "Publicar"}</h3>
-        </button>
+        <div className="ui-form-actions">
+          <Button type="submit">
+            {productId ? "Guardar cambios" : "Publicar"}
+          </Button>
+        </div>
       </form>
-    </>
+    </FormShell>
   );
 };
 

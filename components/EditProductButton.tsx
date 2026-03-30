@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "./ui/Button";
 
 const EditProductButton = ({
   productId,
@@ -7,14 +7,9 @@ const EditProductButton = ({
 }) => {
   const url = `/crear-publicacion?id=${productId}`;
   return (
-    <div className="flex flex-col space-x-1">
-      <Link
-        className="flex justify-center button submit-button space-x-2 my-2 w-full"
-        href={url}
-      >
-        <h3>Editar</h3>
-      </Link>
-    </div>
+    <ButtonLink fullWidth href={url}>
+      Editar
+    </ButtonLink>
   );
 };
 

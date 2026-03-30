@@ -102,12 +102,12 @@ export default function SimpleFileUploader({
         type="file"
       />
       <label
-        className={`flex min-h-12 cursor-pointer items-center justify-between rounded-xl border-2 border-dashed px-4 py-3 transition ${
+        className={`ui-file-dropzone ${
           errorMessage
             ? "border-red-500 bg-red-50 text-red-700"
             : isDragging
             ? "border-sky-500 bg-sky-50 text-sky-700"
-            : "border-gray-400 bg-white text-black dark:border-slate-400 dark:bg-slate-600 dark:text-white"
+            : "border-black/10 bg-white/70 text-black dark:border-white/10 dark:bg-slate-900/50 dark:text-white"
         }`}
         htmlFor={id}
         onDragEnter={() => setIsDragging(true)}
@@ -131,7 +131,7 @@ export default function SimpleFileUploader({
         {errorMessage ? (
           <span className="text-red-600">{errorMessage}</span>
         ) : (
-          <span className="text-slate-600 dark:text-slate-200">
+          <span className="text-slate-600 dark:text-slate-300">
             Formatos permitidos: {types.join(", ")}. Maximo: {maxSize} MB.
           </span>
         )}

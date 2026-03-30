@@ -33,18 +33,21 @@ const Product = async ({
   }).format(date);
 
   return (
-    <div className="item">
-      <div className="max-lg:w-full relative w-2/3 h-full">
+    <div className="ui-detail-layout">
+      <div className="ui-detail-media min-h-[420px]">
         <DefensiveImage
-          className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={product.images?.[0]}
           alt={`${product.brand} ${product.model} product`}
-          width={1000}
+          className="h-full w-full object-contain"
           height={1000}
+          src={product.images?.[0]}
+          width={1000}
         />
       </div>
-      <div className="w-1/3 max-lg:w-full space-y-4">
-        <h1>{product.title}</h1>
+      <div className="ui-detail-sidebar space-y-5">
+        <div className="space-y-2">
+          <p className="ui-eyebrow">Instrumento</p>
+          <h1>{product.title}</h1>
+        </div>
 
         {product.listingType === constants.SALE
           ? product.price && (
@@ -57,47 +60,50 @@ const Product = async ({
             )}
 
         {product.exchanges && (
-          <div className="flex space-x-1">
+          <div className="ui-chip w-fit">
             <span
               aria-label="Escucha propuestas de canje"
               title="Escucha propuestas de canje"
-              className="self-center"
             >
               <FaArrowsRotate />
             </span>
-            <i className="self-center">Escucha propuestas de canje.</i>
+            <i>Escucha propuestas de canje.</i>
           </div>
         )}
 
-        {product.year && <div>Año: {product.year}</div>}
+        {product.year && <div className="ui-detail-meta">Año: {product.year}</div>}
 
-        {product.description && <pre>{product.description}</pre>}
+        {product.description && (
+          <pre className="text-sm leading-7 text-slate-700 dark:text-slate-200">
+            {product.description}
+          </pre>
+        )}
 
         <Location name={product.location} />
 
-        <div>
-          <div className="flex space-x-1">
-            <MdPiano className="self-center" />
-            <h3>{user.firstName}</h3>
-          </div>
+        <div className="ui-detail-meta">
+          <MdPiano className="self-center" />
+          <h3>{user.firstName}</h3>
         </div>
 
-        {isTheirOwn ? (
-          <>
+        <div className="ui-detail-actions">
+          {isTheirOwn ? (
             <EditProductButton productId={product._id} />
-            <DeleteProductButton id={product._id} />
-          </>
-        ) : (
-          <>
+          ) : (
             <WhatsAppButton
               userId={product.userId!}
               message={productMessage(user.firstName, product.title ?? "")}
             />
-            <div>
+          )}
+
+          {isTheirOwn ? (
+            <DeleteProductButton id={product._id} />
+          ) : (
+            <div className="text-sm text-slate-600 dark:text-slate-300">
               <i>{`Fecha de publicación: ${createdAtSpanishDate}`}</i>
             </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
