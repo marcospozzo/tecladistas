@@ -1,4 +1,6 @@
 "use client";
+
+import { Button } from "./ui/Button";
 import { constants } from "@/utils/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -37,22 +39,20 @@ const DeleteProductButton = ({ id }: { id: string | undefined }) => {
   };
 
   return (
-    <div className="flex flex-col space-x-1">
+    <div className="flex flex-col gap-3">
       {!isConfirmed && (
         <button
-          className="flex justify-center delete-button space-x-2 w-full"
+          className="ui-button ui-button-danger w-full"
           onClick={handleDelete}
+          type="button"
         >
-          <h3>Eliminar</h3>
+          Eliminar
         </button>
       )}
       {isConfirmed && (
-        <button
-          className="flex justify-center submit-button space-x-2 w-fit"
-          onClick={handleConfirm}
-        >
-          <h3>Confirmar eliminación</h3>
-        </button>
+        <Button onClick={handleConfirm} type="button" variant="primary">
+          Confirmar eliminación
+        </Button>
       )}
     </div>
   );

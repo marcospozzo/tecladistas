@@ -3,6 +3,7 @@
 import { EditableInputProps } from "@/types";
 import { ChangeEventHandler, KeyboardEventHandler, useState } from "react";
 import { formatPrice, placeholders } from "@/utils/utils";
+import Field from "./ui/Field";
 
 export default function EditableInput({
   text = "",
@@ -28,32 +29,29 @@ export default function EditableInput({
   };
 
   return (
-    <div className="flex max-sm:flex-col max-sm:w-full">
-      <label
-        htmlFor={fieldName}
-        className="self-center max-sm:self-start w-1/5"
-      >{`${label}:`}</label>
+    <Field htmlFor={fieldName} label={`${label}:`}>
       {isEditing || text === "" ? (
         <input
+          autoFocus={text !== ""}
+          className="ui-input"
+          defaultValue={text}
           id={fieldName}
           name={fieldName}
-          onChange={handleOnChangeEdit}
-          defaultValue={text}
           onBlur={handleOnClick}
+          onChange={handleOnChangeEdit}
           onKeyDown={handleKeyDown}
-          className="sm:w-4/5"
-          type="text"
-          autoFocus={text !== ""}
           placeholder={placeholders[fieldName]}
+          type="text"
         />
       ) : (
         <button
+          className="ui-editable-display"
           onClick={handleOnClick}
-          className="w-4/5 max-sm:w-full justify-start border-none editable-input text-left"
+          type="button"
         >
           {fieldName === "price" ? formatPrice(text) : text}
         </button>
       )}
-    </div>
+    </Field>
   );
 }

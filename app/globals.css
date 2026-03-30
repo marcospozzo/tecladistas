@@ -88,11 +88,11 @@ h2 {
 }
 
 .cards {
-  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:min-h-[22em];
+  @apply w-full grid grid-cols-1 gap-4 sm:min-h-[22em] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
 }
 
 .professionals {
-  @apply w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  @apply w-full grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
 }
 
 .link {
@@ -183,24 +183,171 @@ textarea {
   @apply text-sm text-center;
 }
 
-.dashboard-panel {
+.ui-panel {
   @apply rounded-[28px] border border-black/10 bg-white/80 shadow-xl shadow-black/5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/75;
 }
 
-.dashboard-card {
+.ui-card {
   @apply rounded-[24px] border border-black/5 bg-white/60 shadow-sm shadow-black/5 dark:border-white/10 dark:bg-slate-950/40;
 }
 
-.dashboard-link-card {
-  @apply dashboard-card transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg;
+.ui-link-card {
+  @apply ui-card transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg;
 }
 
-.dashboard-eyebrow {
+.ui-eyebrow {
   @apply text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400;
 }
 
-.dashboard-chip {
+.ui-chip {
   @apply inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/10 dark:text-slate-100;
+}
+
+.ui-button {
+  @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 dark:focus-visible:ring-slate-500 dark:focus-visible:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.ui-button-primary {
+  @apply bg-emerald-600 text-white shadow-lg hover:bg-emerald-500;
+}
+
+.ui-button-secondary {
+  @apply border border-black/10 bg-white/70 text-slate-900 shadow-sm hover:bg-white dark:border-white/10 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:bg-slate-900;
+}
+
+.ui-button-danger {
+  @apply bg-rose-600 text-white shadow-lg hover:bg-rose-500;
+}
+
+.ui-form-shell {
+  @apply mx-auto w-full;
+}
+
+.ui-form-header {
+  @apply mb-8 space-y-3 text-center;
+}
+
+.ui-form-title {
+  @apply text-3xl font-semibold tracking-tight sm:text-4xl;
+}
+
+.ui-form-description {
+  @apply text-sm leading-6 text-slate-600 dark:text-slate-300;
+}
+
+.ui-form-grid {
+  @apply flex flex-col gap-5;
+}
+
+.ui-form-actions {
+  @apply flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end;
+}
+
+.ui-field-row {
+  @apply flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-6;
+}
+
+.ui-field-label {
+  @apply text-sm font-semibold text-slate-700 dark:text-slate-200 sm:w-40 sm:pt-3;
+}
+
+.ui-field-control {
+  @apply flex-1;
+}
+
+.ui-field-description {
+  @apply mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300;
+}
+
+.ui-field-error {
+  @apply mt-2 text-sm text-red-600 dark:text-red-300;
+}
+
+.ui-input,
+.ui-select,
+.ui-textarea {
+  @apply w-full rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-black shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 dark:border-white/10 dark:bg-slate-900/50 dark:text-white dark:focus:border-slate-500 dark:focus:ring-slate-800;
+}
+
+.ui-textarea {
+  @apply min-h-[6rem];
+}
+
+.ui-editable-display {
+  @apply ui-input flex items-center justify-between text-left font-semibold hover:bg-white dark:hover:bg-slate-900;
+}
+
+.ui-checkbox-row {
+  @apply flex items-center gap-3 rounded-2xl border border-black/10 bg-white/50 px-4 py-3 dark:border-white/10 dark:bg-slate-900/40;
+}
+
+.ui-checkbox {
+  @apply h-5 w-5 rounded border-black/20 text-emerald-600 focus:ring-emerald-500;
+}
+
+.ui-phone-input {
+  @apply ui-input flex items-center gap-3;
+}
+
+.ui-phone-input .PhoneInputInput {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  min-width: 0;
+  outline: none;
+  width: 100%;
+}
+
+.ui-phone-input .PhoneInputCountry {
+  margin: 0;
+}
+
+.ui-phone-input .PhoneInputCountrySelectArrow {
+  color: currentColor;
+}
+
+.ui-file-dropzone {
+  @apply flex min-h-[3rem] cursor-pointer items-center justify-between rounded-2xl border-2 border-dashed px-4 py-3 transition;
+}
+
+.ui-detail-layout {
+  @apply grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)];
+}
+
+.ui-detail-media {
+  @apply ui-panel relative overflow-hidden p-4 sm:p-6;
+}
+
+.ui-detail-sidebar {
+  @apply ui-panel p-6 sm:p-8;
+}
+
+.ui-detail-meta {
+  @apply flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300;
+}
+
+.ui-detail-actions {
+  @apply flex flex-col gap-3 pt-2;
+}
+
+.dashboard-panel {
+  @apply ui-panel;
+}
+
+.dashboard-card {
+  @apply ui-card;
+}
+
+.dashboard-link-card {
+  @apply ui-link-card;
+}
+
+.dashboard-eyebrow {
+  @apply ui-eyebrow;
+}
+
+.dashboard-chip {
+  @apply ui-chip;
 }
 
 .icons-container {

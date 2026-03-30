@@ -18,57 +18,68 @@ const Studio = async ({
   const user = await getUser(studio.userId!);
 
   return (
-    <div className="item">
-      <div className="max-lg:w-full relative w-3/5 h-full">
+    <div className="ui-detail-layout">
+      <div className="ui-detail-media min-h-[420px]">
         <DefensiveImage
-          className="object-contain w-full h-full lg:pr-8 max-h-screen"
-          src={studio.images?.[0]}
           alt={`Imagen que representa al estudio ${studio.name}`}
-          width={1000}
+          className="h-full w-full object-contain"
           height={1000}
+          src={studio.images?.[0]}
+          width={1000}
         />
       </div>
-      <div className="w-2/5 max-lg:w-full space-y-4">
-        <h1>{studio.name}</h1>
+      <div className="ui-detail-sidebar space-y-5">
+        <div className="space-y-2">
+          <p className="ui-eyebrow">Estudio</p>
+          <h1>{studio.name}</h1>
+        </div>
 
-        {studio.description && <pre>{studio.description}</pre>}
+        {studio.description && (
+          <pre className="text-sm leading-7 text-slate-700 dark:text-slate-200">
+            {studio.description}
+          </pre>
+        )}
 
         {studio.services && (
           <div>
-            <h3 className="text-lg mb-2">Servicios:</h3>
-            {studio.services.map((service: string, index) => (
-              <li key={index}>{service}</li>
-            ))}
+            <h3 className="mb-2 text-lg font-semibold">Servicios</h3>
+            <div className="flex flex-wrap gap-2">
+              {studio.services.map((service: string, index) => (
+                <span className="ui-chip" key={index}>
+                  {service}
+                </span>
+              ))}
+            </div>
           </div>
         )}
 
         <Location name={studio.location} />
 
         {studio.website && (
-          <div className="flex space-x-2">
+          <div className="ui-detail-meta">
             <FaGlobeAmericas className="self-center" />
             <Link
-              href={studio.website}
               className={"link"}
-              target="_blank"
+              href={studio.website}
               rel="noopener noreferrer"
+              target="_blank"
             >
               {studio.website}
             </Link>
           </div>
         )}
 
-        <div>
-          <div className="flex space-x-1">
-            <MdPiano className="self-center" />
-            <h3>{user.firstName}</h3>
-          </div>
+        <div className="ui-detail-meta">
+          <MdPiano className="self-center" />
+          <h3>{user.firstName}</h3>
         </div>
 
-        <WhatsAppButton
-          userId={studio.userId}
-          message={studioMessage(user.firstName, studio.name)}
-        />
+        <div className="ui-detail-actions">
+          <WhatsAppButton
+            userId={studio.userId}
+            message={studioMessage(user.firstName, studio.name)}
+          />
+        </div>
       </div>
     </div>
   );

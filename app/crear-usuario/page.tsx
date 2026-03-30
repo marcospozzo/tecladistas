@@ -1,5 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import Field from "@/components/ui/Field";
+import FormShell from "@/components/ui/FormShell";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
@@ -11,7 +14,7 @@ const CreateWhitelisted = () => {
   const router = useRouter();
   const [data, setData] = useState({
     displayName: "",
-    phone: "",
+    phone: "+549",
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -66,34 +69,44 @@ const CreateWhitelisted = () => {
   };
 
   return (
-    <>
-      <h1 className="form-title">Crear usuario</h1>
-      <form onSubmit={handleSubmit} className="login-signup">
-        <input
-          type="text"
-          id="displayName"
-          name="displayName"
-          placeholder="Nombre"
-          onChange={handleChange}
-        />
-        <PhoneInput
-          className="pl-4 gap-x-2 w-full"
-          id="phone"
-          name="phone"
-          international
-          countryCallingCodeEditable={false}
-          defaultCountry="AR"
-          value={"+549"}
-          onChange={handlePhoneChange}
-        />
-        <br />
-        <div className="flex flex-col justify-center space-y-2">
-          <button className="submit-button" type="submit" value="login">
-            <h3>Crear usuario</h3>
-          </button>
+    <FormShell
+      description="Alta manual de un usuario habilitado para ingresar."
+      eyebrow="Administración"
+      size="narrow"
+      title="Crear usuario"
+    >
+      <form className="ui-form-grid" onSubmit={handleSubmit}>
+        <Field htmlFor="displayName" label="Nombre">
+          <input
+            className="ui-input"
+            id="displayName"
+            name="displayName"
+            onChange={handleChange}
+            placeholder="Nombre"
+            type="text"
+          />
+        </Field>
+
+        <Field htmlFor="phone" label="WhatsApp">
+          <PhoneInput
+            className="ui-phone-input"
+            countryCallingCodeEditable={false}
+            defaultCountry="AR"
+            id="phone"
+            international
+            name="phone"
+            onChange={handlePhoneChange}
+            value={data.phone}
+          />
+        </Field>
+
+        <div className="ui-form-actions">
+          <Button fullWidth type="submit">
+            Crear usuario
+          </Button>
         </div>
       </form>
-    </>
+    </FormShell>
   );
 };
 

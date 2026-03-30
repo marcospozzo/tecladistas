@@ -1,5 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import Field from "@/components/ui/Field";
+import FormShell from "@/components/ui/FormShell";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -10,7 +13,7 @@ import { toast } from "react-toastify";
 const DeleteWhitelisted = () => {
   const router = useRouter();
   const [data, setData] = useState({
-    phone: "",
+    phone: "+549",
   });
 
   function handlePhoneChange(value: string | undefined) {
@@ -55,27 +58,33 @@ const DeleteWhitelisted = () => {
   };
 
   return (
-    <>
-      <h1 className="form-title">Eliminar usuario</h1>
-      <form onSubmit={handleSubmit} className="login-signup">
-        <PhoneInput
-          className="pl-4 gap-x-2 w-full"
-          id="phone"
-          name="phone"
-          international
-          countryCallingCodeEditable={false}
-          defaultCountry="AR"
-          value={"+549"}
-          onChange={handlePhoneChange}
-        />
-        <br />
-        <div className="flex flex-col justify-center space-y-2">
-          <button className="submit-button" type="submit" value="login">
-            <h3>Eliminar usuario</h3>
-          </button>
+    <FormShell
+      description="Eliminá una autorización vigente usando el número de teléfono asociado."
+      eyebrow="Administración"
+      size="narrow"
+      title="Eliminar usuario"
+    >
+      <form className="ui-form-grid" onSubmit={handleSubmit}>
+        <Field htmlFor="phone" label="WhatsApp">
+          <PhoneInput
+            className="ui-phone-input"
+            countryCallingCodeEditable={false}
+            defaultCountry="AR"
+            id="phone"
+            international
+            name="phone"
+            onChange={handlePhoneChange}
+            value={data.phone}
+          />
+        </Field>
+
+        <div className="ui-form-actions">
+          <Button fullWidth variant="danger" type="submit">
+            Eliminar usuario
+          </Button>
         </div>
       </form>
-    </>
+    </FormShell>
   );
 };
 
