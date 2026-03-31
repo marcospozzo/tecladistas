@@ -113,7 +113,9 @@ button,
   align-items: center;
   background-color: rgb(114, 176, 102);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out; /* Smooth hover effect */
   @apply max-sm:w-full;
 }
 
@@ -244,11 +246,11 @@ textarea {
 }
 
 .ui-field-row {
-  @apply flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-6;
+  @apply flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6;
 }
 
 .ui-field-label {
-  @apply text-sm font-semibold text-slate-700 dark:text-slate-200 sm:w-40 sm:pt-3;
+  @apply text-sm font-semibold text-slate-700 dark:text-slate-200 sm:w-40;
 }
 
 .ui-field-control {
@@ -292,9 +294,14 @@ textarea {
 .ui-phone-input .PhoneInputInput {
   background: transparent;
   border: 0;
+  border-radius: 0;
+  box-shadow: none;
   color: inherit;
+  margin: 0;
+  min-height: 0;
   min-width: 0;
   outline: none;
+  padding: 0;
   width: 100%;
 }
 

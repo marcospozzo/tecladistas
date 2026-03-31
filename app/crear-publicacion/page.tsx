@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/Button";
 import Field from "@/components/ui/Field";
+import FileInput from "@/components/ui/FileInput";
 import FormShell from "@/components/ui/FormShell";
 import { EditableInput, SaleRentSwitchButton } from "@/components";
-import SimpleFileUploader from "@/components/SimpleFileUploader";
 import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import { imageTypes, placeholders } from "@/utils/utils";
@@ -39,9 +39,21 @@ const dataReducer = (state: ProductProps, action: DataAction): ProductProps => {
   }
 };
 
+const IMAGE_MAX_SIZE_MB = 20;
+const ACCEPTED_IMAGE_TYPES = imageTypes.map((type) => type.toLowerCase());
+const IMAGE_ACCEPT = ACCEPTED_IMAGE_TYPES.map((type) => `.${type}`).join(",");
+const IMAGE_DESCRIPTION = `Formatos: ${imageTypes.join(", ")}. Máx. ${IMAGE_MAX_SIZE_MB} MB.`;
+
+function getFileExtension(fileName: string) {
+  const segments = fileName.split(".");
+
+  return segments.length > 1 ? (segments.pop()?.toLowerCase() ?? "") : "";
+}
+
 const NewProduct = () => {
   const router = useRouter();
   const [image, setImage] = useState<File | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
   const [listingType, setListingType] = useState(constants.SALE);
   const [data, dispatch] = useReducer(dataReducer, {} as ProductProps);
   const searchParams = useSearchParams();
@@ -79,8 +91,38 @@ const NewProduct = () => {
     }
   };
 
-  const handleImageUploaderChange = (image: File | null) => {
-    setImage(image);
+  const handleImageInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextImage = event.target.files?.[0] ?? null;
+
+    if (!nextImage) {
+      setImage(null);
+      setImageError(null);
+      return;
+    }
+
+    const fileExtension = getFileExtension(nextImage.name);
+
+    if (
+      !fileExtension ||
+      !ACCEPTED_IMAGE_TYPES.includes(fileExtension)
+    ) {
+      setImage(null);
+      setImageError("Formato no soportado. Usar JPG, JPEG o PNG.");
+      event.target.value = "";
+      return;
+    }
+
+    const fileSizeInMb = nextImage.size / 1024 / 1024;
+
+    if (fileSizeInMb > IMAGE_MAX_SIZE_MB) {
+      setImage(null);
+      setImageError(`La imagen supera el maximo de ${IMAGE_MAX_SIZE_MB} MB.`);
+      event.target.value = "";
+      return;
+    }
+
+    setImage(nextImage);
+    setImageError(null);
   };
 
   const handleSwitchListingType = (event: MouseEvent<HTMLElement>) => {
@@ -95,6 +137,12 @@ const NewProduct = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (imageError) {
+      toast.error(imageError);
+      return;
+    }
+
     const formData = new FormData();
 
     for (const key in data) {
@@ -143,9 +191,7 @@ const NewProduct = () => {
   useEffect(() => {
     const syncListingTypeWithHash = () => {
       setListingType(
-        window.location.hash === "#alquiler"
-          ? constants.RENT
-          : constants.SALE,
+        window.location.hash === "#alquiler" ? constants.RENT : constants.SALE,
       );
     };
 
@@ -170,9 +216,7 @@ const NewProduct = () => {
           const cleanedProduct = Object.fromEntries(
             Object.entries(product).filter(
               ([key, value]) =>
-                key !== "listingType" &&
-                value !== null &&
-                value !== undefined,
+                key !== "listingType" && value !== null && value !== undefined,
             ),
           ) as ProductProps;
 
@@ -192,7 +236,7 @@ const NewProduct = () => {
 
   return (
     <FormShell
-      description="Publicá un instrumento para venta o alquiler dentro de la comunidad."
+      description="Publicá un instrumento para venta o alquiler"
       eyebrow={productId ? "Edición" : "Publicación"}
       size="wide"
       title={productId ? "Editar publicación" : "Crear publicación"}
@@ -208,6 +252,7 @@ const NewProduct = () => {
           handleOnChange={handleEditableInputChange}
           label="Título"
           fieldName="title"
+          required={true}
           text={data.title}
         />
 
@@ -232,6 +277,7 @@ const NewProduct = () => {
           handleOnChange={handleEditableInputChange}
           label={listingType === constants.SALE ? "Precio" : "Precio / día"}
           fieldName="price"
+          required={true}
           text={data.price}
         />
 
@@ -239,6 +285,8 @@ const NewProduct = () => {
           handleOnChange={handleEditableInputChange}
           label="Ubicación"
           fieldName="location"
+          maxLength={20}
+          required={true}
           text={data.location}
         />
 
@@ -260,21 +308,24 @@ const NewProduct = () => {
           </Field>
         )}
         {!productId && (
-          <Field htmlFor="image" label="Foto:">
-            <SimpleFileUploader
-              classes="self-center space-x-4 w-full h-12"
-              handleChange={handleImageUploaderChange}
+          <Field
+            description={IMAGE_DESCRIPTION}
+            error={imageError}
+            htmlFor="image"
+            label="Foto:"
+            required={!productId}
+          >
+            <FileInput
+              accept={IMAGE_ACCEPT}
               id="image"
-              label={placeholders.image}
-              maxSize={20}
               name="image"
+              onChange={handleImageInputChange}
               required={!productId}
-              types={imageTypes}
             />
           </Field>
         )}
 
-        <Field htmlFor="disclaimer" label="Confirmación:">
+        <Field htmlFor="disclaimer" label="Confirmación:" required={true}>
           <div className="ui-checkbox-row">
             <input
               className="ui-checkbox"

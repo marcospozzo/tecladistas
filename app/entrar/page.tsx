@@ -22,7 +22,7 @@ const Login = () => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/is-allowed-to-sign-in`,
         body,
-        { withCredentials: true }
+        { withCredentials: true },
       );
       const signInPromise = signIn("email", {
         email: email,
@@ -56,13 +56,13 @@ const Login = () => {
 
   return (
     <FormShell
-      description="Ingresá el email con el que fuiste registradx para recibir el link de acceso."
+      description="Ingresá el email con el que te registraste, para recibir el link de acceso."
       eyebrow="Acceso"
       size="narrow"
       title="Entrar"
     >
       <form className="ui-form-grid" onSubmit={handleSubmit}>
-        <Field htmlFor="email" label="Email">
+        <Field htmlFor="email">
           <input
             className="ui-input"
             id="email"

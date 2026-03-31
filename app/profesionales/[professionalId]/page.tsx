@@ -21,10 +21,11 @@ const Professional = async ({
   const professional = await getProfessional(professionalId);
   const session = await getServerSession(authOptions);
   const userId = session?.user.id ?? "";
+  const centeredMetaClass = "ui-detail-meta w-full justify-center text-center";
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
-      <div className="ui-panel flex flex-col space-y-5 p-6 sm:p-8">
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="ui-panel flex flex-col items-center space-y-5 p-6 text-center sm:p-8">
         <div className="space-y-2 text-center">
           <p className="ui-eyebrow">Profesional</p>
           <h1>
@@ -34,20 +35,24 @@ const Professional = async ({
           </h1>
         </div>
         {professional.phone && (
-          <div className="ui-detail-meta w-full self-start">
+          <div className={centeredMetaClass}>
             <FaPhone className="self-center" />
             <h3>{professional.phone}</h3>
           </div>
         )}
-        {professional.phone && <WhatsAppButton phone={professional.phone} />}
+        {professional.phone && (
+          <div className="w-full max-w-sm">
+            <WhatsAppButton phone={professional.phone} />
+          </div>
+        )}
         {professional.isTecladista && (
-          <div className="ui-chip w-fit">
+          <div className="ui-chip mx-auto w-fit">
             <MdPiano className="self-center" />
             <i>Pst, ¡es del grupo!</i>
           </div>
         )}
         {professional.email && (
-          <div className="ui-detail-meta">
+          <div className={centeredMetaClass}>
             <MdEmail className="self-center" />
             <Link
               className={"link"}
@@ -60,7 +65,7 @@ const Professional = async ({
           </div>
         )}
         {professional.website && (
-          <div className="ui-detail-meta">
+          <div className={centeredMetaClass}>
             <FaGlobeAmericas className="self-center" />
             <Link
               className={"link"}
@@ -73,7 +78,7 @@ const Professional = async ({
           </div>
         )}
         {professional.location && (
-          <div className="ui-detail-meta">
+          <div className={centeredMetaClass}>
             <MdLocationPin className="self-center" />
             <h3>{professional.location}</h3>
           </div>
