@@ -5,6 +5,7 @@ import type { Session } from "next-auth";
 
 import AppThemeProvider from "./theme/AppThemeProvider";
 import { ResolvedTheme, ThemePreference } from "./theme/theme";
+import { NavigationPendingProvider } from "./navigation/NavigationPendingProvider";
 
 export default function Provider({
   children,
@@ -19,12 +20,14 @@ export default function Provider({
 }): React.ReactNode {
   return (
     <SessionProvider session={session}>
-      <AppThemeProvider
-        initialResolvedTheme={initialResolvedTheme}
-        initialThemePreference={initialThemePreference}
-      >
-        {children}
-      </AppThemeProvider>
+      <NavigationPendingProvider>
+        <AppThemeProvider
+          initialResolvedTheme={initialResolvedTheme}
+          initialThemePreference={initialThemePreference}
+        >
+          {children}
+        </AppThemeProvider>
+      </NavigationPendingProvider>
     </SessionProvider>
   );
 }

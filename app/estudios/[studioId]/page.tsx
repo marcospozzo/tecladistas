@@ -1,18 +1,20 @@
 import { Location, WhatsAppButton } from "@/components";
 import DefensiveImage from "@/components/DefensiveImage";
+import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { getStudio, getUser } from "@/utils/axios";
 import Link from "next/link";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { MdPiano } from "react-icons/md";
 import { generateMetadata } from "./utils";
 import { studioMessage } from "@/utils/utils";
+import { Suspense } from "react";
 export { generateMetadata };
 
-const Studio = async ({
+async function StudioContent({
   params,
 }: {
   params: Promise<{ studioId: string }>;
-}) => {
+}) {
   const { studioId } = await params;
   const studio = await getStudio(studioId);
   const user = await getUser(studio.userId!);
@@ -82,6 +84,14 @@ const Studio = async ({
         </div>
       </div>
     </div>
+  );
+}
+
+const Studio = ({ params }: { params: Promise<{ studioId: string }> }) => {
+  return (
+    <Suspense fallback={<PendingContentFallback variant="detail" />}>
+      <StudioContent params={params} />
+    </Suspense>
   );
 };
 

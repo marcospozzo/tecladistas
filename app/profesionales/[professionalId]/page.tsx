@@ -1,10 +1,12 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { ProfessionalRating, WhatsAppButton } from "@/components";
+import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { getProfessional } from "@/utils/axios";
 import { calculateRating, pageTitles } from "@/utils/utils";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { Suspense } from "react";
 import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";
 
@@ -12,11 +14,11 @@ export const metadata: Metadata = {
   title: pageTitles.professionals,
 };
 
-const Professional = async ({
+async function ProfessionalContent({
   params,
 }: {
   params: Promise<{ professionalId: string }>;
-}) => {
+}) {
   const { professionalId } = await params;
   const professional = await getProfessional(professionalId);
   const session = await getServerSession(authOptions);
@@ -103,6 +105,18 @@ const Professional = async ({
         </div>
       </div>
     </div>
+  );
+}
+
+const Professional = ({
+  params,
+}: {
+  params: Promise<{ professionalId: string }>;
+}) => {
+  return (
+    <Suspense fallback={<PendingContentFallback variant="detail" />}>
+      <ProfessionalContent params={params} />
+    </Suspense>
   );
 };
 
