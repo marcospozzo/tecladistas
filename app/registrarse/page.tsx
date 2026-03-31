@@ -8,11 +8,27 @@ import { constants } from "@/utils/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+
+function normalizeName(value: string) {
+  return value
+    .trim()
+    .toLocaleLowerCase("es-AR")
+    .replace(/\s+/g, " ")
+    .replace(
+      /(^|[\s'-])([A-Za-zÁÉÍÓÚÜÑáéíóúüñ])/g,
+      (_match, prefix: string, letter: string) =>
+        `${prefix}${letter.toLocaleUpperCase("es-AR")}`,
+    );
+}
+
+function normalizeEmail(value: string) {
+  return value.trim().toLocaleLowerCase("es-AR");
+}
 
 const SignUp = () => {
   const router = useRouter();
@@ -24,12 +40,27 @@ const SignUp = () => {
     email: "",
   });
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const normalizedData = {
+      ...data,
+      email: normalizeEmail(data.email),
+      firstName: normalizeName(data.firstName),
+      lastName: normalizeName(data.lastName),
+    };
+    const requestData = {
+      email: normalizedData.email,
+      firstName: normalizedData.firstName,
+      lastName: normalizedData.lastName,
+      phone: normalizedData.phone,
+    };
+
+    setData(normalizedData);
+
     try {
       const promise = axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`,
-        data
+        requestData,
       );
       toast.promise(promise, {
         success: "Usuario creado. Redirigiendo...",
@@ -58,14 +89,24 @@ const SignUp = () => {
       await promise;
       router.push(constants.LOGIN_PATH);
     } catch (error) {
-      console.error(error);
+      if (!axios.isAxiosError(error) || !error.response) {
+        console.error(error);
+      }
     }
   };
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    const normalizedValue =
+      name === "email"
+        ? normalizeEmail(value)
+        : name === "firstName" || name === "lastName"
+          ? normalizeName(value)
+          : value;
+
     setData({
       ...data,
-      [event.target.name]: event.target.value,
+      [name]: normalizedValue,
     });
   }
 
@@ -78,7 +119,7 @@ const SignUp = () => {
 
   return (
     <FormShell
-      description="Completá tus datos para solicitar acceso al grupo y a la web."
+      description="Completá tus datos por única vez para darte de alta en la web. La registración solo está habilidada para miembros del grupo de WhatsApp."
       eyebrow="Cuenta"
       size="narrow"
       title="Registrarse"
@@ -100,6 +141,7 @@ const SignUp = () => {
             placeholder="Nombre"
             required
             type="text"
+            value={data.firstName}
           />
         </Field>
 
@@ -112,6 +154,7 @@ const SignUp = () => {
             placeholder="Apellido"
             required
             type="text"
+            value={data.lastName}
           />
         </Field>
 
@@ -141,6 +184,7 @@ const SignUp = () => {
             placeholder="Email"
             required
             type="email"
+            value={data.email}
           />
         </Field>
 

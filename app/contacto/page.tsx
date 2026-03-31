@@ -57,7 +57,7 @@ const Contact = () => {
 
   return (
     <FormShell
-      description="Usá este formulario para comentarios, sugerencias o temas administrativos."
+      description="Usá este formulario para contactar al administrador de la web"
       eyebrow="Soporte"
       size="default"
       title="Contacto"

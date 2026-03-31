@@ -10,6 +10,8 @@ export default function EditableInput({
   label,
   fieldName,
   handleOnChange,
+  maxLength,
+  required = false,
 }: EditableInputProps) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -29,18 +31,20 @@ export default function EditableInput({
   };
 
   return (
-    <Field htmlFor={fieldName} label={`${label}:`}>
+    <Field htmlFor={fieldName} label={`${label}:`} required={required}>
       {isEditing || text === "" ? (
         <input
           autoFocus={text !== ""}
           className="ui-input"
           defaultValue={text}
           id={fieldName}
+          maxLength={maxLength}
           name={fieldName}
           onBlur={handleOnClick}
           onChange={handleOnChangeEdit}
           onKeyDown={handleKeyDown}
           placeholder={placeholders[fieldName]}
+          required={required}
           type="text"
         />
       ) : (
