@@ -48,14 +48,7 @@ export interface StudioProps {
   website?: string;
   location?: string;
 }
-export interface EditableInputProps {
-  text?: string | number;
-  label: string;
-  fieldName: string;
-  handleOnChange: ChangeEventHandler<HTMLInputElement>;
-  maxLength?: number;
-  required?: boolean;
-}
+
 export interface UserProps {
   _id: string;
   firstName: string;
