@@ -5,7 +5,6 @@ import StudioCard from "./Cards/StudioCard";
 import ProfessionalCard from "./Cards/ProfessionalCard";
 import Location from "./Location";
 import CardNew from "./Cards/CardNew";
-import EditableInput from "./EditableInput";
 import WhatsAppButton from "./WhatsAppButton";
 import DeleteProductButton from "./DeleteProductButton";
 import SaleRentSwitchButton from "./SaleRentSwitchButton";
@@ -21,7 +20,6 @@ export {
   ProfessionalCard,
   Location,
   CardNew,
-  EditableInput,
   WhatsAppButton,
   DeleteProductButton,
   SaleRentSwitchButton,

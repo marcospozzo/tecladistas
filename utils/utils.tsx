@@ -75,14 +75,17 @@ export const placeholders: { [key: string]: string } = {
   location: "Barrio / Provincia (máx 20 caracteres)",
   description: "No incluir datos de contacto, como teléfono o email.",
   exchanges: "Escucho propuestas de canje.",
-  image: "Elegir o arrastrar una foto (máx. 20 MB)",
-  disclamer: "Acepto mostrar mi nombre en la publicación.",
+  image: "Elegir una foto",
   brand: "",
   model: "",
   year: "Ej.: 2018",
 };
 
-export function formatPrice(price: any) {
+export const formText = {
+  disclaimerConsent: "Acepto mostrar mi nombre en la publicación.",
+};
+
+export function formatPrice(price: number | string) {
   return Number(price).toLocaleString("es-AR", {
     style: "currency",
     currency: "ARS",
