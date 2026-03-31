@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Page } from "@/types";
+import { useNavigationPending } from "./navigation/NavigationPendingProvider";
 import ThemeSelector from "./theme/ThemeSelector";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
@@ -51,6 +52,7 @@ const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { status } = useSession();
+  const { isPending } = useNavigationPending();
   const isLoggedIn = status === "authenticated";
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -264,7 +266,15 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Abrir ajustes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Synth knob" src="/logo.svg" />
+                <Avatar
+                  alt="Synth knob"
+                  className={
+                    isPending
+                      ? "animate-[spin_2.5s_linear_infinite]"
+                      : undefined
+                  }
+                  src="/logo.svg"
+                />
               </IconButton>
             </Tooltip>
             <Menu

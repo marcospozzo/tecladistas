@@ -5,6 +5,7 @@ import {
   WhatsAppButton,
 } from "@/components";
 import DefensiveImage from "@/components/DefensiveImage";
+import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { getProduct, getUser } from "@/utils/axios";
 import { formatPrice, productMessage } from "@/utils/utils";
 import { FaArrowsRotate } from "react-icons/fa6";
@@ -13,13 +14,14 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { generateMetadata } from "./utils";
 import { constants } from "@/utils/utils";
+import { Suspense } from "react";
 export { generateMetadata };
 
-const Product = async ({
+async function ProductContent({
   params,
 }: {
   params: Promise<{ productId: string }>;
-}) => {
+}) {
   const { productId } = await params;
   const product = await getProduct(productId);
   const user = await getUser(product.userId!);
@@ -106,6 +108,14 @@ const Product = async ({
         </div>
       </div>
     </div>
+  );
+}
+
+const Product = ({ params }: { params: Promise<{ productId: string }> }) => {
+  return (
+    <Suspense fallback={<PendingContentFallback variant="detail" />}>
+      <ProductContent params={params} />
+    </Suspense>
   );
 };
 

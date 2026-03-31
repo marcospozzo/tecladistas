@@ -1,3 +1,4 @@
+import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { ProfessionalProps } from "@/types";
 import { ProfessionalCard } from "@/components";
 import {
@@ -9,12 +10,13 @@ import {
 import { skills } from "@/utils/utils";
 import { getProfessionals } from "@/utils/axios";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: pageTitles.professionals,
 };
 
-const Professionals = async () => {
+async function ProfessionalsContent() {
   const professionals = await getProfessionals();
 
   return (
@@ -41,6 +43,14 @@ const Professionals = async () => {
         </div>
       ))}
     </div>
+  );
+}
+
+const Professionals = () => {
+  return (
+    <Suspense fallback={<PendingContentFallback variant="list" />}>
+      <ProfessionalsContent />
+    </Suspense>
   );
 };
 
