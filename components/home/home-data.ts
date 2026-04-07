@@ -177,7 +177,10 @@ function getTopSheetMusic(sheetMusic: SheetMusic[]) {
 }
 
 function getScatteredPhotosForToday(photos: HomePhoto[]) {
-  const selectedPhotosCount = Math.min(DASHBOARD_FEATURED_PHOTOS, photos.length);
+  const selectedPhotosCount = Math.min(
+    DASHBOARD_FEATURED_PHOTOS,
+    photos.length,
+  );
 
   if (selectedPhotosCount <= 1) {
     return photos.slice(0, selectedPhotosCount);
@@ -187,7 +190,10 @@ function getScatteredPhotosForToday(photos: HomePhoto[]) {
   const rotationOffset = daysSinceEpoch % photos.length;
   const selectedIndexes = Array.from(
     { length: selectedPhotosCount },
-    (_, index) => (Math.floor((index * photos.length) / selectedPhotosCount) + rotationOffset) % photos.length,
+    (_, index) =>
+      (Math.floor((index * photos.length) / selectedPhotosCount) +
+        rotationOffset) %
+      photos.length,
   );
 
   return selectedIndexes.map((index) => photos[index]);
@@ -254,7 +260,7 @@ function buildStats(params: {
       key: "studios",
       label: "Estudios",
       value: formatCount(params.activeStudiosCount),
-      detail: "Grabacion, mezcla, mastering y produccion",
+      detail: "Grabación, mezcla, mastering y producción",
     },
     {
       key: "sheetMusic",
