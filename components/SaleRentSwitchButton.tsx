@@ -1,3 +1,4 @@
+import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import { MouseEventHandler } from "react";
 
@@ -6,7 +7,7 @@ const SaleRentSwitchButton = ({
   listingType,
 }: {
   handleSwitchListingType: MouseEventHandler<HTMLButtonElement>;
-  listingType: string;
+  listingType: NonNullable<ProductProps["listingType"]>;
 }) => {
   return (
     <nav className="mx-auto mb-2 flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/70 p-1 shadow-sm dark:border-white/10 dark:bg-slate-900/60">

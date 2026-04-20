@@ -17,7 +17,9 @@ const Products = ({
   products: ProductProps[];
   userId: string | undefined;
 }) => {
-  const [listingType, setListingType] = useState(constants.SALE);
+  const [listingType, setListingType] = useState<
+    NonNullable<ProductProps["listingType"]>
+  >(constants.SALE);
 
   const sortedProducts = products.sort((a, b) =>
     a.userId === b.userId && a.createdBy === b.createdBy

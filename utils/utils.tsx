@@ -31,7 +31,7 @@ export const constants = {
   SHEETMUSIC_PATH: "/partituras",
   HOME: "tecladistas",
   REMERA_PATH: "/partituras?containsFilter=remera",
-};
+} as const;
 
 export const skillsTranslations: { [key: string]: string } = {
   "synths-digital": "Sintetizadores digitales",
