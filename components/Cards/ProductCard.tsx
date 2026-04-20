@@ -1,5 +1,6 @@
 import { Location } from "@/components";
 import DefensiveImage from "@/components/DefensiveImage";
+import { getListingBadgeClass } from "@/components/listingBadge";
 import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import { formatPrice } from "@/utils/utils";
@@ -13,8 +14,10 @@ const ProductCard = ({
 }: {
   product: ProductProps;
   isTheirOwn: boolean;
-  listingType: string;
+  listingType: ProductProps["listingType"];
 }) => {
+  const badgeListingType = product.listingType ?? listingType;
+
   return (
     <Link
       href={`${constants.INSTRUMENTS_PATH}/${product._id}`}
@@ -33,7 +36,11 @@ const ProductCard = ({
           width={300}
         />
         {isTheirOwn ? (
-          <span className="ui-chip absolute left-3 top-3">Tu publicación</span>
+          <span
+            className={`absolute left-3 top-3 ${getListingBadgeClass(badgeListingType)}`}
+          >
+            Tu publicación
+          </span>
         ) : null}
       </div>
 
@@ -57,7 +64,7 @@ const ProductCard = ({
           {product.location ? <Location name={product.location} /> : <span />}
           {product.price ? (
             <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
-              {listingType === constants.SALE
+              {badgeListingType === constants.SALE
                 ? formatPrice(product.price)
                 : `${formatPrice(product.price)} / día`}
             </span>
