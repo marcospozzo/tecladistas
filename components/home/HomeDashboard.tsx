@@ -1,4 +1,5 @@
 import DefensiveImage from "@/components/DefensiveImage";
+import { getListingBadgeClass } from "@/components/listingBadge";
 import { ProductProps, ProfessionalProps, StudioProps } from "@/types";
 import {
   translateSheetMusicDifficulty,
@@ -73,12 +74,6 @@ function formatPublicationDate(createdAt?: string) {
     month: "short",
     year: "numeric",
   }).format(publishedAt)}`;
-}
-
-function getListingBadgeClass(listingType?: ProductProps["listingType"]) {
-  return listingType === constants.RENT
-    ? "inline-flex items-center rounded-full border border-sky-200/80 bg-sky-600 px-3 py-1 text-xs font-semibold text-white shadow-lg shadow-sky-950/30"
-    : "inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-600 px-3 py-1 text-xs font-semibold text-white shadow-lg shadow-emerald-950/30";
 }
 
 function getSheetMusicName(composer?: string, title?: string) {
@@ -192,7 +187,9 @@ function ProductPreviewCard({
             {product.listingType === constants.RENT ? "Alquiler" : "Venta"}
           </span>
           {isOwn ? (
-            <span className="dashboard-chip">Tu publicación</span>
+            <span className={getListingBadgeClass(product.listingType)}>
+              Tu publicación
+            </span>
           ) : null}
         </div>
       </div>
