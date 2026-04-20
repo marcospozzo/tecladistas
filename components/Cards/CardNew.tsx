@@ -1,11 +1,16 @@
 "use client";
 
+import { ProductProps } from "@/types";
 import { constants } from "@/utils/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsPlusCircleDotted } from "react-icons/bs";
 
-const CardNew = ({ listingType = "" }) => {
+const CardNew = ({
+  listingType,
+}: {
+  listingType?: NonNullable<ProductProps["listingType"]>;
+}) => {
   const pathname = usePathname();
   const url =
     listingType === constants.RENT
