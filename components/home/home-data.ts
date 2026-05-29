@@ -176,29 +176,6 @@ function getTopSheetMusic(sheetMusic: SheetMusic[]) {
     .slice(0, DASHBOARD_FEATURED_SHEET_MUSIC);
 }
 
-function getScatteredPhotosForToday(photos: HomePhoto[]) {
-  const selectedPhotosCount = Math.min(
-    DASHBOARD_FEATURED_PHOTOS,
-    photos.length,
-  );
-
-  if (selectedPhotosCount <= 1) {
-    return photos.slice(0, selectedPhotosCount);
-  }
-
-  const daysSinceEpoch = Math.floor(Date.now() / 86_400_000);
-  const rotationOffset = daysSinceEpoch % photos.length;
-  const selectedIndexes = Array.from(
-    { length: selectedPhotosCount },
-    (_, index) =>
-      (Math.floor((index * photos.length) / selectedPhotosCount) +
-        rotationOffset) %
-      photos.length,
-  );
-
-  return selectedIndexes.map((index) => photos[index]);
-}
-
 async function getHomePhotos(year: string): Promise<{
   heroPhoto?: HomePhoto;
   photos: HomePhoto[];
@@ -210,24 +187,32 @@ async function getHomePhotos(year: string): Promise<{
     return { photos: [] };
   }
 
-  const response = await fetch(`${apiBaseUrl}/photos/${year}`, {
-    cache: "no-store",
-    headers: {
-      "accept-encoding": "identity",
-      authorization: secret,
-    },
-  });
+  const headers = {
+    "accept-encoding": "identity",
+    authorization: secret,
+  };
 
-  if (!response.ok) {
-    throw new Error(`Unable to load photos preview: ${response.status}`);
+  const [dashboardResponse, heroResponse] = await Promise.all([
+    fetch(
+      `${apiBaseUrl}/photos/dashboard?year=${year}&limit=${DASHBOARD_FEATURED_PHOTOS}`,
+      { cache: "no-store", headers },
+    ),
+    fetch(`${apiBaseUrl}/photos/hero`, { cache: "no-store", headers }),
+  ]);
+
+  if (!dashboardResponse.ok) {
+    throw new Error(`Unable to load photos preview: ${dashboardResponse.status}`);
   }
 
-  const photos = (await response.json()) as HomePhoto[];
+  const photos = (await dashboardResponse.json()) as HomePhoto[];
 
-  return {
-    heroPhoto: photos[0],
-    photos: getScatteredPhotosForToday(photos),
-  };
+  let heroPhoto: HomePhoto | undefined;
+  if (heroResponse.ok) {
+    const heroData = (await heroResponse.json()) as { url: string };
+    heroPhoto = { original: heroData.url };
+  }
+
+  return { heroPhoto, photos };
 }
 
 function buildStats(params: {
