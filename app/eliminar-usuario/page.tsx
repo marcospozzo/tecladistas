@@ -29,7 +29,7 @@ const DeleteWhitelisted = () => {
     formData.append("phone", data.phone);
 
     try {
-      const promise = axios.delete("/api/users/delete-whitelisted", {
+      const promise = axios.delete("/api/users/whitelisted", {
         data: formData,
       });
 
