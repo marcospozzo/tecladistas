@@ -418,7 +418,7 @@ export default function HomeDashboard({
               alt="Resumen visual del grupo de Tecladistas"
               className="object-cover"
               fill
-              priority
+              loading="eager"
               sizes="(max-width: 1024px) 100vw, 40vw"
               src={heroImage}
             />
