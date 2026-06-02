@@ -12,12 +12,12 @@ export async function POST(request: Request) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/delete-whitelisted`,
       {
-        method: "post",
+        method: "delete",
         headers: {
           cookie: `${cookie?.name}=${cookie?.value}`,
         },
         body: formData,
-      }
+      },
     );
     const data = await res.json();
     let errorMessage = "";
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (res.ok && data.deletedCount === 1) {
       return NextResponse.json(
         { success: "Usuario eliminado" },
-        { status: 201 }
+        { status: 201 },
       );
     } else {
       return NextResponse.json({ error: errorMessage }, { status: 400 });
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     console.error(error);
     return NextResponse.json(
       { error: "Error al intentar eliminar usuario" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

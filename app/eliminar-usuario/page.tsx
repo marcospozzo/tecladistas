@@ -29,7 +29,9 @@ const DeleteWhitelisted = () => {
     formData.append("phone", data.phone);
 
     try {
-      const promise = axios.post("/api/users/delete-whitelisted", formData);
+      const promise = axios.delete("/api/users/delete-whitelisted", {
+        data: formData,
+      });
 
       toast.promise(promise, {
         pending: "Eliminando...",
