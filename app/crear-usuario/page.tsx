@@ -40,7 +40,7 @@ const CreateWhitelisted = () => {
     formData.append("phone", data.phone);
 
     try {
-      const promise = axios.post("/api/users/create-whitelisted", formData);
+      const promise = axios.post("/api/users/whitelisted", formData);
 
       toast.promise(promise, {
         pending: "Creando...",
