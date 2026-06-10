@@ -35,6 +35,7 @@ export interface ProfessionalProps {
   email?: string;
   phone?: string;
   location?: string;
+  notes?: string;
   ratings?: Array<Rating>;
 }
 export interface StudioProps {

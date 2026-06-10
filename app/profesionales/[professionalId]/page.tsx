@@ -85,6 +85,11 @@ async function ProfessionalContent({
             <h3>{professional.location}</h3>
           </div>
         )}
+        {professional.notes && (
+          <p className="text-sm leading-6 text-slate-600 dark:text-slate-300 max-w-prose text-center">
+            {professional.notes}
+          </p>
+        )}
         <ProfessionalRating
           id={professional._id}
           value={
