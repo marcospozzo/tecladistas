@@ -48,6 +48,7 @@ async function TeacherContent({
               alt={teacher.user.firstName}
               fill
               sizes="96px"
+              loading="eager"
               className="object-cover"
             />
           ) : (
