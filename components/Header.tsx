@@ -47,6 +47,7 @@ const pages: Page[] = [
     ],
   },
   { title: constants.SHEETMUSIC, path: constants.SHEETMUSIC_PATH },
+  { title: constants.CLASSES, path: constants.CLASSES_PATH },
 ];
 
 const Header = () => {
@@ -306,6 +307,17 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              {isLoggedIn && (
+                <MenuItem
+                  key="teacher-profile"
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    router.push(constants.TEACHER_PROFILE_PATH);
+                  }}
+                >
+                  <Typography textAlign="center">Perfil de profe</Typography>
+                </MenuItem>
+              )}
               {isAdmin && (
                 <MenuItem
                   key="admin"

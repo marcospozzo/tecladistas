@@ -58,6 +58,28 @@ export interface UserProps {
   phone: string;
 }
 
+export interface TeacherProfileProps {
+  _id: string;
+  userId: string;
+  isPublic: boolean;
+  slug: string;
+  description?: string;
+  location?: string;
+  level?: "all" | "beginner" | "intermediate" | "advanced";
+  modality?: "online" | "inPerson" | "both";
+  subjects?: string[];
+  profilePicture?: string;
+  instagramHandle?: string;
+  showEmail?: boolean;
+  showPhone?: boolean;
+  user: {
+    firstName: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+  };
+}
+
 export type Page = {
   title: string;
   path: string;

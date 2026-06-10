@@ -11,6 +11,7 @@ import SaleRentSwitchButton from "./SaleRentSwitchButton";
 import Products from "./Products";
 import EditProductButton from "./EditProductButton";
 import ProfessionalRating from "./ProfessionalRating";
+import TeacherCard from "./Cards/TeacherCard";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   Products,
   EditProductButton,
   ProfessionalRating,
+  TeacherCard,
 };

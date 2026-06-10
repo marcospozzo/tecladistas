@@ -2,6 +2,9 @@ import { Rating } from "@/types";
 
 export const constants = {
   INSTRUMENTS: "Instrumentos",
+  CLASSES: "Clases",
+  CLASSES_PATH: "/clases",
+  TEACHER_PROFILE_PATH: "/perfil-de-profe",
   PROFESSIONALS: "Listado de Profesionales",
   STUDIOS: "Estudios de Grabación",
   PICTURES: "Fotos",
@@ -113,6 +116,45 @@ export const contactSubjects: { [key: string]: string } = {
   other: "Otro",
 };
 
+export const teacherSubjects = [
+  "piano-clasico",
+  "piano-popular",
+  "teclado",
+  "sintesis",
+  "teoria",
+  "armonia",
+  "composicion",
+  "lectura",
+  "improvisacion",
+  "produccion",
+];
+
+export const teacherSubjectsTranslations: { [key: string]: string } = {
+  "piano-clasico": "Piano clásico",
+  "piano-popular": "Piano popular / jazz",
+  teclado: "Teclado",
+  sintesis: "Síntesis",
+  teoria: "Teoría musical",
+  armonia: "Armonía",
+  composicion: "Composición",
+  lectura: "Lectura musical",
+  improvisacion: "Improvisación",
+  produccion: "Producción musical",
+};
+
+export const teacherLevelTranslations: { [key: string]: string } = {
+  all: "Todos los niveles",
+  beginner: "Principiante",
+  intermediate: "Intermedio",
+  advanced: "Avanzado",
+};
+
+export const teacherModalityTranslations: { [key: string]: string } = {
+  online: "Virtual",
+  inPerson: "Presencial",
+  both: "Virtual y presencial",
+};
+
 export const skills = [
   "piano-mover",
   "piano-tuner",
@@ -149,6 +191,7 @@ export const pageTitles: { [key: string]: string } = {
   signUp: "Registrarse",
   home: "Tecladistas",
   sheetMusic: "Partituras",
+  classes: "Clases",
 };
 
 export const calculateRating = (ratings: Array<Rating> | undefined): number => {
