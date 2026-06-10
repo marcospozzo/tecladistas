@@ -1,7 +1,10 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import TeacherCard from "@/components/Cards/TeacherCard";
+import { ButtonLink } from "@/components/ui/Button";
 import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { TeacherProfileProps } from "@/types";
-import { pageTitles } from "@/utils/utils";
+import { constants, pageTitles } from "@/utils/utils";
+import { getServerSession } from "next-auth";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -10,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 async function ClassesContent() {
+  const session = await getServerSession(authOptions);
+  const isLoggedIn = !!session;
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/teacher-profiles`,
     { next: { revalidate: 60 } },
@@ -25,6 +31,16 @@ async function ClassesContent() {
           Tecladistas del grupo que enseñan. Contactalos directamente para
           coordinar clases.
         </p>
+        {isLoggedIn && (
+          <div className="mt-5">
+            <ButtonLink
+              href={constants.TEACHER_PROFILE_PATH}
+              variant="secondary"
+            >
+              Configurar tu perfil de profe
+            </ButtonLink>
+          </div>
+        )}
       </div>
 
       {teachers.length === 0 ? (

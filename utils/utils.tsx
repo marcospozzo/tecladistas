@@ -113,6 +113,7 @@ export const contactSubjects: { [key: string]: string } = {
   comment: "Comentario / sugerencia",
   professionalsAndStudios: "Profesionales / Estudios",
   sheetMusic: "Partituras",
+  userDataChange: "Cambio de datos personales",
   other: "Otro",
 };
 

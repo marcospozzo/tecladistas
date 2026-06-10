@@ -10,6 +10,7 @@ import {
   teacherSubjectsTranslations,
 } from "@/utils/utils";
 import axios from "axios";
+import { parsePhoneNumberWithError } from "libphonenumber-js";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
@@ -36,6 +37,15 @@ const emptyForm: FormState = {
   showEmail: false,
   showPhone: false,
 };
+
+function formatPhone(phone: string): string {
+  try {
+    const normalized = phone.startsWith("+") ? phone : `+${phone}`;
+    return parsePhoneNumberWithError(normalized).formatInternational();
+  } catch {
+    return phone;
+  }
+}
 
 function profileToForm(p: TeacherProfileProps): FormState {
   return {
@@ -198,8 +208,11 @@ const TeacherProfilePage = () => {
           <div className="rounded-2xl border border-black/10 bg-black/5 p-4 dark:border-white/10 dark:bg-white/5">
             <p className="ui-eyebrow mb-2">Datos de tu cuenta</p>
             <div className="space-y-1 text-sm text-slate-700 dark:text-slate-300">
+              <p className="font-medium">
+                {profile.user.firstName} {profile.user.lastName}
+              </p>
               <p>{profile.user.email}</p>
-              <p>{profile.user.phone}</p>
+              <p>{formatPhone(profile.user.phone ?? "")}</p>
             </div>
           </div>
 
@@ -212,6 +225,7 @@ const TeacherProfilePage = () => {
                     src={currentPhoto}
                     alt="Preview"
                     fill
+                    sizes="64px"
                     className="object-cover"
                   />
                 ) : (
@@ -375,7 +389,7 @@ const TeacherProfilePage = () => {
               <label htmlFor="showPhone" className="text-sm">
                 Mostrar mi teléfono públicamente{" "}
                 <span className="text-slate-500 dark:text-slate-400">
-                  ({profile.user.phone})
+                  ({formatPhone(profile.user.phone ?? "")})
                 </span>
               </label>
             </div>

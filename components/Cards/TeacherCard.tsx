@@ -28,6 +28,7 @@ const TeacherCard = ({ teacher }: { teacher: TeacherProfileProps }) => {
               src={teacher.profilePicture}
               alt={teacher.user.firstName}
               fill
+              sizes="56px"
               className="object-cover"
             />
           ) : (

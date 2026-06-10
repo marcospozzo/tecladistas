@@ -1,3 +1,4 @@
+import { WhatsAppButton } from "@/components";
 import PendingContentFallback from "@/components/navigation/PendingContentFallback";
 import { TeacherProfileProps } from "@/types";
 import {
@@ -7,10 +8,20 @@ import {
 } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { parsePhoneNumberWithError } from "libphonenumber-js";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FaInstagram, FaPhone } from "react-icons/fa";
 import { MdEmail, MdLocationPin } from "react-icons/md";
+
+function formatPhone(phone: string): string {
+  try {
+    const normalized = phone.startsWith("+") ? phone : `+${phone}`;
+    return parsePhoneNumberWithError(normalized).formatInternational();
+  } catch {
+    return phone;
+  }
+}
 
 async function TeacherContent({
   params,
@@ -36,6 +47,7 @@ async function TeacherContent({
               src={teacher.profilePicture}
               alt={teacher.user.firstName}
               fill
+              sizes="96px"
               className="object-cover"
             />
           ) : (
@@ -112,10 +124,15 @@ async function TeacherContent({
               </Link>
             )}
             {teacher.user.phone && (
-              <div className="ui-detail-meta justify-center">
-                <FaPhone />
-                <span>{teacher.user.phone}</span>
-              </div>
+              <>
+                <div className="ui-detail-meta justify-center">
+                  <FaPhone />
+                  <span>{formatPhone(teacher.user.phone)}</span>
+                </div>
+                <div className="w-full max-w-sm">
+                  <WhatsAppButton phone={teacher.user.phone} />
+                </div>
+              </>
             )}
           </div>
         </div>
