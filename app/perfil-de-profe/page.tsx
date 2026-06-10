@@ -108,6 +108,41 @@ const TeacherProfilePage = () => {
     setPhotoPreview(URL.createObjectURL(file));
   };
 
+  const handleDiscardPhoto = () => {
+    setPhotoFile(null);
+    setPhotoPreview(null);
+  };
+
+  const handleDeletePhoto = async () => {
+    setIsSubmitting(true);
+    const toastId = toast.loading("Eliminando foto...");
+    try {
+      const { data } = await axios.delete(
+        "/api/teacher-profiles/me/profile-picture",
+      );
+      setProfile(data);
+      setForm(profileToForm(data));
+      toast.update(toastId, {
+        render: "Foto eliminada",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (error) {
+      const message = axios.isAxiosError(error)
+        ? (error.response?.data?.error ?? "Error al eliminar foto")
+        : "Error al eliminar foto";
+      toast.update(toastId, {
+        render: message,
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const currentPhoto = photoPreview ?? profile?.profilePicture ?? null;
 
   const hasPhoto = !!(photoFile || profile?.profilePicture);
@@ -242,13 +277,34 @@ const TeacherProfilePage = () => {
                 className="hidden"
                 onChange={handlePhotoChange}
               />
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                {currentPhoto ? "Cambiar foto" : "Subir foto"}
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {currentPhoto ? "Cambiar foto" : "Subir foto"}
+                </Button>
+                {photoPreview && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={handleDiscardPhoto}
+                  >
+                    Descartar
+                  </Button>
+                )}
+                {!photoPreview && profile.profilePicture && (
+                  <Button
+                    type="button"
+                    variant="danger"
+                    disabled={isSubmitting}
+                    onClick={handleDeletePhoto}
+                  >
+                    Eliminar foto
+                  </Button>
+                )}
+              </div>
             </div>
           </Field>
 
