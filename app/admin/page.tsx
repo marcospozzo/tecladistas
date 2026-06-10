@@ -32,35 +32,40 @@ const AdminPanel = () => {
     setCreateData({ ...createData, [event.target.name]: event.target.value });
   };
 
+  const fetchCount = async (): Promise<number> => {
+    const { data } = await axios.get<{ count: number }>(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`,
+    );
+    return data.count;
+  };
+
   const handleCreateSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("displayName", createData.displayName);
     formData.append("phone", createData.phone);
 
+    const toastId = toast.loading("Creando...");
     try {
-      const promise = axios.post("/api/users/whitelisted", formData);
-      toast.promise(promise, {
-        pending: "Creando...",
-        success: {
-          render({ data }: { data?: { data?: { success?: string } } }) {
-            setCreateData({ displayName: "", phone: "+549" });
-            return data?.data?.success ?? "Usuario creado";
-          },
-        },
-        error: {
-          render({
-            data,
-          }: {
-            data?: { response?: { data?: { error?: string } } };
-          }) {
-            return data?.response?.data?.error ?? "Error";
-          },
-        },
+      await axios.post("/api/users/whitelisted", formData);
+      setCreateData({ displayName: "", phone: "+549" });
+      const count = await fetchCount();
+      toast.update(toastId, {
+        render: `Usuario creado — ${count} en lista`,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
       });
-      await promise;
     } catch (error) {
-      console.error(error);
+      const message = axios.isAxiosError(error)
+        ? (error.response?.data?.error ?? "Error al crear usuario")
+        : "Error al crear usuario";
+      toast.update(toastId, {
+        render: message,
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
     }
   };
 
@@ -69,29 +74,27 @@ const AdminPanel = () => {
     const formData = new FormData();
     formData.append("phone", deleteData.phone);
 
+    const toastId = toast.loading("Eliminando...");
     try {
-      const promise = axios.delete("/api/users/whitelisted", { data: formData });
-      toast.promise(promise, {
-        pending: "Eliminando...",
-        success: {
-          render({ data }: { data?: { data?: { success?: string } } }) {
-            setDeleteData({ phone: "+549" });
-            return data?.data?.success ?? "Usuario eliminado";
-          },
-        },
-        error: {
-          render({
-            data,
-          }: {
-            data?: { response?: { data?: { error?: string } } };
-          }) {
-            return data?.response?.data?.error ?? "Error";
-          },
-        },
+      await axios.delete("/api/users/whitelisted", { data: formData });
+      setDeleteData({ phone: "+549" });
+      const count = await fetchCount();
+      toast.update(toastId, {
+        render: `Usuario eliminado — ${count} en lista`,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
       });
-      await promise;
     } catch (error) {
-      console.error(error);
+      const message = axios.isAxiosError(error)
+        ? (error.response?.data?.error ?? "Error al eliminar usuario")
+        : "Error al eliminar usuario";
+      toast.update(toastId, {
+        render: message,
+        type: "error",
+        isLoading: false,
+        autoClose: 4000,
+      });
     }
   };
 
