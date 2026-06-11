@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const body = await request.json();
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
       {
         method: "POST",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),

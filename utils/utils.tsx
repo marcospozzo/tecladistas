@@ -1,4 +1,5 @@
 import { Rating } from "@/types";
+import { parsePhoneNumberWithError } from "libphonenumber-js";
 
 export const constants = {
   INSTRUMENTS: "Instrumentos",
@@ -101,6 +102,16 @@ export function formatPhone(phone: string) {
   return phone.replace(/[^0-9]/g, "");
 }
 
+/** Formats a phone number for display, e.g. "+54 9 11 1234-5678" */
+export function formatPhoneDisplay(phone: string): string {
+  try {
+    const normalized = phone.startsWith("+") ? phone : `+${phone}`;
+    return parsePhoneNumberWithError(normalized).formatInternational();
+  } catch {
+    return phone;
+  }
+}
+
 export const servicesTranslation: { [key: string]: string } = {
   mixing: "Mezcla",
   mastering: "Mastering",
@@ -196,13 +207,10 @@ export const pageTitles: { [key: string]: string } = {
 };
 
 export const calculateRating = (ratings: Array<Rating> | undefined): number => {
-  if (ratings?.length === 0) {
-    return 0;
-  }
+  if (!ratings?.length) return 0;
 
-  const totalRating =
-    ratings?.reduce((sum, rating) => sum + rating.rating, 0) ?? 0;
-  const averageRating = totalRating / (ratings?.length ?? 1);
+  const totalRating = ratings.reduce((sum, rating) => sum + rating.rating, 0);
+  const averageRating = totalRating / ratings.length;
 
   return parseFloat(averageRating.toFixed(1));
 };

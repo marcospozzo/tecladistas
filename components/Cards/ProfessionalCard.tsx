@@ -1,6 +1,5 @@
 import { ProfessionalProps } from "@/types";
-import { constants } from "@/utils/utils";
-import { calculateRating } from "@/utils/utils";
+import { calculateRating, constants } from "@/utils/utils";
 import Link from "next/link";
 import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
 import { MdEmail, MdLocationPin, MdPiano } from "react-icons/md";

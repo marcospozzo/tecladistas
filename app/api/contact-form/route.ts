@@ -7,6 +7,7 @@ export async function POST(request: Request) {
 
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
       {
         method: "post",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
         },
         body: formData,
       }
@@ -22,6 +23,6 @@ export async function POST(request: Request) {
     return res;
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: "Error al enviar formulario" }, { status: 500 });
   }
 }

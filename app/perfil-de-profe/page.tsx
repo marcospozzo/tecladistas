@@ -10,7 +10,7 @@ import {
   teacherSubjectsTranslations,
 } from "@/utils/utils";
 import axios from "axios";
-import { parsePhoneNumberWithError } from "libphonenumber-js";
+import { formatPhoneDisplay } from "@/utils/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
@@ -38,14 +38,6 @@ const emptyForm: FormState = {
   showPhone: false,
 };
 
-function formatPhone(phone: string): string {
-  try {
-    const normalized = phone.startsWith("+") ? phone : `+${phone}`;
-    return parsePhoneNumberWithError(normalized).formatInternational();
-  } catch {
-    return phone;
-  }
-}
 
 function profileToForm(p: TeacherProfileProps): FormState {
   return {
@@ -243,7 +235,7 @@ const TeacherProfilePage = () => {
                 {profile.user.firstName} {profile.user.lastName}
               </p>
               <p>{profile.user.email}</p>
-              <p>{formatPhone(profile.user.phone ?? "")}</p>
+              <p>{formatPhoneDisplay(profile.user.phone ?? "")}</p>
             </div>
           </div>
 
@@ -443,7 +435,7 @@ const TeacherProfilePage = () => {
               <label htmlFor="showPhone" className="text-sm">
                 Mostrar mi teléfono públicamente{" "}
                 <span className="text-slate-500 dark:text-slate-400">
-                  ({formatPhone(profile.user.phone ?? "")})
+                  ({formatPhoneDisplay(profile.user.phone ?? "")})
                 </span>
               </label>
             </div>

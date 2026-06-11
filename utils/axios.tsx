@@ -16,7 +16,9 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config) => {
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
-  config.headers.cookie = `${cookie?.name}=${cookie?.value}`;
+  if (cookie) {
+    config.headers.cookie = `${cookie.name}=${cookie.value}`;
+  }
   config.headers.Authorization = process.env.NEXT_SECRET;
   if (config.data instanceof FormData) {
     config.headers["Content-Type"] = "multipart/form-data";
@@ -84,17 +86,6 @@ export const getProfessional = async (
   }
 };
 
-export const handleProductCreation = async (formData: FormData) => {
-  try {
-    const promise = axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/create`,
-      formData
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export const getProduct = async (productId: string): Promise<ProductProps> => {
   try {
     const response: AxiosResponse<ProductProps> = await axiosInstance.get(
@@ -128,12 +119,12 @@ export const getUser = async (userId: string): Promise<UserProps> => {
   }
 };
 
-type Count = { count: Number };
+type Count = { count: number };
 
 export const getWhitelistedUsersCount = async () => {
   try {
     const response: AxiosResponse<Count> = await axiosInstance.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`
+      "/users/count-whitelisted-users"
     );
     return response.data;
   } catch (error) {
@@ -155,7 +146,7 @@ export type SheetMusic = {
 export const getAllSheetMusic = async () => {
   try {
     const response: AxiosResponse<SheetMusic[]> = await axiosInstance.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/sheet-music`
+      "/sheet-music"
     );
     return response.data;
   } catch (error) {

@@ -5,11 +5,12 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin`, {
       headers: {
-        cookie: `${cookie?.name}=${cookie?.value}`,
+        cookie: `${cookie.name}=${cookie.value}`,
       },
     });
 

@@ -8,6 +8,9 @@ export async function GET(
 ) {
   const { userId, text } = await context.params;
 
+  // Limit message length to prevent open redirect abuse
+  const safeText = text.slice(0, 500);
+
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${userId}`,
@@ -18,14 +21,16 @@ export async function GET(
       }
     );
 
+    if (!res.ok) return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
+
     const data = await res.json();
     const url = `${constants.WHATSAPP_LINK}${formatPhone(
       data.phone
-    )}?text=${encodeURIComponent(text)}`;
+    )}?text=${encodeURIComponent(safeText)}`;
 
     return NextResponse.redirect(url);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: "Error al abrir WhatsApp" }, { status: 500 });
   }
 }

@@ -7,10 +7,11 @@ import { cookieName } from "./utils/utils";
 export const config = {
   matcher: [
     "/profesionales/:path+",
+    "/admin/:path*",
+    "/perfil-de-profe",
     "/entrar",
     "/registrarse",
     "/contacto",
-    "/crear-usuario",
     "/api/users/open-whatsapp/:userId+",
     "/crear-publicacion",
     "/fotos/:path+",
@@ -19,7 +20,7 @@ export const config = {
   ],
 };
 
-export function proxy(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   if (
     request.nextUrl.pathname !== constants.LOGIN_PATH &&
     request.nextUrl.pathname !== "/registrarse" &&

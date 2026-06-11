@@ -8,20 +8,12 @@ import {
 } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { parsePhoneNumberWithError } from "libphonenumber-js";
+import { formatPhoneDisplay } from "@/utils/utils";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FaInstagram, FaPhone } from "react-icons/fa";
 import { MdEmail, MdLocationPin } from "react-icons/md";
 
-function formatPhone(phone: string): string {
-  try {
-    const normalized = phone.startsWith("+") ? phone : `+${phone}`;
-    return parsePhoneNumberWithError(normalized).formatInternational();
-  } catch {
-    return phone;
-  }
-}
 
 async function TeacherContent({
   params,
@@ -128,7 +120,7 @@ async function TeacherContent({
               <>
                 <div className="ui-detail-meta justify-center">
                   <FaPhone />
-                  <span>{formatPhone(teacher.user.phone)}</span>
+                  <span>{formatPhoneDisplay(teacher.user.phone)}</span>
                 </div>
                 <div className="w-full max-w-sm">
                   <WhatsAppButton phone={teacher.user.phone} />

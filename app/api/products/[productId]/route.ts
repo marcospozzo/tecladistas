@@ -9,6 +9,7 @@ export async function DELETE(
   const { productId } = await params;
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
@@ -16,14 +17,14 @@ export async function DELETE(
       {
         method: "delete",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
         },
       }
     );
     return res;
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: "Error al eliminar publicación" }, { status: 500 });
   }
 }
 
@@ -34,13 +35,14 @@ export async function GET(
   const { productId } = await params;
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${productId}`,
       {
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
           Authorization: `${process.env.NEXT_SECRET}`,
         },
       }
@@ -48,6 +50,6 @@ export async function GET(
     return res;
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: "Error al obtener publicación" }, { status: 500 });
   }
 }

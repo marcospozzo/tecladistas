@@ -21,7 +21,7 @@ const Products = ({
     NonNullable<ProductProps["listingType"]>
   >(constants.SALE);
 
-  const sortedProducts = products.sort((a, b) =>
+  const sortedProducts = [...products].sort((a, b) =>
     a.userId === b.userId && a.createdBy === b.createdBy
       ? 0
       : a.userId === b.userId

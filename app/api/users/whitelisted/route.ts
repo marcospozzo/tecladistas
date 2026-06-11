@@ -7,6 +7,7 @@ export async function POST(request: Request) {
 
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
       {
         method: "post",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
         },
         body: formData,
       },
@@ -49,6 +50,7 @@ export async function DELETE(request: Request) {
 
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
@@ -56,7 +58,7 @@ export async function DELETE(request: Request) {
       {
         method: "delete",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
         },
         body: formData,
       },
@@ -69,7 +71,7 @@ export async function DELETE(request: Request) {
     if (res.ok && data.deletedCount === 1) {
       return NextResponse.json(
         { success: "Usuario eliminado" },
-        { status: 201 },
+        { status: 200 },
       );
     } else {
       return NextResponse.json({ error: errorMessage }, { status: 400 });

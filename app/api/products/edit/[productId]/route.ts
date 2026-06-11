@@ -10,6 +10,7 @@ export async function POST(
   const formData = await request.formData();
   const cookieStore = await cookies();
   const cookie = cookieStore.get(cookieName);
+  if (!cookie) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   try {
     const res = await fetch(
@@ -17,7 +18,7 @@ export async function POST(
       {
         method: "put",
         headers: {
-          cookie: `${cookie?.name}=${cookie?.value}`,
+          cookie: `${cookie.name}=${cookie.value}`,
         },
         body: formData,
       }
@@ -25,6 +26,6 @@ export async function POST(
     return res;
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error: "Error al editar publicación" }, { status: 500 });
   }
 }

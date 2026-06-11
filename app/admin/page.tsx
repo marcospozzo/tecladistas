@@ -3,30 +3,17 @@
 import { Button } from "@/components/ui/Button";
 import Field from "@/components/ui/Field";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 type Tab = "crear" | "eliminar";
 
 const AdminPanel = () => {
-  const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("crear");
   const [createData, setCreateData] = useState({ displayName: "", phone: "+549" });
   const [deleteData, setDeleteData] = useState({ phone: "+549" });
-
-  useEffect(() => {
-    axios
-      .get("/api/admin")
-      .then(() => setIsAuthorized(true))
-      .catch(() => {
-        setIsAuthorized(false);
-        router.replace("/");
-      });
-  }, [router]);
 
   const handleCreateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCreateData({ ...createData, [event.target.name]: event.target.value });
@@ -97,8 +84,6 @@ const AdminPanel = () => {
       });
     }
   };
-
-  if (!isAuthorized) return null;
 
   return (
     <section className="ui-form-shell max-w-2xl">
