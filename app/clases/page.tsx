@@ -25,7 +25,6 @@ async function ClassesContent() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-8">
       <div className="text-center">
-        <p className="ui-eyebrow mb-2">Directorio</p>
         <h1 className="ui-form-title mb-3">Clases</h1>
         <p className="ui-form-description mx-auto max-w-lg">
           Tecladistas del grupo que enseñan. Contactalos directamente para

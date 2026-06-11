@@ -13,7 +13,10 @@ import { MdEmail, MdLocationPin } from "react-icons/md";
 const MAX_VISIBLE_SUBJECTS = 3;
 
 const TeacherCard = ({ teacher }: { teacher: TeacherProfileProps }) => {
-  const visibleSubjects = (teacher.subjects ?? []).slice(0, MAX_VISIBLE_SUBJECTS);
+  const visibleSubjects = (teacher.subjects ?? []).slice(
+    0,
+    MAX_VISIBLE_SUBJECTS,
+  );
   const extraCount = (teacher.subjects?.length ?? 0) - MAX_VISIBLE_SUBJECTS;
 
   return (
@@ -42,18 +45,6 @@ const TeacherCard = ({ teacher }: { teacher: TeacherProfileProps }) => {
           <h3 className="truncate text-base font-semibold tracking-tight dark:text-white">
             {teacher.user.firstName} {teacher.user.lastName}
           </h3>
-          <div className="mt-1 flex flex-wrap gap-1.5">
-            {teacher.level && (
-              <span className="ui-chip text-xs">
-                {teacherLevelTranslations[teacher.level]}
-              </span>
-            )}
-            {teacher.modality && (
-              <span className="ui-chip text-xs">
-                {teacherModalityTranslations[teacher.modality]}
-              </span>
-            )}
-          </div>
         </div>
       </div>
 
@@ -66,6 +57,16 @@ const TeacherCard = ({ teacher }: { teacher: TeacherProfileProps }) => {
           ))}
           {extraCount > 0 && (
             <span className="ui-chip text-xs">+{extraCount} más</span>
+          )}
+        </div>
+      )}
+
+      {teacher.modality && (
+        <div className="flex flex-wrap gap-1.5">
+          {teacher.modality && (
+            <span className="ui-chip text-xs">
+              {teacherModalityTranslations[teacher.modality]}
+            </span>
           )}
         </div>
       )}

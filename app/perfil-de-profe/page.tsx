@@ -228,17 +228,13 @@ const TeacherProfilePage = () => {
           <div className="space-y-3">
             <h1 className="ui-form-title">Perfil de profe</h1>
             <p className="ui-form-description">
-              Configurá tu oferta docente. Una vez habilitado, aparecerás en el
-              directorio público de clases.
+              Configurá tu perfil docente. Una vez habilitado, aparecerás en el
+              listado público de clases.
             </p>
           </div>
         </div>
 
-        <form
-          ref={formRef}
-          className="ui-form-grid"
-          onSubmit={handleSubmit}
-        >
+        <form ref={formRef} className="ui-form-grid" onSubmit={handleSubmit}>
           {/* Read-only user data */}
           <div className="rounded-2xl border border-black/10 bg-black/5 p-4 dark:border-white/10 dark:bg-white/5">
             <p className="ui-eyebrow mb-2">Datos de tu cuenta</p>
@@ -393,7 +389,9 @@ const TeacherProfilePage = () => {
 
           {/* Contact options */}
           <fieldset className="space-y-3">
-            <legend className="ui-field-label">Medios de contacto públicos</legend>
+            <legend className="ui-field-label">
+              Medios de contacto públicos
+            </legend>
 
             <Field htmlFor="instagramHandle" label="Instagram">
               <div className="flex items-center gap-2">

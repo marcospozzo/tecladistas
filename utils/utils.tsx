@@ -132,7 +132,7 @@ export const teacherSubjects = [
 
 export const teacherSubjectsTranslations: { [key: string]: string } = {
   "piano-clasico": "Piano clásico",
-  "piano-popular": "Piano popular / jazz",
+  "piano-popular": "Piano popular",
   teclado: "Teclado",
   sintesis: "Síntesis",
   teoria: "Teoría musical",
