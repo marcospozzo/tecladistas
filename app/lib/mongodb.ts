@@ -13,10 +13,10 @@ declare global {
 
 const uri = process.env.MONGODB_URI;
 const options = {
-  connectTimeoutMS: 0,
-  serverSelectionTimeoutMS: 0,
+  connectTimeoutMS: 5000,        // fail fast if Atlas unreachable
+  serverSelectionTimeoutMS: 5000, // don't hang Vercel containers forever
   maxIdleTimeMS: 270000,
-  minPoolSize: 2,
+  minPoolSize: 1,  // was 2 — reduces Atlas connections per Vercel container
   maxPoolSize: 4,
 };
 

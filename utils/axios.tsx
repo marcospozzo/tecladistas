@@ -12,6 +12,7 @@ import { cookieName } from "./utils";
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   withCredentials: true,
+  timeout: 5000, // 5s — prevents slow backend from holding Vercel containers (and Atlas connections) open
 });
 
 axiosInstance.interceptors.request.use(async (config) => {
