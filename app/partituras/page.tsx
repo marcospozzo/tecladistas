@@ -1,9 +1,7 @@
 import { Metadata } from "next";
 import { pageTitles } from "@/utils/utils";
 import { getAllSheetMusic, SheetMusic } from "@/utils/axios";
-import dynamic from "next/dynamic";
-
-const SheetMusicGrid = dynamic(() => import("./SheetMusicGrid"), { ssr: false });
+import SheetMusicClientWrapper from "./SheetMusicClientWrapper";
 
 export const metadata: Metadata = {
   title: pageTitles.sheetmusic,
@@ -20,5 +18,5 @@ export default async function SheetMusicPage({
   const startingFilter =
     typeof containsFilter === "string" ? containsFilter : undefined;
 
-  return <SheetMusicGrid rows={sheetMusic} startingFilter={startingFilter} />;
+  return <SheetMusicClientWrapper rows={sheetMusic} startingFilter={startingFilter} />;
 }
