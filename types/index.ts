@@ -11,7 +11,7 @@ export interface ProductProps {
   status?: "active" | "deleted" | "sold";
   listingType?: "sale" | "rent";
   price?: number;
-  pictures?: Array<string>;
+  images?: Array<string>;
   location?: string;
   createdAt?: string;
 }

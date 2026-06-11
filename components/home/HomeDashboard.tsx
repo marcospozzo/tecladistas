@@ -27,6 +27,7 @@ import {
   MdLocationPin,
   MdPiano,
 } from "react-icons/md";
+import TeacherCard from "@/components/Cards/TeacherCard";
 import HomeSection from "./HomeSection";
 import {
   buildSheetMusicPreviewHref,
@@ -44,7 +45,7 @@ const quickLinkIcons: Record<string, IconType> = {
 };
 
 function getProductImage(product: ProductProps) {
-  return product.pictures?.[0];
+  return product.images?.[0];
 }
 
 function formatProductPrice(product: ProductProps) {
@@ -367,6 +368,7 @@ function PhotosPreview({
 export default function HomeDashboard({
   featuredProfessionals,
   featuredStudios,
+  featuredTeachers,
   isLoggedIn,
   memberCountLabel,
   photos,
@@ -545,6 +547,28 @@ export default function HomeDashboard({
             ctaHref={constants.STUDIOS_PATH}
             ctaLabel="Explorar estudios"
             message="No pude cargar estudios para este preview; la sección completa sigue disponible."
+          />
+        )}
+      </HomeSection>
+
+      <HomeSection
+        description=""
+        eyebrow="Docentes"
+        href={constants.CLASSES_PATH}
+        linkLabel="Ver profes"
+        title="Clases"
+      >
+        {featuredTeachers.length ? (
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {featuredTeachers.map((teacher) => (
+              <TeacherCard key={teacher._id} teacher={teacher} />
+            ))}
+          </div>
+        ) : (
+          <EmptyPreview
+            ctaHref={constants.CLASSES_PATH}
+            ctaLabel="Ver clases"
+            message="Todavía no hay profes con perfil público disponible."
           />
         )}
       </HomeSection>

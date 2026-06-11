@@ -2,6 +2,7 @@ import {
   ProductProps,
   ProfessionalProps,
   StudioProps,
+  TeacherProfileProps,
   UserProps,
 } from "@/types";
 import axios, { AxiosResponse } from "axios";
@@ -141,6 +142,18 @@ export type SheetMusic = {
   genre?: string;
   difficulty?: string;
   year?: number;
+};
+
+export const getTeacherProfiles = async (): Promise<
+  Array<TeacherProfileProps>
+> => {
+  try {
+    const response: AxiosResponse<TeacherProfileProps[]> =
+      await axiosInstance.get("/teacher-profiles");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getAllSheetMusic = async () => {

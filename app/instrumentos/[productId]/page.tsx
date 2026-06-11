@@ -41,7 +41,7 @@ async function ProductContent({
           alt={`${product.brand} ${product.model} product`}
           className="h-full w-full object-contain"
           height={1000}
-          src={product.pictures?.[0]}
+          src={product.images?.[0]}
           width={1000}
         />
       </div>
@@ -73,7 +73,9 @@ async function ProductContent({
           </div>
         )}
 
-        {product.year && <div className="ui-detail-meta">Año: {product.year}</div>}
+        {product.year && (
+          <div className="ui-detail-meta">Año: {product.year}</div>
+        )}
 
         {product.description && (
           <pre className="text-sm leading-7 text-slate-700 dark:text-slate-200">

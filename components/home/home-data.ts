@@ -1,10 +1,11 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { ProductProps, ProfessionalProps, StudioProps } from "@/types";
+import { ProductProps, ProfessionalProps, StudioProps, TeacherProfileProps } from "@/types";
 import {
   getAllSheetMusic,
   getProducts,
   getProfessionals,
   getStudios,
+  getTeacherProfiles,
   getWhitelistedUsersCount,
   SheetMusic,
 } from "@/utils/axios";
@@ -22,6 +23,7 @@ const DASHBOARD_FEATURED_PROFESSIONALS = 4;
 const DASHBOARD_FEATURED_STUDIOS = 5;
 const DASHBOARD_FEATURED_SHEET_MUSIC = 5;
 const DASHBOARD_FEATURED_PHOTOS = 6;
+const DASHBOARD_FEATURED_TEACHERS = 4;
 const DASHBOARD_PHOTOS_YEAR = "2025";
 
 export type HomeStat = {
@@ -56,6 +58,7 @@ export type HomePhoto = {
 export type HomeDashboardData = {
   featuredProfessionals: ProfessionalProps[];
   featuredStudios: StudioProps[];
+  featuredTeachers: TeacherProfileProps[];
   isLoggedIn: boolean;
   memberCountLabel: string;
   photos: HomePhoto[];
@@ -328,6 +331,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     getStudios(),
     isLoggedIn ? getAllSheetMusic() : Promise.resolve([] as SheetMusic[]),
     getHomePhotos(DASHBOARD_PHOTOS_YEAR),
+    getTeacherProfiles(),
   ] as const;
 
   const [
@@ -337,6 +341,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     studiosResult,
     sheetMusicResult,
     photosResult,
+    teachersResult,
   ] = await Promise.allSettled(requests);
 
   const products = getSettledValue(productsResult, []);
@@ -345,6 +350,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   const sheetMusic = getSettledValue(sheetMusicResult, []);
   const homePhotos = getSettledValue(photosResult, { photos: [] });
   const photos = homePhotos.photos;
+  const teachers = getSettledValue(teachersResult, []);
 
   const activeProducts = products.filter(isActiveProduct);
   const saleProducts = sortProductsByDateDesc(
@@ -374,6 +380,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   return {
     featuredProfessionals: getFeaturedProfessionals(professionals),
     featuredStudios: getFeaturedStudios(activeStudios),
+    featuredTeachers: teachers.slice(0, DASHBOARD_FEATURED_TEACHERS),
     isLoggedIn,
     memberCountLabel,
     photos,
