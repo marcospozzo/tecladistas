@@ -41,7 +41,7 @@ async function ProductContent({
           alt={`${product.brand} ${product.model} product`}
           className="h-full w-full object-contain"
           height={1000}
-          src={product.images?.[0]}
+          src={product.pictures?.[0]}
           width={1000}
         />
       </div>

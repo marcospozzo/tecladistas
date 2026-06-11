@@ -215,6 +215,19 @@ export const calculateRating = (ratings: Array<Rating> | undefined): number => {
   return parseFloat(averageRating.toFixed(1));
 };
 
+/** HEAD-checks whether a URL exists. Result is cached for 1 hour (server-side only). */
+export async function checkImageExists(url: string): Promise<boolean> {
+  try {
+    const response = await fetch(url, {
+      method: "HEAD",
+      next: { revalidate: 3600 },
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 export function productMessage(name: string, title: string): string {
   return `Hola ${name}! Soy tecladista gitanx, te contacto por tu instrumento ${title} publicado en la web de Tecladistas.`;
 }

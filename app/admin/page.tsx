@@ -19,13 +19,6 @@ const AdminPanel = () => {
     setCreateData({ ...createData, [event.target.name]: event.target.value });
   };
 
-  const fetchCount = async (): Promise<number> => {
-    const { data } = await axios.get<{ count: number }>(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`,
-    );
-    return data.count;
-  };
-
   const handleCreateSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
@@ -34,11 +27,13 @@ const AdminPanel = () => {
 
     const toastId = toast.loading("Creando...");
     try {
-      await axios.post("/api/users/whitelisted", formData);
+      const { data } = await axios.post<{ success: string; count: number }>(
+        "/api/users/whitelisted",
+        formData,
+      );
       setCreateData({ displayName: "", phone: "+549" });
-      const count = await fetchCount();
       toast.update(toastId, {
-        render: `Usuario creado — ${count} en lista`,
+        render: `Usuario creado — ${data.count} en lista`,
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -63,11 +58,13 @@ const AdminPanel = () => {
 
     const toastId = toast.loading("Eliminando...");
     try {
-      await axios.delete("/api/users/whitelisted", { data: formData });
+      const { data } = await axios.delete<{ success: string; count: number }>(
+        "/api/users/whitelisted",
+        { data: formData },
+      );
       setDeleteData({ phone: "+549" });
-      const count = await fetchCount();
       toast.update(toastId, {
-        render: `Usuario eliminado — ${count} en lista`,
+        render: `Usuario eliminado — ${data.count} en lista`,
         type: "success",
         isLoading: false,
         autoClose: 3000,

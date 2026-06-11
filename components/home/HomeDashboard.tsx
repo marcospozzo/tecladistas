@@ -44,8 +44,7 @@ const quickLinkIcons: Record<string, IconType> = {
 };
 
 function getProductImage(product: ProductProps) {
-  const productImages = product.images as string[] | undefined;
-  return productImages?.[0] ?? product.pictures?.[0];
+  return product.pictures?.[0];
 }
 
 function formatProductPrice(product: ProductProps) {

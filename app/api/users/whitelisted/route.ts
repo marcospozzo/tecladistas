@@ -1,6 +1,20 @@
 import { cookieName } from "@/utils/utils";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import type { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+
+async function fetchWhitelistedCount(cookie: RequestCookie): Promise<number> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/count-whitelisted-users`,
+      { headers: { cookie: `${cookie.name}=${cookie.value}` } },
+    );
+    const data = await res.json();
+    return data.count ?? 0;
+  } catch {
+    return 0;
+  }
+}
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -32,7 +46,8 @@ export async function POST(request: Request) {
       errorMessage = `Error: ${data.error}`;
     }
     if (res.ok) {
-      return NextResponse.json({ success: "Usuario creado" }, { status: 201 });
+      const count = await fetchWhitelistedCount(cookie);
+      return NextResponse.json({ success: "Usuario creado", count }, { status: 201 });
     } else {
       return NextResponse.json({ error: errorMessage }, { status: 400 });
     }
@@ -69,8 +84,9 @@ export async function DELETE(request: Request) {
       errorMessage = `Error: usuario no fue eliminado`;
     }
     if (res.ok && data.deletedCount === 1) {
+      const count = await fetchWhitelistedCount(cookie);
       return NextResponse.json(
-        { success: "Usuario eliminado" },
+        { success: "Usuario eliminado", count },
         { status: 200 },
       );
     } else {

@@ -1,13 +1,11 @@
 import { constants } from "@/utils/utils";
 import { Theme } from "next-auth";
 import { createTransport } from "nodemailer";
+import type { SendVerificationRequestParams } from "next-auth/providers/email";
 
-export async function CustomSendVerificationRequest(params: {
-  identifier: any;
-  url: any;
-  provider: any;
-  theme: any;
-}) {
+export async function CustomSendVerificationRequest(
+  params: SendVerificationRequestParams,
+) {
   const { identifier, url, provider, theme } = params;
   const { host } = new URL(url);
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
