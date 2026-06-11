@@ -22,11 +22,7 @@ const Products = ({
   >(constants.SALE);
 
   const sortedProducts = [...products].sort((a, b) =>
-    a.userId === b.userId && a.createdBy === b.createdBy
-      ? 0
-      : a.userId === b.userId
-      ? -1
-      : 1
+    a.userId === userId ? -1 : b.userId === userId ? 1 : 0
   );
 
   const productsForSale = sortedProducts.filter(

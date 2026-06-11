@@ -1,6 +1,5 @@
 import { ChangeEventHandler } from "react";
 export interface ProductProps {
-  [key: string]: any;
   _id?: string;
   userId?: string;
   title?: string;

@@ -15,7 +15,6 @@ const StudioCard = ({ studio }: { studio: StudioProps }) => {
           alt={`Imagen que representa al estudio ${studio.name}`}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           height={300}
-          priority={true}
           src={studio.images?.[0]}
           width={300}
         />

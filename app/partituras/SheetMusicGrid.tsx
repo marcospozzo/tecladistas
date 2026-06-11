@@ -14,6 +14,8 @@ import {
 } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
 import { useEffect, useState } from "react";
+// SSR is disabled for this component in the parent page (next/dynamic { ssr: false })
+// to avoid MUI DataGrid hydration mismatches with Next.js.
 import { FaDownload } from "react-icons/fa6";
 
 interface SheetMusicGridProps {
@@ -43,14 +45,9 @@ export default function SheetMusicGrid({
   rows,
   startingFilter,
 }: SheetMusicGridProps) {
-  const [hasMounted, setHasMounted] = useState(false);
   const [filterModel, setFilterModel] = useState<GridFilterModel>(() =>
     createFilterModel()
   );
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     setFilterModel(createFilterModel(startingFilter));
@@ -93,12 +90,6 @@ export default function SheetMusicGrid({
       ),
     },
   ];
-
-  // MUI DataGrid does internal async setup; deferring the first render until
-  // mount avoids React warnings in Next 16 when a filter is applied on load.
-  if (!hasMounted) {
-    return <Box sx={{ height: 600, width: "100%" }} />;
-  }
 
   return (
     <Box sx={{ height: 600, width: "100%" }}>

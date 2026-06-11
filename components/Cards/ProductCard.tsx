@@ -31,8 +31,7 @@ const ProductCard = ({
           alt={`${product.brand} product`}
           className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
           height={300}
-          priority={true}
-          src={product.images?.[0]}
+          src={product.pictures?.[0]}
           width={300}
         />
         {isTheirOwn ? (
