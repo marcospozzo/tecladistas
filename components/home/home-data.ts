@@ -56,7 +56,6 @@ export type HomePhoto = {
 export type HomeDashboardData = {
   featuredProfessionals: ProfessionalProps[];
   featuredStudios: StudioProps[];
-  heroPhoto?: HomePhoto;
   isLoggedIn: boolean;
   memberCountLabel: string;
   photos: HomePhoto[];
@@ -176,10 +175,7 @@ function getTopSheetMusic(sheetMusic: SheetMusic[]) {
     .slice(0, DASHBOARD_FEATURED_SHEET_MUSIC);
 }
 
-async function getHomePhotos(year: string): Promise<{
-  heroPhoto?: HomePhoto;
-  photos: HomePhoto[];
-}> {
+async function getHomePhotos(year: string): Promise<{ photos: HomePhoto[] }> {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const secret = process.env.NEXT_SECRET;
 
@@ -192,13 +188,10 @@ async function getHomePhotos(year: string): Promise<{
     authorization: secret,
   };
 
-  const [dashboardResponse, heroResponse] = await Promise.all([
-    fetch(
-      `${apiBaseUrl}/photos/dashboard?year=${year}&limit=${DASHBOARD_FEATURED_PHOTOS}`,
-      { cache: "no-store", headers },
-    ),
-    fetch(`${apiBaseUrl}/photos/hero`, { cache: "no-store", headers }),
-  ]);
+  const dashboardResponse = await fetch(
+    `${apiBaseUrl}/photos/dashboard?year=${year}&limit=${DASHBOARD_FEATURED_PHOTOS}`,
+    { cache: "no-store", headers },
+  );
 
   if (!dashboardResponse.ok) {
     throw new Error(`Unable to load photos preview: ${dashboardResponse.status}`);
@@ -206,13 +199,7 @@ async function getHomePhotos(year: string): Promise<{
 
   const photos = (await dashboardResponse.json()) as HomePhoto[];
 
-  let heroPhoto: HomePhoto | undefined;
-  if (heroResponse.ok) {
-    const heroData = (await heroResponse.json()) as { url: string };
-    heroPhoto = { original: heroData.url };
-  }
-
-  return { heroPhoto, photos };
+  return { photos };
 }
 
 function buildStats(params: {
@@ -357,7 +344,6 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   const studios = getSettledValue(studiosResult, []);
   const sheetMusic = getSettledValue(sheetMusicResult, []);
   const homePhotos = getSettledValue(photosResult, { photos: [] });
-  const heroPhoto = homePhotos.heroPhoto;
   const photos = homePhotos.photos;
 
   const activeProducts = products.filter(isActiveProduct);
@@ -388,7 +374,6 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
   return {
     featuredProfessionals: getFeaturedProfessionals(professionals),
     featuredStudios: getFeaturedStudios(activeStudios),
-    heroPhoto,
     isLoggedIn,
     memberCountLabel,
     photos,

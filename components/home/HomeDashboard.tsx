@@ -367,7 +367,6 @@ function PhotosPreview({
 export default function HomeDashboard({
   featuredProfessionals,
   featuredStudios,
-  heroPhoto,
   isLoggedIn,
   memberCountLabel,
   photos,
@@ -382,7 +381,7 @@ export default function HomeDashboard({
   topSheetMusic,
   topSkills,
 }: HomeDashboardData) {
-  const heroImage = heroPhoto?.original ?? "/keyboard.jpg";
+  const heroImage = "/dashboard-hero.jpg";
   const visibleStats = isLoggedIn
     ? stats
     : stats.filter((stat) => stat.key !== "sheetMusic");
