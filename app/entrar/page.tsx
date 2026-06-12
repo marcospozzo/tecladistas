@@ -14,9 +14,12 @@ const Login = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isLoading) return;
+    setIsLoading(true);
     const body = { email: email };
     try {
       await axios.post(
@@ -47,6 +50,7 @@ const Login = () => {
           toast.error("Login falló. Reintentar...");
         }
       }
+      setIsLoading(false);
     }
   };
 
@@ -75,8 +79,8 @@ const Login = () => {
         </Field>
 
         <div className="ui-form-actions">
-          <Button fullWidth type="submit">
-            Entrar con Email
+          <Button disabled={isLoading} fullWidth type="submit">
+            {isLoading ? "Enviando..." : "Entrar con Email"}
           </Button>
         </div>
 
