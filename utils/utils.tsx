@@ -131,7 +131,7 @@ export const contactSubjects: { [key: string]: string } = {
 export const teacherSubjects = [
   "piano-clasico",
   "piano-popular",
-  "teclado",
+  "teclados",
   "sintesis",
   "teoria",
   "armonia",
@@ -144,7 +144,7 @@ export const teacherSubjects = [
 export const teacherSubjectsTranslations: { [key: string]: string } = {
   "piano-clasico": "Piano clásico",
   "piano-popular": "Piano popular",
-  teclado: "Teclado",
+  teclados: "Teclados",
   sintesis: "Síntesis",
   teoria: "Teoría musical",
   armonia: "Armonía",
