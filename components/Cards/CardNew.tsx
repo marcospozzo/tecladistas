@@ -16,14 +16,14 @@ const CardNew = ({
     listingType === constants.RENT
       ? "/crear-publicacion#alquiler"
       : pathname === constants.INSTRUMENTS_PATH
-      ? "/crear-publicacion"
-      : constants.CONTACT_PATH;
+        ? "/crear-publicacion"
+        : `${constants.CONTACT_PATH}?subject=professionalsAndStudios`;
   const hoverHint =
     listingType === constants.RENT
       ? "Crear publicación de alquiler"
       : pathname === constants.INSTRUMENTS_PATH
-      ? "Crear publicación de venta"
-      : "Contactanos para publicar tu estudio";
+        ? "Crear publicación de venta"
+        : "Contactanos para publicar tu estudio";
 
   return (
     <div className="ui-card flex min-h-[16rem] p-6">
