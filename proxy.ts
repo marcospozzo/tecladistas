@@ -39,11 +39,4 @@ export default function proxy(request: NextRequest) {
     );
     return NextResponse.redirect(signinUrl);
   }
-  if (
-    (request.nextUrl.pathname === LOGIN_PATH ||
-      request.nextUrl.pathname === "/registrarse") &&
-    request.cookies.has(COOKIE_NAME)
-  ) {
-    return NextResponse.redirect(new URL(INSTRUMENTS_PATH, request.url));
-  }
 }

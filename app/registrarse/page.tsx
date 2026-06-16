@@ -8,7 +8,8 @@ import { constants } from "@/utils/utils";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useSession } from "next-auth/react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import "react-phone-number-input/style.css";
@@ -32,6 +33,15 @@ function normalizeEmail(value: string) {
 
 const SignUp = () => {
   const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      toast.info("Ya estás logueado.");
+      router.push("/");
+    }
+  }, [status, router]);
+
   const [data, setData] = useState<UserProps>({
     _id: "",
     firstName: "",
