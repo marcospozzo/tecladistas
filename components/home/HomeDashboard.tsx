@@ -13,14 +13,7 @@ import {
   skillsTranslations,
 } from "@/utils/utils";
 import Link from "next/link";
-import { IconType } from "react-icons";
-import {
-  FaCamera,
-  FaDownload,
-  FaGlobeAmericas,
-  FaPhone,
-  FaStar,
-} from "react-icons/fa";
+import { FaGlobeAmericas, FaPhone, FaStar } from "react-icons/fa";
 import {
   MdArrowOutward,
   MdEmail,
@@ -33,16 +26,7 @@ import {
   buildSheetMusicPreviewHref,
   HomeDashboardData,
   HomePhoto,
-  HomeQuickLink,
 } from "./home-data";
-
-const quickLinkIcons: Record<string, IconType> = {
-  [constants.INSTRUMENTS_PATH]: MdPiano,
-  [constants.PICTURES_2025_PATH]: FaCamera,
-  [constants.PROFESSIONALS_PATH]: FaStar,
-  [constants.SHEETMUSIC_PATH]: FaDownload,
-  [constants.STUDIOS_PATH]: FaGlobeAmericas,
-};
 
 function getProductImage(product: ProductProps) {
   return product.images?.[0];
@@ -123,38 +107,6 @@ function EmptyPreview({
         <MdArrowOutward className="text-lg" />
       </Link>
     </div>
-  );
-}
-
-function QuickLinkCard({ quickLink }: { quickLink: HomeQuickLink }) {
-  const Icon = quickLinkIcons[quickLink.href] ?? MdPiano;
-
-  return (
-    <Link
-      className="dashboard-link-card group flex h-full flex-col justify-between gap-5 p-5"
-      href={quickLink.href}
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold tracking-tight">
-            {quickLink.title}
-          </h3>
-        </div>
-        <span className="dashboard-chip rounded-2xl px-3 py-2">
-          <Icon className="text-lg" />
-        </span>
-      </div>
-
-      <div className="space-y-4">
-        <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
-          {quickLink.description}
-        </p>
-        <div className="flex items-center justify-between gap-3 text-sm font-semibold text-slate-800 dark:text-slate-100">
-          <span>Ver sección</span>
-          <MdArrowOutward className="text-lg transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </div>
-      </div>
-    </Link>
   );
 }
 
@@ -375,7 +327,6 @@ export default function HomeDashboard({
   photosYear,
   productsForRent,
   productsForSale,
-  quickLinks,
   sessionUserId,
   stats,
   totalRentProductsCount,
@@ -394,7 +345,6 @@ export default function HomeDashboard({
         <div className="dashboard-panel p-6 sm:p-8 lg:p-10">
           <div className="flex h-full flex-col justify-between gap-8">
             <div className="space-y-5">
-              <p className="dashboard-eyebrow">Bienvenidx</p>
               <div className="space-y-4">
                 <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
                   <span className="text-emerald-700 dark:text-emerald-300">
@@ -427,7 +377,7 @@ export default function HomeDashboard({
         </div>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {visibleStats.map((stat) => (
           <div className="dashboard-panel p-5" key={stat.label}>
             <p className="dashboard-eyebrow">{stat.label}</p>
@@ -440,14 +390,6 @@ export default function HomeDashboard({
           </div>
         ))}
       </section>
-
-      <HomeSection description="" eyebrow="Resumen" title="Explorá la web">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-          {quickLinks.map((quickLink) => (
-            <QuickLinkCard key={quickLink.href} quickLink={quickLink} />
-          ))}
-        </div>
-      </HomeSection>
 
       <HomeSection
         description=""

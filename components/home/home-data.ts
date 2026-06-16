@@ -28,18 +28,11 @@ const DASHBOARD_PHOTOS_YEAR = "2025";
 
 export type HomeStat = {
   detail: string;
-  key: "instruments" | "members" | "professionals" | "sheetMusic" | "studios";
+  key: "classes" | "instruments" | "members" | "professionals" | "sheetMusic" | "studios";
   label: string;
   value: string;
 };
 
-export type HomeQuickLink = {
-  description: string;
-  href: string;
-  metric: string;
-  requiresLogin?: boolean;
-  title: string;
-};
 
 export type HomeHighlightedSkill = {
   count: number;
@@ -65,7 +58,6 @@ export type HomeDashboardData = {
   photosYear: string;
   productsForRent: ProductProps[];
   productsForSale: ProductProps[];
-  quickLinks: HomeQuickLink[];
   sessionUserId?: string;
   stats: HomeStat[];
   totalRentProductsCount: number;
@@ -214,6 +206,7 @@ function buildStats(params: {
   saleProductsCount: number;
   sheetMusicCount: number;
   sheetMusicGenresCount: number;
+  teachersCount: number;
   topSkillsCount: number;
 }): HomeStat[] {
   return [
@@ -244,6 +237,12 @@ function buildStats(params: {
       detail: `${formatCount(params.sheetMusicGenresCount)} géneros`,
     },
     {
+      key: "classes",
+      label: "Clases",
+      value: formatCount(params.teachersCount),
+      detail: "Profes del grupo disponibles",
+    },
+    {
       key: "members",
       label: "Integrantes",
       value: params.memberCountLabel,
@@ -252,56 +251,6 @@ function buildStats(params: {
   ];
 }
 
-function buildQuickLinks(params: {
-  activeProductsCount: number;
-  activeStudiosCount: number;
-  photosCount: number;
-  photosYear: string;
-  professionalsCount: number;
-  sheetMusicCount: number;
-  topSkillsCount: number;
-}) {
-  return [
-    {
-      title: constants.INSTRUMENTS,
-      href: constants.INSTRUMENTS_PATH,
-      metric: formatCount(params.activeProductsCount),
-      description: "Venta y alquiler directo entre colegas.",
-    },
-    {
-      title: constants.PROFESSIONALS,
-      href: constants.PROFESSIONALS_PATH,
-      metric: formatCount(params.professionalsCount),
-      description: `${formatCount(
-        params.topSkillsCount,
-      )} rubros para soporte en todas las áreas`,
-    },
-    {
-      title: constants.STUDIOS,
-      href: constants.STUDIOS_PATH,
-      metric: formatCount(params.activeStudiosCount),
-      description: "Grabación, producción y mezcla directo entre colegas.",
-    },
-    {
-      title: constants.SHEETMUSIC,
-      href: constants.SHEETMUSIC_PATH,
-      metric: formatCount(params.sheetMusicCount),
-      description:
-        "Partituras ordenadas y categorizadas para encontrar de todo fácilmente.",
-      requiresLogin: true,
-    },
-    {
-      title: constants.PICTURES,
-      href: constants.PICTURES_2025_PATH,
-      metric:
-        params.photosCount > 0
-          ? `${formatCount(params.photosCount)} previews`
-          : `Galeria ${params.photosYear}`,
-      description: `Encuentros y registros visuales del grupo en ${params.photosYear}.`,
-      requiresLogin: true,
-    },
-  ];
-}
 
 export function buildSheetMusicPreviewHref(sheetMusic: SheetMusic) {
   const filterValue = [
@@ -387,15 +336,6 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
     photosYear: DASHBOARD_PHOTOS_YEAR,
     productsForRent: rentProducts.slice(0, DASHBOARD_RENT_PRODUCTS),
     productsForSale: saleProducts.slice(0, DASHBOARD_SALE_PRODUCTS),
-    quickLinks: buildQuickLinks({
-      activeProductsCount: activeProducts.length,
-      activeStudiosCount: activeStudios.length,
-      photosCount: photos.length,
-      photosYear: DASHBOARD_PHOTOS_YEAR,
-      professionalsCount: professionals.length,
-      sheetMusicCount: sheetMusic.length,
-      topSkillsCount: sortedSkills.length,
-    }),
     sessionUserId: session?.user.id,
     stats: buildStats({
       activeProductsCount: activeProducts.length,
@@ -406,6 +346,7 @@ export async function getHomeDashboardData(): Promise<HomeDashboardData> {
       saleProductsCount: saleProducts.length,
       sheetMusicCount: sheetMusic.length,
       sheetMusicGenresCount,
+      teachersCount: teachers.length,
       topSkillsCount: sortedSkills.length,
     }),
     totalRentProductsCount: rentProducts.length,
