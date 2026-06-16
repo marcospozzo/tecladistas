@@ -27,7 +27,7 @@ async function ClassesContent() {
       <div className="text-center">
         <h1 className="ui-form-title mb-3">Clases</h1>
         <p className="ui-form-description mx-auto max-w-lg">
-          Contactá directamente a nuestros profes para coordinar clases.
+          Contacta a profes del grupo para coordinar clases.
         </p>
         {isLoggedIn && (
           <div className="mt-5">
