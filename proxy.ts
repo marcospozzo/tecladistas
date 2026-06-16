@@ -1,8 +1,14 @@
-import { constants } from "@/utils/utils";
+// Keep this file free of imports from utils/ — those modules pull in libphonenumber-js
+// which pushes the middleware Edge Runtime bundle past the 1 MB limit.
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { cookieName } from "./utils/utils";
-// export { default } from "next-auth/middleware"; // its buggy on nextjs 13.4
+
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+const COOKIE_NAME = IS_PRODUCTION
+  ? "__Secure-next-auth.session-token"
+  : "next-auth.session-token";
+const LOGIN_PATH = "/entrar";
+const INSTRUMENTS_PATH = "/instrumentos";
 
 export const config = {
   matcher: [
@@ -22,11 +28,11 @@ export const config = {
 
 export default function proxy(request: NextRequest) {
   if (
-    request.nextUrl.pathname !== constants.LOGIN_PATH &&
+    request.nextUrl.pathname !== LOGIN_PATH &&
     request.nextUrl.pathname !== "/registrarse" &&
-    !request.cookies.has(cookieName)
+    !request.cookies.has(COOKIE_NAME)
   ) {
-    const signinUrl = new URL(constants.LOGIN_PATH, request.url);
+    const signinUrl = new URL(LOGIN_PATH, request.url);
     signinUrl.searchParams.set(
       "callbackUrl",
       `${request.nextUrl.pathname}${request.nextUrl.search}`
@@ -34,12 +40,10 @@ export default function proxy(request: NextRequest) {
     return NextResponse.redirect(signinUrl);
   }
   if (
-    (request.nextUrl.pathname === constants.LOGIN_PATH ||
+    (request.nextUrl.pathname === LOGIN_PATH ||
       request.nextUrl.pathname === "/registrarse") &&
-    request.cookies.has(cookieName)
+    request.cookies.has(COOKIE_NAME)
   ) {
-    return NextResponse.redirect(
-      new URL(constants.INSTRUMENTS_PATH, request.url)
-    );
+    return NextResponse.redirect(new URL(INSTRUMENTS_PATH, request.url));
   }
 }
