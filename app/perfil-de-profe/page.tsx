@@ -443,7 +443,7 @@ const TeacherProfilePage = () => {
 
           {/* Action buttons */}
           <div className="border-t border-black/10 pt-4 dark:border-white/10">
-            {!isPublic && !canEnable && (
+            {!canEnable && (
               <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
                 Para habilitar tu perfil necesitás agregar:{" "}
                 {missingItems.join(" y ")}.
@@ -454,7 +454,7 @@ const TeacherProfilePage = () => {
               {isPublic ? (
                 <>
                   <Button
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !canEnable}
                     type="button"
                     onClick={() => submit(true)}
                   >
