@@ -14,7 +14,14 @@ import { formatPhoneDisplay } from "@/utils/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import Select, { MultiValue } from "react-select";
 import { toast } from "react-toastify";
+
+type SubjectOption = { value: string; label: string };
+const subjectOptions: SubjectOption[] = teacherSubjects.map((s) => ({
+  value: s,
+  label: teacherSubjectsTranslations[s],
+}));
 
 type FormState = {
   description: string;
@@ -81,15 +88,6 @@ const TeacherProfilePage = () => {
     const checked =
       type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
     setForm((f) => ({ ...f, [name]: type === "checkbox" ? checked : value }));
-  };
-
-  const toggleSubject = (subject: string) => {
-    setForm((f) => ({
-      ...f,
-      subjects: f.subjects.includes(subject)
-        ? f.subjects.filter((s) => s !== subject)
-        : [...f.subjects, subject],
-    }));
   };
 
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -316,23 +314,41 @@ const TeacherProfilePage = () => {
           </Field>
 
           {/* Subjects */}
-          <Field htmlFor="subjects" label="Materias">
-            <div className="flex flex-wrap gap-2">
-              {teacherSubjects.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => toggleSubject(s)}
-                  className={`ui-chip cursor-pointer transition-colors ${
-                    form.subjects.includes(s)
-                      ? "border-emerald-600/40 bg-emerald-600/15 text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/15 dark:text-emerald-300"
-                      : "hover:bg-black/10 dark:hover:bg-white/15"
-                  }`}
-                >
-                  {teacherSubjectsTranslations[s]}
-                </button>
-              ))}
-            </div>
+          <Field label="Materias">
+            <Select<SubjectOption, true>
+              isMulti
+              unstyled
+              options={subjectOptions}
+              value={subjectOptions.filter((o) => form.subjects.includes(o.value))}
+              onChange={(selected: MultiValue<SubjectOption>) =>
+                setForm((f) => ({ ...f, subjects: selected.map((o) => o.value) }))
+              }
+              placeholder="Seleccioná materias..."
+              noOptionsMessage={() => "Sin opciones"}
+              classNames={{
+                control: ({ isFocused }) =>
+                  `min-h-[2.5rem] w-full rounded-2xl border border-black/10 bg-white/50 px-3 py-2 dark:border-white/10 dark:bg-slate-900/40${isFocused ? " ring-2 ring-slate-400 ring-offset-2 dark:ring-slate-500 dark:ring-offset-slate-950" : ""}`,
+                valueContainer: () => "flex flex-wrap gap-1",
+                multiValue: () =>
+                  "ui-chip border-emerald-600/40 bg-emerald-600/15 text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/15 dark:text-emerald-300",
+                multiValueLabel: () => "px-1 text-xs",
+                multiValueRemove: () =>
+                  "cursor-pointer rounded-full px-1 hover:bg-emerald-600/20 dark:hover:bg-emerald-400/20",
+                indicatorsContainer: () => "shrink-0",
+                clearIndicator: () =>
+                  "cursor-pointer p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200",
+                dropdownIndicator: () =>
+                  "cursor-pointer p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200",
+                menu: () =>
+                  "z-50 mt-1 overflow-hidden rounded-2xl border border-black/10 bg-white/90 shadow-xl backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/90",
+                menuList: () => "py-1",
+                option: ({ isFocused, isSelected }) =>
+                  `cursor-pointer px-4 py-2.5 text-sm${isSelected ? " font-medium text-emerald-700 dark:text-emerald-300" : isFocused ? " bg-black/5 dark:bg-white/5" : ""}`,
+                placeholder: () => "text-sm text-slate-400 dark:text-slate-500",
+                input: () => "text-sm",
+                noOptionsMessage: () => "px-4 py-2.5 text-sm text-slate-500",
+              }}
+            />
           </Field>
 
           {/* Level */}
