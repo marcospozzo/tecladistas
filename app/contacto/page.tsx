@@ -5,14 +5,20 @@ import Field from "@/components/ui/Field";
 import FormShell from "@/components/ui/FormShell";
 import { contactSubjects } from "@/utils/utils";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 const Contact = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const subjectParam = searchParams.get("subject");
+  const initialSubject =
+    subjectParam && subjectParam in contactSubjects
+      ? contactSubjects[subjectParam]
+      : contactSubjects.comment;
   const [data, setData] = useState({
-    subject: contactSubjects.comment,
+    subject: initialSubject,
     message: "",
   });
 
@@ -68,6 +74,7 @@ const Contact = () => {
             className="ui-select"
             id="subject"
             name="subject"
+            value={data.subject}
             onChange={handleOnChange}
             required
           >
