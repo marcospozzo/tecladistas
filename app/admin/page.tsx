@@ -114,7 +114,11 @@ const AdminPanel = () => {
 
     const toastId = toast.loading("Subiendo partitura...");
     try {
-      await axios.post("/api/sheet-music", formData);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/sheet-music/upload`,
+        formData,
+        { withCredentials: true },
+      );
       setSheetFile(null);
       setSheetForm({ title: "", composer: "", genre: "", difficulty: "", year: "", fileName: "" });
       toast.update(toastId, {
