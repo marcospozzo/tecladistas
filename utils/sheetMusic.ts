@@ -1,10 +1,10 @@
-const difficultyMap: Record<string, string> = {
+export const difficultyMap: Record<string, string> = {
   Beginner: "Principiante",
   Intermediate: "Intermedio",
   Advanced: "Avanzado",
 };
 
-const genreMap: Record<string, string> = {
+export const genreMap: Record<string, string> = {
   Classical: "Clásico",
   Jazz: "Jazz",
   Pop: "Popular",
