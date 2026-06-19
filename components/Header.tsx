@@ -21,7 +21,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 const pages: Page[] = [
@@ -57,23 +56,11 @@ const Header = () => {
   const { isPending } = useNavigationPending();
   const isLoggedIn = status === "authenticated";
 
-  const [isAdmin, setIsAdmin] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [anchorElSubMenu, setAnchorElSubMenu] = useState<null | HTMLElement>(
     null,
   );
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      axios
-        .get("/api/admin")
-        .then(() => setIsAdmin(true))
-        .catch(() => setIsAdmin(false));
-    } else {
-      setIsAdmin(false);
-    }
-  }, [isLoggedIn]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -316,17 +303,6 @@ const Header = () => {
                   }}
                 >
                   <Typography textAlign="center">Perfil de profe</Typography>
-                </MenuItem>
-              )}
-              {isAdmin && (
-                <MenuItem
-                  key="admin"
-                  onClick={() => {
-                    handleCloseUserMenu();
-                    router.push("/admin");
-                  }}
-                >
-                  <Typography textAlign="center">Panel admin</Typography>
                 </MenuItem>
               )}
               <MenuItem key="1" onClick={handleContactClick}>
