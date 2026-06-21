@@ -1,5 +1,5 @@
-import { WhatsAppButton } from "@/components";
 import PendingContentFallback from "@/components/navigation/PendingContentFallback";
+import TeacherContactForm from "@/components/teacher/TeacherContactForm";
 import { TeacherProfileProps } from "@/types";
 import {
   teacherLevelTranslations,
@@ -8,11 +8,10 @@ import {
 } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { formatPhoneDisplay } from "@/utils/utils";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { FaInstagram, FaPhone } from "react-icons/fa";
-import { MdEmail, MdLocationPin } from "react-icons/md";
+import { FaInstagram } from "react-icons/fa";
+import { MdLocationPin } from "react-icons/md";
 
 
 async function TeacherContent({
@@ -93,10 +92,10 @@ async function TeacherContent({
           </div>
         )}
 
-        <div className="w-full space-y-3 border-t border-black/10 pt-5 dark:border-white/10">
-          <p className="ui-eyebrow">Contacto</p>
-          <div className="flex flex-col items-center gap-3">
-            {teacher.instagramHandle && (
+        {teacher.instagramHandle && (
+          <div className="w-full space-y-3 border-t border-black/10 pt-5 dark:border-white/10">
+            <p className="ui-eyebrow">Contacto</p>
+            <div className="flex flex-col items-center gap-3">
               <Link
                 href={`https://instagram.com/${teacher.instagramHandle.replace(/^@/, "")}`}
                 target="_blank"
@@ -106,28 +105,13 @@ async function TeacherContent({
                 <FaInstagram />
                 <span>@{teacher.instagramHandle.replace(/^@/, "")}</span>
               </Link>
-            )}
-            {teacher.user.email && (
-              <Link
-                href={`mailto:${teacher.user.email}`}
-                className="ui-detail-meta link justify-center"
-              >
-                <MdEmail />
-                <span>{teacher.user.email}</span>
-              </Link>
-            )}
-            {teacher.user.phone && (
-              <>
-                <div className="ui-detail-meta justify-center">
-                  <FaPhone />
-                  <span>{formatPhoneDisplay(teacher.user.phone)}</span>
-                </div>
-                <div className="w-full max-w-sm">
-                  <WhatsAppButton phone={teacher.user.phone} />
-                </div>
-              </>
-            )}
+            </div>
           </div>
+        )}
+
+        <div className="w-full border-t border-black/10 pt-6 text-left dark:border-white/10">
+          <p className="ui-eyebrow mb-4">Enviar consulta</p>
+          <TeacherContactForm slug={slug} />
         </div>
       </div>
     </div>

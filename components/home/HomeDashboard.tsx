@@ -166,9 +166,6 @@ function ProductPreviewCard({
 
         <div className="flex items-center justify-between gap-3 text-sm text-slate-600 dark:text-slate-300">
           <span>{formatPublicationDate(product.createdAt)}</span>
-          {product.exchanges ? (
-            <span className="dashboard-chip">Escucha canjes</span>
-          ) : null}
         </div>
       </div>
     </Link>

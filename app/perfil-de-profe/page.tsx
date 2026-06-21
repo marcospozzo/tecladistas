@@ -30,8 +30,6 @@ type FormState = {
   modality: string;
   subjects: string[];
   instagramHandle: string;
-  showEmail: boolean;
-  showPhone: boolean;
 };
 
 const emptyForm: FormState = {
@@ -41,8 +39,6 @@ const emptyForm: FormState = {
   modality: "",
   subjects: [],
   instagramHandle: "",
-  showEmail: false,
-  showPhone: false,
 };
 
 function profileToForm(p: TeacherProfileProps): FormState {
@@ -53,8 +49,6 @@ function profileToForm(p: TeacherProfileProps): FormState {
     modality: p.modality ?? "",
     subjects: p.subjects ?? [],
     instagramHandle: p.instagramHandle ?? "",
-    showEmail: p.showEmail ?? false,
-    showPhone: p.showPhone ?? false,
   };
 }
 
@@ -135,17 +129,9 @@ const TeacherProfilePage = () => {
   const currentPhoto = photoPreview ?? profile?.profilePicture ?? null;
 
   const hasPhoto = !!(photoFile || profile?.profilePicture);
-  const hasContact = !!(
-    form.instagramHandle.trim() ||
-    form.showEmail ||
-    form.showPhone
-  );
-  const canEnable = hasPhoto && hasContact;
+  const canEnable = hasPhoto;
 
-  const missingItems = [
-    !hasPhoto && "foto de perfil",
-    !hasContact && "al menos un medio de contacto",
-  ].filter(Boolean);
+  const missingItems = [!hasPhoto && "foto de perfil"].filter(Boolean);
 
   const submit = (targetIsPublic: boolean) => {
     submitIsPublicRef.current = targetIsPublic;
@@ -166,8 +152,6 @@ const TeacherProfilePage = () => {
     formData.append("modality", form.modality);
     formData.append("subjects", JSON.stringify(form.subjects));
     formData.append("instagramHandle", form.instagramHandle);
-    formData.append("showEmail", String(form.showEmail));
-    formData.append("showPhone", String(form.showPhone));
     formData.append("isPublic", String(targetIsPublic));
 
     const toastId = toast.loading(
@@ -428,70 +412,6 @@ const TeacherProfilePage = () => {
               </div>
             </Field>
 
-            <div className="ui-checkbox-row">
-              <input
-                className="ui-checkbox"
-                type="checkbox"
-                id="showEmail"
-                name="showEmail"
-                checked={form.showEmail}
-                onChange={handleChange}
-              />
-              <label htmlFor="showEmail" className="text-sm">
-                Mostrar mi email públicamente{" "}
-                <span className="text-slate-500 dark:text-slate-400">
-                  ({profile.user.email})
-                </span>
-              </label>
-            </div>
-
-            <div className="ui-checkbox-row">
-              <input
-                className="ui-checkbox"
-                type="checkbox"
-                id="showPhone"
-                name="showPhone"
-                checked={form.showPhone}
-                onChange={handleChange}
-              />
-              <label htmlFor="showPhone" className="text-sm">
-                Mostrar mi teléfono públicamente{" "}
-                <span className="text-slate-500 dark:text-slate-400">
-                  ({formatPhoneDisplay(profile.user.phone ?? "")})
-                </span>
-              </label>
-            </div>
-
-            {(form.showEmail || form.showPhone) && (
-              <div className="flex items-start gap-2.5 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-800 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-300">
-                <svg
-                  className="mt-0.5 h-4 w-4 shrink-0"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p>
-                  <span className="font-semibold">
-                    {form.showEmail && form.showPhone
-                      ? "Tu email y teléfono"
-                      : form.showEmail
-                        ? "Tu email"
-                        : "Tu teléfono"}
-                  </span>{" "}
-                  {form.showEmail && form.showPhone
-                    ? "serán visibles"
-                    : "será visible"}{" "}
-                  para cualquier persona en internet, sin necesidad de estar
-                  registrada en el sitio.
-                </p>
-              </div>
-            )}
           </fieldset>
 
           {/* Action buttons */}
