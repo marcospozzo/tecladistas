@@ -14,7 +14,9 @@ const TeacherContactForm = ({ slug }: Props) => {
   const [form, setForm] = useState(emptyForm);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -84,7 +86,7 @@ const TeacherContactForm = ({ slug }: Props) => {
           id="message"
           name="message"
           onChange={handleChange}
-          placeholder="Contale lo que necesitás..."
+          placeholder="Escribe tu mensaje aquí..."
           required
           rows={4}
           value={form.message}

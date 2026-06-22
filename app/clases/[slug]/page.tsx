@@ -13,7 +13,6 @@ import { Suspense } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
 
-
 async function TeacherContent({
   params,
 }: {
@@ -85,17 +84,9 @@ async function TeacherContent({
           </p>
         )}
 
-        {teacher.location && (
-          <div className="ui-detail-meta w-full justify-center">
-            <MdLocationPin />
-            <span>{teacher.location}</span>
-          </div>
-        )}
-
-        {teacher.instagramHandle && (
-          <div className="w-full space-y-3 border-t border-black/10 pt-5 dark:border-white/10">
-            <p className="ui-eyebrow">Contacto</p>
-            <div className="flex flex-col items-center gap-3">
+        {(teacher.location || teacher.instagramHandle) && (
+          <div className="flex flex-col items-center gap-2">
+            {teacher.instagramHandle && (
               <Link
                 href={`https://instagram.com/${teacher.instagramHandle.replace(/^@/, "")}`}
                 target="_blank"
@@ -105,7 +96,13 @@ async function TeacherContent({
                 <FaInstagram />
                 <span>@{teacher.instagramHandle.replace(/^@/, "")}</span>
               </Link>
-            </div>
+            )}
+            {teacher.location && (
+              <div className="ui-detail-meta justify-center">
+                <MdLocationPin />
+                <span>{teacher.location}</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -118,11 +115,7 @@ async function TeacherContent({
   );
 }
 
-const TeacherPage = ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => (
+const TeacherPage = ({ params }: { params: Promise<{ slug: string }> }) => (
   <Suspense fallback={<PendingContentFallback variant="detail" />}>
     <TeacherContent params={params} />
   </Suspense>
