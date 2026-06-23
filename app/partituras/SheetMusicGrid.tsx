@@ -2,6 +2,7 @@
 
 import { SheetMusic } from "@/utils/axios";
 import {
+  formatFileSize,
   translateSheetMusicDifficulty,
   translateSheetMusicGenre,
 } from "@/utils/sheetMusic";
@@ -64,6 +65,7 @@ export default function SheetMusicGrid({
     year: sheet.year,
     downloadCount: sheet.downloadCount,
     downloadUrl: `/api/sheet-music/${sheet.id}`,
+    fileSize: sheet.fileSize ?? null,
   }));
 
   const columns: GridColDef[] = [
@@ -71,6 +73,12 @@ export default function SheetMusicGrid({
     { field: "genre", headerName: "Género", width: 130 },
     { field: "difficulty", headerName: "Dificultad", width: 130 },
     { field: "year", headerName: "Año", width: 80 },
+    {
+      field: "fileSize",
+      headerName: "Peso",
+      width: 90,
+      valueFormatter: (value: number | null) => formatFileSize(value ?? undefined),
+    },
     { field: "downloadCount", headerName: "Descargas", width: 120 },
     {
       field: "downloadUrl",

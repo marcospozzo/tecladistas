@@ -28,3 +28,9 @@ export function translateSheetMusicGenre(genre?: string) {
 
   return genreMap[genre] ?? genre;
 }
+
+export function formatFileSize(bytes?: number): string {
+  if (!bytes) return "—";
+  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${Math.round(bytes / 1024)} KB`;
+}

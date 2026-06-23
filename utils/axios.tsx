@@ -143,6 +143,7 @@ export type SheetMusic = {
   genre?: string;
   difficulty?: string;
   year?: number;
+  fileSize?: number;
 };
 
 export const getTeacherProfiles = async (): Promise<
