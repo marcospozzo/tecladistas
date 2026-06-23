@@ -419,7 +419,7 @@ export default function HomeDashboard({
             <EmptyPreview
               ctaHref={constants.INSTRUMENTS_PATH}
               ctaLabel="Ver instrumentos"
-              message="Todavía no pude cargar publicaciones para este resumen."
+              message="Ha habido un error al cargar los instrumentos."
             />
           )}
         </div>
@@ -463,7 +463,7 @@ export default function HomeDashboard({
             <EmptyPreview
               ctaHref={constants.PROFESSIONALS_PATH}
               ctaLabel="Abrir profesionales"
-              message="El resumen no pudo cargar contactos destacados, pero la sección completa sigue disponible."
+              message="Ha habido un error al cargar los profesionales."
             />
           )}
         </div>
@@ -486,7 +486,7 @@ export default function HomeDashboard({
           <EmptyPreview
             ctaHref={constants.STUDIOS_PATH}
             ctaLabel="Explorar estudios"
-            message="No pude cargar estudios para este preview; la sección completa sigue disponible."
+            message="Ha habido un error al cargar los estudios."
           />
         )}
       </HomeSection>
@@ -508,7 +508,7 @@ export default function HomeDashboard({
           <EmptyPreview
             ctaHref={constants.CLASSES_PATH}
             ctaLabel="Ver clases"
-            message="Todavía no hay profes con perfil público disponible."
+            message="Ha habido un error al cargar los profes."
           />
         )}
       </HomeSection>
@@ -600,7 +600,7 @@ export default function HomeDashboard({
               <EmptyPreview
                 ctaHref={constants.SHEETMUSIC_PATH}
                 ctaLabel="Ver partituras"
-                message="No hubo datos suficientes para construir el ranking de descargas."
+                message="Ha habido un error al cargar las partituras."
               />
             )}
           </HomeSection>
