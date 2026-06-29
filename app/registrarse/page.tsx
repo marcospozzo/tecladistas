@@ -84,15 +84,10 @@ const SignUp = () => {
             };
           }) {
             const errorData = data?.response?.data;
-            let errorMessage = errorData?.error ?? "Error";
-
             if (errorData?.err?.code === 11000) {
-              errorMessage = "Usuario ya existe. Redirigiendo...";
-              setTimeout(() => {
-                router.push(constants.LOGIN_PATH);
-              }, 1000);
+              setTimeout(() => router.push(constants.LOGIN_PATH), 1000);
             }
-            return errorMessage;
+            return errorData?.error ?? "Error";
           },
         },
       });
