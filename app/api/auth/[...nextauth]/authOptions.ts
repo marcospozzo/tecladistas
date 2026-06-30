@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         secure: isProduction,
-        domain: process.env.COOKIE_DOMAIN,
+        domain: process.env.COOKIE_DOMAIN || undefined,
       },
     },
   },
