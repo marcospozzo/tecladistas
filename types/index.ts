@@ -26,7 +26,6 @@ export interface ProfessionalProps {
   lastName?: string;
   nickname?: string;
   profilePicture?: string;
-  type: "technician" | "teacher";
   skills: Array<string>;
   workplace?: "onSite" | "offSite" | "both";
   isTecladista?: boolean;
