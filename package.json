@@ -56,6 +56,7 @@
       "postcss": "8.5.23"
     },
     "nodemailer": "9.0.1",
+    "sharp": "0.35.3",
     "styled-components": {
       "postcss": "8.5.23"
     }
