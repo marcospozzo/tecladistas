@@ -53,6 +53,7 @@ export const skillsTranslations: { [key: string]: string } = {
   luthier: "Luthiers",
   "in-ears": "In-ears",
   cases: "Estuches y fundas",
+  "hand-healing": "Rehabilitación de manos",
 };
 
 export const skillsPageIds: { [key: string]: string } = {
@@ -183,6 +184,7 @@ export const skills = [
   "cases",
   "mics",
   "luthier",
+  "hand-healing",
 ];
 
 export const isProduction = process.env.NODE_ENV === "production";
