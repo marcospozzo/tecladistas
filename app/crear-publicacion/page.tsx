@@ -238,7 +238,8 @@ const NewProduct = () => {
     formData.append(
       "exchanges",
       String(
-        normalizedForm.listingType === constants.SALE && normalizedForm.exchanges,
+        normalizedForm.listingType === constants.SALE &&
+          normalizedForm.exchanges,
       ),
     );
     formData.append("listingType", normalizedForm.listingType);
@@ -441,7 +442,12 @@ const NewProduct = () => {
           />
         )}
 
-        <Field error={errors.title} htmlFor="title" label="Título:" required={true}>
+        <Field
+          error={errors.title}
+          htmlFor="title"
+          label="Título:"
+          required={true}
+        >
           <input
             className="ui-input"
             id="title"
@@ -455,7 +461,11 @@ const NewProduct = () => {
           />
         </Field>
 
-        <Field error={errors.description} htmlFor="description" label="Descripción:">
+        <Field
+          error={errors.description}
+          htmlFor="description"
+          label="Descripción:"
+        >
           <textarea
             className="ui-textarea max-h-48"
             id="description"
@@ -485,7 +495,9 @@ const NewProduct = () => {
         <Field
           error={errors.price}
           htmlFor="price"
-          label={form.listingType === constants.SALE ? "Precio:" : "Precio / día:"}
+          label={
+            form.listingType === constants.SALE ? "Precio:" : "Precio / día:"
+          }
           required={true}
         >
           <input
@@ -580,6 +592,13 @@ const NewProduct = () => {
             </p>
           </div>
         </Field>
+
+        {!productId && form.listingType === constants.SALE && (
+          <div className="rounded-xl border border-amber-400/70 bg-amber-50 p-4 text-sm text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+            Las publicaciones de venta dejarán de mostrarse luego de un año sin
+            modificaciones.
+          </div>
+        )}
 
         <div className="ui-form-actions">
           <Button disabled={isSubmitting} type="submit">
