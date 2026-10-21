@@ -22,13 +22,13 @@
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.2",
     "autoprefixer": "10.4.15",
-    "axios": "1.18.0",
+    "axios": "1.20.0",
     "cookie": "0.7.2",
     "eslint-config-next": "^16.2.1",
     "mongodb": "^6.1.0",
-    "next": "^16.3.6",
+    "next": "^16.3.8",
     "next-auth": "4.24.15",
-    "nodemailer": "9.1.1",
+    "nodemailer": "10.1.7",
     "postcss": "^8.5.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -55,8 +55,9 @@
     "next": {
       "postcss": "8.5.23"
     },
-    "nodemailer": "9.1.1",
-    "sharp": "0.35.4",
+    "nodemailer": "10.1.7",
+    "postcss-selector-parser": "7.1.7",
+    "sharp": "0.35.5",
     "styled-components": {
       "postcss": "8.5.23"
     }
